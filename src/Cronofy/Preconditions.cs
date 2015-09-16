@@ -20,7 +20,7 @@ namespace Cronofy
 			}
 		}
 
-		public static void NotNullOrEmpty(string name, string value)
+		public static void NotEmpty(string name, string value)
 		{
 			if (string.IsNullOrEmpty(value))
 			{

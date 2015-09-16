@@ -7,18 +7,22 @@ namespace Cronofy.Test.CronofyClient
 	public sealed class GetAuthorizationUrlTest
 	{
 		private const string clientId = "abcdef123456";
+		private const string redirectUri = "http://example.com/redirectUri";
 
 		[Test]
 		public void HasDefaultScope()
 		{
 			var client = new Cronofy.CronofyClient(clientId);
 
-			var authUrl = client.GetAuthorizationUrlBuilder().Build();
+			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
 			var expectedAuthUrl = string.Format(
 				"https://app.cronofy.com/oauth/authorize" +
 					"?client_id={0}" +
-					"&scope=read_account%20read_events%20create_event%20delete_event",
-				clientId);
+					"&response_type=code" +
+					"&scope=read_account%20read_events%20create_event%20delete_event" +
+					"&redirect_uri={1}",
+				clientId,
+				redirectUri);
 
 			Assert.AreEqual(expectedAuthUrl, authUrl);
 		}
@@ -28,15 +32,18 @@ namespace Cronofy.Test.CronofyClient
 		{
 			var client = new Cronofy.CronofyClient(clientId);
 
-			var authUrl = client.GetAuthorizationUrlBuilder()
+			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.Scope("read_account", "read_events")
 				.Build();
 
 			var expectedAuthUrl = string.Format(
 				"https://app.cronofy.com/oauth/authorize" +
-				"?client_id={0}" +
-				"&scope=read_account%20read_events",
-				clientId);
+					"?client_id={0}" +
+					"&response_type=code" +
+					"&scope=read_account%20read_events" +
+					"&redirect_uri={1}",
+				clientId,
+				redirectUri);
 
 			Assert.AreEqual(expectedAuthUrl, authUrl);
 		}
@@ -47,16 +54,19 @@ namespace Cronofy.Test.CronofyClient
 			const string someState = "xyz789";
 			var client = new Cronofy.CronofyClient(clientId);
 
-			var authUrl = client.GetAuthorizationUrlBuilder()
+			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.State(someState)
 				.Build();
 
 			var expectedAuthUrl = string.Format(
 				"https://app.cronofy.com/oauth/authorize" +
-				"?client_id={0}" +
-				"&scope=read_account%20read_events%20create_event%20delete_event" +
-				"&state={1}",
+					"?client_id={0}" +
+					"&response_type=code" +
+					"&scope=read_account%20read_events%20create_event%20delete_event" +
+					"&redirect_uri={1}" +
+					"&state={2}",
 				clientId,
+				redirectUri,
 				someState);
 
 			Assert.AreEqual(expectedAuthUrl, authUrl);
@@ -67,13 +77,16 @@ namespace Cronofy.Test.CronofyClient
 		{
 			var client = new Cronofy.CronofyClient(clientId);
 
-			var builder = client.GetAuthorizationUrlBuilder();
+			var builder = client.GetAuthorizationUrlBuilder(redirectUri);
 
 			var expectedAuthUrl = string.Format(
 				"https://app.cronofy.com/oauth/authorize" +
-				"?client_id={0}" +
-				"&scope=read_account%20read_events%20create_event%20delete_event",
-				clientId);
+					"?client_id={0}" +
+					"&response_type=code" +
+					"&scope=read_account%20read_events%20create_event%20delete_event" +
+					"&redirect_uri={1}",
+				clientId,
+				redirectUri);
 
 			Assert.AreEqual(expectedAuthUrl, builder.ToString());
 		}

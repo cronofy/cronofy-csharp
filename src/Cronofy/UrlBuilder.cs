@@ -38,7 +38,7 @@ namespace Cronofy
 		/// </exception>
 		public UrlBuilder Url(string url)
 		{
-			Preconditions.NotNullOrEmpty("url", url);
+			Preconditions.NotEmpty("url", url);
 
 			this.url = url;
 
@@ -63,7 +63,7 @@ namespace Cronofy
 		/// </exception>
 		public UrlBuilder AddParameter(string key, string value)
 		{
-			Preconditions.NotNullOrEmpty("key", key);
+			Preconditions.NotEmpty("key", key);
 			Preconditions.NotNull("value", value);
 
 			var encodedKey = HttpUtility.UrlPathEncode(key);

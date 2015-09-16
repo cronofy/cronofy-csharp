@@ -32,6 +32,10 @@ namespace Cronofy
 		/// Creates a new <see cref="AuthorizationUrlBuilder"/> seeded with your
 		/// client configuration.
 		/// </summary>
+		/// <param name="redirectUri">
+		/// The URI to redirect the user's response for the authorization
+		/// request to, must not be empty.
+		/// </param>
 		/// <returns>
 		/// Returns a new <see cref="AuthorizationUrlBuilder"/>.
 		/// </returns>
@@ -39,9 +43,14 @@ namespace Cronofy
 		/// The read_account, read_events, create_event, and delete_event scopes
 		/// are requested by default.
 		/// </remarks>
-		public AuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+		/// <exception cref="ArgumentException">
+		/// Thrown if <paramref name="redirectUri"/> is null or empty.
+		/// </exception>
+		public AuthorizationUrlBuilder GetAuthorizationUrlBuilder(string redirectUri)
 		{
-			return new AuthorizationUrlBuilder(this.clientId);
+			Preconditions.NotEmpty("redirectUri", redirectUri);
+
+			return new AuthorizationUrlBuilder(this.clientId, redirectUri);
 		}
 
 		/// <summary>
@@ -59,6 +68,7 @@ namespace Cronofy
 			};
 
 			private readonly string clientId;
+			private readonly string redirectUri;
 			private string[] scope;
 			private string state;
 
@@ -69,14 +79,21 @@ namespace Cronofy
 			/// <param name="clientId">
 			/// The application's OAuth client_id, must not be blank.
 			/// </param>
+			/// <param name="redirectUri">
+			/// The URI to redirect the user's response for the authorization
+			/// request to, must not be empty.
+			/// </param>
 			/// <exception cref="ArgumentException">
-			/// Thrown if <paramref name="clientId"/> is blank.
+			/// Thrown if <paramref name="clientId"/> is blank, or if
+			/// <paramref name="redirectUri"/> is empty.
 			/// </exception>
-			internal AuthorizationUrlBuilder(string clientId)
+			internal AuthorizationUrlBuilder(string clientId, string redirectUri)
 			{
 				Preconditions.NotBlank("clientId", clientId);
+				Preconditions.NotEmpty("redirectUri", redirectUri);
 
 				this.clientId = clientId;
+				this.redirectUri = redirectUri;
 				this.scope = DefaultScopes;
 			}
 
@@ -116,7 +133,7 @@ namespace Cronofy
 			/// </exception>
 			public AuthorizationUrlBuilder State(string state)
 			{
-				Preconditions.NotNullOrEmpty("state", state);
+				Preconditions.NotEmpty("state", state);
 
 				this.state = state;
 
@@ -135,7 +152,9 @@ namespace Cronofy
 				var urlBuilder = new UrlBuilder()
 					.Url(AuthorizationUrl)
 					.AddParameter("client_id", this.clientId)
-					.AddParameter("scope", string.Join(" ", this.scope));
+					.AddParameter("response_type", "code")
+					.AddParameter("scope", string.Join(" ", this.scope))
+					.AddParameter("redirect_uri", this.redirectUri);
 
 				if (this.state != null)
 				{
