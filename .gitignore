@@ -9,7 +9,6 @@ TestResults/
 .nuget/
 build
 tools
-TestResult.xml
 
 # globs
 Makefile.in

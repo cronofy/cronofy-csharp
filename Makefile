@@ -22,5 +22,5 @@ build: clean mono_version install_tools
 	xbuild $(SLN)
 
 test: build
-	mono $(NUNIT) $(TEST_DLLS)
-
+	mkdir -p build/NUnit
+	mono $(NUNIT) -result=build/NUnit/TestReport.xml $(TEST_DLLS)
