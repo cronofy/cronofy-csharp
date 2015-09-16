@@ -9,6 +9,9 @@ namespace Cronofy.Test
 		[Test()]
 		public void TestCase()
 		{
+			var client = new CronofyClient();
+
+			Assert.IsTrue(client.SmokeTest());
 		}
 	}
 }

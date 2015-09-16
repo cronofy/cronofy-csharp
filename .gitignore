@@ -6,6 +6,8 @@
 [Bb]in/
 packages/
 TestResults/
+.nuget/
+TestResult.xml
 
 # globs
 Makefile.in
