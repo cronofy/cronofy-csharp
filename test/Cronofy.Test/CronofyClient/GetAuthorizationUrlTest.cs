@@ -1,5 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Cronofy.Test.CronofyClient
 {
@@ -34,6 +36,32 @@ namespace Cronofy.Test.CronofyClient
 
 			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.Scope("read_account", "read_events")
+				.Build();
+
+			var expectedAuthUrl = string.Format(
+				"https://app.cronofy.com/oauth/authorize" +
+					"?client_id={0}" +
+					"&response_type=code" +
+					"&scope=read_account%20read_events" +
+					"&redirect_uri={1}",
+				clientId,
+				redirectUri);
+
+			Assert.AreEqual(expectedAuthUrl, authUrl);
+		}
+
+		[Test]
+		public void CanOverrideScopeWithEnumerable()
+		{
+			IEnumerable<string> scope = new List<string> {
+				"read_account",
+				"read_events"
+			};
+
+			var client = new Cronofy.CronofyClient(clientId);
+
+			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+				.Scope(scope)
 				.Build();
 
 			var expectedAuthUrl = string.Format(

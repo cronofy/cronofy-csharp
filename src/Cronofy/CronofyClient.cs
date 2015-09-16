@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Linq;
 
 namespace Cronofy
 {
@@ -116,6 +117,23 @@ namespace Cronofy
 				this.scope = scope;
 
 				return this;
+			}
+
+			/// <summary>
+			/// Sets the scope the authorization URL will request from the user.
+			/// </summary>
+			/// <param name="scope">
+			/// The scope to request from the user, must not be empty.
+			/// </param>
+			/// <returns>
+			/// A reference to the builder.
+			/// </returns>
+			/// <exception cref="ArgumentException">
+			/// Thrown if <paramref name="scope"/> is empty.
+			/// </exception>
+			public AuthorizationUrlBuilder Scope(IEnumerable<string> scope)
+			{
+				return Scope(scope.ToArray());
 			}
 
 			/// <summary>
