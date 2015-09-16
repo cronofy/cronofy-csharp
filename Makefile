@@ -11,10 +11,13 @@ clean:
 full_clean:
 	git clean -dfX
 
+mono_version:
+	mono --version
+
 install_tools:
 	script/nuget-install
 
-build: clean install_tools
+build: clean mono_version install_tools
 	mono $(NUGET) restore $(SLN)
 	xbuild $(SLN)
 
