@@ -66,8 +66,8 @@ namespace Cronofy
 			Preconditions.NotEmpty("key", key);
 			Preconditions.NotNull("value", value);
 
-			var encodedKey = HttpUtility.UrlPathEncode(key);
-			var encodedValue = HttpUtility.UrlPathEncode(value);
+			var encodedKey = EncodeParameter(key);
+			var encodedValue = EncodeParameter(value);
 
 			var parameter = string.Format("{0}={1}", encodedKey, encodedValue);
 
@@ -93,6 +93,11 @@ namespace Cronofy
 			{
 				return this.url;
 			}
+		}
+
+		internal static string EncodeParameter(string value)
+		{
+			return Uri.EscapeDataString(value);
 		}
 	}
 }

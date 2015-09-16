@@ -35,7 +35,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CronofyClient\GetAuthorizationUrlTest.cs" />
+    <Compile Include="UrlBuilderTests\EncodeParameter.cs" />
+    <Compile Include="CronofyClientTests\GetAuthorizationUrl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,6 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CronofyClient\" />
+    <Folder Include="CronofyClientTests\" />
+    <Folder Include="UrlBuilderTests\" />
   </ItemGroup>
 </Project>
