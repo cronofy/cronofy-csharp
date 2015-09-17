@@ -41,6 +41,15 @@ namespace Cronofy
 			this.HttpClient = new ConcreteHttpClient();
 		}
 
+		/// <summary>
+		/// Gets or sets the HTTP client.
+		/// </summary>
+		/// <value>
+		/// The HTTP client.
+		/// </value>
+		/// <remarks>
+		/// Intend for test purposes only.
+		/// </remarks>
 		internal IHttpClient HttpClient { get; set; }
 
 		/// <summary>
@@ -68,8 +77,31 @@ namespace Cronofy
 			return new AuthorizationUrlBuilder(this.clientId, redirectUri);
 		}
 
+		/// <summary>
+		/// Gets the OAuth token from authorization code provided from a
+		/// successful authorization request.
+		/// </summary>
+		/// <param name="code">
+		/// The authorization code provided from an successful authorization
+		/// request, must not be empty.
+		/// </param>
+		/// <param name="redirectUri">
+		/// The redirect URI provided for the authorization requests, must not
+		/// be empty.
+		/// </param>
+		/// <returns>
+		/// Returns an <see cref="OAuthToken"/> for the provided authorization
+		/// code.
+		/// </returns>
+		/// <exception cref="ArgumentException">
+		/// Thrown if <paramref name="code"/> or <paramref name="redirectUri"/>
+		/// are null or empty.
+		/// </exception>
 		public OAuthToken GetTokenFromCode(string code, string redirectUri)
 		{
+			Preconditions.NotEmpty("code", code);
+			Preconditions.NotEmpty("redirectUri", redirectUri);
+
 			var request = new HttpRequest();
 
 			request.Method = "POST";
