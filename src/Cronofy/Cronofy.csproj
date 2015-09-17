@@ -45,9 +45,15 @@
     <Compile Include="ConcreteHttpClient.cs" />
     <Compile Include="HttpRequest.cs" />
     <Compile Include="HttpResponse.cs" />
+    <Compile Include="Responses\OAuthTokenResponse.cs" />
+    <Compile Include="Requests\OAuthTokenRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Responses\" />
+    <Folder Include="Requests\" />
   </ItemGroup>
 </Project>

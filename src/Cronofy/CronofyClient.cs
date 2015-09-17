@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using Cronofy.Responses;
+using Cronofy.Requests;
 
 namespace Cronofy
 {
@@ -13,6 +15,8 @@ namespace Cronofy
 	{
 		private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
 		private const string TokenUrl = "https://app.cronofy.com/oauth/token";
+
+		private const string CodeGrantType = "authorization_code";
 
 		private readonly string clientId;
 		private readonly string clientSecret;
@@ -110,20 +114,20 @@ namespace Cronofy
 				{ "Content-Type", "application/json; charset=utf-8" },
 			};
 
-			var requestBody = new Dictionary<string, string>();
-
-			requestBody["client_id"] = clientId;
-			requestBody["client_secret"] = clientSecret;
-			requestBody["grant_type"] = "authorization_code";
-			requestBody["code"] = code;
-			requestBody["redirect_uri"] = redirectUri;
+			var requestBody = new OAuthTokenRequest {
+				ClientId = this.clientId,
+				ClientSecret = this.clientSecret,
+				GrantType = CodeGrantType,
+				Code = code,
+				RedirectUri = redirectUri,
+			};
 
 			request.Body = JsonConvert.SerializeObject(requestBody);
 
 			var response = HttpClient.GetResponse(request);
-			var body = JsonConvert.DeserializeObject<Dictionary<string,string>>(response.Body);
+			var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(response.Body);
 
-			return new OAuthToken(body["access_token"], body["refresh_token"], int.Parse(body["expires_in"]), body["scope"].Split(new[] { ' ' }));
+			return new OAuthToken(token.AccessToken, token.RefreshToken, token.ExpiresIn, token.GetScopeArray());
 		}
 
 		/// <summary>

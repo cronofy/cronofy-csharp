@@ -30,7 +30,7 @@ namespace Cronofy.Test
 
 			if (stubbedRequests.ContainsKey(key) == false)
 			{
-				throw new NotImplementedException(
+				throw new ArgumentException(
 					"\n\n----------\n\n" +
 					"No stub found\n" +
 					"=============\n\n" +
@@ -52,7 +52,7 @@ namespace Cronofy.Test
 			};
 		}
 
-		private string GetRequestKey(string method, string url, IEnumerable<KeyValuePair<string, string>> headers, string body)
+		private static string GetRequestKey(string method, string url, IEnumerable<KeyValuePair<string, string>> headers, string body)
 		{
 			var encodedHeaders = new StringBuilder();
 
