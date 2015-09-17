@@ -8,13 +8,20 @@ namespace Cronofy.Test.CronofyClientTests
 	public sealed class GetAuthorizationUrl
 	{
 		private const string clientId = "abcdef123456";
+		private const string clientSecret = "s3cr3t1v3";
 		private const string redirectUri = "http://example.com/redirectUri";
+
+		private CronofyClient client;
+
+		[SetUp]
+		public void SetUp()
+		{
+			this.client = new CronofyClient(clientId, clientSecret);
+		}
 
 		[Test]
 		public void HasDefaultScope()
 		{
-			var client = new CronofyClient(clientId);
-
 			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
 			var expectedAuthUrl = string.Format(
 				"https://app.cronofy.com/oauth/authorize" +
@@ -31,8 +38,6 @@ namespace Cronofy.Test.CronofyClientTests
 		[Test]
 		public void CanOverrideScope()
 		{
-			var client = new CronofyClient(clientId);
-
 			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.Scope("read_account", "read_events")
 				.Build();
@@ -57,8 +62,6 @@ namespace Cronofy.Test.CronofyClientTests
 				"read_events"
 			};
 
-			var client = new CronofyClient(clientId);
-
 			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.Scope(scope)
 				.Build();
@@ -79,7 +82,6 @@ namespace Cronofy.Test.CronofyClientTests
 		public void CanProvideState()
 		{
 			const string someState = "xyz789";
-			var client = new CronofyClient(clientId);
 
 			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
 				.State(someState)
@@ -102,8 +104,6 @@ namespace Cronofy.Test.CronofyClientTests
 		[Test]
 		public void ToStringGeneratesUrl()
 		{
-			var client = new CronofyClient(clientId);
-
 			var builder = client.GetAuthorizationUrlBuilder(redirectUri);
 
 			var expectedAuthUrl = string.Format(

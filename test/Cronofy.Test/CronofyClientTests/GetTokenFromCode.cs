@@ -1,0 +1,56 @@
+﻿using System;
+using NUnit.Framework;
+
+namespace Cronofy.Test.CronofyClientTests
+{
+	[TestFixture]
+	public sealed class GetTokenFromCode
+	{
+		private const string clientId = "abcdef123456";
+		private const string clientSecret = "s3cr3t1v3";
+		private const string oauthCode = "zyxvut987654";
+		private const string redirectUri = "http://example.com/redirectUri";
+
+		private CronofyClient client;
+		private StubHttpClient http;
+
+		[SetUp]
+		public void SetUp()
+		{
+			this.client = new CronofyClient(clientId, clientSecret);
+			this.http = new StubHttpClient();
+
+			client.HttpClient = http;
+		}
+
+		[Test]
+		public void CanRedeemToken()
+		{
+			const string accessToken = "asdnakjsdnas";
+			const int expiresIn = 3600;
+			const string refreshToken = "jerwpmsdkjngvdsk";
+			const string scope = "read_events create_event delete_event";
+
+			http.Stub(
+				HttpPost
+					.Url("https://app.cronofy.com/oauth/token")
+					.RequestHeader("Content-Type", "application/json; charset=utf-8")
+					.RequestBodyFormat(
+						"{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
+						clientId, clientSecret, oauthCode, redirectUri)
+					.ResponseCode(200)
+					.ResponseBodyFormat(
+						"{{\"token_type\":\"bearer\",\"access_token\":\"{0}\",\"expires_in\":{1},\"refresh_token\":\"{2}\",\"scope\":\"{3}\"}}",
+						accessToken, expiresIn, refreshToken, scope)
+			);
+
+			var token = client.GetTokenFromCode(oauthCode, redirectUri);
+
+			Assert.NotNull(token);
+			Assert.AreEqual(accessToken, token.AccessToken);
+			Assert.AreEqual(expiresIn, token.ExpiresIn);
+			Assert.AreEqual(refreshToken, token.RefreshToken);
+			Assert.AreEqual(scope.Split(new[] { ' ' }), token.Scope);
+		}
+	}
+}

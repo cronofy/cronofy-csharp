@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace Cronofy
 {
@@ -9,7 +11,11 @@ namespace Cronofy
 	/// </summary>
 	public sealed class CronofyClient
 	{
+		private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
+		private const string TokenUrl = "https://app.cronofy.com/oauth/token";
+
 		private readonly string clientId;
+		private readonly string clientSecret;
 
 		/// <summary>
 		/// Initializes a new instance of the
@@ -18,15 +24,24 @@ namespace Cronofy
 		/// <param name="clientId">
 		/// Your OAuth client_id, must not be blank.
 		/// </param>
+		/// <param name="clientSecret">
+		/// Your OAuth client_secret, must not be blank.
+		/// </param>
 		/// <exception cref="ArgumentException">
-		/// Thrown if <paramref name="clientId"/> is blank.
+		/// Thrown if <paramref name="clientId"/> or
+		/// <paramref name="clientSecret"/> are blank.
 		/// </exception>
-		public CronofyClient(string clientId)
+		public CronofyClient(string clientId, string clientSecret)
 		{
 			Preconditions.NotBlank("clientId", clientId);
+			Preconditions.NotBlank("clientSecret", clientSecret);
 
 			this.clientId = clientId;
+			this.clientSecret = clientSecret;
+			this.HttpClient = new ConcreteHttpClient();
 		}
+
+		internal IHttpClient HttpClient { get; set; }
 
 		/// <summary>
 		/// Creates a new <see cref="AuthorizationUrlBuilder"/> seeded with your
@@ -53,14 +68,39 @@ namespace Cronofy
 			return new AuthorizationUrlBuilder(this.clientId, redirectUri);
 		}
 
+		public OAuthToken GetTokenFromCode(string code, string redirectUri)
+		{
+			var request = new HttpRequest();
+
+			request.Method = "POST";
+			request.Url = TokenUrl;
+			request.Headers = new Dictionary<string, string> {
+				{ "Content-Type", "application/json; charset=utf-8" },
+			};
+
+			var requestBody = new Dictionary<string, string>();
+
+			requestBody["client_id"] = clientId;
+			requestBody["client_secret"] = clientSecret;
+			requestBody["grant_type"] = "authorization_code";
+			requestBody["code"] = code;
+			requestBody["redirect_uri"] = redirectUri;
+
+			request.Body = JsonConvert.SerializeObject(requestBody);
+
+			var response = HttpClient.GetResponse(request);
+			var body = JsonConvert.DeserializeObject<Dictionary<string,string>>(response.Body);
+
+			return new OAuthToken(body["access_token"], body["refresh_token"], int.Parse(body["expires_in"]), body["scope"].Split(new[] { ' ' }));
+		}
+
 		/// <summary>
 		/// Builder class for authorization URLs.
 		/// </summary>
 		public sealed class AuthorizationUrlBuilder
 		{
-			private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
 
-			private static readonly string[] DefaultScopes = new [] {
+			private static readonly string[] DefaultScopes = {
 				"read_account",
 				"read_events",
 				"create_event",
