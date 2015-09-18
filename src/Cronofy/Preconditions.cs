@@ -4,6 +4,14 @@ namespace Cronofy
 {
 	internal static class Preconditions
 	{
+		public static void True(bool value, string message)
+		{
+			if (value == false)
+			{
+				throw new ArgumentException(message);
+			}
+		}
+
 		public static void NotBlank(string name, string value)
 		{
 			if (string.IsNullOrEmpty(value) || value.Trim().Length == 0)

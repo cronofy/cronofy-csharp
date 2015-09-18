@@ -39,7 +39,8 @@ namespace Cronofy
 
 		public bool Equals(OAuthToken other)
 		{
-			return this.AccessToken == other.AccessToken
+			return other != null
+				&& this.AccessToken == other.AccessToken
 				&& this.RefreshToken == other.RefreshToken
 				&& this.ExpiresIn == other.ExpiresIn
 				&& this.Scope.SequenceEqual(other.Scope);

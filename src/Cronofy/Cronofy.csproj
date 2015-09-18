@@ -47,6 +47,16 @@
     <Compile Include="HttpResponse.cs" />
     <Compile Include="Responses\OAuthTokenResponse.cs" />
     <Compile Include="Requests\OAuthTokenRequest.cs" />
+    <Compile Include="CronofyAccountClient.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="Responses\ReadEventsResponse.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Participation.cs" />
+    <Compile Include="Transparency.cs" />
+    <Compile Include="EventStatus.cs" />
+    <Compile Include="Date.cs" />
+    <Compile Include="EventTime.cs" />
+    <Compile Include="EventTimeConvertor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

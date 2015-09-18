@@ -13,7 +13,7 @@ namespace Cronofy.Test
 		{
 			this.stubbedRequests = new Dictionary<string, StubRequest>();
 		}
-		
+
 		public StubHttpClient Stub(StubRequestBuilder builder)
 		{
 			var request = builder.Build();
@@ -26,7 +26,15 @@ namespace Cronofy.Test
 
 		public HttpResponse GetResponse(HttpRequest request)
 		{
-			var key = GetRequestKey(request.Method, request.Url, request.Headers, request.Body);
+			var url = request.Url;
+
+			if (request.QueryString != null && request.QueryString.Any())
+			{
+				var encodedQueryString = ToQueryString(request.QueryString);
+				url = string.Format("{0}?{1}", url, encodedQueryString);
+			}
+
+			var key = GetRequestKey(request.Method, url, request.Headers, request.Body);
 
 			if (stubbedRequests.ContainsKey(key) == false)
 			{
@@ -54,14 +62,41 @@ namespace Cronofy.Test
 
 		private static string GetRequestKey(string method, string url, IEnumerable<KeyValuePair<string, string>> headers, string body)
 		{
-			var encodedHeaders = new StringBuilder();
+			var requestKey = new StringBuilder();
 
-			foreach (var header in headers)
+			requestKey.AppendFormat("{0} {1}", method, url);
+
+			var allHeaders = headers.ToList();
+
+			if (allHeaders.Any())
 			{
-				encodedHeaders.AppendFormat("{0}: {1}\n", header.Key, header.Value);
+				requestKey.AppendLine();
 			}
 
-			return string.Format("{0} {1}\n{2}\n{3}", method, url, encodedHeaders, body);
+			foreach (var header in allHeaders)
+			{
+				requestKey.AppendFormat("{0}: {1}\n", header.Key, header.Value);
+			}
+
+			if (string.IsNullOrEmpty(body) == false)
+			{
+				requestKey.AppendLine();
+				requestKey.Append(body);
+			}
+
+			return requestKey.ToString();
+		}
+
+		private static string ToQueryString(IEnumerable<KeyValuePair<string, string>> queryString)
+		{
+			var encodedPairs = new List<string>();
+
+			foreach (var qs in queryString)
+			{
+				encodedPairs.Add(string.Format("{0}={1}", UrlBuilder.EncodeParameter(qs.Key), UrlBuilder.EncodeParameter(qs.Value)));
+			}
+
+			return string.Join("&", encodedPairs.ToArray());
 		}
 	}
 }

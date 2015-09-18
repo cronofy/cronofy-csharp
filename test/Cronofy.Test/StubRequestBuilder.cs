@@ -38,10 +38,15 @@ namespace Cronofy.Test
 			return this;
 		}
 
+		public StubRequestBuilder ResponseBody(string body)
+		{
+			this.responseBody = body;
+			return this;
+		}
+
 		public StubRequestBuilder ResponseBodyFormat(string format, params object[] args)
 		{
-			this.responseBody = string.Format(format, args);
-			return this;
+			return this.ResponseBody(string.Format(format, args));
 		}
 
 		public StubRequest Build()
@@ -72,6 +77,14 @@ namespace Cronofy.Test
 		public static StubRequestBuilder Url(string url)
 		{
 			return new StubRequestBuilder("POST", url);
+		}
+	}
+
+	public static class HttpGet
+	{
+		public static StubRequestBuilder Url(string url)
+		{
+			return new StubRequestBuilder("GET", url);
 		}
 	}
 }

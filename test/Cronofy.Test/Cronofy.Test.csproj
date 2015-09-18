@@ -43,6 +43,9 @@
     <Compile Include="CronofyClientTests\GetTokenFromCode.cs" />
     <Compile Include="StubHttpClient.cs" />
     <Compile Include="StubRequestBuilder.cs" />
+    <Compile Include="CronofyClientTests\GetEvents.cs" />
+    <Compile Include="DateTests.cs" />
+    <Compile Include="EventTimeTests\JsonParsing.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -57,5 +60,6 @@
   <ItemGroup>
     <Folder Include="CronofyClientTests\" />
     <Folder Include="UrlBuilderTests\" />
+    <Folder Include="EventTimeTests\" />
   </ItemGroup>
 </Project>
