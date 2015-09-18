@@ -44,13 +44,10 @@ namespace Cronofy.Test.CronofyClientTests
 						accessToken, expiresIn, refreshToken, scope)
 			);
 
-			var token = client.GetTokenFromCode(oauthCode, redirectUri);
+			var actualToken = client.GetTokenFromCode(oauthCode, redirectUri);
+			var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }));
 
-			Assert.NotNull(token);
-			Assert.AreEqual(accessToken, token.AccessToken);
-			Assert.AreEqual(expiresIn, token.ExpiresIn);
-			Assert.AreEqual(refreshToken, token.RefreshToken);
-			Assert.AreEqual(scope.Split(new[] { ' ' }), token.Scope);
+			Assert.AreEqual(expectedToken, actualToken);
 		}
 	}
 }
