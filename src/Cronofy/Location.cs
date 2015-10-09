@@ -11,6 +11,8 @@ namespace Cronofy
 {
 	public sealed class Location
 	{
+		// TODO Remove this attribute, instead create a HTTP-specific class
+		[JsonProperty("description")]
 		public string Description { get; set; }
 
 		public override int GetHashCode()

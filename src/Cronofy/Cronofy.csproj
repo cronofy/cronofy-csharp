@@ -57,6 +57,8 @@
     <Compile Include="Date.cs" />
     <Compile Include="EventTime.cs" />
     <Compile Include="EventTimeConvertor.cs" />
+    <Compile Include="Requests\UpsertEventRequest.cs" />
+    <Compile Include="UpsertEventRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

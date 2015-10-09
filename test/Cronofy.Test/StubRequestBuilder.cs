@@ -26,10 +26,15 @@ namespace Cronofy.Test
 			return this;
 		}
 
+		public StubRequestBuilder RequestBody(string body)
+		{
+			this.requestBody = body;
+			return this;
+		}
+
 		public StubRequestBuilder RequestBodyFormat(string format, params object[] args)
 		{
-			this.requestBody = string.Format(format, args);
-			return this;
+			return RequestBody(string.Format(format, args));
 		}
 
 		public StubRequestBuilder ResponseCode(int code)

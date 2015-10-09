@@ -7,12 +7,14 @@ using Cronofy.Responses;
 using Cronofy.Requests;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Messaging;
+using Cronofy;
 
 namespace Cronofy
 {
 	public sealed class CronofyAccountClient
 	{
 		private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
+		private const string UpsertEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
 		
 		private readonly string accessToken;
 
@@ -49,7 +51,37 @@ namespace Cronofy
 			var response = HttpClient.GetResponse(request);
 			var readEventsResponse = JsonConvert.DeserializeObject<ReadEventsResponse>(response.Body);
 
+			// TODO Support parameters
+			// TODO Support pages
+
 			return readEventsResponse.Events.Select(e => e.ToEvent());
+		}
+
+		public void UpsertEvent(string calendarId, UpsertEventRequestBuilder builder)
+		{
+			var request = builder.Build();
+			UpsertEvent(calendarId, request);
+		}
+
+		public void UpsertEvent(string calendarId, UpsertEventRequest eventRequest)
+		{
+			var request = new HttpRequest();
+
+			request.Method = "POST";
+			request.Url = string.Format(UpsertEventUrlFormat, calendarId);
+			request.Headers = new Dictionary<string, string> {
+				{ "Authorization", "Bearer " + this.accessToken },
+				{ "Content-Type", "application/json; charset=utf-8" },
+			};
+
+			request.Body = JsonConvert.SerializeObject(eventRequest);
+
+			var response = HttpClient.GetResponse(request);
+
+			if (response.Code != 202) {
+				// TODO More useful exceptions
+				throw new ApplicationException("Request failed");
+			}
 		}
 	}
 }

@@ -7,13 +7,6 @@ namespace Cronofy.Test.EventTimeTests
 	[TestFixture]
 	public sealed class JsonParsing
 	{
-		internal sealed class EventTimeHolder
-		{
-			[JsonProperty("event_time")]
-			[JsonConverter(typeof(EventTimeConverter))]
-			public EventTime EventTime { get; set; }
-		}
-
 		[Test]
 		public void CanParseBasicTimeString()
 		{

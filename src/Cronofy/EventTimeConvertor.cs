@@ -60,7 +60,28 @@ namespace Cronofy
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			throw new NotImplementedException();
+			var eventTime = value as EventTime;
+
+			if (eventTime == null)
+			{
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName("time");
+
+			if (eventTime.HasTime)
+			{
+				writer.WriteValue(eventTime.DateTimeOffset.ToString("u"));
+			}
+			else
+			{
+				writer.WriteValue(eventTime.Date.ToString());
+			}
+
+			writer.WritePropertyName("tzid");
+			writer.WriteValue(eventTime.TimeZoneId);
+			writer.WriteEndObject();
 		}
 	}
 }
