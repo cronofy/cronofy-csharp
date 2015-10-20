@@ -28,7 +28,7 @@ namespace Cronofy.Test.CronofyClientTests
 		{
 			http.Stub(
 				HttpGet
-				.Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC")
+				.Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
 				.RequestHeader("Authorization", "Bearer " + accessToken)
 				.ResponseCode(200)
 				.ResponseBody(

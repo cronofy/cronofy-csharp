@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Newtonsoft.Json;
 using Cronofy.Responses;
 using Cronofy.Requests;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Remoting.Messaging;
 using Cronofy;
 
 namespace Cronofy
@@ -46,10 +43,11 @@ namespace Cronofy
 			};
 			request.QueryString = new Dictionary<string, string> {
 				{ "tzid", "Etc/UTC" },
+				{ "localized_times", "true" },
 			};
 
 			var response = HttpClient.GetResponse(request);
-			var readEventsResponse = JsonConvert.DeserializeObject<ReadEventsResponse>(response.Body);
+			var readEventsResponse = JsonConvert.DeserializeObject<ReadEventsResponse>(response.Body, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
 
 			// TODO Support parameters
 			// TODO Support pages
