@@ -8,13 +8,24 @@ namespace Cronofy
 {
 	internal sealed class ConcreteHttpClient : IHttpClient
 	{
+		private static readonly IDictionary<string, Action<HttpWebRequest, string>> RestrictedHeaderUpdate
+			= new Dictionary<string, Action<HttpWebRequest, string>>();
+
+		static ConcreteHttpClient()
+		{
+			RestrictedHeaderUpdate.Add("Content-Type", (req, val) => req.ContentType = val);
+		}
+
 		public HttpResponse GetResponse(HttpRequest request)
 		{
 			var urlBuilder = new UrlBuilder().Url(request.Url);
 
-			foreach (var item in request.QueryString)
+			if (request.QueryString != null)
 			{
-				urlBuilder.AddParameter(item.Key, item.Value);
+				foreach (var item in request.QueryString)
+				{
+					urlBuilder.AddParameter(item.Key, item.Value);
+				}
 			}
 
 			var url = urlBuilder.Build();
@@ -25,7 +36,14 @@ namespace Cronofy
 
 			foreach (var item in request.Headers)
 			{
-				httpRequest.Headers[item.Key] = item.Value;
+				if (RestrictedHeaderUpdate.ContainsKey(item.Key))
+				{
+					RestrictedHeaderUpdate[item.Key].Invoke(httpRequest, item.Value);
+				}
+				else
+				{
+					httpRequest.Headers[item.Key] = item.Value;
+				}
 			}
 
 			httpRequest.UserAgent = "Cronofy .NET";
