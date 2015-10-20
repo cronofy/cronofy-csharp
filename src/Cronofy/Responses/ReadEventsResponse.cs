@@ -66,14 +66,13 @@ namespace Cronofy.Responses
 
 			public Event ToEvent()
 			{
-				return new Event {
+				var evt = new Event {
 					CalendarId = CalendarId,
 					EventUid = EventUid,
 					Summary = Summary,
 					Description = Description,
 					Start = Start,
 					End = End,
-					Location = Location.ToLocation(),
 					Deleted = Deleted,
 					ParticipationStatus = ParticipationStatus,
 					Transparency = Transparency,
@@ -81,6 +80,13 @@ namespace Cronofy.Responses
 					Created = Created,
 					Updated = Updated,
 				};
+
+				if (Location != null)
+				{
+					evt.Location = Location.ToLocation();
+				}
+
+				return evt;
 			}
 		}
 	}
