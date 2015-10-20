@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cronofy", "src\Cronofy\Cron
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cronofy.Test", "test\Cronofy.Test\Cronofy.Test.csproj", "{5A8D2403-F256-45DA-A07D-6FFF9ABC9751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cronofy.Example", "src\Cronofy.Example\Cronofy.Example.csproj", "{CF032BE6-0BA4-44B8-92CA-9A47E741D6E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{5A8D2403-F256-45DA-A07D-6FFF9ABC9751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8D2403-F256-45DA-A07D-6FFF9ABC9751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8D2403-F256-45DA-A07D-6FFF9ABC9751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF032BE6-0BA4-44B8-92CA-9A47E741D6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF032BE6-0BA4-44B8-92CA-9A47E741D6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF032BE6-0BA4-44B8-92CA-9A47E741D6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF032BE6-0BA4-44B8-92CA-9A47E741D6E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
