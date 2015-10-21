@@ -30,6 +30,9 @@ namespace Cronofy.Responses
 			[JsonProperty("calendar_id")]
 			public string CalendarId { get; set; }
 
+			[JsonProperty("event_id")]
+			public string EventId { get; set; }
+
 			[JsonProperty("event_uid")]
 			public string EventUid { get; set; }
 
@@ -109,6 +112,7 @@ namespace Cronofy.Responses
 			{
 				var evt = new Event {
 					CalendarId = CalendarId,
+					EventId = EventId,
 					EventUid = EventUid,
 					Summary = Summary,
 					Description = Description,

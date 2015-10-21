@@ -40,6 +40,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
   ""events"": [
     {
       ""calendar_id"": ""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw"",
+      ""event_id"": ""myEventId"",
       ""event_uid"": ""evt_external_54008b1a4a41730f8d5c6037"",
       ""summary"": ""Company Retreat"",
       ""description"": ""Escape to the country"",
@@ -73,6 +74,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 				new List<Event> {
 					new Event {
 						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+						EventId = "myEventId",
 						EventUid = "evt_external_54008b1a4a41730f8d5c6037",
 						Summary = "Company Retreat",
 						Description = "Escape to the country",

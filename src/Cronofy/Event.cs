@@ -9,6 +9,7 @@ namespace Cronofy
 	public sealed class Event
 	{
 		public string CalendarId { get; set; }
+		public string EventId { get; set; }
 		public string EventUid { get; set; }
 		public string Summary { get; set; }
 		public string Description { get; set; }
@@ -44,6 +45,7 @@ namespace Cronofy
 		{
 			return other != null
 				&& this.EventUid == other.EventUid
+				&& this.EventId == other.EventId
 				&& this.CalendarId == other.CalendarId
 				&& this.Created == other.Created
 				&& this.Updated == other.Updated
@@ -62,8 +64,8 @@ namespace Cronofy
 		public override string ToString()
 		{
 			return string.Format(
-				"<{0} CalendarId={1}, EventUid={2}, Summary={3}, Start={4}, End={5}, Deleted={6}, Attendees={7}>",
-				GetType(), CalendarId, EventUid, Summary, Start, End, Deleted, Attendees);
+				"<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Attendees={8}>",
+				GetType(), CalendarId, EventId, EventUid, Summary, Start, End, Deleted, Attendees);
 		}
 
 		private static bool NullTolerantSequenceEqual<T>(IEnumerable<T> left, IEnumerable<T> right)
