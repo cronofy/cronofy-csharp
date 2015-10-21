@@ -5,11 +5,13 @@ using Cronofy.Responses;
 using Cronofy.Requests;
 using Cronofy;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Cronofy
 {
 	public sealed class CronofyAccountClient
 	{
+		private const string CalendarsUrl = "https://api.cronofy.com/v1/calendars";
 		private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
 		private const string ManagedEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
 		
@@ -33,6 +35,24 @@ namespace Cronofy
 		/// Intend for test purposes only.
 		/// </remarks>
 		internal IHttpClient HttpClient { get; set; }
+
+		public IEnumerable<Calendar> GetCalendars()
+		{
+			var request = new HttpRequest();
+
+			request.Method = "GET";
+			request.Url = CalendarsUrl;
+
+			request.Headers = new Dictionary<string, string> {
+				{ "Authorization", "Bearer " + this.accessToken },
+			};
+
+			var response = HttpClient.GetResponse(request);
+
+			var calendarsResponse = JsonConvert.DeserializeObject<CalendarsResponse>(response.Body);
+
+			return calendarsResponse.Calendars.Select(c => c.ToCalendar());
+		}
 
 		public IEnumerable<Event> GetEvents()
 		{

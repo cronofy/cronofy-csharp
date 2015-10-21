@@ -50,6 +50,7 @@
     <Compile Include="CronofyAccountClientTests\GetEvents.cs" />
     <Compile Include="CronofyAccountClientTests\UpsertEvent.cs" />
     <Compile Include="CronofyAccountClientTests\DeleteEvent.cs" />
+    <Compile Include="CronofyAccountClientTests\GetCalendars.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
