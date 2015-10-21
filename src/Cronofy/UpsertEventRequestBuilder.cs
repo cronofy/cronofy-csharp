@@ -1,6 +1,5 @@
 ﻿using System;
 using Cronofy.Requests;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Cronofy
 {
@@ -13,27 +12,29 @@ namespace Cronofy
 		private DateTimeOffset endTime;
 		private string locationDescription;
 
-		public UpsertEventRequestBuilder EventId(string value)
+		public UpsertEventRequestBuilder EventId(string eventId)
 		{
-			this.eventId = value;
+			Preconditions.NotEmpty("eventId", eventId);
+
+			this.eventId = eventId;
 			return this;
 		}
 
-		public UpsertEventRequestBuilder Summary(string value)
+		public UpsertEventRequestBuilder Summary(string summary)
 		{
-			this.summary = value;
+			this.summary = summary;
 			return this;
 		}
 
-		public UpsertEventRequestBuilder Description(string value)
+		public UpsertEventRequestBuilder Description(string description)
 		{
-			this.description = value;
+			this.description = description;
 			return this;
 		}
 
-		public UpsertEventRequestBuilder Start(DateTimeOffset value)
+		public UpsertEventRequestBuilder Start(DateTimeOffset start)
 		{
-			this.startTime = value;
+			this.startTime = start;
 			return this;
 		}
 
@@ -42,9 +43,9 @@ namespace Cronofy
 			return Start(new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0)));
 		}
 
-		public UpsertEventRequestBuilder End(DateTimeOffset value)
+		public UpsertEventRequestBuilder End(DateTimeOffset end)
 		{
-			this.endTime = value;
+			this.endTime = end;
 			return this;
 		}
 
@@ -53,9 +54,9 @@ namespace Cronofy
 			return End(new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0)));
 		}
 
-		public UpsertEventRequestBuilder Location(string value)
+		public UpsertEventRequestBuilder Location(string location)
 		{
-			this.locationDescription = value;
+			this.locationDescription = location;
 			return this;
 		}
 

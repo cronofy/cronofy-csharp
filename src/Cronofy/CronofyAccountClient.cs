@@ -78,15 +78,21 @@ namespace Cronofy
 		}
 
 		/// <inheritdoc />
-		public void UpsertEvent(string calendarId, UpsertEventRequestBuilder builder)
+		public void UpsertEvent(string calendarId, UpsertEventRequestBuilder eventBuilder)
 		{
-			var request = builder.Build();
+			Preconditions.NotEmpty("calendarId", calendarId);
+			Preconditions.NotNull("eventBuilder", eventBuilder);
+
+			var request = eventBuilder.Build();
 			UpsertEvent(calendarId, request);
 		}
 
 		/// <inheritdoc />
 		public void UpsertEvent(string calendarId, UpsertEventRequest eventRequest)
 		{
+			Preconditions.NotEmpty("calendarId", calendarId);
+			Preconditions.NotNull("eventRequest", eventRequest);
+
 			var request = new HttpRequest();
 
 			request.Method = "POST";
@@ -109,6 +115,9 @@ namespace Cronofy
 		/// <inheritdoc />
 		public void DeleteEvent(string calendarId, string eventId)
 		{
+			Preconditions.NotEmpty("calendarId", calendarId);
+			Preconditions.NotEmpty("eventId", eventId);
+
 			var request = new HttpRequest();
 
 			request.Method = "DELETE";

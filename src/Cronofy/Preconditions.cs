@@ -43,5 +43,13 @@ namespace Cronofy
 				throw new ArgumentException(string.Format("{0} must not be null", name));
 			}
 		}
+
+		public static void NotNull(string name, object value)
+		{
+			if (value == null)
+			{
+				throw new ArgumentException(string.Format("{0} must not be null", name));
+			}
+		}
 	}
 }
