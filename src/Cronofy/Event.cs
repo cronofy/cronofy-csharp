@@ -1,4 +1,8 @@
 using System;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Cronofy
 {
@@ -17,6 +21,7 @@ namespace Cronofy
 		public string EventStatus { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
+		public Attendee[] Attendees { get; set; }
 
 		public override int GetHashCode()
 		{
@@ -50,14 +55,30 @@ namespace Cronofy
 				&& this.EventStatus == other.EventStatus
 				&& object.Equals(this.Location, other.Location)
 				&& object.Equals(this.Start, other.Start)
-				&& object.Equals(this.End, other.End);
+				&& object.Equals(this.End, other.End)
+				&& NullTolerantSequenceEqual(this.Attendees, other.Attendees);
 		}
 
 		public override string ToString()
 		{
 			return string.Format(
-				"<{0} CalendarId={1}, EventUid={2}, Summary={3}, Start={4}, End={5}, Deleted={6}>",
-				GetType(), CalendarId, EventUid, Summary, Start, End, Deleted);
+				"<{0} CalendarId={1}, EventUid={2}, Summary={3}, Start={4}, End={5}, Deleted={6}, Attendees={7}>",
+				GetType(), CalendarId, EventUid, Summary, Start, End, Deleted, Attendees);
+		}
+
+		private static bool NullTolerantSequenceEqual<T>(IEnumerable<T> left, IEnumerable<T> right)
+		{
+			if (left == null)
+			{
+				return right == null;
+			}
+
+			if (right == null)
+			{
+				return false;
+			}
+
+			return left.SequenceEqual(right);
 		}
 	}
 }

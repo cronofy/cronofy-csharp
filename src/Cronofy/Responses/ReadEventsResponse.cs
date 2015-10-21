@@ -1,5 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Linq;
 
 namespace Cronofy.Responses
 {
@@ -66,6 +68,9 @@ namespace Cronofy.Responses
 			[JsonProperty("updated")]
 			public DateTime Updated { get; set; }
 
+			[JsonProperty("attendees")]
+			public AttendeeResponse[] Attendees { get; set; }
+
 			internal sealed class LocationResponse
 			{
 				[JsonProperty("description")]
@@ -75,6 +80,27 @@ namespace Cronofy.Responses
 				{
 					return new Location {
 						Description = Description,
+					};
+				}
+			}
+
+			internal sealed class AttendeeResponse
+			{
+				[JsonProperty("email")]
+				public string Email { get; set; }
+
+				[JsonProperty("display_name")]
+				public string DisplayName { get; set; }
+
+				[JsonProperty("status")]
+				public string Status { get; set; }
+
+				public Attendee ToAttendee()
+				{
+					return new Attendee {
+						Email = Email,
+						DisplayName = DisplayName,
+						Status = Status,
 					};
 				}
 			}
@@ -99,6 +125,11 @@ namespace Cronofy.Responses
 				if (Location != null)
 				{
 					evt.Location = Location.ToLocation();
+				}
+
+				if (Attendees != null)
+				{
+					evt.Attendees = Attendees.Select(a => a.ToAttendee()).ToArray();
 				}
 
 				return evt;

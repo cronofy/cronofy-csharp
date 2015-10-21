@@ -1,6 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.NetworkInformation;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
@@ -85,6 +87,13 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						EventStatus = EventStatus.Confirmed,
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+						Attendees = new[] {
+							new Attendee {
+								Email = "example@cronofy.com",
+								DisplayName = "Example Person",
+								Status = AttendeeStatus.NeedsAction,
+							}
+						},
 					} 
 				},
 				events);
@@ -149,6 +158,13 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						EventStatus = EventStatus.Confirmed,
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+						Attendees = new[] {
+							new Attendee {
+								Email = "example@cronofy.com",
+								DisplayName = "Example Person",
+								Status = AttendeeStatus.NeedsAction,
+							}
+						},
 					}
 				},
 				events);
@@ -252,6 +268,13 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						EventStatus = EventStatus.Confirmed,
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+						Attendees = new[] {
+							new Attendee {
+								Email = "example@cronofy.com",
+								DisplayName = "Example Person",
+								Status = AttendeeStatus.NeedsAction,
+							}
+						},
 					},
 					new Event {
 						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
@@ -267,6 +290,13 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						EventStatus = EventStatus.Confirmed,
 						Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
+						Attendees = new[] {
+							new Attendee {
+								Email = "example+other@cronofy.com",
+								DisplayName = "Other Person",
+								Status = AttendeeStatus.NeedsAction,
+							}
+						},
 					},
 				},
 				events);

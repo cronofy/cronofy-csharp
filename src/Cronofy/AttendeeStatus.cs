@@ -2,7 +2,7 @@
 
 namespace Cronofy
 {
-	public static class Participation
+	public static class AttendeeStatus
 	{
 		// TODO Expand list
 		public const string NeedsAction = "needs_action";

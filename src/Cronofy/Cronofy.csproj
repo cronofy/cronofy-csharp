@@ -65,6 +65,8 @@
     <Compile Include="CronofyOAuthClient.cs" />
     <Compile Include="Requests\OAuthTokenRefreshRequest.cs" />
     <Compile Include="ICronofyOAuthClient.cs" />
+    <Compile Include="AttendeeStatus.cs" />
+    <Compile Include="Attendee.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
