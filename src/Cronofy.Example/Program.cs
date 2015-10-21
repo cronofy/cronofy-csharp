@@ -12,6 +12,18 @@ namespace Cronofy.Example
 			Console.WriteLine();
 			var client = new CronofyAccountClient(accessToken);
 
+			Console.WriteLine("Fetching calendars...");
+			var calendars = client.GetCalendars();
+
+			Console.WriteLine();
+
+			foreach (var calendar in calendars)
+			{
+				Console.WriteLine("{0} - {1} - {2} ({3})", calendar.CalendarId, calendar.Name, calendar.Profile.Name, calendar.Profile.ProviderName);
+			}
+
+			Console.WriteLine();
+
 			Console.WriteLine("Fetching events...");
 			var events = client.GetEvents();
 
@@ -42,6 +54,13 @@ namespace Cronofy.Example
 
 			client.UpsertEvent(calendarId, eventBuilder);
 			Console.WriteLine("Event upserted");
+			Console.WriteLine();
+
+			Console.WriteLine("Press enter to delete...");
+			Console.ReadLine();
+
+			client.DeleteEvent(calendarId, eventId);
+			Console.WriteLine("Event deleted");
 			Console.WriteLine();
 
 			Console.WriteLine("Press enter to continue...");
