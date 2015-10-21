@@ -1,5 +1,6 @@
 ﻿using System;
 using Cronofy.Requests;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Cronofy
 {
@@ -36,10 +37,20 @@ namespace Cronofy
 			return this;
 		}
 
+		public UpsertEventRequestBuilder Start(int year, int month, int day, int hour, int minute)
+		{
+			return Start(new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0)));
+		}
+
 		public UpsertEventRequestBuilder End(DateTimeOffset value)
 		{
 			this.endTime = value;
 			return this;
+		}
+
+		public UpsertEventRequestBuilder End(int year, int month, int day, int hour, int minute)
+		{
+			return End(new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0)));
 		}
 
 		public UpsertEventRequestBuilder Location(string value)

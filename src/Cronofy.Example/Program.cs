@@ -49,8 +49,8 @@ namespace Cronofy.Example
 				.EventId(eventId)
 				.Summary("Cronofy Example")
 				.Description("Example from the Cronofy .NET SDK")
-				.Start(new DateTime(2015, 10, 20, 17, 0, 0, DateTimeKind.Utc))
-				.End(new DateTime(2015, 10, 20, 17, 30, 0, DateTimeKind.Utc));
+				.Start(2015, 10, 20, 17, 00)
+				.End(2015, 10, 20, 17, 30);
 
 			client.UpsertEvent(calendarId, eventBuilder);
 			Console.WriteLine("Event upserted");
