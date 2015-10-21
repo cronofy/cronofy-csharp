@@ -10,7 +10,7 @@ namespace Cronofy
 	/// <summary>
 	/// Client for the Cronofy API.
 	/// </summary>
-	public sealed class CronofyOAuthClient
+	public sealed class CronofyOAuthClient : ICronofyOAuthClient
 	{
 		private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
 		private const string TokenUrl = "https://app.cronofy.com/oauth/token";
@@ -81,26 +81,7 @@ namespace Cronofy
 			return new AuthorizationUrlBuilder(this.clientId, redirectUri);
 		}
 
-		/// <summary>
-		/// Gets the OAuth token from authorization code provided from a
-		/// successful authorization request.
-		/// </summary>
-		/// <param name="code">
-		/// The authorization code provided from an successful authorization
-		/// request, must not be empty.
-		/// </param>
-		/// <param name="redirectUri">
-		/// The redirect URI provided for the authorization requests, must not
-		/// be empty.
-		/// </param>
-		/// <returns>
-		/// Returns an <see cref="OAuthToken"/> for the provided authorization
-		/// code.
-		/// </returns>
-		/// <exception cref="ArgumentException">
-		/// Thrown if <paramref name="code"/> or <paramref name="redirectUri"/>
-		/// are null or empty.
-		/// </exception>
+		/// <inheritdoc />
 		public OAuthToken GetTokenFromCode(string code, string redirectUri)
 		{
 			Preconditions.NotEmpty("code", code);
@@ -130,20 +111,7 @@ namespace Cronofy
 			return new OAuthToken(token.AccessToken, token.RefreshToken, token.ExpiresIn, token.GetScopeArray());
 		}
 
-		/// <summary>
-		/// Gets the OAuth token from authorization code provided from a
-		/// successful authorization request.
-		/// </summary>
-		/// <param name="refreshToken">
-		/// The refresh token that can be used to retrieve a new
-		/// <see cref="OAuthToken"/>, must not be empty.
-		/// </param>
-		/// <returns>
-		/// Returns an <see cref="OAuthToken"/> for the provided refresh token.
-		/// </returns>
-		/// <exception cref="ArgumentException">
-		/// Thrown if <paramref name="refreshToken"/> is null or empty.
-		/// </exception>
+		/// <inheritdoc />
 		public OAuthToken GetTokenFromRefreshToken(string refreshToken)
 		{
 			Preconditions.NotEmpty("refreshToken", refreshToken);

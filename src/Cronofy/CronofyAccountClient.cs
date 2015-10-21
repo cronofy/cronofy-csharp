@@ -36,6 +36,7 @@ namespace Cronofy
 		/// </remarks>
 		internal IHttpClient HttpClient { get; set; }
 
+		/// <inheritdoc />
 		public IEnumerable<Calendar> GetCalendars()
 		{
 			var request = new HttpRequest();
@@ -54,6 +55,7 @@ namespace Cronofy
 			return calendarsResponse.Calendars.Select(c => c.ToCalendar());
 		}
 
+		/// <inheritdoc />
 		public IEnumerable<Event> GetEvents()
 		{
 			var request = new HttpRequest();
@@ -77,12 +79,14 @@ namespace Cronofy
 			return new GetEventsIterator(this.HttpClient, this.accessToken, response);
 		}
 
+		/// <inheritdoc />
 		public void UpsertEvent(string calendarId, UpsertEventRequestBuilder builder)
 		{
 			var request = builder.Build();
 			UpsertEvent(calendarId, request);
 		}
 
+		/// <inheritdoc />
 		public void UpsertEvent(string calendarId, UpsertEventRequest eventRequest)
 		{
 			var request = new HttpRequest();
@@ -104,6 +108,7 @@ namespace Cronofy
 			}
 		}
 
+		/// <inheritdoc />
 		public void DeleteEvent(string calendarId, string eventId)
 		{
 			var request = new HttpRequest();
