@@ -8,12 +8,12 @@ namespace Cronofy
 {
 	internal sealed class ConcreteHttpClient : IHttpClient
 	{
-		private static readonly IDictionary<string, Action<HttpWebRequest, string>> RestrictedHeaderUpdate
-			= new Dictionary<string, Action<HttpWebRequest, string>>();
+		private static readonly IDictionary<string, Header.Assignment> RestrictedHeaders
+			= new Dictionary<string, Header.Assignment>();
 
 		static ConcreteHttpClient()
 		{
-			RestrictedHeaderUpdate.Add("Content-Type", (req, val) => req.ContentType = val);
+			RestrictedHeaders.Add("Content-Type", Header.SetContentType);
 		}
 
 		public HttpResponse GetResponse(HttpRequest request)
@@ -31,35 +31,51 @@ namespace Cronofy
 			var url = urlBuilder.Build();
 
 			var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+
 			httpRequest.KeepAlive = true;
 			httpRequest.Method = request.Method;
+			httpRequest.UserAgent = "Cronofy .NET";
 
+			MapHeaders(request, httpRequest);
+			WriteRequestBody(request, httpRequest);
+
+			return GetResponse(httpRequest);
+		}
+
+		private static void MapHeaders(HttpRequest request, HttpWebRequest httpRequest)
+		{
 			foreach (var item in request.Headers)
 			{
-				if (RestrictedHeaderUpdate.ContainsKey(item.Key))
+				if (RestrictedHeaders.ContainsKey(item.Key))
 				{
-					RestrictedHeaderUpdate[item.Key].Invoke(httpRequest, item.Value);
+					RestrictedHeaders[item.Key].Invoke(httpRequest, item.Value);
 				}
 				else
 				{
 					httpRequest.Headers[item.Key] = item.Value;
 				}
 			}
+		}
 
-			httpRequest.UserAgent = "Cronofy .NET";
-
-			if (string.IsNullOrEmpty(request.Body) == false)
+		private static void WriteRequestBody(HttpRequest request, HttpWebRequest httpRequest)
+		{
+			if (string.IsNullOrEmpty(request.Body))
 			{
-				var bodyBytes = Encoding.UTF8.GetBytes(request.Body);
-
-				httpRequest.ContentLength = bodyBytes.Length;
-
-				using (var stream = httpRequest.GetRequestStream())
-				{
-					stream.Write(bodyBytes, 0, bodyBytes.Length);
-				}
+				return;
 			}
 
+			var bodyBytes = Encoding.UTF8.GetBytes(request.Body);
+
+			httpRequest.ContentLength = bodyBytes.Length;
+
+			using (var stream = httpRequest.GetRequestStream())
+			{
+				stream.Write(bodyBytes, 0, bodyBytes.Length);
+			}
+		}
+
+		private static HttpResponse GetResponse(HttpWebRequest httpRequest)
+		{
 			using (var httpResponse = (HttpWebResponse)httpRequest.GetResponse())
 			{
 				var responseBody = GetResponseBody(httpResponse);
@@ -68,8 +84,8 @@ namespace Cronofy
 
 				// TODO Check 422 response as it isn't in the enum
 				response.Code = (int)httpResponse.StatusCode;
-				response.Headers = new Dictionary<string, string>();
 
+				response.Headers = new Dictionary<string, string>();
 				foreach (var key in httpResponse.Headers.AllKeys)
 				{
 					var value = httpResponse.GetResponseHeader(key);
@@ -95,6 +111,16 @@ namespace Cronofy
 				{
 					return reader.ReadToEnd();
 				}
+			}
+		}
+
+		internal static class Header
+		{
+			internal delegate void Assignment(HttpWebRequest request, string value);
+
+			internal static void SetContentType(HttpWebRequest request, string value)
+			{
+				request.ContentType = value;
 			}
 		}
 	}
