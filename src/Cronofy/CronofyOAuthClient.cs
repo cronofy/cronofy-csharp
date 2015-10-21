@@ -105,10 +105,9 @@ namespace Cronofy
 
 			request.Body = JsonConvert.SerializeObject(requestBody);
 
-			var response = HttpClient.GetResponse(request);
-			var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(response.Body);
+			var tokenResponse = HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
-			return new OAuthToken(token.AccessToken, token.RefreshToken, token.ExpiresIn, token.GetScopeArray());
+			return tokenResponse.ToToken();
 		}
 
 		/// <inheritdoc />
@@ -133,10 +132,9 @@ namespace Cronofy
 
 			request.Body = JsonConvert.SerializeObject(requestBody);
 
-			var response = HttpClient.GetResponse(request);
-			var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(response.Body);
+			var token = HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
-			return new OAuthToken(token.AccessToken, token.RefreshToken, token.ExpiresIn, token.GetScopeArray());
+			return token.ToToken();
 		}
 
 		/// <summary>

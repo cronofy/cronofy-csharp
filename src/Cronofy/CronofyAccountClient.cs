@@ -48,9 +48,7 @@ namespace Cronofy
 				{ "Authorization", "Bearer " + this.accessToken },
 			};
 
-			var response = HttpClient.GetResponse(request);
-
-			var calendarsResponse = JsonConvert.DeserializeObject<CalendarsResponse>(response.Body);
+			var calendarsResponse = HttpClient.GetJsonResponse<CalendarsResponse>(request);
 
 			return calendarsResponse.Calendars.Select(c => c.ToCalendar());
 		}
@@ -74,7 +72,7 @@ namespace Cronofy
 			};
 
 			// Eagerly fetch the first page to hit access token and validation issues.
-			var response = HttpClient.GetResponse(request);
+			var response = HttpClient.GetJsonResponse<ReadEventsResponse>(request);
 
 			return new GetEventsIterator(this.HttpClient, this.accessToken, response);
 		}
@@ -136,13 +134,13 @@ namespace Cronofy
 		{
 			private readonly IHttpClient httpClient;
 			private readonly string accessToken;
-			private readonly HttpResponse firstResponse;
+			private readonly ReadEventsResponse firstPage;
 
-			public GetEventsIterator(IHttpClient httpClient, string accessToken, HttpResponse firstResponse)
+			public GetEventsIterator(IHttpClient httpClient, string accessToken, ReadEventsResponse firstPage)
 			{
 				this.httpClient = httpClient;
 				this.accessToken = accessToken;
-				this.firstResponse = firstResponse;
+				this.firstPage = firstPage;
 			}
 
 			public IEnumerator<Event> GetEnumerator()
@@ -157,21 +155,23 @@ namespace Cronofy
 
 			private IEnumerable<Event> GetEvents()
 			{
-				var currentPage = DeserializeResponse(firstResponse);
+				return GetPages().SelectMany(EventsFromPage);
+			}
 
-				foreach (var item in currentPage.Events)
+			private IEnumerable<ReadEventsResponse> GetPages()
+			{
+				var currentPage = firstPage;
+
+				while (true)
 				{
-					yield return item.ToEvent();
-				}
+					yield return currentPage;
 
-				while (currentPage.Pages.NextPageUrl != null)
-				{
-					currentPage = GetNextPageResponse(currentPage);
-
-					foreach (var item in currentPage.Events)
+					if (currentPage.Pages.NextPageUrl == null)
 					{
-						yield return item.ToEvent();
+						break;
 					}
+
+					currentPage = GetNextPageResponse(currentPage);
 				}
 			}
 
@@ -185,14 +185,12 @@ namespace Cronofy
 					{ "Authorization", "Bearer " + this.accessToken },
 				};
 
-				var response = this.httpClient.GetResponse(request);
-
-				return DeserializeResponse(response);
+				return this.httpClient.GetJsonResponse<ReadEventsResponse>(request);
 			}
 
-			private static ReadEventsResponse DeserializeResponse(HttpResponse response)
+			private static IEnumerable<Event> EventsFromPage(ReadEventsResponse response)
 			{
-				return JsonConvert.DeserializeObject<ReadEventsResponse>(response.Body, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+				return response.Events.Select(e => e.ToEvent());
 			}
 		}
 	}

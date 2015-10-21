@@ -21,5 +21,10 @@ namespace Cronofy.Responses
 		{
 			return Scope.Split(new[] { ' ' });
 		}
+
+		public OAuthToken ToToken()
+		{
+			return new OAuthToken(AccessToken, RefreshToken, ExpiresIn, GetScopeArray());
+		}
 	}
 }
