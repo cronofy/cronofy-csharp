@@ -4,7 +4,8 @@ namespace Cronofy
 {
 	public static class Transparency
 	{
-		// TODO Expand list
 		public const string Opaque = "opaque";
+		public const string Transparent = "transparent";
+		public const string Unknown = "unknown";
 	}
 }

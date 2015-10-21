@@ -4,7 +4,9 @@ namespace Cronofy
 {
 	public static class EventStatus
 	{
-		// TODO Expand list
+		public const string Cancelled = "cancelled";
 		public const string Confirmed = "confirmed";
+		public const string Tentative = "tentative";
+		public const string Unknown = "unknown";
 	}
 }

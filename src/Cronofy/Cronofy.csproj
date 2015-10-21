@@ -50,7 +50,6 @@
     <Compile Include="Event.cs" />
     <Compile Include="Responses\ReadEventsResponse.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Participation.cs" />
     <Compile Include="Transparency.cs" />
     <Compile Include="EventStatus.cs" />
     <Compile Include="Date.cs" />
