@@ -92,4 +92,12 @@ namespace Cronofy.Test
 			return new StubRequestBuilder("GET", url);
 		}
 	}
+
+	public static class HttpDelete
+	{
+		public static StubRequestBuilder Url(string url)
+		{
+			return new StubRequestBuilder("DELETE", url);
+		}
+	}
 }

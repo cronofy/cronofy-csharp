@@ -49,6 +49,7 @@
     <Compile Include="EventTimeTests\JsonGeneration.cs" />
     <Compile Include="CronofyAccountClientTests\GetEvents.cs" />
     <Compile Include="CronofyAccountClientTests\UpsertEvent.cs" />
+    <Compile Include="CronofyAccountClientTests\DeleteEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

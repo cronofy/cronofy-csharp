@@ -11,7 +11,7 @@ namespace Cronofy
 	public sealed class CronofyAccountClient
 	{
 		private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
-		private const string UpsertEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
+		private const string ManagedEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
 		
 		private readonly string accessToken;
 
@@ -68,13 +68,36 @@ namespace Cronofy
 			var request = new HttpRequest();
 
 			request.Method = "POST";
-			request.Url = string.Format(UpsertEventUrlFormat, calendarId);
+			request.Url = string.Format(ManagedEventUrlFormat, calendarId);
 			request.Headers = new Dictionary<string, string> {
 				{ "Authorization", "Bearer " + this.accessToken },
 				{ "Content-Type", "application/json; charset=utf-8" },
 			};
 
 			request.Body = JsonConvert.SerializeObject(eventRequest);
+
+			var response = HttpClient.GetResponse(request);
+
+			if (response.Code != 202) {
+				// TODO More useful exceptions
+				throw new ApplicationException("Request failed");
+			}
+		}
+
+		public void DeleteEvent(string calendarId, string eventId)
+		{
+			var request = new HttpRequest();
+
+			request.Method = "DELETE";
+			request.Url = string.Format(ManagedEventUrlFormat, calendarId);
+			request.Headers = new Dictionary<string, string> {
+				{ "Authorization", "Bearer " + this.accessToken },
+				{ "Content-Type", "application/json; charset=utf-8" },
+			};
+
+			var requestBody = new { event_id = eventId };
+
+			request.Body = JsonConvert.SerializeObject(requestBody);
 
 			var response = HttpClient.GetResponse(request);
 
