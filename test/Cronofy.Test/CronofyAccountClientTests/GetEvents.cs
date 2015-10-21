@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Cronofy.Test.CronofyClientTests
+namespace Cronofy.Test.CronofyAccountClientTests
 {
 	[TestFixture]
 	public sealed class GetEvents

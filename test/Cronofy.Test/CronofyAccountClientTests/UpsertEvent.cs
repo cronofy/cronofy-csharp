@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace Cronofy.Test.CronofyClientTests
+namespace Cronofy.Test.CronofyAccountClientTests
 {
 	[TestFixture]
 	public sealed class UpsertEvent

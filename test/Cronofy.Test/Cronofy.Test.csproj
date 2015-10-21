@@ -43,12 +43,12 @@
     <Compile Include="CronofyClientTests\GetTokenFromCode.cs" />
     <Compile Include="StubHttpClient.cs" />
     <Compile Include="StubRequestBuilder.cs" />
-    <Compile Include="CronofyClientTests\GetEvents.cs" />
     <Compile Include="DateTests.cs" />
     <Compile Include="EventTimeTests\JsonParsing.cs" />
-    <Compile Include="CronofyClientTests\UpsertEvent.cs" />
     <Compile Include="EventTimeTests\EventTimeHolder.cs" />
     <Compile Include="EventTimeTests\JsonGeneration.cs" />
+    <Compile Include="CronofyAccountClientTests\GetEvents.cs" />
+    <Compile Include="CronofyAccountClientTests\UpsertEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -64,5 +64,6 @@
     <Folder Include="CronofyClientTests\" />
     <Folder Include="UrlBuilderTests\" />
     <Folder Include="EventTimeTests\" />
+    <Folder Include="CronofyAccountClientTests\" />
   </ItemGroup>
 </Project>
