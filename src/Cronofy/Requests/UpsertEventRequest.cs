@@ -23,6 +23,12 @@ namespace Cronofy.Requests
 		public EventTime End { get; set; }
 
 		[JsonProperty("location")]
-		public Location Location { get; set; }
+		public RequestLocation Location { get; set; }
+
+		public sealed class RequestLocation
+		{
+			[JsonProperty("description")]
+			public string Description { get; set; }
+		}
 	}
 }

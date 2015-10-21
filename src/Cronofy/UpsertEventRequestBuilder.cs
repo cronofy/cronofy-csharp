@@ -56,7 +56,7 @@ namespace Cronofy
 				Description = this.description,
 				Start = new EventTime(this.startTime.ToUniversalTime(), "Etc/UTC"),
 				End = new EventTime(this.endTime.ToUniversalTime(), "Etc/UTC"),
-				Location = new Cronofy.Location {
+				Location = new UpsertEventRequest.RequestLocation {
 					Description = this.locationDescription,
 				},
 			};
