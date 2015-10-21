@@ -65,6 +65,9 @@ namespace Cronofy.Responses
 			[JsonProperty("event_status")]
 			public string EventStatus { get; set; }
 
+			[JsonProperty("categories")]
+			public string[] Categories { get; set; }
+
 			[JsonProperty("created")]
 			public DateTime Created { get; set; }
 
@@ -122,6 +125,7 @@ namespace Cronofy.Responses
 					ParticipationStatus = ParticipationStatus,
 					Transparency = Transparency,
 					EventStatus = EventStatus,
+					Categories = Categories,
 					Created = Created,
 					Updated = Updated,
 				};

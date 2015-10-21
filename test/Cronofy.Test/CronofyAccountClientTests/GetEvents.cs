@@ -53,7 +53,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
       ""event_status"": ""confirmed"",
-      ""categories"": [],
+      ""categories"": [""foo"", ""bar""],
       ""attendees"": [
         {
           ""email"": ""example@cronofy.com"",
@@ -87,6 +87,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						ParticipationStatus = Participation.NeedsAction,
 						Transparency = Transparency.Opaque,
 						EventStatus = EventStatus.Confirmed,
+						Categories = new[] { "foo", "bar" },
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
 						Attendees = new[] {
@@ -158,6 +159,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						ParticipationStatus = Participation.NeedsAction,
 						Transparency = Transparency.Opaque,
 						EventStatus = EventStatus.Confirmed,
+						Categories = new string[] {},
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
 						Attendees = new[] {
@@ -268,6 +270,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						ParticipationStatus = Participation.NeedsAction,
 						Transparency = Transparency.Opaque,
 						EventStatus = EventStatus.Confirmed,
+						Categories = new string[] {},
 						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
 						Attendees = new[] {
@@ -290,6 +293,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 						ParticipationStatus = Participation.NeedsAction,
 						Transparency = Transparency.Opaque,
 						EventStatus = EventStatus.Confirmed,
+						Categories = new string[] {},
 						Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
 						Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
 						Attendees = new[] {

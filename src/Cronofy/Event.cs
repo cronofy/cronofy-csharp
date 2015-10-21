@@ -20,6 +20,7 @@ namespace Cronofy
 		public string ParticipationStatus { get; set; }
 		public string Transparency { get; set; }
 		public string EventStatus { get; set; }
+		public string[] Categories { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
 		public Attendee[] Attendees { get; set; }
@@ -58,7 +59,8 @@ namespace Cronofy
 				&& object.Equals(this.Location, other.Location)
 				&& object.Equals(this.Start, other.Start)
 				&& object.Equals(this.End, other.End)
-				&& NullTolerantSequenceEqual(this.Attendees, other.Attendees);
+				&& NullTolerantSequenceEqual(this.Attendees, other.Attendees)
+				&& NullTolerantSequenceEqual(this.Categories, other.Categories);
 		}
 
 		public override string ToString()
