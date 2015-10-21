@@ -52,5 +52,12 @@ namespace Cronofy
 				&& object.Equals(this.Start, other.Start)
 				&& object.Equals(this.End, other.End);
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"<{0} CalendarId={1}, EventUid={2}, Summary={3}, Start={4}, End={5}, Deleted={6}>",
+				GetType(), CalendarId, EventUid, Summary, Start, End, Deleted);
+		}
 	}
 }
