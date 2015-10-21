@@ -7,8 +7,6 @@ namespace Cronofy.Test.CronofyAccountClientTests
 	[TestFixture]
 	public sealed class GetEvents
 	{
-		private const string clientId = "abcdef123456";
-		private const string clientSecret = "s3cr3t1v3";
 		private const string accessToken = "zyxvut987654";
 
 		private CronofyAccountClient client;
