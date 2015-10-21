@@ -8,6 +8,21 @@ namespace Cronofy.Responses
 		[JsonProperty("events")]
 		public EventResponse[] Events { get; set; }
 
+		[JsonProperty("pages")]
+		public PagesResponse Pages { get; set; }
+
+		internal sealed class PagesResponse
+		{
+			[JsonProperty("current")]
+			public int CurrentPage { get; set; }
+
+			[JsonProperty("total")]
+			public int TotalPages { get; set; }
+
+			[JsonProperty("next_page")]
+			public string NextPageUrl { get; set; }
+		}
+
 		internal sealed class EventResponse
 		{
 			[JsonProperty("calendar_id")]
