@@ -1,12 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
 using Cronofy.Responses;
 using Cronofy.Requests;
 using Cronofy;
-using System.Collections;
-using System.Web;
+using Newtonsoft.Json;
 
 namespace Cronofy
 {
