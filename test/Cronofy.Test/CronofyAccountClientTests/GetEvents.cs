@@ -6,33 +6,33 @@ using System.Net.NetworkInformation;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
-	[TestFixture]
-	public sealed class GetEvents
-	{
-		private const string accessToken = "zyxvut987654";
+    [TestFixture]
+    public sealed class GetEvents
+    {
+        private const string accessToken = "zyxvut987654";
 
-		private CronofyAccountClient client;
-		private StubHttpClient http;
+        private CronofyAccountClient client;
+        private StubHttpClient http;
 
-		[SetUp]
-		public void SetUp()
-		{
-			this.client = new CronofyAccountClient(accessToken);
-			this.http = new StubHttpClient();
+        [SetUp]
+        public void SetUp()
+        {
+            this.client = new CronofyAccountClient(accessToken);
+            this.http = new StubHttpClient();
 
-			client.HttpClient = http;
-		}
+            client.HttpClient = http;
+        }
 
-		[Test]
-		public void CanGetEvents()
-		{
-			http.Stub(
-				HttpGet
-				.Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-				.RequestHeader("Authorization", "Bearer " + accessToken)
-				.ResponseCode(200)
-				.ResponseBody(
-					@"{
+        [Test]
+        public void CanGetEvents()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
   ""pages"": {
     ""current"": 1,
     ""total"": 1
@@ -66,52 +66,52 @@ namespace Cronofy.Test.CronofyAccountClientTests
     }
   ]
 }")
-			);
+            );
 
-			var events = client.GetEvents();
+            var events = client.GetEvents();
 
-			CollectionAssert.AreEqual(
-				new List<Event> {
-					new Event {
-						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
-						EventId = "myEventId",
-						EventUid = "evt_external_54008b1a4a41730f8d5c6037",
-						Summary = "Company Retreat",
-						Description = "Escape to the country",
-						Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
-						End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
-						Location = new Location {
-							Description = "Beach",
-						},
-						Deleted = false,
-						ParticipationStatus = AttendeeStatus.NeedsAction,
-						Transparency = Transparency.Opaque,
-						EventStatus = EventStatus.Confirmed,
-						Categories = new[] { "foo", "bar" },
-						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
-						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-						Attendees = new[] {
-							new Attendee {
-								Email = "example@cronofy.com",
-								DisplayName = "Example Person",
-								Status = AttendeeStatus.NeedsAction,
-							}
-						},
-					} 
-				},
-				events);
-		}
+            CollectionAssert.AreEqual(
+                new List<Event> {
+                    new Event {
+                        CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                        EventId = "myEventId",
+                        EventUid = "evt_external_54008b1a4a41730f8d5c6037",
+                        Summary = "Company Retreat",
+                        Description = "Escape to the country",
+                        Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
+                        End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
+                        Location = new Location {
+                            Description = "Beach",
+                        },
+                        Deleted = false,
+                        ParticipationStatus = AttendeeStatus.NeedsAction,
+                        Transparency = Transparency.Opaque,
+                        EventStatus = EventStatus.Confirmed,
+                        Categories = new[] { "foo", "bar" },
+                        Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
+                        Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+                        Attendees = new[] {
+                            new Attendee {
+                                Email = "example@cronofy.com",
+                                DisplayName = "Example Person",
+                                Status = AttendeeStatus.NeedsAction,
+                            }
+                        },
+                    } 
+                },
+                events);
+        }
 
-		[Test]
-		public void CanGetEventWithoutLocation()
-		{
-			http.Stub(
-				HttpGet
-				.Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-				.RequestHeader("Authorization", "Bearer " + accessToken)
-				.ResponseCode(200)
-				.ResponseBody(
-					@"{
+        [Test]
+        public void CanGetEventWithoutLocation()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
   ""pages"": {
     ""current"": 1,
     ""total"": 1
@@ -141,49 +141,49 @@ namespace Cronofy.Test.CronofyAccountClientTests
     }
   ]
 }")
-			);
+            );
 
-			var events = client.GetEvents();
+            var events = client.GetEvents();
 
-			CollectionAssert.AreEqual(
-				new List<Event> {
-					new Event {
-						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
-						EventUid = "evt_external_54008b1a4a41730f8d5c6037",
-						Summary = "Company Retreat",
-						Description = "Escape to the country",
-						Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
-						End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
-						Location = null,
-						Deleted = false,
-						ParticipationStatus = AttendeeStatus.NeedsAction,
-						Transparency = Transparency.Opaque,
-						EventStatus = EventStatus.Confirmed,
-						Categories = new string[] {},
-						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
-						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-						Attendees = new[] {
-							new Attendee {
-								Email = "example@cronofy.com",
-								DisplayName = "Example Person",
-								Status = AttendeeStatus.NeedsAction,
-							}
-						},
-					}
-				},
-				events);
-		}
+            CollectionAssert.AreEqual(
+                new List<Event> {
+                    new Event {
+                        CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                        EventUid = "evt_external_54008b1a4a41730f8d5c6037",
+                        Summary = "Company Retreat",
+                        Description = "Escape to the country",
+                        Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
+                        End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
+                        Location = null,
+                        Deleted = false,
+                        ParticipationStatus = AttendeeStatus.NeedsAction,
+                        Transparency = Transparency.Opaque,
+                        EventStatus = EventStatus.Confirmed,
+                        Categories = new string[] {},
+                        Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
+                        Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+                        Attendees = new[] {
+                            new Attendee {
+                                Email = "example@cronofy.com",
+                                DisplayName = "Example Person",
+                                Status = AttendeeStatus.NeedsAction,
+                            }
+                        },
+                    }
+                },
+                events);
+        }
 
-		[Test]
-		public void CanGetPagedEvents()
-		{
-			http.Stub(
-				HttpGet
-				.Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-				.RequestHeader("Authorization", "Bearer " + accessToken)
-				.ResponseCode(200)
-				.ResponseBody(
-					@"{
+        [Test]
+        public void CanGetPagedEvents()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
   ""pages"": {
     ""current"": 1,
     ""total"": 2,
@@ -214,15 +214,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
     }
   ]
 }")
-			);
+            );
 
-			http.Stub(
-				HttpGet
-				.Url("https://api.cronofy.com/v1/events/pages/08a07b034306679e")
-				.RequestHeader("Authorization", "Bearer " + accessToken)
-				.ResponseCode(200)
-				.ResponseBody(
-					@"{
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events/pages/08a07b034306679e")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
   ""pages"": {
     ""current"": 2,
     ""total"": 2
@@ -252,60 +252,60 @@ namespace Cronofy.Test.CronofyAccountClientTests
     }
   ]
 }")
-			);
+            );
 
-			var events = client.GetEvents();
+            var events = client.GetEvents();
 
-			CollectionAssert.AreEqual(
-				new List<Event> {
-					new Event {
-						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
-						EventUid = "evt_external_54008b1a4a41730f8d5c6037",
-						Summary = "Company Retreat",
-						Description = "Escape to the country",
-						Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
-						End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
-						Location = null,
-						Deleted = false,
-						ParticipationStatus = AttendeeStatus.NeedsAction,
-						Transparency = Transparency.Opaque,
-						EventStatus = EventStatus.Confirmed,
-						Categories = new string[] {},
-						Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
-						Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-						Attendees = new[] {
-							new Attendee {
-								Email = "example@cronofy.com",
-								DisplayName = "Example Person",
-								Status = AttendeeStatus.NeedsAction,
-							}
-						},
-					},
-					new Event {
-						CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
-						EventUid = "evt_external_54008b1a4a41730f8d5c6040",
-						Summary = "Company Retreat",
-						Description = "Escape to the country",
-						Start = new EventTime(new Date(2014, 12, 6), "Etc/UTC"),
-						End = new EventTime(new Date(2014, 12, 8), "Etc/UTC"),
-						Location = null,
-						Deleted = false,
-						ParticipationStatus = AttendeeStatus.NeedsAction,
-						Transparency = Transparency.Opaque,
-						EventStatus = EventStatus.Confirmed,
-						Categories = new string[] {},
-						Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
-						Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
-						Attendees = new[] {
-							new Attendee {
-								Email = "example+other@cronofy.com",
-								DisplayName = "Other Person",
-								Status = AttendeeStatus.NeedsAction,
-							}
-						},
-					},
-				},
-				events);
-		}
-	}
+            CollectionAssert.AreEqual(
+                new List<Event> {
+                    new Event {
+                        CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                        EventUid = "evt_external_54008b1a4a41730f8d5c6037",
+                        Summary = "Company Retreat",
+                        Description = "Escape to the country",
+                        Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
+                        End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
+                        Location = null,
+                        Deleted = false,
+                        ParticipationStatus = AttendeeStatus.NeedsAction,
+                        Transparency = Transparency.Opaque,
+                        EventStatus = EventStatus.Confirmed,
+                        Categories = new string[] {},
+                        Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
+                        Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+                        Attendees = new[] {
+                            new Attendee {
+                                Email = "example@cronofy.com",
+                                DisplayName = "Example Person",
+                                Status = AttendeeStatus.NeedsAction,
+                            }
+                        },
+                    },
+                    new Event {
+                        CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                        EventUid = "evt_external_54008b1a4a41730f8d5c6040",
+                        Summary = "Company Retreat",
+                        Description = "Escape to the country",
+                        Start = new EventTime(new Date(2014, 12, 6), "Etc/UTC"),
+                        End = new EventTime(new Date(2014, 12, 8), "Etc/UTC"),
+                        Location = null,
+                        Deleted = false,
+                        ParticipationStatus = AttendeeStatus.NeedsAction,
+                        Transparency = Transparency.Opaque,
+                        EventStatus = EventStatus.Confirmed,
+                        Categories = new string[] {},
+                        Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
+                        Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
+                        Attendees = new[] {
+                            new Attendee {
+                                Email = "example+other@cronofy.com",
+                                DisplayName = "Other Person",
+                                Status = AttendeeStatus.NeedsAction,
+                            }
+                        },
+                    },
+                },
+                events);
+        }
+    }
 }

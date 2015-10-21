@@ -6,33 +6,33 @@ using System.Linq;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
-	[TestFixture]
-	public sealed class GetCalendars
-	{
-		private const string accessToken = "zyxvut987654";
+    [TestFixture]
+    public sealed class GetCalendars
+    {
+        private const string accessToken = "zyxvut987654";
 
-		private CronofyAccountClient client;
-		private StubHttpClient http;
+        private CronofyAccountClient client;
+        private StubHttpClient http;
 
-		[SetUp]
-		public void SetUp()
-		{
-			this.client = new CronofyAccountClient(accessToken);
-			this.http = new StubHttpClient();
+        [SetUp]
+        public void SetUp()
+        {
+            this.client = new CronofyAccountClient(accessToken);
+            this.http = new StubHttpClient();
 
-			client.HttpClient = http;
-		}
+            client.HttpClient = http;
+        }
 
-		[Test]
-		public void CanGetCalendars()
-		{
-			http.Stub(
-				HttpGet
-				.Url("https://api.cronofy.com/v1/calendars")
-				.RequestHeader("Authorization", "Bearer " + accessToken)
-				.ResponseCode(200)
-				.ResponseBody(
-					@"{
+        [Test]
+        public void CanGetCalendars()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/calendars")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
   ""calendars"": [
     {
       ""provider_name"": ""google"",
@@ -63,47 +63,47 @@ namespace Cronofy.Test.CronofyAccountClientTests
     }
   ]
 }")
-		);
+        );
 
-			var calendars = client.GetCalendars();
+            var calendars = client.GetCalendars();
 
-			CollectionAssert.AreEqual(
-				new List<Calendar> {
-					new Calendar {
-						Profile = new Profile {
-							ProviderName = "google",
-							ProfileId = "pro_n23kjnwrw2",
-							Name = "example@cronofy.com",
-						},
-						CalendarId = "cal_n23kjnwrw2_jsdfjksn234",
-						Name = "Home",
-						ReadOnly = false,
-						Deleted = false,
-					},
-					new Calendar {
-						Profile = new Profile {
-							ProviderName = "google",
-							ProfileId = "pro_n23kjnwrw2",
-							Name = "example@cronofy.com",
-						},
-						CalendarId = "cal_n23kjnwrw2_n1k323nkj23",
-						Name = "Work",
-						ReadOnly = true,
-						Deleted = true,
-					},
-					new Calendar {
-						Profile = new Profile {
-							ProviderName = "apple",
-							ProfileId = "pro_n23kjnkopy",
-							Name = "example@cronofy.com",
-						},
-						CalendarId = "cal_n23kjnkopy_3nkj23wejk1",
-						Name = "Bank Holidays",
-						ReadOnly = true,
-						Deleted = false,
-					},
-				},
-				calendars.ToList());
-		}
-	}
+            CollectionAssert.AreEqual(
+                new List<Calendar> {
+                    new Calendar {
+                        Profile = new Profile {
+                            ProviderName = "google",
+                            ProfileId = "pro_n23kjnwrw2",
+                            Name = "example@cronofy.com",
+                        },
+                        CalendarId = "cal_n23kjnwrw2_jsdfjksn234",
+                        Name = "Home",
+                        ReadOnly = false,
+                        Deleted = false,
+                    },
+                    new Calendar {
+                        Profile = new Profile {
+                            ProviderName = "google",
+                            ProfileId = "pro_n23kjnwrw2",
+                            Name = "example@cronofy.com",
+                        },
+                        CalendarId = "cal_n23kjnwrw2_n1k323nkj23",
+                        Name = "Work",
+                        ReadOnly = true,
+                        Deleted = true,
+                    },
+                    new Calendar {
+                        Profile = new Profile {
+                            ProviderName = "apple",
+                            ProfileId = "pro_n23kjnkopy",
+                            Name = "example@cronofy.com",
+                        },
+                        CalendarId = "cal_n23kjnkopy_3nkj23wejk1",
+                        Name = "Bank Holidays",
+                        ReadOnly = true,
+                        Deleted = false,
+                    },
+                },
+                calendars.ToList());
+        }
+    }
 }

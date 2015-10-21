@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Cronofy
 {
-	internal interface IHttpClient
-	{
-		HttpResponse GetResponse(HttpRequest request);
-	}
+    internal interface IHttpClient
+    {
+        HttpResponse GetResponse(HttpRequest request);
+    }
 }
