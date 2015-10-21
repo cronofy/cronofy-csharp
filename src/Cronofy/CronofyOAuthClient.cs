@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using Cronofy.Responses;
-using Cronofy.Requests;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Newtonsoft.Json;
+    using Cronofy.Responses;
+    using Cronofy.Requests;
+
     /// <summary>
     /// Client for the Cronofy API.
     /// </summary>
@@ -91,21 +91,20 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = TokenUrl;
-            request.Headers = new Dictionary<string, string> {
-                { "Content-Type", "application/json; charset=utf-8" },
-            };
+            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
-            var requestBody = new OAuthTokenRequest {
-                ClientId = this.clientId,
-                ClientSecret = this.clientSecret,
-                GrantType = CodeGrantType,
-                Code = code,
-                RedirectUri = redirectUri,
-            };
+            var requestBody = new OAuthTokenRequest
+                {
+                    ClientId = this.clientId,
+                    ClientSecret = this.clientSecret,
+                    GrantType = CodeGrantType,
+                    Code = code,
+                    RedirectUri = redirectUri,
+                };
 
             request.Body = JsonConvert.SerializeObject(requestBody);
 
-            var tokenResponse = HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
+            var tokenResponse = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
             return tokenResponse.ToToken();
         }
@@ -119,9 +118,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = TokenUrl;
-            request.Headers = new Dictionary<string, string> {
-                { "Content-Type", "application/json; charset=utf-8" },
-            };
+            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
             var requestBody = new OAuthTokenRefreshRequest {
                 ClientId = this.clientId,
@@ -130,9 +127,10 @@ namespace Cronofy
                 RefreshToken = refreshToken,
             };
 
+            // TODO Extension method this to SetJsonBody or something
             request.Body = JsonConvert.SerializeObject(requestBody);
 
-            var token = HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
+            var token = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
             return token.ToToken();
         }
@@ -142,7 +140,6 @@ namespace Cronofy
         /// </summary>
         public sealed class AuthorizationUrlBuilder
         {
-
             private static readonly string[] DefaultScopes = {
                 "read_account",
                 "read_events",
@@ -215,7 +212,7 @@ namespace Cronofy
             /// </exception>
             public AuthorizationUrlBuilder Scope(IEnumerable<string> scope)
             {
-                return Scope(scope.ToArray());
+                return this.Scope(scope.ToArray());
             }
 
             /// <summary>

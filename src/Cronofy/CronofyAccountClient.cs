@@ -1,14 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Cronofy.Responses;
-using Cronofy.Requests;
-using Cronofy;
-using Newtonsoft.Json;
-using System.Linq;
-
 namespace Cronofy
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using Cronofy.Responses;
+    using Cronofy.Requests;
+    using Cronofy;
+    using Newtonsoft.Json;
+    using System.Linq;
+
     public sealed class CronofyAccountClient : ICronofyAccountClient
     {
         private const string CalendarsUrl = "https://api.cronofy.com/v1/calendars";
@@ -43,12 +43,9 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = CalendarsUrl;
+            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
 
-            request.Headers = new Dictionary<string, string> {
-                { "Authorization", "Bearer " + this.accessToken },
-            };
-
-            var calendarsResponse = HttpClient.GetJsonResponse<CalendarsResponse>(request);
+            var calendarsResponse = this.HttpClient.GetJsonResponse<CalendarsResponse>(request);
 
             return calendarsResponse.Calendars.Select(c => c.ToCalendar());
         }
@@ -60,19 +57,14 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = ReadEventsUrl;
-
-            request.Headers = new Dictionary<string, string> {
-                { "Authorization", "Bearer " + this.accessToken },
-            };
+            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
 
             // TODO Support parameters
-            request.QueryString = new Dictionary<string, string> {
-                { "tzid", "Etc/UTC" },
-                { "localized_times", "true" },
-            };
+            request.QueryString.Add("tzid", "Etc/UTC");
+            request.QueryString.Add("localized_times", "true");
 
             // Eagerly fetch the first page to hit access token and validation issues.
-            var response = HttpClient.GetJsonResponse<ReadEventsResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<ReadEventsResponse>(request);
 
             return new GetEventsIterator(this.HttpClient, this.accessToken, response);
         }
@@ -84,7 +76,8 @@ namespace Cronofy
             Preconditions.NotNull("eventBuilder", eventBuilder);
 
             var request = eventBuilder.Build();
-            UpsertEvent(calendarId, request);
+
+            this.UpsertEvent(calendarId, request);
         }
 
         /// <inheritdoc />
@@ -97,16 +90,15 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.Headers = new Dictionary<string, string> {
-                { "Authorization", "Bearer " + this.accessToken },
-                { "Content-Type", "application/json; charset=utf-8" },
-            };
+            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
+            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
             request.Body = JsonConvert.SerializeObject(eventRequest);
 
-            var response = HttpClient.GetResponse(request);
+            var response = this.HttpClient.GetResponse(request);
 
-            if (response.Code != 202) {
+            if (response.Code != 202)
+            {
                 // TODO More useful exceptions
                 throw new ApplicationException("Request failed");
             }
@@ -122,18 +114,17 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.Headers = new Dictionary<string, string> {
-                { "Authorization", "Bearer " + this.accessToken },
-                { "Content-Type", "application/json; charset=utf-8" },
-            };
+            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
+            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
             var requestBody = new { event_id = eventId };
 
             request.Body = JsonConvert.SerializeObject(requestBody);
 
-            var response = HttpClient.GetResponse(request);
+            var response = this.HttpClient.GetResponse(request);
 
-            if (response.Code != 202) {
+            if (response.Code != 202)
+            {
                 // TODO More useful exceptions
                 throw new ApplicationException("Request failed");
             }
@@ -152,11 +143,13 @@ namespace Cronofy
                 this.firstPage = firstPage;
             }
 
+            /// <inheritdoc />
             public IEnumerator<Event> GetEnumerator()
             {
                 return this.GetEvents().GetEnumerator();
             }
 
+            /// <inheritdoc />
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this.GetEnumerator();
@@ -164,12 +157,12 @@ namespace Cronofy
 
             private IEnumerable<Event> GetEvents()
             {
-                return GetPages().SelectMany(EventsFromPage);
+                return this.GetPages().SelectMany(EventsFromPage);
             }
 
             private IEnumerable<ReadEventsResponse> GetPages()
             {
-                var currentPage = firstPage;
+                var currentPage = this.firstPage;
 
                 while (true)
                 {
@@ -180,7 +173,7 @@ namespace Cronofy
                         break;
                     }
 
-                    currentPage = GetNextPageResponse(currentPage);
+                    currentPage = this.GetNextPageResponse(currentPage);
                 }
             }
 
@@ -190,9 +183,9 @@ namespace Cronofy
 
                 request.Method = "GET";
                 request.Url = page.Pages.NextPageUrl;
-                request.Headers = new Dictionary<string, string> {
-                    { "Authorization", "Bearer " + this.accessToken },
-                };
+
+                request.Headers = new Dictionary<string, string>();
+                request.Headers.Add("Authorization", "Bearer " + this.accessToken);
 
                 return this.httpClient.GetJsonResponse<ReadEventsResponse>(request);
             }

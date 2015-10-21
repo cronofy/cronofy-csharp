@@ -1,11 +1,11 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using System.IO;
-using System.Collections.Generic;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+    using System.Net;
+    using System.Text;
+    using System.IO;
+    using System.Collections.Generic;
+
     internal sealed class ConcreteHttpClient : IHttpClient
     {
         private static readonly IDictionary<string, Header.Assignment> RestrictedHeaders
