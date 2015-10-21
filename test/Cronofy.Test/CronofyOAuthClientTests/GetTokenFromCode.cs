@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Cronofy.Test.CronofyClientTests
+namespace Cronofy.Test.CronofyOAuthClientTests
 {
 	[TestFixture]
 	public sealed class GetTokenFromCode
@@ -11,13 +11,13 @@ namespace Cronofy.Test.CronofyClientTests
 		private const string oauthCode = "zyxvut987654";
 		private const string redirectUri = "http://example.com/redirectUri";
 
-		private CronofyClient client;
+		private CronofyOAuthClient client;
 		private StubHttpClient http;
 
 		[SetUp]
 		public void SetUp()
 		{
-			this.client = new CronofyClient(clientId, clientSecret);
+			this.client = new CronofyOAuthClient(clientId, clientSecret);
 			this.http = new StubHttpClient();
 
 			client.HttpClient = http;

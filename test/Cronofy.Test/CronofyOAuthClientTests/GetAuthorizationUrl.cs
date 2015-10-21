@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Cronofy.Test.CronofyClientTests
+namespace Cronofy.Test.CronofyOAuthClientTests
 {
 	[TestFixture]
 	public sealed class GetAuthorizationUrl
@@ -11,12 +11,12 @@ namespace Cronofy.Test.CronofyClientTests
 		private const string clientSecret = "s3cr3t1v3";
 		private const string redirectUri = "http://example.com/redirectUri";
 
-		private CronofyClient client;
+		private CronofyOAuthClient client;
 
 		[SetUp]
 		public void SetUp()
 		{
-			this.client = new CronofyClient(clientId, clientSecret);
+			this.client = new CronofyOAuthClient(clientId, clientSecret);
 		}
 
 		[Test]

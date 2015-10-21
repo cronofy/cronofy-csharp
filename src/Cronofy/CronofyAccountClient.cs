@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Cronofy
 {
-	public sealed class CronofyAccountClient
+	public sealed class CronofyAccountClient : ICronofyAccountClient
 	{
 		private const string CalendarsUrl = "https://api.cronofy.com/v1/calendars";
 		private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";

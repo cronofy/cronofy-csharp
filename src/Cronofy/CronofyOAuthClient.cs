@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Newtonsoft.Json;
 using Cronofy.Responses;
 using Cronofy.Requests;
@@ -11,19 +10,20 @@ namespace Cronofy
 	/// <summary>
 	/// Client for the Cronofy API.
 	/// </summary>
-	public sealed class CronofyClient
+	public sealed class CronofyOAuthClient
 	{
 		private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
 		private const string TokenUrl = "https://app.cronofy.com/oauth/token";
 
 		private const string CodeGrantType = "authorization_code";
+		private const string RefreshTokenGrantType = "refresh_token";
 
 		private readonly string clientId;
 		private readonly string clientSecret;
 
 		/// <summary>
 		/// Initializes a new instance of the
-		/// <see cref="Cronofy.CronofyClient"/> class.
+		/// <see cref="Cronofy.CronofyOAuthClient"/> class.
 		/// </summary>
 		/// <param name="clientId">
 		/// Your OAuth client_id, must not be blank.
@@ -35,7 +35,7 @@ namespace Cronofy
 		/// Thrown if <paramref name="clientId"/> or
 		/// <paramref name="clientSecret"/> are blank.
 		/// </exception>
-		public CronofyClient(string clientId, string clientSecret)
+		public CronofyOAuthClient(string clientId, string clientSecret)
 		{
 			Preconditions.NotBlank("clientId", clientId);
 			Preconditions.NotBlank("clientSecret", clientSecret);
@@ -120,6 +120,47 @@ namespace Cronofy
 				GrantType = CodeGrantType,
 				Code = code,
 				RedirectUri = redirectUri,
+			};
+
+			request.Body = JsonConvert.SerializeObject(requestBody);
+
+			var response = HttpClient.GetResponse(request);
+			var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(response.Body);
+
+			return new OAuthToken(token.AccessToken, token.RefreshToken, token.ExpiresIn, token.GetScopeArray());
+		}
+
+		/// <summary>
+		/// Gets the OAuth token from authorization code provided from a
+		/// successful authorization request.
+		/// </summary>
+		/// <param name="refreshToken">
+		/// The refresh token that can be used to retrieve a new
+		/// <see cref="OAuthToken"/>, must not be empty.
+		/// </param>
+		/// <returns>
+		/// Returns an <see cref="OAuthToken"/> for the provided refresh token.
+		/// </returns>
+		/// <exception cref="ArgumentException">
+		/// Thrown if <paramref name="refreshToken"/> is null or empty.
+		/// </exception>
+		public OAuthToken GetTokenFromRefreshToken(string refreshToken)
+		{
+			Preconditions.NotEmpty("refreshToken", refreshToken);
+
+			var request = new HttpRequest();
+
+			request.Method = "POST";
+			request.Url = TokenUrl;
+			request.Headers = new Dictionary<string, string> {
+				{ "Content-Type", "application/json; charset=utf-8" },
+			};
+
+			var requestBody = new OAuthTokenRefreshRequest {
+				ClientId = this.clientId,
+				ClientSecret = this.clientSecret,
+				GrantType = RefreshTokenGrantType,
+				RefreshToken = refreshToken,
 			};
 
 			request.Body = JsonConvert.SerializeObject(requestBody);
