@@ -19,6 +19,8 @@ namespace Cronofy
 
 		public CronofyAccountClient(string accessToken)
 		{
+			Preconditions.NotEmpty("accessToken", accessToken);
+
 			this.accessToken = accessToken;
 			this.HttpClient = new ConcreteHttpClient();
 		}
