@@ -30,7 +30,7 @@ namespace Cronofy
 					return new EventTime(dateResult, "Etc/UTC");
 				}
 
-				throw new NotImplementedException("Failed to parse " + value);
+				throw new JsonSerializationException("Failed to parse " + value);
 			}
 
 			if (reader.TokenType == JsonToken.StartObject)
@@ -52,10 +52,10 @@ namespace Cronofy
 					return new EventTime(dateResult, timeZoneId);
 				}
 
-				throw new NotImplementedException("Failed to parse " + jobject);
+				throw new JsonSerializationException("Failed to parse " + jobject);
 			}
 
-			throw new NotImplementedException("Failed to parse " + reader.TokenType);
+			throw new JsonSerializationException("Failed to parse " + reader.TokenType);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
