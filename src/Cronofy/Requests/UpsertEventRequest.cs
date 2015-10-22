@@ -64,7 +64,7 @@
         public RequestLocation Location { get; set; }
 
         /// <summary>
-        /// Class for the serialization of a locations for an upsert event
+        /// Class for the serialization of the location for an upsert event
         /// request.
         /// </summary>
         public sealed class RequestLocation
