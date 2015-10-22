@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Internal helper for building URLs.
+    /// Helper for building URLs.
     /// </summary>
     internal sealed class UrlBuilder
     {
+        /// <summary>
+        /// The list of querystring parameters.
+        /// </summary>
         private readonly List<string> parameters;
+
+        /// <summary>
+        /// The base URL.
+        /// </summary>
         private string url;
 
         /// <summary>
@@ -84,20 +90,27 @@ namespace Cronofy
         /// </returns>
         public string Build()
         {
-            if (this.parameters.Count > 0)
-            {
-                var queryString = string.Join("&", this.parameters.ToArray());
-                return string.Format("{0}?{1}", this.url, queryString);
-            }
-            else
+            if (this.parameters.Count == 0)
             {
                 return this.url;
             }
+
+            var queryString = string.Join("&", this.parameters.ToArray());
+            return string.Format("{0}?{1}", this.url, queryString);
         }
 
-        internal static string EncodeParameter(string value)
+        /// <summary>
+        /// Encodes the parameter.
+        /// </summary>
+        /// <param name="parameter">
+        /// The parameter to encode.
+        /// </param>
+        /// <returns>
+        /// The parameter in an encoded form.
+        /// </returns>
+        internal static string EncodeParameter(string parameter)
         {
-            return Uri.EscapeDataString(value);
+            return Uri.EscapeDataString(parameter);
         }
     }
 }

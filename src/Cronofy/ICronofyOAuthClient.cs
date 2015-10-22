@@ -1,7 +1,10 @@
-﻿using System;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+
+    /// <summary>
+    /// Interface for a Cronofy client that performs OAuth related operations.
+    /// </summary>
     public interface ICronofyOAuthClient
     {
         /// <summary>

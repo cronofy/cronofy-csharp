@@ -1,8 +1,8 @@
 ﻿namespace Cronofy.Responses
 {
     using System;
-    using Newtonsoft.Json;
     using System.Linq;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Class for the deserialization of a read events response.

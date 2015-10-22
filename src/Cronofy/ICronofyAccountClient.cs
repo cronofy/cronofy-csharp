@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Cronofy.Requests;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+    using System.Collections.Generic;
+    using Cronofy.Requests;
+
+    /// <summary>
+    /// Interface for a Cronofy client that interacts with an account's
+    /// calendars and events.
+    /// </summary>
     public interface ICronofyAccountClient
     {
         /// <summary>
@@ -13,7 +17,7 @@ namespace Cronofy
         /// The account's <see cref="Calendar"/>s.
         /// </returns>
         /// <remarks>
-        /// TODO Exceptions
+        /// TODO Exceptions.
         /// </remarks>
         IEnumerable<Calendar> GetCalendars();
 
@@ -24,7 +28,7 @@ namespace Cronofy
         /// The account's <see cref="Event"/>s.
         /// </returns>
         /// <remarks>
-        /// TODO Request exceptions
+        /// TODO Request exceptions.
         /// </remarks>
         IEnumerable<Event> GetEvents();
 
@@ -36,8 +40,8 @@ namespace Cronofy
         /// empty.
         /// </param>
         /// <param name="eventBuilder">
-        /// The populated builder from which to create a
-        /// <see cref="UpsertEventRequest"/>, must not be null.
+        /// The builder from which to create a <see cref="UpsertEventRequest"/>,
+        /// must not be null.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="calendarId"/> is empty,
@@ -46,9 +50,9 @@ namespace Cronofy
         /// valid <see cref="UpsertEventRequest"/>.
         /// </exception>
         /// <remarks>
-        /// TODO Request exceptions
+        /// TODO Request exceptions.
         /// </remarks>
-        void UpsertEvent(string calendarId, UpsertEventRequestBuilder eventBuilder);
+        void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder);
 
         /// <summary>
         /// Upserts an event to the account's calendar.
@@ -65,7 +69,7 @@ namespace Cronofy
         /// <paramref name="eventRequest"/> is null.
         /// </exception>
         /// <remarks>
-        /// TODO Request exceptions
+        /// TODO Request exceptions.
         /// </remarks>
         void UpsertEvent(string calendarId, UpsertEventRequest eventRequest);
 
@@ -84,7 +88,7 @@ namespace Cronofy
         /// <paramref name="eventId"/> are empty.
         /// </exception>
         /// <remarks>
-        /// TODO Request exceptions
+        /// TODO Request exceptions.
         /// </remarks>
         void DeleteEvent(string calendarId, string eventId);
     }

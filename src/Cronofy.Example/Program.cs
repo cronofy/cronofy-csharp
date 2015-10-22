@@ -1,9 +1,19 @@
-﻿using System;
-
-namespace Cronofy.Example
+﻿namespace Cronofy.Example
 {
+    using System;
+
+    /// <summary>
+    /// Example program for interacting with the Cronofy API.
+    /// </summary>
     public static class Program
     {
+        /// <summary>
+        /// The entry point of the program, where the program control starts and
+        /// ends.
+        /// </summary>
+        /// <param name="args">
+        /// The command-line arguments.
+        /// </param>
         public static void Main(string[] args)
         {
             Console.Write("Enter access token: ");
@@ -36,9 +46,9 @@ namespace Cronofy.Example
 
             Console.WriteLine();
 
-            const string eventId = "CronofyExample";
+            const string EventId = "CronofyExample";
 
-            Console.WriteLine("Creating event with ID {0}", eventId);
+            Console.WriteLine("Creating event with ID {0}", EventId);
             Console.WriteLine();
 
             Console.Write("Enter calendar ID: ");
@@ -46,7 +56,7 @@ namespace Cronofy.Example
             Console.WriteLine();
 
             var eventBuilder = new UpsertEventRequestBuilder()
-                .EventId(eventId)
+                .EventId(EventId)
                 .Summary("Cronofy Example")
                 .Description("Example from the Cronofy .NET SDK")
                 .Start(2015, 10, 20, 17, 00)
@@ -59,7 +69,7 @@ namespace Cronofy.Example
             Console.WriteLine("Press enter to delete...");
             Console.ReadLine();
 
-            client.DeleteEvent(calendarId, eventId);
+            client.DeleteEvent(calendarId, EventId);
             Console.WriteLine("Event deleted");
             Console.WriteLine();
 

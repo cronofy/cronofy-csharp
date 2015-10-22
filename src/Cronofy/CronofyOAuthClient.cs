@@ -1,24 +1,43 @@
 ﻿namespace Cronofy
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Newtonsoft.Json;
-    using Cronofy.Responses;
     using Cronofy.Requests;
+    using Cronofy.Responses;
 
     /// <summary>
     /// Client for the Cronofy API.
     /// </summary>
     public sealed class CronofyOAuthClient : ICronofyOAuthClient
     {
+        /// <summary>
+        /// The URL for the OAuth authorization endpoint.
+        /// </summary>
         private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
+
+        /// <summary>
+        /// The URL for the OAuth token endpoint.
+        /// </summary>
         private const string TokenUrl = "https://app.cronofy.com/oauth/token";
 
+        /// <summary>
+        /// The grant type for exchanging an OAuth authorization code.
+        /// </summary>
         private const string CodeGrantType = "authorization_code";
+
+        /// <summary>
+        /// The grant type for refreshing an OAuth authorization's access token.
+        /// </summary>
         private const string RefreshTokenGrantType = "refresh_token";
 
+        /// <summary>
+        /// The client ID of the OAuth application.
+        /// </summary>
         private readonly string clientId;
+
+        /// <summary>
+        /// The client secret of the OAuth application.
+        /// </summary>
         private readonly string clientSecret;
 
         /// <summary>
@@ -31,7 +50,7 @@
         /// <param name="clientSecret">
         /// Your OAuth client_secret, must not be blank.
         /// </param>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="clientId"/> or
         /// <paramref name="clientSecret"/> are blank.
         /// </exception>
@@ -71,7 +90,7 @@
         /// The read_account, read_events, create_event, and delete_event scopes
         /// are requested by default.
         /// </remarks>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="redirectUri"/> is null or empty.
         /// </exception>
         public AuthorizationUrlBuilder GetAuthorizationUrlBuilder(string redirectUri)
@@ -81,7 +100,7 @@
             return new AuthorizationUrlBuilder(this.clientId, redirectUri);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public OAuthToken GetTokenFromCode(string code, string redirectUri)
         {
             Preconditions.NotEmpty("code", code);
@@ -91,7 +110,6 @@
 
             request.Method = "POST";
             request.Url = TokenUrl;
-            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
             var requestBody = new OAuthTokenRequest
                 {
@@ -102,14 +120,14 @@
                     RedirectUri = redirectUri,
                 };
 
-            request.Body = JsonConvert.SerializeObject(requestBody);
+            request.SetJsonBody(requestBody);
 
             var tokenResponse = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
             return tokenResponse.ToToken();
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public OAuthToken GetTokenFromRefreshToken(string refreshToken)
         {
             Preconditions.NotEmpty("refreshToken", refreshToken);
@@ -118,17 +136,16 @@
 
             request.Method = "POST";
             request.Url = TokenUrl;
-            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
-            var requestBody = new OAuthTokenRefreshRequest {
+            var requestBody = new OAuthTokenRefreshRequest
+            {
                 ClientId = this.clientId,
                 ClientSecret = this.clientSecret,
                 GrantType = RefreshTokenGrantType,
                 RefreshToken = refreshToken,
             };
 
-            // TODO Extension method this to SetJsonBody or something
-            request.Body = JsonConvert.SerializeObject(requestBody);
+            request.SetJsonBody(requestBody);
 
             var token = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
@@ -140,16 +157,35 @@
         /// </summary>
         public sealed class AuthorizationUrlBuilder
         {
-            private static readonly string[] DefaultScopes = {
+            /// <summary>
+            /// The default scopes for a new OAuth authorization request.
+            /// </summary>
+            private static readonly string[] DefaultScopes =
+            {
                 "read_account",
                 "read_events",
                 "create_event",
                 "delete_event",
             };
 
+            /// <summary>
+            /// The client ID of the OAuth application.
+            /// </summary>
             private readonly string clientId;
+
+            /// <summary>
+            /// The URI to redirect the user's authorization response to.
+            /// </summary>
             private readonly string redirectUri;
+
+            /// <summary>
+            /// The scope the OAuth application is requesting from the user.
+            /// </summary>
             private string[] scope;
+
+            /// <summary>
+            /// The state to persist through the OAuth authorization process.
+            /// </summary>
             private string state;
 
             /// <summary>
@@ -163,7 +199,7 @@
             /// The URI to redirect the user's response for the authorization
             /// request to, must not be empty.
             /// </param>
-            /// <exception cref="ArgumentException">
+            /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="clientId"/> is blank, or if
             /// <paramref name="redirectUri"/> is empty.
             /// </exception>
@@ -186,7 +222,7 @@
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            /// <exception cref="ArgumentException">
+            /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
             public AuthorizationUrlBuilder Scope(params string[] scope)
@@ -207,7 +243,7 @@
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            /// <exception cref="ArgumentException">
+            /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
             public AuthorizationUrlBuilder Scope(IEnumerable<string> scope)
@@ -225,8 +261,8 @@
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            /// <exception cref="ArgumentException">
-            /// Thrown if <paramref name="state"/> is null or empty
+            /// <exception cref="System.ArgumentException">
+            /// Thrown if <paramref name="state"/> is null or empty.
             /// </exception>
             public AuthorizationUrlBuilder State(string state)
             {

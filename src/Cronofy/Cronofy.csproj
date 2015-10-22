@@ -19,6 +19,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>..\..\build\Cronofy\bin\Debug\Cronofy.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -66,7 +67,8 @@
     <Compile Include="ICronofyOAuthClient.cs" />
     <Compile Include="AttendeeStatus.cs" />
     <Compile Include="Attendee.cs" />
-    <Compile Include="HttpClientExtensions.cs" />
+    <Compile Include="IHttpClientExtensions.cs" />
+    <Compile Include="IBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -3,20 +3,49 @@ namespace Cronofy
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Cronofy.Responses;
-    using Cronofy.Requests;
-    using Cronofy;
-    using Newtonsoft.Json;
     using System.Linq;
+    using Cronofy;
+    using Cronofy.Requests;
+    using Cronofy.Responses;
+    using Newtonsoft.Json;
 
+    /// <summary>
+    /// Class for a Cronofy client that interacts with an account's calendars
+    /// and events.
+    /// </summary>
     public sealed class CronofyAccountClient : ICronofyAccountClient
     {
+        /// <summary>
+        /// The URL of the list calendars endpoint.
+        /// </summary>
         private const string CalendarsUrl = "https://api.cronofy.com/v1/calendars";
+
+        /// <summary>
+        /// The URL of the read events endpoint.
+        /// </summary>
         private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
+
+        /// <summary>
+        /// The URL format for the managed event endpoint.
+        /// </summary>
         private const string ManagedEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
-        
+
+        /// <summary>
+        /// The access token for the OAuth authorization for the account.
+        /// </summary>
         private readonly string accessToken;
 
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Cronofy.CronofyAccountClient"/> class.
+        /// </summary>
+        /// <param name="accessToken">
+        /// The access token for the OAuth authorization for the account, must
+        /// not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="accessToken"/> is null or empty.
+        /// </exception>
         public CronofyAccountClient(string accessToken)
         {
             Preconditions.NotEmpty("accessToken", accessToken);
@@ -36,28 +65,28 @@ namespace Cronofy
         /// </remarks>
         internal IHttpClient HttpClient { get; set; }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public IEnumerable<Calendar> GetCalendars()
         {
             var request = new HttpRequest();
 
             request.Method = "GET";
             request.Url = CalendarsUrl;
-            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
+            request.AddOAuthAuthorization(this.accessToken);
 
             var calendarsResponse = this.HttpClient.GetJsonResponse<CalendarsResponse>(request);
 
             return calendarsResponse.Calendars.Select(c => c.ToCalendar());
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public IEnumerable<Event> GetEvents()
         {
             var request = new HttpRequest();
 
             request.Method = "GET";
             request.Url = ReadEventsUrl;
-            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
+            request.AddOAuthAuthorization(this.accessToken);
 
             // TODO Support parameters
             request.QueryString.Add("tzid", "Etc/UTC");
@@ -69,8 +98,8 @@ namespace Cronofy
             return new GetEventsIterator(this.HttpClient, this.accessToken, response);
         }
 
-        /// <inheritdoc />
-        public void UpsertEvent(string calendarId, UpsertEventRequestBuilder eventBuilder)
+        /// <inheritdoc/>
+        public void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
             Preconditions.NotNull("eventBuilder", eventBuilder);
@@ -80,7 +109,7 @@ namespace Cronofy
             this.UpsertEvent(calendarId, request);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public void UpsertEvent(string calendarId, UpsertEventRequest eventRequest)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
@@ -90,10 +119,8 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
-            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
-
-            request.Body = JsonConvert.SerializeObject(eventRequest);
+            request.AddOAuthAuthorization(this.accessToken);
+            request.SetJsonBody(eventRequest);
 
             var response = this.HttpClient.GetResponse(request);
 
@@ -104,7 +131,7 @@ namespace Cronofy
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public void DeleteEvent(string calendarId, string eventId)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
@@ -114,12 +141,10 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.Headers.Add("Authorization", "Bearer " + this.accessToken);
-            request.Headers.Add("Content-Type", "application/json; charset=utf-8");
+            request.AddOAuthAuthorization(this.accessToken);
 
             var requestBody = new { event_id = eventId };
-
-            request.Body = JsonConvert.SerializeObject(requestBody);
+            request.SetJsonBody(requestBody);
 
             var response = this.HttpClient.GetResponse(request);
 
@@ -130,36 +155,100 @@ namespace Cronofy
             }
         }
 
+        /// <summary>
+        /// Iterator for a paged events response.
+        /// </summary>
         internal sealed class GetEventsIterator : IEnumerable<Event>
         {
+            /// <summary>
+            /// The HTTP client to perform requests with.
+            /// </summary>
             private readonly IHttpClient httpClient;
+
+            /// <summary>
+            /// The access token for the OAuth authorization for the account.
+            /// </summary>
             private readonly string accessToken;
+
+            /// <summary>
+            /// The first page of the events response.
+            /// </summary>
             private readonly ReadEventsResponse firstPage;
 
+            /// <summary>
+            /// Initializes a new instance of the
+            /// <see cref="Cronofy.CronofyAccountClient.GetEventsIterator"/>
+            /// class.
+            /// </summary>
+            /// <param name="httpClient">
+            /// The HTTP client to use for requests, must not be null.
+            /// </param>
+            /// <param name="accessToken">
+            /// The access token for the OAuth authorization for the account,
+            /// must not be empty.
+            /// </param>
+            /// <param name="firstPage">
+            /// The first page of events, must not be null.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="httpClient"/> or
+            /// <paramref name="firstPage"/> are null, of if
+            /// <paramref name="accessToken"/> is empty.
+            /// </exception>
             public GetEventsIterator(IHttpClient httpClient, string accessToken, ReadEventsResponse firstPage)
             {
+                Preconditions.NotNull("httpClient", httpClient);
+                Preconditions.NotEmpty("accessToken", accessToken);
+                Preconditions.NotNull("firstPage", firstPage);
+
                 this.httpClient = httpClient;
                 this.accessToken = accessToken;
                 this.firstPage = firstPage;
             }
 
-            /// <inheritdoc />
+            /// <inheritdoc/>
             public IEnumerator<Event> GetEnumerator()
             {
                 return this.GetEvents().GetEnumerator();
             }
 
-            /// <inheritdoc />
+            /// <inheritdoc/>
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
 
-            private IEnumerable<Event> GetEvents()
+            /// <summary>
+            /// Gets the events from a page response.
+            /// </summary>
+            /// <param name="response">
+            /// The page response to extract the events from.
+            /// </param>
+            /// <returns>
+            /// The events from the page response.
+            /// </returns>
+            private static IEnumerable<Event> GetEventsFromPage(ReadEventsResponse response)
             {
-                return this.GetPages().SelectMany(EventsFromPage);
+                return response.Events.Select(e => e.ToEvent());
             }
 
+            /// <summary>
+            /// Gets all the events from the result set.
+            /// </summary>
+            /// <returns>
+            /// All the events from the result set.
+            /// </returns>
+            private IEnumerable<Event> GetEvents()
+            {
+                return this.GetPages().SelectMany(GetEventsFromPage);
+            }
+
+            /// <summary>
+            /// Gets all the pages from the result set.
+            /// </summary>
+            /// <returns>
+            /// All the pages from the result set.
+            /// </returns>
             private IEnumerable<ReadEventsResponse> GetPages()
             {
                 var currentPage = this.firstPage;
@@ -177,22 +266,24 @@ namespace Cronofy
                 }
             }
 
-            private ReadEventsResponse GetNextPageResponse(ReadEventsResponse page)
+            /// <summary>
+            /// Gets the next page response.
+            /// </summary>
+            /// <param name="currentPage">
+            /// The response for the current page.
+            /// </param>
+            /// <returns>
+            /// The next page response.
+            /// </returns>
+            private ReadEventsResponse GetNextPageResponse(ReadEventsResponse currentPage)
             {
                 var request = new HttpRequest();
 
                 request.Method = "GET";
-                request.Url = page.Pages.NextPageUrl;
-
-                request.Headers = new Dictionary<string, string>();
-                request.Headers.Add("Authorization", "Bearer " + this.accessToken);
+                request.Url = currentPage.Pages.NextPageUrl;
+                request.AddOAuthAuthorization(this.accessToken);
 
                 return this.httpClient.GetJsonResponse<ReadEventsResponse>(request);
-            }
-
-            private static IEnumerable<Event> EventsFromPage(ReadEventsResponse response)
-            {
-                return response.Events.Select(e => e.ToEvent());
             }
         }
     }
