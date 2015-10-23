@@ -10,6 +10,7 @@ TestResults/
 build
 tools
 Cronofy.nuspec
+src/Cronofy/Properties/AssemblyVersion.cs
 
 # globs
 Makefile.in
