@@ -41,10 +41,16 @@ package: test build_release
 	mkdir -p artifacts
 	mono $(NUGET) pack -Verbosity detailed -OutputDirectory artifacts Cronofy.nuspec
 
-release: package
+release: package guard-env-NUGET_API_KEY
 	@git diff --exit-code --no-patch || (echo "Cannot release with uncommitted changes"; exit 1)
 	git push
 	@echo "Publishing artifacts/Cronofy.$(VERSION).nupkg"
 	@mono $(NUGET) push -ApiKey $(NUGET_API_KEY) artifacts/Cronofy.$(VERSION).nupkg
 	git tag rel-$(VERSION)
 	git push --tags
+
+guard-env-%:
+	@ if [ "${${*}}" == "" ]; then \
+		echo "$* must be set"; \
+		exit 1; \
+	fi
