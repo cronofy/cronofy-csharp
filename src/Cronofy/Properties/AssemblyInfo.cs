@@ -10,7 +10,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("0.1.0.0")]
-
 [assembly: InternalsVisibleTo("Cronofy.Test")]
 [assembly: System.CLSCompliant(true)]

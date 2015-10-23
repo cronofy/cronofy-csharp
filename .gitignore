@@ -9,6 +9,7 @@ TestResults/
 .nuget/
 build
 tools
+Cronofy.nuspec
 
 # globs
 Makefile.in

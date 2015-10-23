@@ -8,5 +8,3 @@
 [assembly: AssemblyCopyright("Cronofy")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-[assembly: AssemblyVersion("1.0.*")]
