@@ -13,11 +13,15 @@
     internal sealed class ConcreteHttpClient : IHttpClient
     {
         /// <summary>
+        /// The user agent string to use for all requests.
+        /// </summary>
+        private static readonly string UserAgentString;
+
+        /// <summary>
         /// A collection of headers that cannot be assigned in a dictionary-like
         /// manner, and the corresponding actions to use to set them instead.
         /// </summary>
-        private static readonly IDictionary<string, Header.Assignment> RestrictedHeaders
-            = new Dictionary<string, Header.Assignment>();
+        private static readonly IDictionary<string, Header.Assignment> RestrictedHeaders;
 
         /// <summary>
         /// Initializes static members of the
@@ -25,6 +29,11 @@
         /// </summary>
         static ConcreteHttpClient()
         {
+            UserAgentString = string.Format(
+                "Cronofy .NET {0}",
+                typeof(ConcreteHttpClient).Assembly.GetName().Version);
+
+            RestrictedHeaders = new Dictionary<string, Header.Assignment>();
             RestrictedHeaders.Add("Content-Type", Header.SetContentType);
         }
 
@@ -49,7 +58,7 @@
 
             httpRequest.KeepAlive = true;
             httpRequest.Method = request.Method;
-            httpRequest.UserAgent = "Cronofy .NET";
+            httpRequest.UserAgent = UserAgentString;
 
             MapHeaders(request, httpRequest);
             WriteRequestBody(request, httpRequest);
