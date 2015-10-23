@@ -61,9 +61,19 @@
             httpRequest.UserAgent = UserAgentString;
 
             MapHeaders(request, httpRequest);
-            WriteRequestBody(request, httpRequest);
 
-            return GetResponse(httpRequest);
+            try
+            {
+                WriteRequestBody(request, httpRequest);
+                return GetResponse(httpRequest);
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(
+                    "Failed to get a response to the request - {0}",
+                    ex.Message);
+                throw new CronofyException(message, ex);
+            }
         }
 
         /// <summary>
@@ -170,10 +180,7 @@
 
                 if (response == null)
                 {
-                    var message = string.Format(
-                        "Failed to get a response to the request - {0}",
-                        ex.Message);
-                    throw new CronofyException(message, ex);
+                    throw;
                 }
 
                 return response;
