@@ -127,13 +127,12 @@
         /// </returns>
         private static HttpResponse GetResponse(HttpWebRequest httpRequest)
         {
-            using (var httpResponse = (HttpWebResponse)httpRequest.GetResponse())
+            using (var httpResponse = GetAnyResponse(httpRequest))
             {
                 var responseBody = GetResponseBody(httpResponse);
 
                 var response = new HttpResponse();
 
-                // TODO Check 422 response as it isn't in the enum
                 response.Code = (int)httpResponse.StatusCode;
 
                 response.Headers = new Dictionary<string, string>();
@@ -144,6 +143,38 @@
                 }
 
                 response.Body = responseBody;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Gets any valid response instead of throwing an exception depending
+        /// on the status code.
+        /// </summary>
+        /// <param name="httpRequest">
+        /// The request to make.
+        /// </param>
+        /// <returns>
+        /// The response to the request.
+        /// </returns>
+        private static HttpWebResponse GetAnyResponse(HttpWebRequest httpRequest)
+        {
+            try
+            {
+                return (HttpWebResponse)httpRequest.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                var response = ex.Response as HttpWebResponse;
+
+                if (response == null)
+                {
+                    var message = string.Format(
+                        "Failed to get a response to the request - {0}",
+                        ex.Message);
+                    throw new CronofyException(message, ex);
+                }
 
                 return response;
             }

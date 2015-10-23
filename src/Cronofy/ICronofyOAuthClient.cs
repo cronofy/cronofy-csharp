@@ -27,6 +27,12 @@
         /// Thrown if <paramref name="code"/> or <paramref name="redirectUri"/>
         /// are null or empty.
         /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
         OAuthToken GetTokenFromCode(string code, string redirectUri);
 
         /// <summary>
@@ -43,6 +49,12 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="refreshToken"/> is null or empty.
         /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
         OAuthToken GetTokenFromRefreshToken(string refreshToken);
     }
 }

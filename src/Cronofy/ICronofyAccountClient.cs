@@ -16,9 +16,9 @@
         /// <returns>
         /// The account's <see cref="Calendar"/>s.
         /// </returns>
-        /// <remarks>
-        /// TODO Exceptions.
-        /// </remarks>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
         IEnumerable<Calendar> GetCalendars();
 
         /// <summary>
@@ -27,9 +27,9 @@
         /// <returns>
         /// The account's <see cref="Event"/>s.
         /// </returns>
-        /// <remarks>
-        /// TODO Request exceptions.
-        /// </remarks>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
         IEnumerable<Event> GetEvents();
 
         /// <summary>
@@ -49,8 +49,11 @@
         /// <paramref name="eventBuilder"/> is not in a state which creates a
         /// valid <see cref="UpsertEventRequest"/>.
         /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
         /// <remarks>
-        /// TODO Request exceptions.
+        /// TODO Validation exceptions.
         /// </remarks>
         void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder);
 
@@ -68,8 +71,11 @@
         /// Thrown if <paramref name="calendarId"/> is empty, or
         /// <paramref name="eventRequest"/> is null.
         /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
         /// <remarks>
-        /// TODO Request exceptions.
+        /// TODO Validation exceptions.
         /// </remarks>
         void UpsertEvent(string calendarId, UpsertEventRequest eventRequest);
 
@@ -87,8 +93,11 @@
         /// Thrown if <paramref name="calendarId"/> or
         /// <paramref name="eventId"/> are empty.
         /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
         /// <remarks>
-        /// TODO Request exceptions.
+        /// TODO Validation exceptions.
         /// </remarks>
         void DeleteEvent(string calendarId, string eventId);
     }

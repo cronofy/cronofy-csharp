@@ -1,13 +1,11 @@
 namespace Cronofy
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using Cronofy;
     using Cronofy.Requests;
     using Cronofy.Responses;
-    using Newtonsoft.Json;
 
     /// <summary>
     /// Class for a Cronofy client that interacts with an account's calendars
@@ -43,7 +41,7 @@ namespace Cronofy
         /// The access token for the OAuth authorization for the account, must
         /// not be empty.
         /// </param>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.
         /// </exception>
         public CronofyAccountClient(string accessToken)
@@ -126,8 +124,8 @@ namespace Cronofy
 
             if (response.Code != 202)
             {
-                // TODO More useful exceptions
-                throw new ApplicationException("Request failed");
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
             }
         }
 
@@ -150,8 +148,8 @@ namespace Cronofy
 
             if (response.Code != 202)
             {
-                // TODO More useful exceptions
-                throw new ApplicationException("Request failed");
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
             }
         }
 
@@ -190,7 +188,7 @@ namespace Cronofy
             /// <param name="firstPage">
             /// The first page of events, must not be null.
             /// </param>
-            /// <exception cref="ArgumentException">
+            /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="httpClient"/> or
             /// <paramref name="firstPage"/> are null, of if
             /// <paramref name="accessToken"/> is empty.
