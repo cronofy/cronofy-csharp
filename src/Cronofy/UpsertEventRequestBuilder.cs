@@ -203,19 +203,24 @@
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
-            // TODO Conditionally assign location based upon locationDescription
-            return new UpsertEventRequest
+            var request = new UpsertEventRequest
             {
                 EventId = this.eventId,
                 Summary = this.summary,
                 Description = this.description,
                 Start = new EventTime(this.startTime.ToUniversalTime(), "Etc/UTC"),
                 End = new EventTime(this.endTime.ToUniversalTime(), "Etc/UTC"),
-                Location = new UpsertEventRequest.RequestLocation
+            };
+
+            if (string.IsNullOrEmpty(this.locationDescription) == false)
+            {
+                request.Location = new UpsertEventRequest.RequestLocation
                 {
                     Description = this.locationDescription,
-                },
-            };
+                };
+            }
+
+            return request;
         }
     }
 }

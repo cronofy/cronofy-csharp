@@ -9,6 +9,15 @@
     internal sealed class HttpRequest
     {
         /// <summary>
+        /// The default JSON serializer settings.
+        /// </summary>
+        private static readonly JsonSerializerSettings DefaultSerializerSettings =
+            new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Cronofy.HttpRequest"/>
         /// class.
         /// </summary>
@@ -91,7 +100,8 @@
             Preconditions.NotNull("bodyObject", bodyObject);
 
             this.Headers.Add("Content-Type", "application/json; charset=utf-8");
-            this.Body = JsonConvert.SerializeObject(bodyObject);
+
+            this.Body = JsonConvert.SerializeObject(bodyObject, DefaultSerializerSettings);
         }
     }
 }
