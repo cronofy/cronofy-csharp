@@ -38,4 +38,5 @@ test: build
 	mono $(NUNIT) -result=build/NUnit/TestReport.xml $(TEST_DLLS)
 
 package: test build_release
-	mono $(NUGET) pack -Verbosity detailed -OutputDirectory packages Cronofy.nuspec
+	mkdir -p artifacts
+	mono $(NUGET) pack -Verbosity detailed -OutputDirectory artifacts Cronofy.nuspec

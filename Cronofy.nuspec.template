@@ -27,5 +27,6 @@
     <file src="src/Cronofy/**/*.cs" target="src/Cronofy" />
     <file src="build/GITCOMMIT" target="GITCOMMIT" />
     <file src="build/VERSION" target="VERSION" />
+    <file src="README.md" target="README.md" />
   </files>
 </package>

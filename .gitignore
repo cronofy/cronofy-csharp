@@ -4,10 +4,11 @@
 #build
 [Oo]bj/
 [Bb]in/
-packages/
-TestResults/
 .nuget/
+TestResults/
+artifacts
 build
+packages/
 tools
 Cronofy.nuspec
 src/Cronofy/Properties/AssemblyVersion.cs
