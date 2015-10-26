@@ -72,6 +72,8 @@
     <Compile Include="IBuilder.cs" />
     <Compile Include="CronofyException.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
+    <Compile Include="GetEventsRequestBuilder.cs" />
+    <Compile Include="Requests\GetEventsRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

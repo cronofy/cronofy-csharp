@@ -80,18 +80,48 @@ namespace Cronofy
         /// <inheritdoc/>
         public IEnumerable<Event> GetEvents()
         {
-            var request = new HttpRequest();
+            var builder = new GetEventsRequestBuilder();
 
-            request.Method = "GET";
-            request.Url = ReadEventsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            return this.GetEvents(builder);
+        }
 
-            // TODO Support parameters
-            request.QueryString.Add("tzid", "Etc/UTC");
-            request.QueryString.Add("localized_times", "true");
+        /// <inheritdoc/>
+        public IEnumerable<Event> GetEvents(IBuilder<GetEventsRequest> builder)
+        {
+            Preconditions.NotNull("builder", builder);
+
+            var request = builder.Build();
+
+            return this.GetEvents(request);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<Event> GetEvents(GetEventsRequest request)
+        {
+            Preconditions.NotNull("request", request);
+
+            var httpRequest = new HttpRequest();
+
+            httpRequest.Method = "GET";
+            httpRequest.Url = ReadEventsUrl;
+            httpRequest.AddOAuthAuthorization(this.accessToken);
+
+            // TODO Support more parameters
+            httpRequest.QueryString.Add("tzid", request.TimeZoneId);
+            httpRequest.QueryString.Add("localized_times", "true");
+
+            if (request.From.HasValue)
+            {
+                httpRequest.QueryString.Add("from", request.From.ToString());
+            }
+
+            if (request.To.HasValue)
+            {
+                httpRequest.QueryString.Add("to", request.To.ToString());
+            }
 
             // Eagerly fetch the first page to hit access token and validation issues.
-            var response = this.HttpClient.GetJsonResponse<ReadEventsResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<ReadEventsResponse>(httpRequest);
 
             return new GetEventsIterator(this.HttpClient, this.accessToken, response);
         }
