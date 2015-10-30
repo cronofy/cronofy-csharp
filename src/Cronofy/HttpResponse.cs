@@ -5,7 +5,7 @@
     /// <summary>
     /// Class representing a HTTP response.
     /// </summary>
-    internal sealed class HttpResponse
+    public sealed class HttpResponse
     {
         /// <summary>
         /// Gets or sets the response code.

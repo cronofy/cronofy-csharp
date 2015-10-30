@@ -49,5 +49,22 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             Assert.AreEqual(expectedToken, actualToken);
         }
+
+        [Test]
+        public void ExceptionWhenBadRequest()
+        {
+            http.Stub(
+                HttpPost
+                .Url("https://app.cronofy.com/oauth/token")
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
+                    clientId, clientSecret, oauthCode, redirectUri)
+                .ResponseCode(400)
+                .ResponseBody("{\"error\":\"invalid_grant\"}")
+            );
+
+            Assert.Throws<CronofyResponseException>(() => client.GetTokenFromCode(oauthCode, redirectUri));
+        }
     }
 }

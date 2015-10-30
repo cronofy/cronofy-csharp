@@ -34,6 +34,12 @@
         {
             var response = httpClient.GetResponse(request);
 
+            if (response.Code != 200)
+            {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyResponseException("Request failed", response);
+            }
+
             return JsonConvert.DeserializeObject<T>(response.Body, DefaultSerializerSettings);
         }
     }

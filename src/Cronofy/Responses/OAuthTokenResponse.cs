@@ -54,6 +54,11 @@
         /// </returns>
         public string[] GetScopeArray()
         {
+            if (string.IsNullOrEmpty(this.Scope))
+            {
+                return new string[0];
+            }
+
             return this.Scope.Split(new[] { ' ' });
         }
 
