@@ -25,8 +25,8 @@
     <file src="src/Cronofy/packages.config" target="src/Cronofy" />
     <file src="src/Cronofy/Cronofy.csproj" target="src/Cronofy" />
     <file src="src/Cronofy/**/*.cs" target="src/Cronofy" />
-    <file src="build/GITCOMMIT" target="GITCOMMIT" />
-    <file src="build/VERSION" target="VERSION" />
+    <file src="build/GITCOMMIT.txt" target="GITCOMMIT.txt" />
+    <file src="build/VERSION.txt" target="VERSION.txt" />
     <file src="README.md" target="README.md" />
   </files>
 </package>

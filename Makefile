@@ -21,8 +21,8 @@ install_tools:
 
 set_version:
 	mkdir -p build
-	echo $(VERSION) > build/VERSION
-	echo $(GITCOMMIT) > build/GITCOMMIT
+	echo $(VERSION) > build/VERSION.txt
+	echo $(GITCOMMIT) > build/GITCOMMIT.txt
 	sed s/%VERSION%/$(VERSION)/ Cronofy.nuspec.template > Cronofy.nuspec
 	sed s/%VERSION%/$(VERSION)/ src/Cronofy/Properties/AssemblyVersion.cs.template > src/Cronofy/Properties/AssemblyVersion.cs
 
