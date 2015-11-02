@@ -8,6 +8,7 @@
     <RootNamespace>Cronofy</RootNamespace>
     <AssemblyName>Cronofy</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,6 +76,13 @@
     <Compile Include="GetEventsRequestBuilder.cs" />
     <Compile Include="Requests\GetEventsRequest.cs" />
     <Compile Include="CronofyResponseException.cs" />
+    <Compile Include="FreeBusy.cs" />
+    <Compile Include="FreeBusyStatus.cs" />
+    <Compile Include="Requests\GetFreeBusyRequest.cs" />
+    <Compile Include="GetFreeBusyRequestBuilder.cs" />
+    <Compile Include="Responses\IPagedResultsResponse.cs" />
+    <Compile Include="Responses\PagesResponse.cs" />
+    <Compile Include="Responses\FreeBusyResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

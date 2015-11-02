@@ -92,7 +92,7 @@ namespace Cronofy
         /// The account's participation status.
         /// </value>
         /// <remarks>
-        /// See <see cref="AttendeeStatus"/> for potential values.
+        /// See <see cref="Cronofy.AttendeeStatus"/> for potential values.
         /// </remarks>
         public string ParticipationStatus { get; set; }
 
@@ -103,7 +103,7 @@ namespace Cronofy
         /// The transparency of the event.
         /// </value>
         /// <remarks>
-        /// See <see cref="Transparency"/> for potential values.
+        /// See <see cref="Cronofy.Transparency"/> for potential values.
         /// </remarks>
         public string Transparency { get; set; }
 
@@ -114,7 +114,7 @@ namespace Cronofy
         /// The status of the event.
         /// </value>
         /// <remarks>
-        /// See <see cref="EventStatus"/> for potential values.
+        /// See <see cref="Cronofy.EventStatus"/> for potential values.
         /// </remarks>
         public string EventStatus { get; set; }
 

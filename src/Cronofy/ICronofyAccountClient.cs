@@ -68,6 +68,52 @@
         IEnumerable<Event> GetEvents(GetEventsRequest request);
 
         /// <summary>
+        /// Gets the free busy information belonging to the account.
+        /// </summary>
+        /// <returns>
+        /// The account's <see cref="FreeBusy"/>s.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<FreeBusy> GetFreeBusy();
+
+        /// <summary>
+        /// Gets the free busy information belonging to the account.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder from which to get the parameters for the request, must
+        /// not be null.
+        /// </param>
+        /// <returns>
+        /// The account's <see cref="FreeBusy"/>s.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="builder"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<FreeBusy> GetFreeBusy(IBuilder<GetFreeBusyRequest> builder);
+
+        /// <summary>
+        /// Gets the free busy information belonging to the account.
+        /// </summary>
+        /// <param name="request">
+        /// The parameters for the request, must not be null.
+        /// </param>
+        /// <returns>
+        /// The account's <see cref="FreeBusy"/>s.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="request"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<FreeBusy> GetFreeBusy(GetFreeBusyRequest request);
+
+        /// <summary>
         /// Upserts an event to the account's calendar.
         /// </summary>
         /// <param name="calendarId">

@@ -8,6 +8,7 @@
     <RootNamespace>Cronofy.Test</RootNamespace>
     <AssemblyName>Cronofy.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +53,7 @@
     <Compile Include="CronofyOAuthClientTests\GetAuthorizationUrl.cs" />
     <Compile Include="CronofyOAuthClientTests\GetTokenFromCode.cs" />
     <Compile Include="CronofyOAuthClientTests\GetTokenFromRefreshToken.cs" />
+    <Compile Include="CronofyAccountClientTests\GetFreeBusy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

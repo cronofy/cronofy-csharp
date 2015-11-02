@@ -19,6 +19,11 @@ namespace Cronofy
         private const string CalendarsUrl = "https://api.cronofy.com/v1/calendars";
 
         /// <summary>
+        /// The URL of the free-busy endpoint.
+        /// </summary>
+        private const string FreeBusyUrl = "https://api.cronofy.com/v1/free_busy";
+
+        /// <summary>
         /// The URL of the read events endpoint.
         /// </summary>
         private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
@@ -120,10 +125,59 @@ namespace Cronofy
                 httpRequest.QueryString.Add("to", request.To.ToString());
             }
 
-            // Eagerly fetch the first page to hit access token and validation issues.
-            var response = this.HttpClient.GetJsonResponse<ReadEventsResponse>(httpRequest);
+            return new PagedResultsIterator<ReadEventsResponse, Event>(
+                this.HttpClient,
+                this.accessToken,
+                httpRequest);
+        }
 
-            return new GetEventsIterator(this.HttpClient, this.accessToken, response);
+        /// <inheritdoc/>
+        public IEnumerable<FreeBusy> GetFreeBusy()
+        {
+            var builder = new GetFreeBusyRequestBuilder();
+
+            return this.GetFreeBusy(builder);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<FreeBusy> GetFreeBusy(IBuilder<GetFreeBusyRequest> builder)
+        {
+            Preconditions.NotNull("builder", builder);
+
+            var request = builder.Build();
+
+            return this.GetFreeBusy(request);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<FreeBusy> GetFreeBusy(GetFreeBusyRequest request)
+        {
+            Preconditions.NotNull("request", request);
+
+            var httpRequest = new HttpRequest();
+
+            httpRequest.Method = "GET";
+            httpRequest.Url = FreeBusyUrl;
+            httpRequest.AddOAuthAuthorization(this.accessToken);
+
+            // TODO Support more parameters
+            httpRequest.QueryString.Add("tzid", request.TimeZoneId);
+            httpRequest.QueryString.Add("localized_times", "true");
+
+            if (request.From.HasValue)
+            {
+                httpRequest.QueryString.Add("from", request.From.ToString());
+            }
+
+            if (request.To.HasValue)
+            {
+                httpRequest.QueryString.Add("to", request.To.ToString());
+            }
+
+            return new PagedResultsIterator<FreeBusyResponse, FreeBusy>(
+                this.HttpClient,
+                this.accessToken,
+                httpRequest);
         }
 
         /// <inheritdoc/>
@@ -186,7 +240,14 @@ namespace Cronofy
         /// <summary>
         /// Iterator for a paged events response.
         /// </summary>
-        internal sealed class GetEventsIterator : IEnumerable<Event>
+        /// <typeparam name="TResponse">
+        /// The type of response returned by the paged result set.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the items within the paged result set.
+        /// </typeparam>
+        internal sealed class PagedResultsIterator<TResponse, TResult> : IEnumerable<TResult>
+            where TResponse : IPagedResultsResponse<TResult>
         {
             /// <summary>
             /// The HTTP client to perform requests with.
@@ -201,11 +262,11 @@ namespace Cronofy
             /// <summary>
             /// The first page of the events response.
             /// </summary>
-            private readonly ReadEventsResponse firstPage;
+            private readonly TResponse firstPage;
 
             /// <summary>
             /// Initializes a new instance of the
-            /// <see cref="Cronofy.CronofyAccountClient.GetEventsIterator"/>
+            /// <see cref="Cronofy.CronofyAccountClient.PagedResultsIterator{TResponse,TResult}"/>
             /// class.
             /// </summary>
             /// <param name="httpClient">
@@ -215,29 +276,31 @@ namespace Cronofy
             /// The access token for the OAuth authorization for the account,
             /// must not be empty.
             /// </param>
-            /// <param name="firstPage">
-            /// The first page of events, must not be null.
+            /// <param name="firstRequest">
+            /// The request for the first page of results, must not be null.
             /// </param>
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="httpClient"/> or
-            /// <paramref name="firstPage"/> are null, of if
+            /// <paramref name="firstRequest"/> are null, of if
             /// <paramref name="accessToken"/> is empty.
             /// </exception>
-            public GetEventsIterator(IHttpClient httpClient, string accessToken, ReadEventsResponse firstPage)
+            public PagedResultsIterator(IHttpClient httpClient, string accessToken, HttpRequest firstRequest)
             {
                 Preconditions.NotNull("httpClient", httpClient);
                 Preconditions.NotEmpty("accessToken", accessToken);
-                Preconditions.NotNull("firstPage", firstPage);
+                Preconditions.NotNull("firstRequest", firstRequest);
 
                 this.httpClient = httpClient;
                 this.accessToken = accessToken;
-                this.firstPage = firstPage;
+
+                // Eagerly fetch the first page to hit access token and validation issues.
+                this.firstPage = this.httpClient.GetJsonResponse<TResponse>(firstRequest);
             }
 
             /// <inheritdoc/>
-            public IEnumerator<Event> GetEnumerator()
+            public IEnumerator<TResult> GetEnumerator()
             {
-                return this.GetEvents().GetEnumerator();
+                return this.GetResults().GetEnumerator();
             }
 
             /// <inheritdoc/>
@@ -247,28 +310,14 @@ namespace Cronofy
             }
 
             /// <summary>
-            /// Gets the events from a page response.
-            /// </summary>
-            /// <param name="response">
-            /// The page response to extract the events from.
-            /// </param>
-            /// <returns>
-            /// The events from the page response.
-            /// </returns>
-            private static IEnumerable<Event> GetEventsFromPage(ReadEventsResponse response)
-            {
-                return response.Events.Select(e => e.ToEvent());
-            }
-
-            /// <summary>
             /// Gets all the events from the result set.
             /// </summary>
             /// <returns>
             /// All the events from the result set.
             /// </returns>
-            private IEnumerable<Event> GetEvents()
+            private IEnumerable<TResult> GetResults()
             {
-                return this.GetPages().SelectMany(GetEventsFromPage);
+                return this.GetPages().SelectMany(page => page.GetResults());
             }
 
             /// <summary>
@@ -277,7 +326,7 @@ namespace Cronofy
             /// <returns>
             /// All the pages from the result set.
             /// </returns>
-            private IEnumerable<ReadEventsResponse> GetPages()
+            private IEnumerable<TResponse> GetPages()
             {
                 var currentPage = this.firstPage;
 
@@ -303,7 +352,7 @@ namespace Cronofy
             /// <returns>
             /// The next page response.
             /// </returns>
-            private ReadEventsResponse GetNextPageResponse(ReadEventsResponse currentPage)
+            private TResponse GetNextPageResponse(IPagedResultsResponse<TResult> currentPage)
             {
                 var request = new HttpRequest();
 
@@ -311,7 +360,7 @@ namespace Cronofy
                 request.Url = currentPage.Pages.NextPageUrl;
                 request.AddOAuthAuthorization(this.accessToken);
 
-                return this.httpClient.GetJsonResponse<ReadEventsResponse>(request);
+                return this.httpClient.GetJsonResponse<TResponse>(request);
             }
         }
     }
