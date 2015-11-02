@@ -83,6 +83,7 @@
     <Compile Include="Responses\IPagedResultsResponse.cs" />
     <Compile Include="Responses\PagesResponse.cs" />
     <Compile Include="Responses\FreeBusyResponse.cs" />
+    <Compile Include="TimeZoneIdentifiers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

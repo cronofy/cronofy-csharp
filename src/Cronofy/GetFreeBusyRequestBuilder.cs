@@ -9,11 +9,6 @@
     public sealed class GetFreeBusyRequestBuilder : IBuilder<GetFreeBusyRequest>
     {
         /// <summary>
-        /// The default time zone ID for requests.
-        /// </summary>
-        private const string DefaultTimeZoneId = "Etc/UTC";
-
-        /// <summary>
         /// The request's time zone ID.
         /// </summary>
         private string timeZoneId;
@@ -34,7 +29,7 @@
         /// </summary>
         public GetFreeBusyRequestBuilder()
         {
-            this.timeZoneId = DefaultTimeZoneId;
+            this.timeZoneId = TimeZoneIdentifiers.Default;
         }
 
         /// <summary>

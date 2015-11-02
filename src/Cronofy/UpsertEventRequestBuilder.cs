@@ -41,6 +41,26 @@
         private string locationDescription;
 
         /// <summary>
+        /// The time zone ID of the event's start time.
+        /// </summary>
+        private string startTimeZoneId;
+
+        /// <summary>
+        /// The time zone ID of the event's end time.
+        /// </summary>
+        private string endTimeZoneId;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
+        /// </summary>
+        public UpsertEventRequestBuilder()
+        {
+            this.startTimeZoneId = TimeZoneIdentifiers.Default;
+            this.endTimeZoneId = TimeZoneIdentifiers.Default;
+        }
+
+        /// <summary>
         /// Sets the OAuth application's ID for the event.
         /// </summary>
         /// <param name="eventId">
@@ -200,6 +220,71 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the time zone identifier for the start and end times of the
+        /// event.
+        /// </summary>
+        /// <param name="timeZoneId">
+        /// Time zone identifier, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="timeZoneId"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder TimeZoneId(string timeZoneId)
+        {
+            Preconditions.NotEmpty("timeZoneId", timeZoneId);
+
+            this.startTimeZoneId = timeZoneId;
+            this.endTimeZoneId = timeZoneId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the time zone identifier for the start time of the event.
+        /// </summary>
+        /// <param name="timeZoneId">
+        /// Time zone identifier, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="timeZoneId"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder StartTimeZoneId(string timeZoneId)
+        {
+            Preconditions.NotEmpty("timeZoneId", timeZoneId);
+
+            this.startTimeZoneId = timeZoneId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the time zone identifier for the end time of the event.
+        /// </summary>
+        /// <param name="timeZoneId">
+        /// Time zone identifier, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="timeZoneId"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder EndTimeZoneId(string timeZoneId)
+        {
+            Preconditions.NotEmpty("timeZoneId", timeZoneId);
+
+            this.endTimeZoneId = timeZoneId;
+
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -208,8 +293,8 @@
                 EventId = this.eventId,
                 Summary = this.summary,
                 Description = this.description,
-                Start = new EventTime(this.startTime.ToUniversalTime(), "Etc/UTC"),
-                End = new EventTime(this.endTime.ToUniversalTime(), "Etc/UTC"),
+                Start = new EventTime(this.startTime.ToUniversalTime(), this.startTimeZoneId),
+                End = new EventTime(this.endTime.ToUniversalTime(), this.endTimeZoneId),
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)

@@ -35,13 +35,13 @@
                 DateTimeOffset dtoResult;
                 if (DateTimeOffset.TryParseExact(value, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out dtoResult))
                 {
-                    return new EventTime(dtoResult, "Etc/UTC");
+                    return new EventTime(dtoResult, TimeZoneIdentifiers.UTC);
                 }
 
                 Date dateResult;
                 if (Date.TryParse(value, out dateResult))
                 {
-                    return new EventTime(dateResult, "Etc/UTC");
+                    return new EventTime(dateResult, TimeZoneIdentifiers.UTC);
                 }
 
                 throw new JsonSerializationException("Failed to parse " + value);
