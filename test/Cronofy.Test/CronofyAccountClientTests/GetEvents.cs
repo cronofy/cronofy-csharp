@@ -344,6 +344,25 @@ namespace Cronofy.Test.CronofyAccountClientTests
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }
 
+        [Test]
+        public void CanGetOnlyEventsThatAreManaged()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&only_managed=true")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(SingleEventResponseBody)
+            );
+
+            var builder = new GetEventsRequestBuilder()
+                .OnlyManaged(true);
+
+            var events = client.GetEvents(builder);
+
+            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+        }
+
         const string SingleEventResponseBody = @"{
   ""pages"": {
     ""current"": 1,

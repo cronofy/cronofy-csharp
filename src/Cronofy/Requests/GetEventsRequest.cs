@@ -62,5 +62,13 @@
         /// The include managed flag for the request.
         /// </value>
         public bool? IncludeManaged { get; set; }
+
+        /// <summary>
+        /// Gets or sets the only managed flag for the request.
+        /// </summary>
+        /// <value>
+        /// The only managed flag for the request.
+        /// </value>
+        public bool? OnlyManaged { get; set; }
     }
 }

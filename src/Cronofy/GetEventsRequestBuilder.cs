@@ -44,6 +44,11 @@
         private bool? includeManaged;
 
         /// <summary>
+        /// The request's only managed flag.
+        /// </summary>
+        private bool? onlyManaged;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetEventsRequestBuilder"/> class.
         /// </summary>
@@ -215,6 +220,23 @@
             return this;
         }
 
+
+        /// <summary>
+        /// Sets the only managed flag for the request.
+        /// </summary>
+        /// <param name="onlyManaged">
+        /// A flag specifying whether only events that are managed by the
+        /// application should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder OnlyManaged(bool onlyManaged)
+        {
+            this.onlyManaged = onlyManaged;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -227,6 +249,7 @@
                 IncludeDeleted = this.includeDeleted,
                 IncludeMoved = this.includeMoved,
                 IncludeManaged = this.includeManaged,
+                OnlyManaged = this.onlyManaged,
             };
         }
     }
