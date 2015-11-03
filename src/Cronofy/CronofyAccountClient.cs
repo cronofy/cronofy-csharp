@@ -125,6 +125,11 @@ namespace Cronofy
                 httpRequest.QueryString.Add("to", request.To.ToString());
             }
 
+            if (request.LastModified.HasValue)
+            {
+                httpRequest.QueryString.Add("last_modified", request.LastModified.Value.ToString("u"));
+            }
+
             return new PagedResultsIterator<ReadEventsResponse, Event>(
                 this.HttpClient,
                 this.accessToken,

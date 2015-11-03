@@ -24,6 +24,11 @@
         private Date? to;
 
         /// <summary>
+        /// The request's last modified time.
+        /// </summary>
+        private DateTime? lastModified;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetEventsRequestBuilder"/> class.
         /// </summary>
@@ -132,6 +137,22 @@
             return this.To(date);
         }
 
+        /// <summary>
+        /// Sets the last modified time for the request.
+        /// </summary>
+        /// <param name="lastModified">
+        /// The time the an event must have been modified on or after in order
+        /// to be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder LastModified(DateTime lastModified)
+        {
+            this.lastModified = lastModified;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -140,6 +161,7 @@
                 TimeZoneId = this.timeZoneId,
                 From = this.from,
                 To = this.to,
+                LastModified = this.lastModified,
             };
         }
     }

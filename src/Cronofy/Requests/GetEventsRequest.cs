@@ -30,5 +30,13 @@
         /// The to date for the request.
         /// </value>
         public Date? To { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified time for the request.
+        /// </summary>
+        /// <value>
+        /// The last modified time for the request.
+        /// </value>
+        public DateTime? LastModified { get; set; }
     }
 }
