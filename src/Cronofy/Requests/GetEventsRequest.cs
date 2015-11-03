@@ -38,5 +38,13 @@
         /// The last modified time for the request.
         /// </value>
         public DateTime? LastModified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include deleted flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include deleted flag for the request.
+        /// </value>
+        public bool? IncludeDeleted { get; set; }
     }
 }

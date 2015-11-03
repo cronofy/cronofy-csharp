@@ -29,6 +29,11 @@
         private DateTime? lastModified;
 
         /// <summary>
+        /// The request's include deleted flag.
+        /// </summary>
+        private bool? includeDeleted;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetEventsRequestBuilder"/> class.
         /// </summary>
@@ -153,6 +158,21 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the include deleted flag for the request.
+        /// </summary>
+        /// <param name="includeDeleted">
+        /// A flag specifying whether deleted events should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder IncludeDeleted(bool includeDeleted)
+        {
+            this.includeDeleted = includeDeleted;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -162,6 +182,7 @@
                 From = this.from,
                 To = this.to,
                 LastModified = this.lastModified,
+                IncludeDeleted = this.includeDeleted,
             };
         }
     }

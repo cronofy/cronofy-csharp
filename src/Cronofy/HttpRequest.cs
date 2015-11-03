@@ -1,5 +1,6 @@
 ﻿namespace Cronofy
 {
+    using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
@@ -24,7 +25,7 @@
         public HttpRequest()
         {
             this.Headers = new Dictionary<string, string>();
-            this.QueryString = new Dictionary<string, string>();
+            this.QueryString = new QueryStringCollection();
         }
 
         /// <summary>
@@ -57,7 +58,7 @@
         /// <value>
         /// The query string parameters of the request.
         /// </value>
-        public IDictionary<string, string> QueryString { get; set; }
+        public QueryStringCollection QueryString { get; set; }
 
         /// <summary>
         /// Gets or sets the body of the request.
@@ -102,6 +103,135 @@
             this.Headers.Add("Content-Type", "application/json; charset=utf-8");
 
             this.Body = JsonConvert.SerializeObject(bodyObject, DefaultSerializerSettings);
+        }
+
+        /// <summary>
+        /// Type conversion aware dictionary for building query strings.
+        /// </summary>
+        internal sealed class QueryStringCollection : Dictionary<string, string>
+        {
+            /// <summary>
+            /// Add the specified key and value if one is present.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="nullable">
+            /// The value to add, if one is present.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, bool? nullable)
+            {
+                Preconditions.NotNull("key", key);
+
+                if (nullable.HasValue)
+                {
+                    this.Add(key, nullable.Value);
+                }
+            }
+
+            /// <summary>
+            /// Add the specified key and value.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="value">
+            /// The value to add.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, bool value)
+            {
+                Preconditions.NotNull("key", key);
+
+                this.Add(key, value.ToString().ToLowerInvariant());
+            }
+
+            /// <summary>
+            /// Add the specified key and value if one is present.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="nullable">
+            /// The value to add, if one is present.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, DateTime? nullable)
+            {
+                Preconditions.NotNull("key", key);
+
+                if (nullable.HasValue)
+                {
+                    this.Add(key, nullable.Value);
+                }
+            }
+
+            /// <summary>
+            /// Add the specified key and value.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="value">
+            /// The value to add.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, DateTime value)
+            {
+                Preconditions.NotNull("key", key);
+
+                this.Add(key, value.ToString("u"));
+            }
+
+            /// <summary>
+            /// Add the specified key and value if one is present.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="nullable">
+            /// The value to add, if one is present.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, Date? nullable)
+            {
+                Preconditions.NotNull("key", key);
+
+                if (nullable.HasValue)
+                {
+                    this.Add(key, nullable.Value);
+                }
+            }
+
+            /// <summary>
+            /// Add the specified key and value.
+            /// </summary>
+            /// <param name="key">
+            /// The key to add the value under, must not be null.
+            /// </param>
+            /// <param name="value">
+            /// The value to add.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null.
+            /// </exception>
+            public void Add(string key, Date value)
+            {
+                Preconditions.NotNull("key", key);
+
+                this.Add(key, value.ToString());
+            }
         }
     }
 }

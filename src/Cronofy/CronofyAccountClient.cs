@@ -113,22 +113,11 @@ namespace Cronofy
 
             // TODO Support more parameters
             httpRequest.QueryString.Add("tzid", request.TimeZoneId);
-            httpRequest.QueryString.Add("localized_times", "true");
-
-            if (request.From.HasValue)
-            {
-                httpRequest.QueryString.Add("from", request.From.ToString());
-            }
-
-            if (request.To.HasValue)
-            {
-                httpRequest.QueryString.Add("to", request.To.ToString());
-            }
-
-            if (request.LastModified.HasValue)
-            {
-                httpRequest.QueryString.Add("last_modified", request.LastModified.Value.ToString("u"));
-            }
+            httpRequest.QueryString.Add("localized_times", true);
+            httpRequest.QueryString.Add("from", request.From);
+            httpRequest.QueryString.Add("to", request.To);
+            httpRequest.QueryString.Add("last_modified", request.LastModified);
+            httpRequest.QueryString.Add("include_deleted", request.IncludeDeleted);
 
             return new PagedResultsIterator<ReadEventsResponse, Event>(
                 this.HttpClient,
