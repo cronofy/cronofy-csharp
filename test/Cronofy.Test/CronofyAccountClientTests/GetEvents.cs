@@ -248,21 +248,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventsWithinDates()
         {
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&from=2015-10-20&to=2015-10-30")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
-
-            var builder = new GetEventsRequestBuilder()
-                .From(2015, 10, 20)
-                .To(2015, 10, 30);
-
-            var events = client.GetEvents(builder);
-
-            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+            AssertParameter(
+                "from=2015-10-20&to=2015-10-30",
+                b => b.From(2015, 10, 20).To(2015, 10, 30));
         }
 
         [Test]
@@ -270,93 +258,48 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             var lastModified = DateTime.UtcNow.AddMinutes(-15);
 
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&last_modified=" +
-                    UrlBuilder.EncodeParameter(lastModified.ToString("u")))
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
-
-            var builder = new GetEventsRequestBuilder()
-                .LastModified(lastModified);
-
-            var events = client.GetEvents(builder);
-
-            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+            AssertParameter(
+                "last_modified=" + UrlBuilder.EncodeParameter(lastModified.ToString("u")),
+                b => b.LastModified(lastModified));
         }
 
         [Test]
         public void CanGetEventsThatHaveBeenDeleted()
         {
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&include_deleted=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
-
-            var builder = new GetEventsRequestBuilder()
-                .IncludeDeleted(true);
-
-            var events = client.GetEvents(builder);
-
-            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+            AssertParameter("include_deleted=true", b => b.IncludeDeleted(true));
         }
 
         [Test]
         public void CanGetEventsThatHaveBeenMoved()
         {
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&include_moved=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
-
-            var builder = new GetEventsRequestBuilder()
-                .IncludeMoved(true);
-
-            var events = client.GetEvents(builder);
-
-            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+            AssertParameter("include_moved=true", b => b.IncludeMoved(true));
         }
 
         [Test]
         public void CanGetEventsThatAreManaged()
         {
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&include_managed=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
-
-            var builder = new GetEventsRequestBuilder()
-                .IncludeManaged(true);
-
-            var events = client.GetEvents(builder);
-
-            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+            AssertParameter("include_managed=true", b => b.IncludeManaged(true));
         }
 
         [Test]
         public void CanGetOnlyEventsThatAreManaged()
         {
+            AssertParameter("only_managed=true", b => b.OnlyManaged(true));
+        }
+
+        private void AssertParameter(string keyValue, Action<GetEventsRequestBuilder> builderAction)
+        {
             http.Stub(
                 HttpGet
-                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&only_managed=true")
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&" + keyValue)
                 .RequestHeader("Authorization", "Bearer " + accessToken)
                 .ResponseCode(200)
                 .ResponseBody(SingleEventResponseBody)
             );
 
-            var builder = new GetEventsRequestBuilder()
-                .OnlyManaged(true);
+            var builder = new GetEventsRequestBuilder();
+
+            builderAction.Invoke(builder);
 
             var events = client.GetEvents(builder);
 
