@@ -111,7 +111,6 @@ namespace Cronofy
             httpRequest.Url = ReadEventsUrl;
             httpRequest.AddOAuthAuthorization(this.accessToken);
 
-            // TODO Support more parameters
             httpRequest.QueryString.Add("tzid", request.TimeZoneId);
             httpRequest.QueryString.Add("localized_times", true);
             httpRequest.QueryString.Add("from", request.From);
