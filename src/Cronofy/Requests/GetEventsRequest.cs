@@ -54,5 +54,13 @@
         /// The include moved flag for the request.
         /// </value>
         public bool? IncludeMoved { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include managed flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include managed flag for the request.
+        /// </value>
+        public bool? IncludeManaged { get; set; }
     }
 }

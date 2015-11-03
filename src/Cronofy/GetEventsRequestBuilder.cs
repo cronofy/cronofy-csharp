@@ -39,6 +39,11 @@
         private bool? includeMoved;
 
         /// <summary>
+        /// The request's include managed flag.
+        /// </summary>
+        private bool? includeManaged;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetEventsRequestBuilder"/> class.
         /// </summary>
@@ -194,6 +199,22 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the include managed flag for the request.
+        /// </summary>
+        /// <param name="includeManaged">
+        /// A flag specifying whether events that are managed by the application
+        /// should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder IncludeManaged(bool includeManaged)
+        {
+            this.includeManaged = includeManaged;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -205,6 +226,7 @@
                 LastModified = this.lastModified,
                 IncludeDeleted = this.includeDeleted,
                 IncludeMoved = this.includeMoved,
+                IncludeManaged = this.includeManaged,
             };
         }
     }
