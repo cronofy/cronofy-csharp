@@ -306,6 +306,25 @@ namespace Cronofy.Test.CronofyAccountClientTests
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }
 
+        [Test]
+        public void CanGetEventsThatHaveBeenMoved()
+        {
+            http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&include_moved=true")
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(SingleEventResponseBody)
+            );
+
+            var builder = new GetEventsRequestBuilder()
+                .IncludeMoved(true);
+
+            var events = client.GetEvents(builder);
+
+            CollectionAssert.AreEqual(SingleEventResultCollection, events);
+        }
+
         const string SingleEventResponseBody = @"{
   ""pages"": {
     ""current"": 1,

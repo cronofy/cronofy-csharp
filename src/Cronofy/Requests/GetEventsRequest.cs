@@ -46,5 +46,13 @@
         /// The include deleted flag for the request.
         /// </value>
         public bool? IncludeDeleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include moved flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include moved flag for the request.
+        /// </value>
+        public bool? IncludeMoved { get; set; }
     }
 }

@@ -118,6 +118,7 @@ namespace Cronofy
             httpRequest.QueryString.Add("to", request.To);
             httpRequest.QueryString.Add("last_modified", request.LastModified);
             httpRequest.QueryString.Add("include_deleted", request.IncludeDeleted);
+            httpRequest.QueryString.Add("include_moved", request.IncludeMoved);
 
             return new PagedResultsIterator<ReadEventsResponse, Event>(
                 this.HttpClient,

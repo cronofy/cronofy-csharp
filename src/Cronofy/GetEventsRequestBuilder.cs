@@ -34,6 +34,11 @@
         private bool? includeDeleted;
 
         /// <summary>
+        /// The request's include moved flag.
+        /// </summary>
+        private bool? includeMoved;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetEventsRequestBuilder"/> class.
         /// </summary>
@@ -173,6 +178,22 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the include moved flag for the request.
+        /// </summary>
+        /// <param name="includeMoved">
+        /// A flag specifying whether events that have moved out of the
+        /// specified window should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder IncludeMoved(bool includeMoved)
+        {
+            this.includeMoved = includeMoved;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -183,6 +204,7 @@
                 To = this.to,
                 LastModified = this.lastModified,
                 IncludeDeleted = this.includeDeleted,
+                IncludeMoved = this.includeMoved,
             };
         }
     }
