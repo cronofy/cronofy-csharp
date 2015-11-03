@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
@@ -108,8 +109,14 @@
         /// <summary>
         /// Type conversion aware dictionary for building query strings.
         /// </summary>
-        internal sealed class QueryStringCollection : Dictionary<string, string>
+        internal sealed class QueryStringCollection : IEnumerable<KeyValuePair<string, string>>
         {
+            /// <summary>
+            /// Data structure to hold the pairs within.
+            /// </summary>
+            private readonly IDictionary<string, IList<string>> pairs
+                = new Dictionary<string, IList<string>>();
+
             /// <summary>
             /// Add the specified key and value if one is present.
             /// </summary>
@@ -231,6 +238,89 @@
                 Preconditions.NotNull("key", key);
 
                 this.Add(key, value.ToString());
+            }
+
+            /// <summary>
+            /// Add the specified key and value.
+            /// </summary>
+            /// <param name="key">
+            /// The key of the value, must not be null.
+            /// </param>
+            /// <param name="value">
+            /// The value, must not be null.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> or <paramref name="value"/> are
+            /// null.
+            /// </exception>
+            public void Add(string key, string value)
+            {
+                Preconditions.NotNull("key", key);
+                Preconditions.NotNull("value", value);
+
+                if (!this.pairs.ContainsKey(key))
+                {
+                    this.pairs.Add(key, new List<string>());
+                }
+
+                this.pairs[key].Add(value);
+            }
+
+            /// <summary>
+            /// Add the specified key and value.
+            /// </summary>
+            /// <param name="key">
+            /// The key of the value, must not be null.
+            /// </param>
+            /// <param name="values">
+            /// The values, if not null must not contain null values.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// Thrown if <paramref name="key"/> is null or
+            /// <paramref name="values"/> is not null but contains null values.
+            /// </exception>
+            public void Add(string key, IEnumerable<string> values)
+            {
+                Preconditions.NotNull("key", key);
+
+                if (values == null)
+                {
+                    return;
+                }
+
+                foreach (var value in values)
+                {
+                    this.Add(key, value);
+                }
+            }
+
+            /// <inheritdoc/>
+            public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+            {
+                return this.GetPairs().GetEnumerator();
+            }
+
+            /// <inheritdoc/>
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this.GetEnumerator();
+            }
+
+            /// <summary>
+            /// Gets the pairs.
+            /// </summary>
+            /// <returns>
+            /// The pairs.
+            /// </returns>
+            public IEnumerable<KeyValuePair<string, string>> GetPairs()
+            {
+                foreach (var pair in this.pairs)
+                {
+                    foreach (var value in pair.Value)
+                    {
+                        yield return new KeyValuePair<string, string>(pair.Key, value);
+                    }
+                }
             }
         }
     }

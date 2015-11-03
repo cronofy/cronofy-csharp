@@ -19,7 +19,14 @@ namespace Cronofy.Test
             var request = builder.Build();
             var key = GetRequestKey(request.Method, request.Url, request.RequestHeaders, request.RequestBody);
 
-            this.stubbedRequests.Add(key, request);
+            if (this.stubbedRequests.ContainsKey(key))
+            {
+                this.stubbedRequests[key] = request;
+            }
+            else
+            {
+                this.stubbedRequests.Add(key, request);
+            }
 
             return this;
         }

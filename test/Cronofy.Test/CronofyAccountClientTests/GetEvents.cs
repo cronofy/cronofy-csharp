@@ -1,8 +1,9 @@
 ﻿using System;
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.NetworkInformation;
+using NUnit.Framework;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
@@ -259,7 +260,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
             var lastModified = DateTime.UtcNow.AddMinutes(-15);
 
             AssertParameter(
-                "last_modified=" + UrlBuilder.EncodeParameter(lastModified.ToString("u")),
+                "last_modified=" + Encode(lastModified.ToString("u")),
                 b => b.LastModified(lastModified));
         }
 
@@ -285,6 +286,38 @@ namespace Cronofy.Test.CronofyAccountClientTests
         public void CanGetOnlyEventsThatAreManaged()
         {
             AssertParameter("only_managed=true", b => b.OnlyManaged(true));
+        }
+
+        [Test]
+        public void CanGetEventsWithinOneCalendar()
+        {
+            const string calendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw";
+
+            AssertParameter(
+                Encode("calendar_ids[]", calendarId),
+                b => b.CalendarId(calendarId));
+        }
+
+        [Test]
+        public void CanGetEventsWithinMultipleCalendars()
+        {
+            var calendarIds = new List<string>
+            {
+                "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                "cal_U@y23bStTFV7AAAB_iWTeH8WOCDOIW@us5gRzww",
+            };
+
+            var expectedKeyValue =
+                Encode("calendar_ids[]", calendarIds[0]) + "&" +
+                Encode("calendar_ids[]", calendarIds[1]);
+
+            AssertParameter(
+                expectedKeyValue,
+                b => b.CalendarIds(calendarIds));
+
+            AssertParameter(
+                expectedKeyValue,
+                b => b.CalendarIds(calendarIds.ToArray()));
         }
 
         private void AssertParameter(string keyValue, Action<GetEventsRequestBuilder> builderAction)
@@ -364,5 +397,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 },
             }
         };
+
+        private static string Encode(string value)
+        {
+            return UrlBuilder.EncodeParameter(value);
+        }
+
+        private static string Encode(string key, string value)
+        {
+            return Encode(key) + "=" + Encode(value);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Cronofy.Requests
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Class for the serialization of an get events request.
@@ -70,5 +71,13 @@
         /// The only managed flag for the request.
         /// </value>
         public bool? OnlyManaged { get; set; }
+
+        /// <summary>
+        /// Gets or sets the calendar IDs for the request.
+        /// </summary>
+        /// <value>
+        /// The calendar IDs for the request.
+        /// </value>
+        public IEnumerable<string> CalendarIds { get; set; }
     }
 }

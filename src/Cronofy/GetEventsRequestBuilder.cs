@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
     using Cronofy.Requests;
 
     /// <summary>
@@ -47,6 +48,11 @@
         /// The request's only managed flag.
         /// </summary>
         private bool? onlyManaged;
+
+        /// <summary>
+        /// The request's calendar IDs.
+        /// </summary>
+        private IEnumerable<string> calendarIds;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -220,7 +226,6 @@
             return this;
         }
 
-
         /// <summary>
         /// Sets the only managed flag for the request.
         /// </summary>
@@ -237,6 +242,39 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the calendar IDs for the request.
+        /// </summary>
+        /// <param name="calendarIds">
+        /// The calendar IDs to restrict the events to, must not be null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder CalendarIds(IEnumerable<string> calendarIds)
+        {
+            Preconditions.NotNull("calendarIds", calendarIds);
+
+            this.calendarIds = calendarIds;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the calendar ID for the request.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The calendar ID to restrict the events to, must not be null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder CalendarId(string calendarId)
+        {
+            Preconditions.NotNull("calendarId", calendarId);
+
+            return this.CalendarIds(new[] { calendarId });
+        }
+
         /// <inheritdoc/>
         public GetEventsRequest Build()
         {
@@ -250,6 +288,7 @@
                 IncludeMoved = this.includeMoved,
                 IncludeManaged = this.includeManaged,
                 OnlyManaged = this.onlyManaged,
+                CalendarIds = this.calendarIds,
             };
         }
     }
