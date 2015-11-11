@@ -83,6 +83,28 @@
         }
 
         /// <summary>
+        /// Adds a querystring parameter to the URL.
+        /// </summary>
+        /// <param name="key">
+        /// The key of the querystring parameter, must not be null or empty.
+        /// </param>
+        /// <param name="value">
+        /// The value of the querystring parameter.
+        /// </param>
+        /// <returns>
+        /// A reference to the builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="key"/> is null or empty.
+        /// </exception>
+        public UrlBuilder AddParameter(string key, bool value)
+        {
+            var stringValue = value.ToString().ToLowerInvariant();
+
+            return this.AddParameter(key, stringValue);
+        }
+
+        /// <summary>
         /// Generates a URL based on the current state of the builder.
         /// </summary>
         /// <returns>

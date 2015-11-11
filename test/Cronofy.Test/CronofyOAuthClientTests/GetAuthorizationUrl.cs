@@ -102,6 +102,46 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
+        public void CanSetAvoidLinkingToTrue()
+        {
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                .AvoidLinking(true)
+                .Build();
+
+            var expectedAuthUrl = string.Format(
+                "https://app.cronofy.com/oauth/authorize" +
+                    "?client_id={0}" +
+                    "&response_type=code" +
+                    "&scope=read_account%20read_events%20create_event%20delete_event" +
+                    "&redirect_uri={1}" +
+                    "&avoid_linking=true",
+                UrlBuilder.EncodeParameter(clientId),
+                UrlBuilder.EncodeParameter(redirectUri));
+
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
+
+        [Test]
+        public void CanSetAvoidLinkingToFalse()
+        {
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                .AvoidLinking(false)
+                .Build();
+
+            var expectedAuthUrl = string.Format(
+                "https://app.cronofy.com/oauth/authorize" +
+                    "?client_id={0}" +
+                    "&response_type=code" +
+                    "&scope=read_account%20read_events%20create_event%20delete_event" +
+                    "&redirect_uri={1}" +
+                    "&avoid_linking=false",
+                UrlBuilder.EncodeParameter(clientId),
+                UrlBuilder.EncodeParameter(redirectUri));
+
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
+
+        [Test]
         public void ToStringGeneratesUrl()
         {
             var builder = client.GetAuthorizationUrlBuilder(redirectUri);

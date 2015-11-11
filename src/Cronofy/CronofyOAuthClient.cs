@@ -189,6 +189,12 @@
             private string state;
 
             /// <summary>
+            /// The value of the avoid linking parameter for the OAuth
+            /// authorization process.
+            /// </summary>
+            private bool? avoidLinking;
+
+            /// <summary>
             /// Initializes a new instance of the
             /// <see cref="AuthorizationUrlBuilder"/> class.
             /// </summary>
@@ -274,6 +280,24 @@
             }
 
             /// <summary>
+            /// Sets the avoid linking parameter for the OAuth authorization
+            /// process.
+            /// </summary>
+            /// <param name="avoidLinking">
+            /// If set to <c>true</c>, avoid linking calendars during the OAuth
+            /// authorization process.
+            /// </param>
+            /// <returns>
+            /// A reference to the builder.
+            /// </returns>
+            public AuthorizationUrlBuilder AvoidLinking(bool avoidLinking)
+            {
+                this.avoidLinking = avoidLinking;
+
+                return this;
+            }
+
+            /// <summary>
             /// Generates an authorization URL based on the current state of the
             /// builder.
             /// </summary>
@@ -292,6 +316,11 @@
                 if (this.state != null)
                 {
                     urlBuilder.AddParameter("state", this.state);
+                }
+
+                if (this.avoidLinking.HasValue)
+                {
+                    urlBuilder.AddParameter("avoid_linking", this.avoidLinking.Value);
                 }
 
                 return urlBuilder.Build();
