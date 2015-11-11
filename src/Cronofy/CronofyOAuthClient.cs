@@ -21,6 +21,11 @@
         private const string TokenUrl = "https://app.cronofy.com/oauth/token";
 
         /// <summary>
+        /// The URL for the OAuth token revocation endpoint.
+        /// </summary>
+        private const string TokenRevocationUrl = "https://app.cronofy.com/oauth/token/revoke";
+
+        /// <summary>
         /// The grant type for exchanging an OAuth authorization code.
         /// </summary>
         private const string CodeGrantType = "authorization_code";
@@ -125,6 +130,33 @@
             var tokenResponse = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
 
             return tokenResponse.ToToken();
+        }
+
+        /// <inheritdoc/>
+        public void RevokeToken(string token)
+        {
+            Preconditions.NotEmpty("token", token);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = TokenRevocationUrl;
+
+            var requestBody = new OAuthTokenRevocationRequest
+            {
+                ClientId = this.clientId,
+                ClientSecret = this.clientSecret,
+                Token = token,
+            };
+
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 200)
+            {
+                throw new CronofyResponseException("Request failed", response);
+            }
         }
 
         /// <inheritdoc/>

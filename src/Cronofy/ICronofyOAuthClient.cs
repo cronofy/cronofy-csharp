@@ -56,5 +56,26 @@
         /// TODO Validation exceptions.
         /// </remarks>
         OAuthToken GetTokenFromRefreshToken(string refreshToken);
+
+        /// <summary>
+        /// Revokes the given authorization token.
+        /// </summary>
+        /// <param name="token">
+        /// <para>
+        /// The refresh token or access token of the OAuth authorization to
+        /// revoke, must not be null or empty.
+        /// </para>
+        /// <para>
+        /// It is recommended that the refresh token is passed as it cannot
+        /// expire.
+        /// </para>
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="token"/> is null or empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void RevokeToken(string token);
     }
 }

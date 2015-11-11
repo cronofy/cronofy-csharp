@@ -84,6 +84,7 @@
     <Compile Include="Responses\PagesResponse.cs" />
     <Compile Include="Responses\FreeBusyResponse.cs" />
     <Compile Include="TimeZoneIdentifiers.cs" />
+    <Compile Include="Requests\OAuthTokenRevocationRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
