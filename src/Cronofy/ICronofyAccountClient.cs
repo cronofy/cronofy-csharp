@@ -11,6 +11,17 @@
     public interface ICronofyAccountClient
     {
         /// <summary>
+        /// Gets the details of the account.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Account"/>.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        Account GetAccount();
+
+        /// <summary>
         /// Gets the calendars belonging to the account.
         /// </summary>
         /// <returns>

@@ -1,5 +1,6 @@
 namespace Cronofy
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -13,6 +14,11 @@ namespace Cronofy
     /// </summary>
     public sealed class CronofyAccountClient : ICronofyAccountClient
     {
+        /// <summary>
+        /// The URL of the account endpoint.
+        /// </summary>
+        private const string AccountUrl = "https://api.cronofy.com/v1/account";
+        
         /// <summary>
         /// The URL of the list calendars endpoint.
         /// </summary>
@@ -67,6 +73,20 @@ namespace Cronofy
         /// Intend for test purposes only.
         /// </remarks>
         internal IHttpClient HttpClient { get; set; }
+
+        /// <inheritdoc/>
+        public Account GetAccount()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = AccountUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetJsonResponse<AccountResponse>(request);
+
+            return response.ToAccount();
+        }
 
         /// <inheritdoc/>
         public IEnumerable<Calendar> GetCalendars()
