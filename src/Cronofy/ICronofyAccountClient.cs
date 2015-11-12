@@ -203,5 +203,25 @@
         /// TODO Validation exceptions.
         /// </remarks>
         void DeleteEvent(string calendarId, string eventId);
+
+        /// <summary>
+        /// Creates a notification channel.
+        /// </summary>
+        /// <param name="callbackUrl">
+        /// The callback URL for the channel, must not be empty.
+        /// </param>
+        /// <returns>
+        /// The created channel.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="callbackUrl"/> is empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        Channel CreateChannel(string callbackUrl);
     }
 }

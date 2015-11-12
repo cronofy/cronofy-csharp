@@ -45,6 +45,11 @@ namespace Cronofy
         private const string ManagedEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
 
         /// <summary>
+        /// The URL of the channels endpoint.
+        /// </summary>
+        private const string ChannelsUrl = "https://api.cronofy.com/v1/channels";
+
+        /// <summary>
         /// The access token for the OAuth authorization for the account.
         /// </summary>
         private readonly string accessToken;
@@ -264,6 +269,28 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
+        }
+
+        /// <inheritdoc/>
+        public Channel CreateChannel(string callbackUrl)
+        {
+            Preconditions.NotEmpty("callbackUrl", callbackUrl);
+
+            var request = new HttpRequest();
+
+            var channelRequest = new CreateChannelRequest
+            {
+                CallbackUrl = callbackUrl,
+            };
+
+            request.Method = "POST";
+            request.Url = ChannelsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+            request.SetJsonBody(channelRequest);
+
+            var response = this.HttpClient.GetJsonResponse<ChannelResponse>(request);
+
+            return response.ToChannel();
         }
 
         /// <summary>

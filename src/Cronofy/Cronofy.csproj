@@ -88,6 +88,9 @@
     <Compile Include="Account.cs" />
     <Compile Include="Responses\AccountResponse.cs" />
     <Compile Include="Responses\ProfilesResponse.cs" />
+    <Compile Include="Channel.cs" />
+    <Compile Include="Requests\CreateChannelRequest.cs" />
+    <Compile Include="Responses\ChannelResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
