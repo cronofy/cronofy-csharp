@@ -234,5 +234,19 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         IEnumerable<Channel> GetChannels();
+
+        /// <summary>
+        /// Close the notification channel.
+        /// </summary>
+        /// <param name="channelId">
+        /// The ID of the notification channel to close, must not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="channelId"/> is empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void CloseChannel(string channelId);
     }
 }

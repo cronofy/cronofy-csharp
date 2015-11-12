@@ -50,6 +50,11 @@ namespace Cronofy
         private const string ChannelsUrl = "https://api.cronofy.com/v1/channels";
 
         /// <summary>
+        /// The URL format for the channel endpoint.
+        /// </summary>
+        private const string ChannelUrlFormat = "https://api.cronofy.com/v1/channels/{0}";
+
+        /// <summary>
         /// The access token for the OAuth authorization for the account.
         /// </summary>
         private readonly string accessToken;
@@ -305,6 +310,26 @@ namespace Cronofy
             var response = this.HttpClient.GetJsonResponse<ChannelsResponse>(request);
 
             return response.Channels.Select(c => c.ToChannel());
+        }
+
+        /// <inheritdoc/>
+        public void CloseChannel(string channelId)
+        {
+            Preconditions.NotEmpty("channelId", channelId);
+
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = string.Format(ChannelUrlFormat, channelId);
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202)
+            {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
         }
 
         /// <summary>
