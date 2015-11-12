@@ -1,35 +1,20 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
     [TestFixture]
-    public sealed class GetProfiles
+    internal sealed class GetProfiles : Base
     {
-        private const string accessToken = "zyxvut987654";
-
-        private CronofyAccountClient client;
-        private StubHttpClient http;
-
-        [SetUp]
-        public void SetUp()
-        {
-            this.client = new CronofyAccountClient(accessToken);
-            this.http = new StubHttpClient();
-
-            client.HttpClient = http;
-        }
-
         [Test]
         public void CanGetCalendars()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/profiles")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -51,7 +36,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
         );
 
-            var profiles = client.GetProfiles();
+            var profiles = Client.GetProfiles();
 
             CollectionAssert.AreEqual(
                 new List<Profile> {

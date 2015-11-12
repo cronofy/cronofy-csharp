@@ -3,30 +3,15 @@ using NUnit.Framework;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
-    [TestFixture]
-    public sealed class GetAccount
+    internal sealed class GetAccount : Base
     {
-        private const string accessToken = "zyxvut987654";
-
-        private CronofyAccountClient client;
-        private StubHttpClient http;
-
-        [SetUp]
-        public void SetUp()
-        {
-            this.client = new CronofyAccountClient(accessToken);
-            this.http = new StubHttpClient();
-
-            client.HttpClient = http;
-        }
-
         [Test]
         public void CanGetAccount()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/account")
-                    .RequestHeader("Authorization", "Bearer " + accessToken)
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .ResponseCode(200)
                     .ResponseBody(
                     @"{
@@ -39,7 +24,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
             );
 
-            var actualAccount = client.GetAccount();
+            var actualAccount = Client.GetAccount();
             var expectedAccount = new Account
             {
                 Id = "acc_567236000909002",

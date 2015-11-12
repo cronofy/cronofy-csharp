@@ -1,41 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.NetworkInformation;
 using NUnit.Framework;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
-    [TestFixture]
-    public sealed class GetEvents
+    internal sealed class GetEvents : Base
     {
-        private const string accessToken = "zyxvut987654";
-
-        private CronofyAccountClient client;
-        private StubHttpClient http;
-
-        [SetUp]
-        public void SetUp()
-        {
-            this.client = new CronofyAccountClient(accessToken);
-            this.http = new StubHttpClient();
-
-            client.HttpClient = http;
-        }
-
         [Test]
         public void CanGetEvents()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(SingleEventResponseBody)
             );
 
-            var events = client.GetEvents();
+            var events = Client.GetEvents();
 
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }
@@ -43,10 +25,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventWithoutLocation()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -81,7 +63,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
             );
 
-            var events = client.GetEvents();
+            var events = Client.GetEvents();
 
             CollectionAssert.AreEqual(
                 new List<Event> {
@@ -115,10 +97,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetPagedEvents()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -154,10 +136,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
             );
 
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events/pages/08a07b034306679e")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -192,7 +174,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
             );
 
-            var events = client.GetEvents();
+            var events = Client.GetEvents();
 
             CollectionAssert.AreEqual(
                 new List<Event> {
@@ -322,10 +304,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
         private void AssertParameter(string keyValue, Action<GetEventsRequestBuilder> builderAction)
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&" + keyValue)
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(SingleEventResponseBody)
             );
@@ -334,7 +316,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             builderAction.Invoke(builder);
 
-            var events = client.GetEvents(builder);
+            var events = Client.GetEvents(builder);
 
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }

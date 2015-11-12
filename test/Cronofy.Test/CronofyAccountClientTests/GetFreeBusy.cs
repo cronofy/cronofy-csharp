@@ -4,14 +4,8 @@ using System;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
-    [TestFixture]
-    public sealed class GetFreeBusy
+    internal sealed class GetFreeBusy : Base
     {
-        private const string accessToken = "zyxvut987654";
-
-        private CronofyAccountClient client;
-        private StubHttpClient http;
-
         const string BasicResponseBody = @"{
   ""pages"": {
     ""current"": 1,
@@ -36,27 +30,18 @@ namespace Cronofy.Test.CronofyAccountClientTests
             }
         };
 
-        [SetUp]
-        public void SetUp()
-        {
-            this.client = new CronofyAccountClient(accessToken);
-            this.http = new StubHttpClient();
-
-            client.HttpClient = http;
-        }
-
         [Test]
         public void CanGetFreeBusy()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true")
-                    .RequestHeader("Authorization", "Bearer " + accessToken)
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .ResponseCode(200)
                     .ResponseBody(BasicResponseBody)
             );
 
-            var events = client.GetFreeBusy();
+            var events = Client.GetFreeBusy();
 
             CollectionAssert.AreEqual(BasicResponseCollection, events);
         }
@@ -64,10 +49,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetPagedFreeBusy()
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -87,10 +72,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
         );
 
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/free_busy/pages/08a07b034306679e")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
                     @"{
@@ -109,7 +94,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 }")
         );
 
-            var events = client.GetFreeBusy();
+            var events = Client.GetFreeBusy();
 
             CollectionAssert.AreEqual(
                 new List<FreeBusy> {
@@ -167,10 +152,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
         private void AssertParameter(string keyValue, Action<GetFreeBusyRequestBuilder> builderAction)
         {
-            http.Stub(
+            Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true&" + keyValue)
-                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(BasicResponseBody)
             );
@@ -179,7 +164,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             builderAction.Invoke(builder);
 
-            var events = client.GetFreeBusy(builder);
+            var events = Client.GetFreeBusy(builder);
 
             CollectionAssert.AreEqual(BasicResponseCollection, events);
         }
