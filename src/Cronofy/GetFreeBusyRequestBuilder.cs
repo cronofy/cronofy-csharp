@@ -24,6 +24,11 @@
         private Date? to;
 
         /// <summary>
+        /// The request's include managed flag.
+        /// </summary>
+        private bool? includeManaged;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.GetFreeBusyRequestBuilder"/> class.
         /// </summary>
@@ -132,6 +137,22 @@
             return this.To(date);
         }
 
+        /// <summary>
+        /// Sets the include managed flag for the request.
+        /// </summary>
+        /// <param name="includeManaged">
+        /// A flag specifying whether free-busy information for events that are
+        /// managed by the application should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder IncludeManaged(bool includeManaged)
+        {
+            this.includeManaged = includeManaged;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetFreeBusyRequest Build()
         {
@@ -140,6 +161,7 @@
                 TimeZoneId = this.timeZoneId,
                 From = this.from,
                 To = this.to,
+                IncludeManaged = this.includeManaged,
             };
         }
     }

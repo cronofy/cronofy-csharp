@@ -182,6 +182,7 @@ namespace Cronofy
             httpRequest.QueryString.Add("localized_times", true);
             httpRequest.QueryString.Add("from", request.From);
             httpRequest.QueryString.Add("to", request.To);
+            httpRequest.QueryString.Add("include_managed", request.IncludeManaged);
 
             return new PagedResultsIterator<FreeBusyResponse, FreeBusy>(
                 this.HttpClient,

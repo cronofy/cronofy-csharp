@@ -28,5 +28,13 @@
         /// The to date for the request.
         /// </value>
         public Date? To { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include managed flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include managed flag for the request.
+        /// </value>
+        public bool? IncludeManaged { get; set; }
     }
 }
