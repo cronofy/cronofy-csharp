@@ -281,12 +281,28 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("callbackUrl", callbackUrl);
 
-            var request = new HttpRequest();
+            var builder = new CreateChannelBuilder()
+                .CallbackUrl(callbackUrl);
 
-            var channelRequest = new CreateChannelRequest
-            {
-                CallbackUrl = callbackUrl,
-            };
+            return this.CreateChannel(builder);
+        }
+
+        /// <inheritdoc/>
+        public Channel CreateChannel(IBuilder<CreateChannelRequest> channelBuilder)
+        {
+            Preconditions.NotNull("channelBuilder", channelBuilder);
+
+            var request = channelBuilder.Build();
+
+            return this.CreateChannel(request);
+        }
+
+        /// <inheritdoc/>
+        public Channel CreateChannel(CreateChannelRequest channelRequest)
+        {
+            Preconditions.NotNull("channelRequest", channelRequest);
+
+            var request = new HttpRequest();
 
             request.Method = "POST";
             request.Url = ChannelsUrl;

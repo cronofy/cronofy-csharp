@@ -225,6 +225,47 @@
         Channel CreateChannel(string callbackUrl);
 
         /// <summary>
+        /// Creates a notification channel.
+        /// </summary>
+        /// <param name="channelBuilder">
+        /// The builder from which to create a
+        /// <see cref="CreateChannelRequest"/>, must not be null.
+        /// </param>
+        /// <returns>
+        /// The created channel.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="channelBuilder"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        Channel CreateChannel(IBuilder<CreateChannelRequest> channelBuilder);
+
+        /// <summary>
+        /// Creates a notification channel.
+        /// </summary>
+        /// <param name="channelRequest">
+        /// The details of the channel to create, must not be null.
+        /// </param>
+        /// <returns>
+        /// The created channel.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="channelRequest"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        Channel CreateChannel(CreateChannelRequest channelRequest);
+
+        /// <summary>
         /// Gets the active notification channels for the account.
         /// </summary>
         /// <returns>

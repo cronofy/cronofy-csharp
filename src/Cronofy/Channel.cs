@@ -87,11 +87,20 @@
         /// </summary>
         public sealed class ChannelFilters
         {
+            /// <summary>
+            /// Gets or sets a value indicating whether the channel is filtered
+            /// to only managed events.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the channel is filtered to only managed events;
+            /// otherwise, <c>false</c>.
+            /// </value>
+            public bool? OnlyManaged { get; set; }
+
             /// <inheritdoc/>
             public override int GetHashCode()
             {
-                // TODO Incorporate filters
-                return 1;
+                return this.OnlyManaged.GetHashCode();
             }
 
             /// <inheritdoc/>
@@ -122,16 +131,17 @@
             /// </returns>
             public bool Equals(ChannelFilters other)
             {
-                // TODO Incorporate filters
-                return other != null;
+                return other != null
+                    && this.OnlyManaged == other.OnlyManaged;
             }
 
             /// <inheritdoc/>
             public override string ToString()
             {
                 return string.Format(
-                    "<{0}>",
-                    this.GetType());
+                    "<{0} OnlyManaged={1}>",
+                    this.GetType(),
+                    this.OnlyManaged);
             }
         }
     }
