@@ -223,5 +223,16 @@
         /// TODO Validation exceptions.
         /// </remarks>
         Channel CreateChannel(string callbackUrl);
+
+        /// <summary>
+        /// Gets the active notification channels for the account.
+        /// </summary>
+        /// <returns>
+        /// The account's <see cref="Channel"/>s.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<Channel> GetChannels();
     }
 }

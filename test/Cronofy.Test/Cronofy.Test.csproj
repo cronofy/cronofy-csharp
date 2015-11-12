@@ -59,6 +59,7 @@
     <Compile Include="CronofyAccountClientTests\GetProfiles.cs" />
     <Compile Include="CronofyAccountClientTests\CreateChannel.cs" />
     <Compile Include="CronofyAccountClientTests\Base.cs" />
+    <Compile Include="CronofyAccountClientTests\GetChannels.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

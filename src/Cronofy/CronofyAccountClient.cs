@@ -293,6 +293,20 @@ namespace Cronofy
             return response.ToChannel();
         }
 
+        /// <inheritdoc/>
+        public IEnumerable<Channel> GetChannels()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = ChannelsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetJsonResponse<ChannelsResponse>(request);
+
+            return response.Channels.Select(c => c.ToChannel());
+        }
+
         /// <summary>
         /// Iterator for a paged events response.
         /// </summary>
