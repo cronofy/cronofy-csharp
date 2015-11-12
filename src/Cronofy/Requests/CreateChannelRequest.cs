@@ -1,6 +1,7 @@
 ﻿namespace Cronofy.Requests
 {
     using System;
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -40,6 +41,15 @@
             /// </value>
             [JsonProperty("only_managed")]
             public bool? OnlyManaged { get; set; }
+
+            /// <summary>
+            /// Gets or sets the calendar IDs for the request.
+            /// </summary>
+            /// <value>
+            /// The calendar IDs for the request.
+            /// </value>
+            [JsonProperty("calendar_ids")]
+            public IEnumerable<string> CalendarIds { get; set; }
         }
     }
 }

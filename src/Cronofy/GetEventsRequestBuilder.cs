@@ -251,6 +251,9 @@
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarIds"/> is null.
+        /// </exception>
         public GetEventsRequestBuilder CalendarIds(IEnumerable<string> calendarIds)
         {
             Preconditions.NotNull("calendarIds", calendarIds);
@@ -268,6 +271,9 @@
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> is null.
+        /// </exception>
         public GetEventsRequestBuilder CalendarId(string calendarId)
         {
             Preconditions.NotNull("calendarId", calendarId);

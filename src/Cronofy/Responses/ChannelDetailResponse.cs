@@ -48,6 +48,7 @@
             if (this.Filters != null)
             {
                 filters.OnlyManaged = this.Filters.OnlyManaged;
+                filters.CalendarIds = this.Filters.CalendarIds;
             }
 
             return new Channel
@@ -72,6 +73,15 @@
             /// </value>
             [JsonProperty("only_managed")]
             public bool? OnlyManaged { get; set; }
+
+            /// <summary>
+            /// Gets or sets the calendar ID filters.
+            /// </summary>
+            /// <value>
+            /// The calendar ID filters.
+            /// </value>
+            [JsonProperty("calendar_ids")]
+            public string[] CalendarIds { get; set; }
         }
     }
 }

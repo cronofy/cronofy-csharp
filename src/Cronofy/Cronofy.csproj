@@ -94,6 +94,7 @@
     <Compile Include="Responses\ChannelsResponse.cs" />
     <Compile Include="Responses\ChannelDetailResponse.cs" />
     <Compile Include="CreateChannelBuilder.cs" />
+    <Compile Include="EnumerableUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

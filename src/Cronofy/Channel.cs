@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Class for representing a channel.
@@ -97,6 +98,14 @@
             /// </value>
             public bool? OnlyManaged { get; set; }
 
+            /// <summary>
+            /// Gets or sets the calendar IDs the channel is filtered to.
+            /// </summary>
+            /// <value>
+            /// The calendar IDs the channel is filtered to.
+            /// </value>
+            public IEnumerable<string> CalendarIds { get; set; }
+
             /// <inheritdoc/>
             public override int GetHashCode()
             {
@@ -132,16 +141,18 @@
             public bool Equals(ChannelFilters other)
             {
                 return other != null
-                    && this.OnlyManaged == other.OnlyManaged;
+                    && this.OnlyManaged == other.OnlyManaged
+                    && EnumerableUtils.NullTolerantSequenceEqual(this.CalendarIds, other.CalendarIds);
             }
 
             /// <inheritdoc/>
             public override string ToString()
             {
                 return string.Format(
-                    "<{0} OnlyManaged={1}>",
+                    "<{0} OnlyManaged={1}, CalendarIds={2}>",
                     this.GetType(),
-                    this.OnlyManaged);
+                    this.OnlyManaged,
+                    this.CalendarIds);
             }
         }
     }
