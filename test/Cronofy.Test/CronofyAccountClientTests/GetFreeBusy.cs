@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System;
 
 namespace Cronofy.Test.CronofyAccountClientTests
 {
@@ -131,40 +132,66 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetFreeBusyWithinDates()
         {
+            AssertParameter(
+                "from=2015-10-20&to=2015-10-30",
+                b => b.From(2015, 10, 20).To(2015, 10, 30));
+        }
+
+        [Test]
+        public void CanGetFreeBusyIncludingManagedEvents()
+        {
+            AssertParameter("include_managed=true", b => b.IncludeManaged(true));
+        }
+
+        [Test]
+        public void CanGetFreeBusyWithinMultipleCalendars()
+        {
+            var calendarIds = new List<string>
+            {
+                "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                "cal_U@y23bStTFV7AAAB_iWTeH8WOCDOIW@us5gRzww",
+            };
+
+            var expectedKeyValue =
+                Encode("calendar_ids[]", calendarIds[0]) + "&" +
+                Encode("calendar_ids[]", calendarIds[1]);
+
+            AssertParameter(
+                expectedKeyValue,
+                b => b.CalendarIds(calendarIds));
+
+            AssertParameter(
+                expectedKeyValue,
+                b => b.CalendarIds(calendarIds.ToArray()));
+        }
+
+        private void AssertParameter(string keyValue, Action<GetFreeBusyRequestBuilder> builderAction)
+        {
             http.Stub(
                 HttpGet
-                    .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true&from=2015-10-20&to=2015-10-30")
-                    .RequestHeader("Authorization", "Bearer " + accessToken)
-                    .ResponseCode(200)
-                    .ResponseBody(BasicResponseBody)
+                .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true&" + keyValue)
+                .RequestHeader("Authorization", "Bearer " + accessToken)
+                .ResponseCode(200)
+                .ResponseBody(BasicResponseBody)
             );
 
-            var builder = new GetFreeBusyRequestBuilder()
-                .From(2015, 10, 20)
-                .To(2015, 10, 30);
+            var builder = new GetFreeBusyRequestBuilder();
+
+            builderAction.Invoke(builder);
 
             var events = client.GetFreeBusy(builder);
 
             CollectionAssert.AreEqual(BasicResponseCollection, events);
         }
 
-        [Test]
-        public void CanGetFreeBusyIncludingManagedEvents()
+        private static string Encode(string value)
         {
-            http.Stub(
-                HttpGet
-                .Url("https://api.cronofy.com/v1/free_busy?tzid=Etc%2FUTC&localized_times=true&include_managed=true")
-                .RequestHeader("Authorization", "Bearer " + accessToken)
-                .ResponseCode(200)
-                .ResponseBody(BasicResponseBody)
-            );
+            return UrlBuilder.EncodeParameter(value);
+        }
 
-            var builder = new GetFreeBusyRequestBuilder()
-                .IncludeManaged(true);
-
-            var events = client.GetFreeBusy(builder);
-
-            CollectionAssert.AreEqual(BasicResponseCollection, events);
+        private static string Encode(string key, string value)
+        {
+            return Encode(key) + "=" + Encode(value);
         }
     }
 }

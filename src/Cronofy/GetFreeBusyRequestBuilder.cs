@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
     using Cronofy.Requests;
 
     /// <summary>
@@ -27,6 +28,11 @@
         /// The request's include managed flag.
         /// </summary>
         private bool? includeManaged;
+
+        /// <summary>
+        /// The request's calendar IDs.
+        /// </summary>
+        private IEnumerable<string> calendarIds;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -153,6 +159,41 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the calendar IDs for the request.
+        /// </summary>
+        /// <param name="calendarIds">
+        /// The calendar IDs to restrict the free-busy information to, must not
+        /// be null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder CalendarIds(IEnumerable<string> calendarIds)
+        {
+            Preconditions.NotNull("calendarIds", calendarIds);
+
+            this.calendarIds = calendarIds;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the calendar ID for the request.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The calendar ID to restrict the free-busy information to, must not
+        /// be null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder CalendarId(string calendarId)
+        {
+            Preconditions.NotNull("calendarId", calendarId);
+
+            return this.CalendarIds(new[] { calendarId });
+        }
+
         /// <inheritdoc/>
         public GetFreeBusyRequest Build()
         {
@@ -162,6 +203,7 @@
                 From = this.from,
                 To = this.to,
                 IncludeManaged = this.includeManaged,
+                CalendarIds = this.calendarIds,
             };
         }
     }
