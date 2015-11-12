@@ -21,7 +21,7 @@
         /// <value>
         /// The ID of the profile.
         /// </value>
-        public string ProfileId { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the profile.
@@ -31,10 +31,29 @@
         /// </value>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this profile is connected.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this profile is connected; otherwise, <c>false</c>.
+        /// </value>
+        public bool Connected { get; set; }
+
+        /// <summary>
+        /// Gets or sets the relink URL for the profile.
+        /// </summary>
+        /// <value>
+        /// The relink URL for the profile.
+        /// </value>
+        /// <remarks>
+        /// <c>null</c> unless <see cref="Connected"/> is false.
+        /// </remarks>
+        public string RelinkUrl { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return this.ProfileId.GetHashCode();
+            return this.Id.GetHashCode();
         }
 
         /// <inheritdoc/>
@@ -66,20 +85,24 @@
         public bool Equals(Profile other)
         {
             return other != null
-                && this.ProfileId == other.ProfileId
+                && this.Id == other.Id
                 && this.Name == other.Name
-                && this.ProviderName == other.ProviderName;
+                && this.ProviderName == other.ProviderName
+                && this.Connected == other.Connected
+                && this.RelinkUrl == other.RelinkUrl;
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format(
-                "<{0} ProviderName={1}, ProfileId={2}, Name={3}>",
+                "<{0} ProviderName={1}, Id={2}, Name={3}, Connected={4}, RelinkUrl={5}>",
                 this.GetType(),
                 this.ProviderName,
-                this.ProfileId,
-                this.Name);
+                this.Id,
+                this.Name,
+                this.Connected,
+                this.RelinkUrl);
         }
     }
 }

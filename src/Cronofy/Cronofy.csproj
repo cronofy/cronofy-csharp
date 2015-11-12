@@ -87,6 +87,7 @@
     <Compile Include="Requests\OAuthTokenRevocationRequest.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Responses\AccountResponse.cs" />
+    <Compile Include="Responses\ProfilesResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

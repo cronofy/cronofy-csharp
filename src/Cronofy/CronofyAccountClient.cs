@@ -18,6 +18,11 @@ namespace Cronofy
         /// The URL of the account endpoint.
         /// </summary>
         private const string AccountUrl = "https://api.cronofy.com/v1/account";
+
+        /// <summary>
+        /// The URL of the profiles endpoint.
+        /// </summary>
+        private const string ProfilesUrl = "https://api.cronofy.com/v1/profiles";
         
         /// <summary>
         /// The URL of the list calendars endpoint.
@@ -86,6 +91,20 @@ namespace Cronofy
             var response = this.HttpClient.GetJsonResponse<AccountResponse>(request);
 
             return response.ToAccount();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<Profile> GetProfiles()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = ProfilesUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetJsonResponse<ProfilesResponse>(request);
+
+            return response.Profiles.Select(p => p.ToProfile());
         }
 
         /// <inheritdoc/>

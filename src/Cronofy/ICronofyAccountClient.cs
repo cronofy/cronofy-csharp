@@ -22,6 +22,17 @@
         Account GetAccount();
 
         /// <summary>
+        /// Gets the profiles belonging to the account.
+        /// </summary>
+        /// <returns>
+        /// The account's <see cref="Profile"/>s.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<Profile> GetProfiles();
+
+        /// <summary>
         /// Gets the calendars belonging to the account.
         /// </summary>
         /// <returns>

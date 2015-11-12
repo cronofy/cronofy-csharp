@@ -70,7 +70,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
             CollectionAssert.AreEqual(
                 new List<Calendar> {
                     new Calendar {
-                        Profile = new Profile {
+                        Profile = new Calendar.ProfileSummary {
                             ProviderName = "google",
                             ProfileId = "pro_n23kjnwrw2",
                             Name = "example@cronofy.com",
@@ -81,7 +81,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = false,
                     },
                     new Calendar {
-                        Profile = new Profile {
+                        Profile = new Calendar.ProfileSummary {
                             ProviderName = "google",
                             ProfileId = "pro_n23kjnwrw2",
                             Name = "example@cronofy.com",
@@ -92,7 +92,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = true,
                     },
                     new Calendar {
-                        Profile = new Profile {
+                        Profile = new Calendar.ProfileSummary {
                             ProviderName = "apple",
                             ProfileId = "pro_n23kjnkopy",
                             Name = "example@cronofy.com",

@@ -56,6 +56,7 @@
     <Compile Include="CronofyAccountClientTests\GetFreeBusy.cs" />
     <Compile Include="CronofyOAuthClientTests\RevokeToken.cs" />
     <Compile Include="CronofyAccountClientTests\GetAccount.cs" />
+    <Compile Include="CronofyAccountClientTests\GetProfiles.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

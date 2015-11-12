@@ -95,7 +95,7 @@
             /// </returns>
             public Calendar ToCalendar()
             {
-                var profile = new Profile
+                var profile = new Calendar.ProfileSummary
                 {
                     ProviderName = this.ProviderName,
                     ProfileId = this.ProfileId,
