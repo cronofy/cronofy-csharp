@@ -61,6 +61,7 @@
     <Compile Include="CronofyAccountClientTests\Base.cs" />
     <Compile Include="CronofyAccountClientTests\GetChannels.cs" />
     <Compile Include="CronofyAccountClientTests\CloseChannel.cs" />
+    <Compile Include="PushNotificationTests\JsonParsing.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,5 +78,6 @@
     <Folder Include="EventTimeTests\" />
     <Folder Include="CronofyAccountClientTests\" />
     <Folder Include="CronofyOAuthClientTests\" />
+    <Folder Include="PushNotificationTests\" />
   </ItemGroup>
 </Project>
