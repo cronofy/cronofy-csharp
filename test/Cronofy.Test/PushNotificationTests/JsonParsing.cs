@@ -2,13 +2,28 @@
 using NUnit.Framework;
 using Cronofy.Requests;
 using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Text;
 
 namespace Cronofy.Test.PushNotificationTests
 {
     [TestFixture]
     public sealed class JsonParsing
     {
-        private static readonly PushNotificationRequest expectedVerification
+        private const string VerificationRequestBody = @"{
+    ""notification"": {
+        ""type"": ""verification""
+    },
+    ""channel"": {
+        ""channel_id"": ""chn_54cf7c7cb4ad4c1027000001"",
+        ""callback_url"": ""https://example.com/callback"",
+        ""filters"": {
+            ""calendar_ids"": [""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw""]
+        }
+    }
+}";
+        private static readonly PushNotificationRequest ExpectedVerification
             = new PushNotificationRequest
             {
                 Notification = new PushNotificationRequest.NotificationDetail
@@ -26,7 +41,21 @@ namespace Cronofy.Test.PushNotificationTests
                 }
             };
 
-        private static readonly PushNotificationRequest expectedChange
+        private const string ChangeRequestBody = @"{
+    ""notification"": {
+        ""type"": ""change"",
+        ""changes_since"": ""2015-11-13T10:39:12Z""
+    },
+    ""channel"": {
+        ""channel_id"": ""chn_54cf7c7cb4ad4c1027000001"",
+        ""callback_url"": ""https://example.com/callback"",
+        ""filters"": {
+            ""calendar_ids"": [""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw""]
+        }
+    }
+}";
+
+        private static readonly PushNotificationRequest ExpectedChange
             = new PushNotificationRequest
             {
                 Notification = new PushNotificationRequest.NotificationDetail
@@ -46,42 +75,41 @@ namespace Cronofy.Test.PushNotificationTests
             };
 
         [Test]
-        public void CanParseWithJsonNet()
+        public void CanParseVerificationWithJsonNet()
         {
-            const string verificationRequest = @"{
-    ""notification"": {
-        ""type"": ""verification""
-    },
-    ""channel"": {
-        ""channel_id"": ""chn_54cf7c7cb4ad4c1027000001"",
-        ""callback_url"": ""https://example.com/callback"",
-        ""filters"": {
-            ""calendar_ids"": [""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw""]
+            var actualVerification = JsonConvert.DeserializeObject<PushNotificationRequest>(VerificationRequestBody);
+            Assert.AreEqual(ExpectedVerification, actualVerification);
         }
-    }
-}";
 
-            var actualVerification = JsonConvert.DeserializeObject<PushNotificationRequest>(verificationRequest);
-
-            Assert.AreEqual(expectedVerification, actualVerification);
-
-            const string changeRequest = @"{
-    ""notification"": {
-        ""type"": ""change"",
-        ""changes_since"": ""2015-11-13T10:39:12Z""
-    },
-    ""channel"": {
-        ""channel_id"": ""chn_54cf7c7cb4ad4c1027000001"",
-        ""callback_url"": ""https://example.com/callback"",
-        ""filters"": {
-            ""calendar_ids"": [""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw""]
+        [Test]
+        public void CanParseChangeWithJsonNet()
+        {
+            var actualChange = JsonConvert.DeserializeObject<PushNotificationRequest>(ChangeRequestBody);
+            Assert.AreEqual(ExpectedChange, actualChange);
         }
-    }
-}";
 
-            var actualChange = JsonConvert.DeserializeObject<PushNotificationRequest>(changeRequest);
+        [Test]
+        public void CanParseVerificationWithCoreSerialization()
+        {
+            var serializer = new DataContractJsonSerializer(typeof(PushNotificationRequest));
 
-            Assert.AreEqual(expectedChange, actualChange);
+            var verificationBytes = Encoding.UTF8.GetBytes(VerificationRequestBody);
+            var verificationStream = new MemoryStream(verificationBytes);
+
+            var actualVerification = (PushNotificationRequest)serializer.ReadObject(verificationStream);
+            Assert.AreEqual(ExpectedVerification, actualVerification);
+        }
+
+        [Test]
+        public void CanParseChangeWithCoreSerialization()
+        {
+            var serializer = new DataContractJsonSerializer(typeof(PushNotificationRequest));
+
+            var changeBytes = Encoding.UTF8.GetBytes(ChangeRequestBody);
+            var changeStream = new MemoryStream(changeBytes);
+
+            var actualChange = (PushNotificationRequest)serializer.ReadObject(changeStream);
+            Assert.AreEqual(ExpectedChange, actualChange);
         }
     }
 }

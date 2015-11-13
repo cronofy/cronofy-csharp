@@ -1,11 +1,14 @@
 ﻿namespace Cronofy.Requests
 {
     using System;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
     /// <summary>
     /// Class for the deserialization of push notification requests.
     /// </summary>
+    [DataContract]
     public sealed class PushNotificationRequest
     {
         /// <summary>
@@ -15,6 +18,7 @@
         /// The details of the notification.
         /// </value>
         [JsonProperty("notification")]
+        [DataMember(Name = "notification")]
         public NotificationDetail Notification { get; set; }
 
         /// <summary>
@@ -24,6 +28,7 @@
         /// The details of the channel.
         /// </value>
         [JsonProperty("channel")]
+        [DataMember(Name = "channel")]
         public ChannelDetail Channel { get; set; }
 
         /// <inheritdoc/>
@@ -79,6 +84,7 @@
         /// <summary>
         /// Class for the deserialization of push notification details.
         /// </summary>
+        [DataContract]
         public sealed class NotificationDetail
         {
             /// <summary>
@@ -88,6 +94,7 @@
             /// The type of the notification.
             /// </value>
             [JsonProperty("type")]
+            [DataMember(Name = "type")]
             public string Type { get; set; }
 
             /// <summary>
@@ -96,8 +103,45 @@
             /// <value>
             /// The time that there have been changes since.
             /// </value>
-            [JsonProperty("changes_since")]
             public DateTime? ChangesSince { get; set; }
+
+            /// <summary>
+            /// Gets or sets the changes since property as a string.
+            /// </summary>
+            /// <value>
+            /// The changes since property as a string.
+            /// </value>
+            /// <remarks>
+            /// Only present to support deserialization using
+            /// <see cref="DataContractAttribute"/>s.
+            /// </remarks>
+            [DataMember(Name = "changes_since")]
+            private string ChangesSinceDeserializer
+            {
+                get
+                {
+                    if (this.ChangesSince.HasValue)
+                    {
+                        return this.ChangesSince.Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                set
+                {
+                    this.ChangesSince = null;
+
+                    DateTime dtoResult;
+
+                    if (value != null && DateTime.TryParseExact(value, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out dtoResult))
+                    {
+                        this.ChangesSince = dtoResult;
+                    }
+                }
+            }
 
             /// <inheritdoc/>
             public override int GetHashCode()
@@ -153,6 +197,7 @@
         /// <summary>
         /// Class for the deserialization of channel details.
         /// </summary>
+        [DataContract]
         public sealed class ChannelDetail
         {
             /// <summary>
@@ -162,6 +207,7 @@
             /// The ID of the channel.
             /// </value>
             [JsonProperty("channel_id")]
+            [DataMember(Name = "channel_id")]
             public string Id { get; set; }
 
             /// <summary>
@@ -171,6 +217,7 @@
             /// The callback URL of the channel.
             /// </value>
             [JsonProperty("callback_url")]
+            [DataMember(Name = "callback_url")]
             public string CallbackUrl { get; set; }
 
             /// <summary>
@@ -180,6 +227,7 @@
             /// The filters for the channel.
             /// </value>
             [JsonProperty("filters")]
+            [DataMember(Name = "filters")]
             public ChannelFilters Filters { get; set; }
 
             /// <inheritdoc/>
@@ -237,6 +285,7 @@
             /// Class for the deserialization of the filtering options of a channel
             /// response.
             /// </summary>
+            [DataContract]
             public sealed class ChannelFilters
             {
                 /// <summary>
@@ -246,6 +295,7 @@
                 /// The only managed flag.
                 /// </value>
                 [JsonProperty("only_managed")]
+                [DataMember(Name = "only_managed")]
                 public bool? OnlyManaged { get; set; }
 
                 /// <summary>
@@ -255,6 +305,7 @@
                 /// The calendar ID filters.
                 /// </value>
                 [JsonProperty("calendar_ids")]
+                [DataMember(Name = "calendar_ids")]
                 public string[] CalendarIds { get; set; }
 
                 /// <inheritdoc/>
