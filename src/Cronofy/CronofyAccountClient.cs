@@ -132,6 +132,31 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public Calendar CreateCalendar(string profileId, string name)
+        {
+            Preconditions.NotEmpty("profileId", profileId);
+            Preconditions.NotEmpty("name", name);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = CalendarsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var calendarRequest = new CreateCalendarRequest
+            {
+                ProfileId = profileId,
+                Name = name,
+            };
+
+            request.SetJsonBody(calendarRequest);
+
+            var response = this.HttpClient.GetJsonResponse<CreateCalendarResponse>(request);
+
+            return response.ToCalendar();
+        }
+
+        /// <inheritdoc/>
         public IEnumerable<Event> GetEvents()
         {
             var builder = new GetEventsRequestBuilder();

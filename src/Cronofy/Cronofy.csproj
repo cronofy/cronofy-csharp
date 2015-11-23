@@ -97,6 +97,8 @@
     <Compile Include="CreateChannelBuilder.cs" />
     <Compile Include="EnumerableUtils.cs" />
     <Compile Include="Requests\PushNotificationRequest.cs" />
+    <Compile Include="Requests\CreateCalendarRequest.cs" />
+    <Compile Include="Responses\CreateCalendarResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

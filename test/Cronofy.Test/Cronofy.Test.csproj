@@ -65,6 +65,7 @@
     <Compile Include="CronofyAccountClientTests\GetChannels.cs" />
     <Compile Include="CronofyAccountClientTests\CloseChannel.cs" />
     <Compile Include="PushNotificationTests\JsonParsing.cs" />
+    <Compile Include="CronofyAccountClientTests\CreateCalendar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
