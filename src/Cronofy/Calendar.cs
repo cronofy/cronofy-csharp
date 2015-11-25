@@ -47,6 +47,17 @@
         /// </value>
         public bool Deleted { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this
+        /// <see cref="Cronofy.Calendar"/> is the primary calendar for the
+        /// profile.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the primary calendar for the profile; otherwise,
+        /// <c>false</c>.
+        /// </value>
+        public bool Primary { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -86,6 +97,7 @@
                 && this.Name == other.Name
                 && this.ReadOnly == other.ReadOnly
                 && this.Deleted == other.Deleted
+                && this.Primary == other.Primary
                 && object.Equals(this.Profile, other.Profile);
         }
 
@@ -93,13 +105,14 @@
         public override string ToString()
         {
             return string.Format(
-                "<{0} Profile={1}, CalendarId={2}, Name={3}, ReadOnly={4}, Deleted={5}>",
+                "<{0} Profile={1}, CalendarId={2}, Name={3}, ReadOnly={4}, Deleted={5}, Primary={6}>",
                 this.GetType(),
                 this.Profile,
                 this.CalendarId,
                 this.Name,
                 this.ReadOnly,
-                this.Deleted);
+                this.Deleted,
+                this.Primary);
         }
 
         /// <summary>

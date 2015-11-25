@@ -25,7 +25,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""calendar_id"": ""cal_n23kjnwrw2_jsdfjksn234"",
       ""calendar_name"": ""Home"",
       ""calendar_readonly"": false,
-      ""calendar_deleted"": false
+      ""calendar_deleted"": false,
+      ""calendar_primary"": true
     },
     {
       ""provider_name"": ""google"",
@@ -34,7 +35,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""calendar_id"": ""cal_n23kjnwrw2_n1k323nkj23"",
       ""calendar_name"": ""Work"",
       ""calendar_readonly"": true,
-      ""calendar_deleted"": true
+      ""calendar_deleted"": true,
+      ""calendar_primary"": false
     },
     {
       ""provider_name"": ""apple"",
@@ -43,7 +45,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""calendar_id"": ""cal_n23kjnkopy_3nkj23wejk1"",
       ""calendar_name"": ""Bank Holidays"",
       ""calendar_readonly"": true,
-      ""calendar_deleted"": false
+      ""calendar_deleted"": false,
+      ""calendar_primary"": false
     }
   ]
 }")
@@ -63,6 +66,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Name = "Home",
                         ReadOnly = false,
                         Deleted = false,
+                        Primary = true,
                     },
                     new Calendar {
                         Profile = new Calendar.ProfileSummary {
@@ -74,6 +78,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Name = "Work",
                         ReadOnly = true,
                         Deleted = true,
+                        Primary = false,
                     },
                     new Calendar {
                         Profile = new Calendar.ProfileSummary {
@@ -85,6 +90,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Name = "Bank Holidays",
                         ReadOnly = true,
                         Deleted = false,
+                        Primary = false,
                     },
                 },
                 calendars.ToList());

@@ -88,6 +88,17 @@
             public bool CalendarDeleted { get; set; }
 
             /// <summary>
+            /// Gets or sets a value indicating whether this calendar is the
+            /// primary one for the profile.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the primary calendar for the profile; otherwise,
+            /// <c>false</c>.
+            /// </value>
+            [JsonProperty("calendar_primary")]
+            public bool CalendarPrimary { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Calendar"/>.
             /// </summary>
             /// <returns>
@@ -109,6 +120,7 @@
                     Name = this.CalendarName,
                     ReadOnly = this.CalendarReadonly,
                     Deleted = this.CalendarDeleted,
+                    Primary = this.CalendarPrimary,
                 };
             }
         }
