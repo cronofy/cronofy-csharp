@@ -66,6 +66,8 @@
     <Compile Include="CronofyAccountClientTests\CloseChannel.cs" />
     <Compile Include="PushNotificationTests\JsonParsing.cs" />
     <Compile Include="CronofyAccountClientTests\CreateCalendar.cs" />
+    <Compile Include="ExtremeTimesTests\JsonParsing.cs" />
+    <Compile Include="ExtremeTimesTests\TimeHolder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -83,5 +85,6 @@
     <Folder Include="CronofyAccountClientTests\" />
     <Folder Include="CronofyOAuthClientTests\" />
     <Folder Include="PushNotificationTests\" />
+    <Folder Include="ExtremeTimesTests\" />
   </ItemGroup>
 </Project>

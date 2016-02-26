@@ -99,6 +99,7 @@
     <Compile Include="Requests\CreateCalendarRequest.cs" />
     <Compile Include="Responses\CreateCalendarResponse.cs" />
     <Compile Include="EventTimeConverter.cs" />
+    <Compile Include="TimestampConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

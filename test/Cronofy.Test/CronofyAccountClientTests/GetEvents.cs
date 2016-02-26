@@ -95,6 +95,78 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
 
         [Test]
+        public void CanGetEventWithOldAuditTimes()
+        {
+            Http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
+  ""pages"": {
+    ""current"": 1,
+    ""total"": 1
+  },
+  ""events"": [
+    {
+      ""calendar_id"": ""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw"",
+      ""event_uid"": ""evt_external_54008b1a4a41730f8d5c6037"",
+      ""summary"": ""Company Retreat"",
+      ""description"": ""Escape to the country"",
+      ""start"": ""2014-09-06"",
+      ""end"": ""2014-09-08"",
+      ""deleted"": false,
+      ""participation_status"": ""needs_action"",
+      ""transparency"": ""opaque"",
+      ""event_status"": ""confirmed"",
+      ""categories"": [],
+      ""attendees"": [
+        {
+          ""email"": ""example@cronofy.com"",
+          ""display_name"": ""Example Person"",
+          ""status"": ""needs_action""
+        }
+      ],
+      ""created"": ""0000-12-29T00:00:00Z"",
+      ""updated"": ""0000-12-29T00:00:00Z""
+    }
+  ]
+}")
+        );
+
+            var events = Client.GetEvents();
+
+            CollectionAssert.AreEqual(
+                new List<Event> {
+                new Event {
+                    CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                    EventUid = "evt_external_54008b1a4a41730f8d5c6037",
+                    Summary = "Company Retreat",
+                    Description = "Escape to the country",
+                    Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
+                    End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
+                    Location = null,
+                    Deleted = false,
+                    ParticipationStatus = AttendeeStatus.NeedsAction,
+                    Transparency = Transparency.Opaque,
+                    EventStatus = EventStatus.Confirmed,
+                    Categories = new string[] {},
+                    Created = DateTime.MinValue,
+                    Updated = DateTime.MinValue,
+                    Attendees = new[] {
+                        new Attendee {
+                            Email = "example@cronofy.com",
+                            DisplayName = "Example Person",
+                            Status = AttendeeStatus.NeedsAction,
+                        }
+                    },
+                }
+            },
+                events);
+        }
+
+        [Test]
         public void CanGetPagedEvents()
         {
             Http.Stub(
