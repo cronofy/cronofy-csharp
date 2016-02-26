@@ -169,6 +169,7 @@
             /// The time the event was created.
             /// </value>
             [JsonProperty("created")]
+            [JsonConverter(typeof(TimestampConverter))]
             public DateTime Created { get; set; }
 
             /// <summary>
@@ -178,6 +179,7 @@
             /// The time the event was last updated.
             /// </value>
             [JsonProperty("updated")]
+            [JsonConverter(typeof(TimestampConverter))]
             public DateTime Updated { get; set; }
 
             /// <summary>
