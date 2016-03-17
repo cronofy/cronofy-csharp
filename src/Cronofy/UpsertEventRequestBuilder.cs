@@ -28,12 +28,22 @@
         /// <summary>
         /// The start time of the event.
         /// </summary>
-        private DateTimeOffset startTime;
+        private DateTimeOffset? startTime;
+
+        /// <summary>
+        /// The start date of the event.
+        /// </summary>
+        private Date? startDate;
 
         /// <summary>
         /// The end time of the event.
         /// </summary>
-        private DateTimeOffset endTime;
+        private DateTimeOffset? endTime;
+
+        /// <summary>
+        /// The end date of the event.
+        /// </summary>
+        private Date? endDate;
 
         /// <summary>
         /// The description of the event's location.
@@ -127,6 +137,7 @@
         public UpsertEventRequestBuilder Start(DateTimeOffset start)
         {
             this.startTime = start;
+            this.startDate = null;
             return this;
         }
 
@@ -152,12 +163,52 @@
         /// A reference to the modified builder.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown if the provided parameters do no generate a valid date.
+        /// Thrown if the provided parameters do no generate a valid time.
         /// </exception>
         public UpsertEventRequestBuilder Start(int year, int month, int day, int hour, int minute)
         {
-            var dateTimeOffset = new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0));
+            var dateTimeOffset = new DateTimeOffset(year, month, day, hour, minute, 0, TimeSpan.Zero);
             return this.Start(dateTimeOffset);
+        }
+
+        /// <summary>
+        /// Sets the start time of the event.
+        /// </summary>
+        /// <param name="start">
+        /// The start time of the event.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder Start(Date start)
+        {
+            this.startDate = start;
+            this.startTime = null;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the start time of the event.
+        /// </summary>
+        /// <param name="year">
+        /// The year of the start time.
+        /// </param>
+        /// <param name="month">
+        /// The month of the start time.
+        /// </param>
+        /// <param name="day">
+        /// The day of the start time.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the provided parameters do no generate a valid date.
+        /// </exception>
+        public UpsertEventRequestBuilder Start(int year, int month, int day)
+        {
+            var date = new Date(year, month, day);
+            return this.Start(date);
         }
 
         /// <summary>
@@ -172,6 +223,7 @@
         public UpsertEventRequestBuilder End(DateTimeOffset end)
         {
             this.endTime = end;
+            this.endDate = null;
             return this;
         }
 
@@ -197,12 +249,52 @@
         /// A reference to the modified builder.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown if the provided parameters do no generate a valid date.
+        /// Thrown if the provided parameters do no generate a valid time.
         /// </exception>
         public UpsertEventRequestBuilder End(int year, int month, int day, int hour, int minute)
         {
-            var dateTimeOffset = new DateTimeOffset(year, month, day, hour, minute, 0, new TimeSpan(0));
+            var dateTimeOffset = new DateTimeOffset(year, month, day, hour, minute, 0, TimeSpan.Zero);
             return this.End(dateTimeOffset);
+        }
+
+        /// <summary>
+        /// Sets the end time of the event.
+        /// </summary>
+        /// <param name="end">
+        /// The end time of the event.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder End(Date end)
+        {
+            this.endDate = end;
+            this.endTime = null;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the end time of the event.
+        /// </summary>
+        /// <param name="year">
+        /// The year of the end time.
+        /// </param>
+        /// <param name="month">
+        /// The month of the end time.
+        /// </param>
+        /// <param name="day">
+        /// The day of the end time.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the provided parameters do no generate a valid date.
+        /// </exception>
+        public UpsertEventRequestBuilder End(int year, int month, int day)
+        {
+            var date = new Date(year, month, day);
+            return this.End(date);
         }
 
         /// <summary>
@@ -293,8 +385,8 @@
                 EventId = this.eventId,
                 Summary = this.summary,
                 Description = this.description,
-                Start = new EventTime(this.startTime.ToUniversalTime(), this.startTimeZoneId),
-                End = new EventTime(this.endTime.ToUniversalTime(), this.endTimeZoneId),
+                Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
+                End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)
@@ -306,6 +398,46 @@
             }
 
             return request;
+        }
+
+        /// <summary>
+        /// Gets an <see cref="EventTime"/> from the two nullable values.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="EventTime"/>.
+        /// </returns>
+        /// <param name="propertyName">
+        /// The name of the property the <see cref="EventTime"/> will be
+        /// assigned to. Used to generate more meaningful exception messages.
+        /// </param>
+        /// <param name="time">
+        /// The time to create the <see cref="EventTime"/> from when not
+        /// <code>null</code>.
+        /// </param>
+        /// <param name="date">
+        /// The date to create the <see cref="EventTime"/> from when not
+        /// <code>null</code>.
+        /// </param>
+        /// <param name="timeZoneId">
+        /// Time zone identifier for the <see cref="EventTime"/>.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Raised when both <paramref name="time"/> and <paramref name="date"/>
+        /// are <code>null</code>.s
+        /// </exception>
+        private static EventTime GetEventTime(string propertyName, DateTimeOffset? time, Date? date, string timeZoneId)
+        {
+            if (time.HasValue)
+            {
+                return new EventTime(time.Value.ToUniversalTime(), timeZoneId);
+            }
+
+            if (date.HasValue)
+            {
+                return new EventTime(date.Value, timeZoneId);
+            }
+
+            throw new ArgumentException(string.Format("{0} is not specified", propertyName));
         }
     }
 }
