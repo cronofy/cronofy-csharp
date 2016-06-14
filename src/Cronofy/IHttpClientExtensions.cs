@@ -32,15 +32,22 @@
         /// </typeparam>
         public static T GetJsonResponse<T>(this IHttpClient httpClient, HttpRequest request)
         {
-            var response = httpClient.GetResponse(request);
-
-            if (response.Code != 200)
-            {
-                // TODO More useful exceptions for validation errors
-                throw new CronofyResponseException("Request failed", response);
-            }
+            var response = httpClient.GetValidResponse(request);
 
             return JsonConvert.DeserializeObject<T>(response.Body, DefaultSerializerSettings);
+        }
+
+        public static HttpResponse GetValidResponse(this IHttpClient httpClient, HttpRequest request)
+        {
+            var response = httpClient.GetResponse(request);
+
+            if (response.Code / 100 == 2)
+            {
+                return response;
+            }
+
+            // TODO Specific exception for validation errors
+            throw new CronofyResponseException("Request failed", response);
         }
     }
 }
