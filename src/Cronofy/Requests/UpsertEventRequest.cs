@@ -1,5 +1,6 @@
 ﻿namespace Cronofy.Requests
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -64,6 +65,15 @@
         public RequestLocation Location { get; set; }
 
         /// <summary>
+        /// Gets or sets the reminders of the event.
+        /// </summary>
+        /// <value>
+        /// The reminders of the event.
+        /// </value>
+        [JsonProperty("reminders")]
+        public IEnumerable<RequestReminder> Reminders { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the location for an upsert event
         /// request.
         /// </summary>
@@ -77,6 +87,22 @@
             /// </value>
             [JsonProperty("description")]
             public string Description { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of the reminders for an upsert event
+        /// request.
+        /// </summary>
+        public sealed class RequestReminder
+        {
+            /// <summary>
+            /// Gets or sets the minutes offset of the reminder.
+            /// </summary>
+            /// <value>
+            /// The minutes offset of the reminder.
+            /// </value>
+            [JsonProperty("minutes")]
+            public int Minutes { get; set; }
         }
     }
 }
