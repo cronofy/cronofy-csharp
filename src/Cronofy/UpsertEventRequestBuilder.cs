@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Linq;
     using Cronofy.Requests;
 
     /// <summary>
@@ -59,6 +60,11 @@
         /// The time zone ID of the event's end time.
         /// </summary>
         private string endTimeZoneId;
+
+        /// <summary>
+        /// The reminders for the event.
+        /// </summary>
+        private int[] reminders;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -336,6 +342,32 @@
         }
 
         /// <summary>
+        /// Sets the reminders for the event.
+        /// </summary>
+        /// <param name="reminders">
+        /// The times that reminders should be triggered, must not be
+        /// <code>null</code>.
+        /// <para>
+        /// Each value is a number of minutes before the event start that a
+        /// reminder should be triggered.
+        /// </para>
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="reminders"/> is null.
+        /// </exception>
+        public UpsertEventRequestBuilder Reminders(int[] reminders)
+        {
+            Preconditions.NotNull("reminders", reminders);
+
+            this.reminders = reminders;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the time zone identifier for the start time of the event.
         /// </summary>
         /// <param name="timeZoneId">
@@ -397,6 +429,11 @@
                 };
             }
 
+            if (this.reminders != null && this.reminders.Length > 0)
+            {
+                request.Reminders = this.reminders.Select(minutes => new UpsertEventRequest.RequestReminder { Minutes = minutes });
+            }
+
             return request;
         }
 
@@ -423,7 +460,7 @@
         /// </param>
         /// <exception cref="ArgumentException">
         /// Raised when both <paramref name="time"/> and <paramref name="date"/>
-        /// are <code>null</code>.s
+        /// are <code>null</code>.
         /// </exception>
         private static EventTime GetEventTime(string propertyName, DateTimeOffset? time, Date? date, string timeZoneId)
         {
