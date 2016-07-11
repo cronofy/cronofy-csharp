@@ -5,11 +5,12 @@ root = true
 
 # Defaults
 [*]
-charset = utf-8-bom
+charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 indent_style = space
 
 # C# files
-[*.cs]
+[*.cs,*.csproj,*.sln]
+charset = utf-8-bom
 indent_size = 4
