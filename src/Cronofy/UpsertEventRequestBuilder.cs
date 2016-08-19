@@ -115,10 +115,10 @@
         /// </exception>
         public UpsertEventRequestBuilder EventUid(string eventUid)
         {
-          Preconditions.NotEmpty("eventUid", eventUid);
+            Preconditions.NotEmpty("eventUid", eventUid);
 
-          this.eventUid = eventUid;
-          return this;
+            this.eventUid = eventUid;
+            return this;
         }
 
         /// <summary>
@@ -452,10 +452,6 @@
             else if (string.IsNullOrEmpty(this.eventUid) == false)
             {
                 request.EventUid = this.eventUid;
-            }
-            else
-            {
-                throw new ArgumentException("Must supply either eventId or eventUid");
             }
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)
