@@ -168,7 +168,6 @@ namespace Cronofy
         /// </value>
         public EventOptions Options { get; set; }
 
-
         /// <inheritdoc/>
         public override int GetHashCode()
         {
