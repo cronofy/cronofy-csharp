@@ -293,28 +293,34 @@
             internal sealed class EventOptions
             {
                 /// <summary>
-                /// Gets or sets a value indicating whether this event can be deleted
+                /// Gets or sets a value indicating whether this event can be
+                /// deleted.
                 /// </summary>
                 /// <value>
-                /// <c>true</c> if the event can be deleted; otherwise, <c>false</c>.
+                /// <c>true</c> if the event can be deleted; otherwise,
+                /// <c>false</c>.
                 /// </value>
                 [JsonProperty("delete")]
                 public bool Delete { get; set; }
 
                 /// <summary>
-                /// Gets or sets a value indicating whether this event can be updated
+                /// Gets or sets a value indicating whether this event can be
+                /// updated.                
                 /// </summary>
                 /// <value>
-                /// <c>true</c> if the event can be updated; otherwise, <c>false</c>.
+                /// <c>true</c> if the event can be updated; otherwise,
+                /// <c>false</c>.
                 /// </value>
                 [JsonProperty("update")]
                 public bool Update { get; set; }
 
                 /// <summary>
-                /// Converts the response into a <see cref="Cronofy.EventOptions"/>.
+                /// Converts the response into a
+                /// <see cref="Cronofy.EventOptions"/>.
                 /// </summary>
                 /// <returns>
-                /// A <see cref="Cronofy.EventOptions"/> based upon the response.
+                /// A <see cref="Cronofy.EventOptions"/> based upon the
+                /// response.
                 /// </returns>
                 public Cronofy.EventOptions ToOptions()
                 {

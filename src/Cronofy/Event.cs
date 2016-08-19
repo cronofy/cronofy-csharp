@@ -213,7 +213,7 @@ namespace Cronofy
                 && this.ParticipationStatus == other.ParticipationStatus
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
-				&& this.Recurring == other.Recurring
+                && this.Recurring == other.Recurring
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)

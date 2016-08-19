@@ -7,7 +7,7 @@
     public sealed class EventOptions
     {
         /// <summary>
-        /// Gets or sets a value indicating whether this event can be deleted
+        /// Gets or sets a value indicating whether this event can be deleted.
         /// </summary>
         /// <value>
         /// <c>true</c> if the event can be deleted; otherwise, <c>false</c>.
@@ -15,7 +15,7 @@
         public bool Delete { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this event can be updated
+        /// Gets or sets a value indicating whether this event can be updated.
         /// </summary>
         /// <value>
         /// <c>true</c> if the event can be updated; otherwise, <c>false</c>.
@@ -29,12 +29,13 @@
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
 
-            return obj is EventOptions && Equals((EventOptions) obj);
+            return obj is EventOptions && this.Equals((EventOptions)obj);
         }
 
         /// <inheritdoc/>
@@ -42,13 +43,26 @@
         {
             unchecked
             {
-                return (Delete.GetHashCode()*397) ^ Update.GetHashCode();
+                return (this.Delete.GetHashCode() * 397) ^ this.Update.GetHashCode();
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Cronofy.EventOptions"/>
+        /// is equal to the current <see cref="Cronofy.EventOptions"/>.
+        /// </summary>
+        /// <param name="other">
+        /// The <see cref="Cronofy.EventOptions"/> to compare with the current
+        /// <see cref="Cronofy.EventOptions"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="Cronofy.EventOptions"/> is
+        /// equal to the current <see cref="Cronofy.EventOptions"/>; otherwise,
+        /// <c>false</c>.
+        /// </returns>
         private bool Equals(EventOptions other)
         {
-            return Delete == other.Delete && Update == other.Update;
+            return this.Delete == other.Delete && this.Update == other.Update;
         }
     }
 }
