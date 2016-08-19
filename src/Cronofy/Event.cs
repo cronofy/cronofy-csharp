@@ -213,7 +213,7 @@ namespace Cronofy
                 && this.ParticipationStatus == other.ParticipationStatus
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
-            	&& this.Recurring == other.Recurring
+				&& this.Recurring == other.Recurring
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
@@ -221,12 +221,11 @@ namespace Cronofy
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Categories, other.Categories);
         }
 
-
         /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format(
-                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7} Recurring={8}, Attendees={9}>",
+                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}>",
                 this.GetType(),
                 this.CalendarId,
                 this.EventId,
