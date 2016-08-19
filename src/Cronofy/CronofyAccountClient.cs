@@ -55,6 +55,11 @@ namespace Cronofy
         private const string ChannelUrlFormat = "https://api.cronofy.com/v1/channels/{0}";
 
         /// <summary>
+        /// The URL format for the elevated permissions endpoint.
+        /// </summary>
+        private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
+
+        /// <summary>
         /// The access token for the OAuth authorization for the account.
         /// </summary>
         private readonly string accessToken;
@@ -323,6 +328,32 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
+        }
+
+        /// <inheritdoc/>
+        public ElevatedPermissions ElevatedPermissions(ElevatedPermissionsBuilder permissionBuilder)
+        {
+            Preconditions.NotNull("permissionBuilder", permissionBuilder);
+
+            var request = permissionBuilder.Build();
+
+            return this.ElevatedPermissions(request);
+        }
+
+        /// <inheritdoc/>
+        public ElevatedPermissions ElevatedPermissions(ElevatedPermissionsRequest permissionsRequest)
+        {
+            Preconditions.NotNull("permissionsRequesr", permissionsRequest);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = PermissionsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+            request.SetJsonBody(permissionsRequest);
+
+            var response = this.HttpClient.GetJsonResponse<ElevatedPermissionsResponse>(request);
+            return response.ToElevatedPermissions();
         }
 
         /// <inheritdoc/>
