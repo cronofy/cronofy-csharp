@@ -67,6 +67,11 @@
         private int[] reminders;
 
         /// <summary>
+        /// The OAuth application's ID for the external event.
+        /// </summary>
+        private string eventUid;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -94,6 +99,26 @@
 
             this.eventId = eventId;
             return this;
+        }
+
+        /// <summary>
+        /// Sets the OAuth application's ID for an external event.
+        /// </summary>
+        /// <param name="eventUid">
+        /// The OAuth application's ID for an external event, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="eventUid"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder EventUid(string eventUid)
+        {
+          Preconditions.NotEmpty("eventUid", eventUid);
+
+          this.eventUid = eventUid;
+          return this;
         }
 
         /// <summary>
@@ -414,12 +439,24 @@
         {
             var request = new UpsertEventRequest
             {
-                EventId = this.eventId,
                 Summary = this.summary,
                 Description = this.description,
                 Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
             };
+
+            if (string.IsNullOrEmpty(this.eventId) == false)
+            {
+                request.EventId = this.eventId;
+            }
+            else if (string.IsNullOrEmpty(this.eventUid) == false)
+            {
+                request.EventUid = this.eventUid;
+            }
+            else
+            {
+                throw new ArgumentException("Must supply either eventId or eventUid");
+            }
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)
             {

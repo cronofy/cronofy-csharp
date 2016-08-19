@@ -127,6 +127,17 @@
             public bool Deleted { get; set; }
 
             /// <summary>
+            /// Gets or sets a value indicating whether this event is a
+            /// recurring event.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the event is a recurring event; otherwise,
+            /// <c>false</c>.
+            /// </value>
+            [JsonProperty("recurring")]
+            public bool Recurring { get; set; }
+
+            /// <summary>
             /// Gets or sets the account's participation status.
             /// </summary>
             /// <value>
@@ -192,6 +203,15 @@
             public AttendeeResponse[] Attendees { get; set; }
 
             /// <summary>
+            /// Gets or sets the permissable options for this event.
+            /// </summary>
+            /// <value>
+            /// The event's options.
+            /// </value>
+            [JsonProperty("options")]
+            public EventOptions Options { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Event"/>.
             /// </summary>
             /// <returns>
@@ -215,6 +235,7 @@
                     Categories = this.Categories,
                     Created = this.Created,
                     Updated = this.Updated,
+                    Recurring = this.Recurring
                 };
 
                 if (this.Location != null)
@@ -225,6 +246,11 @@
                 if (this.Attendees != null)
                 {
                     evt.Attendees = this.Attendees.Select(a => a.ToAttendee()).ToArray();
+                }
+
+                if (this.Options != null)
+                {
+                    evt.Options = this.Options.ToOptions();
                 }
 
                 return evt;
@@ -256,6 +282,46 @@
                     return new Location
                     {
                         Description = this.Description,
+                    };
+                }
+            }
+
+            /// <summary>
+            /// Class for the deserialization of the options for a read event
+            /// response.
+            /// </summary>
+            internal sealed class EventOptions
+            {
+                /// <summary>
+                /// Gets or sets a value indicating whether this event can be deleted
+                /// </summary>
+                /// <value>
+                /// <c>true</c> if the event can be deleted; otherwise, <c>false</c>.
+                /// </value>
+                [JsonProperty("delete")]
+                public bool Delete { get; set; }
+
+                /// <summary>
+                /// Gets or sets a value indicating whether this event can be updated
+                /// </summary>
+                /// <value>
+                /// <c>true</c> if the event can be updated; otherwise, <c>false</c>.
+                /// </value>
+                [JsonProperty("update")]
+                public bool Update { get; set; }
+
+                /// <summary>
+                /// Converts the response into a <see cref="Cronofy.EventOptions"/>.
+                /// </summary>
+                /// <returns>
+                /// A <see cref="Cronofy.EventOptions"/> based upon the response.
+                /// </returns>
+                public Cronofy.EventOptions ToOptions()
+                {
+                    return new Cronofy.EventOptions
+                    {
+                        Delete = this.Delete,
+                        Update = this.Update
                     };
                 }
             }
