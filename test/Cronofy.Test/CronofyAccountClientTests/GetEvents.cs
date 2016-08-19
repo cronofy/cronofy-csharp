@@ -59,10 +59,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ],
       ""created"": ""2014-09-01T08:00:01Z"",
       ""updated"": ""2014-09-01T09:24:16Z"",
-	  ""options"": {
-		""delete"": true,
-		""update"": true
-	  }
+      ""options"": {
+        ""delete"": true,
+        ""update"": true
+      }
     }
   ]
 }")
