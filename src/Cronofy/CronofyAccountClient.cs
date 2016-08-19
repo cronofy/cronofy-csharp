@@ -302,6 +302,30 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public void DeleteExternalEvent(string calendarId, string eventUid)
+        {
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotEmpty("eventUid", eventUid);
+
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = string.Format(ManagedEventUrlFormat, calendarId);
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var requestBody = new { event_uid = eventUid };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202)
+            {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
+        }
+
+        /// <inheritdoc/>
         public Channel CreateChannel(string callbackUrl)
         {
             Preconditions.NotEmpty("callbackUrl", callbackUrl);

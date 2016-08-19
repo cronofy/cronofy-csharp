@@ -227,6 +227,28 @@
         void DeleteEvent(string calendarId, string eventId);
 
         /// <summary>
+        /// Deletes an external event from the account's calendars.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The ID of the calendar the event should be upserted to, must not be
+        /// empty.
+        /// </param>
+        /// <param name="eventUid">
+        /// The ID of the external event to delete, must not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> or
+        /// <paramref name="eventUid"/> are empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        void DeleteExternalEvent(string calendarId, string eventUid);
+
+        /// <summary>
         /// Creates a notification channel.
         /// </summary>
         /// <param name="callbackUrl">

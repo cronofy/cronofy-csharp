@@ -23,5 +23,22 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Client.DeleteEvent(calendarId, eventId);
         }
+
+        [Test]
+        public void CanDeleteExternalEvent()
+        {
+            const string eventUid = "external_event_id";
+
+            Http.Stub(
+                HttpDelete
+                    .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(@"{{""event_uid"":""{0}""}}", eventUid)
+                    .ResponseCode(202)
+            );
+
+            Client.DeleteExternalEvent(calendarId, eventUid);
+        }
     }
 }
