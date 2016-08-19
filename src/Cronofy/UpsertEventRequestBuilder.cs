@@ -439,20 +439,13 @@
         {
             var request = new UpsertEventRequest
             {
+                EventId = this.eventId,
+                EventUid = this.eventUid,
                 Summary = this.summary,
                 Description = this.description,
                 Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
             };
-
-            if (string.IsNullOrEmpty(this.eventId) == false)
-            {
-                request.EventId = this.eventId;
-            }
-            else if (string.IsNullOrEmpty(this.eventUid) == false)
-            {
-                request.EventUid = this.eventUid;
-            }
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)
             {
