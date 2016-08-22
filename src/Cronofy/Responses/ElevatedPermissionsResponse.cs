@@ -4,7 +4,7 @@ namespace Cronofy.Responses
 {
     internal sealed class ElevatedPermissionsResponse
     {
-        [JsonProperty("permissions_request")]
+        [JsonProperty("permission")]
         public PermissionsRequestResponse PermissionsRequest { get; set; }
 
         internal sealed class PermissionsRequestResponse

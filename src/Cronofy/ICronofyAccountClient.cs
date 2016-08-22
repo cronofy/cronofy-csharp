@@ -333,5 +333,41 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         void CloseChannel(string channelId);
+
+        /// <summary>
+        /// Generates a request for Elevated permissions for an account.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder from which to get the parameters for the request, must
+        /// not be null.
+        /// </param>
+        /// <returns>
+        /// The account's <see cref="Cronofy.ElevatedPermissions"/>s.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="builder"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        ElevatedPermissions ElevatedPermissions(ElevatedPermissionsBuilder builder);
+
+        /// <summary>
+        /// Generates a request for Elevated permissions for an account.
+        /// </summary>
+        /// <param name="request">
+        /// The parameters for the request, must not be null.
+        /// </param>
+        /// <returns>
+        /// The account's <see cref="Cronofy.ElevatedPermissions"/>s.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="request"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        ElevatedPermissions ElevatedPermissions(ElevatedPermissionsRequest request);
+
     }
 }

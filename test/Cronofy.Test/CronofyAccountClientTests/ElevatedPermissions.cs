@@ -17,18 +17,13 @@
 
 
             Http.Stub(
-                HttpDelete
+                HttpPost
                     .Url("https://api.cronofy.com/v1/permissions")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
-                    .RequestBodyFormat(@"{{
-                        ""permissions_request"": {{
-                            ""redirect_url"":""http://example.local/redirect"",
-                            ""permissions"": [ ""calendar_id"":""cal_102324034530"", ""permission_level"":""unrestricted"" ]
-                        }}
-					}}")
-            		.ResponseBody(@"{{ ""permissions_request"": {{ ""url"": ""http://example.local/response"" }} }}")
-                    .ResponseCode(202)
+                    .RequestBody(@"{""permissions"":[{""calendar_id"":""cal_102324034530"",""permission_level"":""unrestricted""}],""redirect_uri"":""http://example.local/redirect""}")
+            		.ResponseBody(@"{""permission"": { ""url"": ""http://example.local/response"" } }")
+                    .ResponseCode(200)
             );
 
             var result = Client.ElevatedPermissions(builder);
