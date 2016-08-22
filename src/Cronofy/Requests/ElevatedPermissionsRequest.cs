@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets or sets the redirect url for the request.
         /// </summary>
-       	[JsonProperty("redirect_uri")]
+		[JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
 
         /// <summary>

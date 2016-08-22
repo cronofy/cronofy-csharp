@@ -15,7 +15,6 @@
                 .RedirectUri(RedirectUri)
                 .AddCalendarPermission(CalendarId, PermissionLevel);
 
-
             Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/permissions")

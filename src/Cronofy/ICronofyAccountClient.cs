@@ -368,6 +368,5 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         ElevatedPermissions ElevatedPermissions(ElevatedPermissionsRequest request);
-
     }
 }
