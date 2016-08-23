@@ -11,12 +11,18 @@
         /// <summary>
         /// Gets or sets the permissions for the request.
         /// </summary>
+        /// <value>
+        /// The permissions for the request.
+        /// </value>
         [JsonProperty("permissions")]
         public IList<CalendarPermission> Permissions { get; set; }
 
         /// <summary>
-        /// Gets or sets the redirect url for the request.
+        /// Gets or sets the redirect URI for the request.
         /// </summary>
+        /// <value>
+        /// The redirect URI for the request.
+        /// </value>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
 
@@ -27,14 +33,20 @@
         public sealed class CalendarPermission
         {
             /// <summary>
-            /// Gets or sets the calendar id for the request.
+            /// Gets or sets the calendar ID for the request.
             /// </summary>
+            /// <value>
+            /// The calendar ID for the request.
+            /// </value>
             [JsonProperty("calendar_id")]
             public string CalendarId { get; set; }
 
             /// <summary>
             /// Gets or sets the permission level for the request.
             /// </summary>
+            /// <value>
+            /// The permission level for the request.
+            /// </value>
             [JsonProperty("permission_level")]
             public string PermissionLevel { get; set; }
         }

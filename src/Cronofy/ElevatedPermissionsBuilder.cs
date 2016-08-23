@@ -9,8 +9,14 @@
     /// </summary>
     public sealed class ElevatedPermissionsBuilder : IBuilder<ElevatedPermissionsRequest>
     {
+        /// <summary>
+        /// The list of calendar permissions.
+        /// </summary>
         private readonly IList<CalendarPermission> calendarPermissions = new List<CalendarPermission>();
 
+        /// <summary>
+        /// The URI to redirect to once the user responds to the request.
+        /// </summary>
         private string redirectUri;
 
         /// <summary>
@@ -85,10 +91,25 @@
             return request;
         }
 
+        /// <summary>
+        /// Calendar permission.
+        /// </summary>
         private sealed class CalendarPermission
         {
+            /// <summary>
+            /// Gets or sets the ID of the calendar the permission relates to.
+            /// </summary>
+            /// <value>
+            /// The ID of the calendar calendar.
+            /// </value>
             public string CalendarId { get; set; }
 
+            /// <summary>
+            /// Gets or sets the requested permission level.
+            /// </summary>
+            /// <value>
+            /// The permission level.
+            /// </value>
             public string PermissionLevel { get; set; }
         }
     }
