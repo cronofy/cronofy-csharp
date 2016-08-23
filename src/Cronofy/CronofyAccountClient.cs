@@ -23,7 +23,7 @@ namespace Cronofy
         /// The URL of the profiles endpoint.
         /// </summary>
         private const string ProfilesUrl = "https://api.cronofy.com/v1/profiles";
-        
+
         /// <summary>
         /// The URL of the list calendars endpoint.
         /// </summary>
@@ -331,7 +331,7 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public ElevatedPermissions ElevatedPermissions(ElevatedPermissionsBuilder permissionBuilder)
+        public ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsBuilder permissionBuilder)
         {
             Preconditions.NotNull("permissionBuilder", permissionBuilder);
 
@@ -341,7 +341,7 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public ElevatedPermissions ElevatedPermissions(ElevatedPermissionsRequest permissionsRequest)
+        public ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsRequest permissionsRequest)
         {
             Preconditions.NotNull("permissionsRequesr", permissionsRequest);
 
@@ -352,7 +352,7 @@ namespace Cronofy
             request.AddOAuthAuthorization(this.accessToken);
             request.SetJsonBody(permissionsRequest);
 
-            var response = this.HttpClient.GetJsonResponse<ElevatedPermissionsResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<Responses.ElevatedPermissionsResponse>(request);
             return response.ToElevatedPermissions();
         }
 

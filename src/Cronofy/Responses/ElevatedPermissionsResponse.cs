@@ -18,14 +18,14 @@
 
         /// <summary>
         /// Converts the response to an instance of
-        /// <see cref="ElevatedPermissions"/>.
+        /// <see cref="Cronofy.ElevatedPermissionsResponse"/>.
         /// </summary>
         /// <returns>
-        /// An instance of <see cref="ElevatedPermissions"/>.
+        /// An instance of <see cref="Cronofy.ElevatedPermissionsResponse"/>.
         /// </returns>
-        public ElevatedPermissions ToElevatedPermissions()
+        public Cronofy.ElevatedPermissionsResponse ToElevatedPermissions()
         {
-            return new ElevatedPermissions()
+            return new Cronofy.ElevatedPermissionsResponse()
             {
                 Url = this.PermissionsRequest.Url
             };

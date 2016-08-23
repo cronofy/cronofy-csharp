@@ -40,7 +40,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElevatedPermissions.cs" />
+    <Compile Include="ElevatedPermissionsResponse.cs" />
     <Compile Include="ElevatedPermissionsBuilder.cs" />
     <Compile Include="EventOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

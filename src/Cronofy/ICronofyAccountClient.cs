@@ -342,7 +342,7 @@
         /// not be null.
         /// </param>
         /// <returns>
-        /// The account's <see cref="Cronofy.ElevatedPermissions"/>s.
+        /// The account's <see cref="Cronofy.ElevatedPermissionsResponse"/>s.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="builder"/> is null.
@@ -350,7 +350,7 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        ElevatedPermissions ElevatedPermissions(ElevatedPermissionsBuilder builder);
+        ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsBuilder builder);
 
         /// <summary>
         /// Generates a request for Elevated permissions for an account.
@@ -359,7 +359,7 @@
         /// The parameters for the request, must not be null.
         /// </param>
         /// <returns>
-        /// The account's <see cref="Cronofy.ElevatedPermissions"/>s.
+        /// The account's <see cref="Cronofy.ElevatedPermissionsResponse"/>s.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="request"/> is null.
@@ -367,6 +367,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        ElevatedPermissions ElevatedPermissions(ElevatedPermissionsRequest request);
+        ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsRequest request);
     }
 }

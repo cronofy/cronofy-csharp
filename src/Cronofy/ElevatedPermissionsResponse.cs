@@ -3,7 +3,7 @@
     /// <summary>
     /// Class representing a response to a request for elevated permissions.
     /// </summary>
-    public sealed class ElevatedPermissions
+    public sealed class ElevatedPermissionsResponse
     {
         /// <summary>
         /// Gets or sets the Url to redirect the user to in order to grant the
