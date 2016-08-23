@@ -13,7 +13,7 @@
         /// <value>
         /// The permissions request.
         /// </value>
-        [JsonProperty("permission")]
+        [JsonProperty("permissions_request")]
         public PermissionsRequestResponse PermissionsRequest { get; set; }
 
         /// <summary>
