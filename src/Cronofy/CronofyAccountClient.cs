@@ -23,7 +23,7 @@ namespace Cronofy
         /// The URL of the profiles endpoint.
         /// </summary>
         private const string ProfilesUrl = "https://api.cronofy.com/v1/profiles";
-        
+
         /// <summary>
         /// The URL of the list calendars endpoint.
         /// </summary>
@@ -53,6 +53,11 @@ namespace Cronofy
         /// The URL format for the channel endpoint.
         /// </summary>
         private const string ChannelUrlFormat = "https://api.cronofy.com/v1/channels/{0}";
+
+        /// <summary>
+        /// The URL format for the elevated permissions endpoint.
+        /// </summary>
+        private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
 
         /// <summary>
         /// The access token for the OAuth authorization for the account.
@@ -299,6 +304,56 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
+        }
+
+        /// <inheritdoc/>
+        public void DeleteExternalEvent(string calendarId, string eventUid)
+        {
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotEmpty("eventUid", eventUid);
+
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = string.Format(ManagedEventUrlFormat, calendarId);
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var requestBody = new { event_uid = eventUid };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202)
+            {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
+        }
+
+        /// <inheritdoc/>
+        public ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsBuilder permissionBuilder)
+        {
+            Preconditions.NotNull("permissionBuilder", permissionBuilder);
+
+            var request = permissionBuilder.Build();
+
+            return this.ElevatedPermissions(request);
+        }
+
+        /// <inheritdoc/>
+        public ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsRequest permissionsRequest)
+        {
+            Preconditions.NotNull("permissionsRequesr", permissionsRequest);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = PermissionsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+            request.SetJsonBody(permissionsRequest);
+
+            var response = this.HttpClient.GetJsonResponse<Responses.ElevatedPermissionsResponse>(request);
+            return response.ToElevatedPermissions();
         }
 
         /// <inheritdoc/>

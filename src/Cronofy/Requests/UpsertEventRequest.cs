@@ -18,6 +18,15 @@
         public string EventId { get; set; }
 
         /// <summary>
+        /// Gets or sets the OAuth application's ID for an external event.
+        /// </summary>
+        /// <value>
+        /// The OAuth application's ID for an external event.
+        /// </value>
+        [JsonProperty("event_uid")]
+        public string EventUid { get; set; }
+
+        /// <summary>
         /// Gets or sets the event's summary.
         /// </summary>
         /// <value>

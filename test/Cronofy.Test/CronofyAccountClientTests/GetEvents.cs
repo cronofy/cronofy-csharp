@@ -45,6 +45,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""start"": ""2014-09-06"",
       ""end"": ""2014-09-08"",
       ""deleted"": false,
+      ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
       ""event_status"": ""confirmed"",
@@ -57,7 +58,11 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
       ],
       ""created"": ""2014-09-01T08:00:01Z"",
-      ""updated"": ""2014-09-01T09:24:16Z""
+      ""updated"": ""2014-09-01T09:24:16Z"",
+      ""options"": {
+        ""delete"": true,
+        ""update"": true
+      }
     }
   ]
 }")
@@ -76,6 +81,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
                         Location = null,
                         Deleted = false,
+                        Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
@@ -89,6 +95,11 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                 Status = AttendeeStatus.NeedsAction,
                             }
                         },
+                        Options = new EventOptions()
+                        {
+                            Delete = true,
+                            Update = true
+                        }
                     }
                 },
                 events);

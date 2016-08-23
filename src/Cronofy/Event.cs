@@ -150,6 +150,24 @@ namespace Cronofy
         /// </value>
         public Attendee[] Attendees { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this event is a
+        /// recurring event.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the event is a recurring event; otherwise,
+        /// <c>false</c>.
+        /// </value>
+        public bool Recurring { get; set; }
+
+        /// <summary>
+        /// Gets or sets the permissable options for this event.
+        /// </summary>
+        /// <value>
+        /// The event's options.
+        /// </value>
+        public EventOptions Options { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -195,6 +213,7 @@ namespace Cronofy
                 && this.ParticipationStatus == other.ParticipationStatus
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
+                && this.Recurring == other.Recurring
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
@@ -206,7 +225,7 @@ namespace Cronofy
         public override string ToString()
         {
             return string.Format(
-                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Attendees={8}>",
+                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}>",
                 this.GetType(),
                 this.CalendarId,
                 this.EventId,
@@ -215,6 +234,7 @@ namespace Cronofy
                 this.Start,
                 this.End,
                 this.Deleted,
+                this.Recurring,
                 this.Attendees);
         }
     }

@@ -67,6 +67,11 @@
         private int[] reminders;
 
         /// <summary>
+        /// The OAuth application's ID for the external event.
+        /// </summary>
+        private string eventUid;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -93,6 +98,26 @@
             Preconditions.NotEmpty("eventId", eventId);
 
             this.eventId = eventId;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the OAuth application's ID for an external event.
+        /// </summary>
+        /// <param name="eventUid">
+        /// The OAuth application's ID for an external event, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="eventUid"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder EventUid(string eventUid)
+        {
+            Preconditions.NotEmpty("eventUid", eventUid);
+
+            this.eventUid = eventUid;
             return this;
         }
 
@@ -415,6 +440,7 @@
             var request = new UpsertEventRequest
             {
                 EventId = this.eventId,
+                EventUid = this.eventUid,
                 Summary = this.summary,
                 Description = this.description,
                 Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
