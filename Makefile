@@ -1,4 +1,5 @@
 NUGET=tools/nuget.exe
+NUGET_SOURCE=https://www.nuget.org/api/v2/package
 NUNIT=packages/NUnit.Runners.*/tools/nunit-console.exe
 SLN=Cronofy.sln
 TEST_DLLS=build/Cronofy.Test/bin/Debug/Cronofy.Test.dll
@@ -45,7 +46,7 @@ release: package guard-env-NUGET_API_KEY
 	@git diff --exit-code --no-patch || (echo "Cannot release with uncommitted changes"; exit 1)
 	git push
 	@echo "Publishing artifacts/Cronofy.$(VERSION).nupkg"
-	@mono $(NUGET) push -ApiKey $(NUGET_API_KEY) artifacts/Cronofy.$(VERSION).nupkg
+	@mono $(NUGET) push -ApiKey $(NUGET_API_KEY) -Source $(NUGET_SOURCE) artifacts/Cronofy.$(VERSION).nupkg
 	git tag rel-$(VERSION)
 	git push --tags
 
