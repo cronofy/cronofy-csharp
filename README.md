@@ -4,7 +4,7 @@
 
 ## Installation
 
-The Cronofy .NET SDK is available as a Nuget package
+The Cronofy .NET SDK is available as a Nuget package, to install run the following command in the [Package Manager Console](https://docs.nuget.org/consume/package-manager-console)
 ```
 Install-Package Cronofy
 ```
