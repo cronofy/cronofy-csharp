@@ -2,11 +2,19 @@
 
 [Cronofy](https://www.cronofy.com) - one API for all the calendars (Google, iCloud, Exchange, Office 365, Outlook.com)
 
+## Installation
+
+The Cronofy .NET SDK is available as a Nuget package, to install run the following command in the [Package Manager Console](https://docs.nuget.org/consume/package-manager-console)
+```
+Install-Package Cronofy
+```
+More info is available on [nuget](https://www.nuget.org/packages/Cronofy/)
+
 ## Usage
 
 In order to use the Cronofy API you will need to [create a developer account](https://app.cronofy.com/sign_up/new).
 
-From there you can [create personal access tokens](https://app.cronofy.com/oauth/applications/5447ae289bd94726da00000f/tokens)
+From there you can [use your Calendar Sandbox](https://app.cronofy.com/oauth/sandbox)
 to access your own calendars, or you can [create an OAuth application](https://app.cronofy.com/oauth/applications/new)
 to obtain an OAuth `client_id` and `client_secret` to be able to use the full
 API.
