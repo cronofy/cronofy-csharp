@@ -222,7 +222,7 @@ namespace Cronofy
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
                 && this.Recurring == other.Recurring
-                && this.Organizer == other.Organizer
+                && object.Equals(this.Organizer, other.Organizer)
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)

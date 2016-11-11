@@ -203,6 +203,15 @@
             public AttendeeResponse[] Attendees { get; set; }
 
             /// <summary>
+            /// Gets or sets the event's organizer.
+            /// </summary>
+            /// <value>
+            /// The event's organizer.
+            /// </value>
+            [JsonProperty("organizer")]
+            public OrganizerResponse Organizer { get; set; }
+
+            /// <summary>
             /// Gets or sets the permissable options for this event.
             /// </summary>
             /// <value>
@@ -251,6 +260,11 @@
                 if (this.Options != null)
                 {
                     evt.Options = this.Options.ToOptions();
+                }
+
+                if (this.Organizer != null)
+                {
+                    evt.Organizer = this.Organizer.ToOrganizer();
                 }
 
                 return evt;
@@ -378,6 +392,46 @@
                         Email = this.Email,
                         DisplayName = this.DisplayName,
                         Status = this.Status,
+                    };
+                }
+            }
+
+            /// <summary>
+            /// Class for the deserialization of an organizer for a read event
+            /// response.
+            /// </summary>
+            internal sealed class OrganizerResponse
+            {
+                /// <summary>
+                /// Gets or sets the email of the organizer.
+                /// </summary>
+                /// <value>
+                /// The email of the organizer.
+                /// </value>
+                [JsonProperty("email")]
+                public string Email { get; set; }
+
+                /// <summary>
+                /// Gets or sets the display name of the organizer.
+                /// </summary>
+                /// <value>
+                /// The display name of the organizer.
+                /// </value>
+                [JsonProperty("display_name")]
+                public string DisplayName { get; set; }
+
+                /// <summary>
+                /// Converts the response into a <see cref="Cronofy.Organizer"/>.
+                /// </summary>
+                /// <returns>
+                /// A <see cref="Cronofy.Organizer"/> based upon the response.
+                /// </returns>
+                public Organizer ToOrganizer()
+                {
+                    return new Organizer
+                    {
+                        Email = this.Email,
+                        DisplayName = this.DisplayName,
                     };
                 }
             }
