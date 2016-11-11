@@ -151,6 +151,14 @@ namespace Cronofy
         public Attendee[] Attendees { get; set; }
 
         /// <summary>
+        /// Gets or sets the event's organizer.
+        /// </summary>
+        /// <value>
+        /// The event's Organizer
+        /// </value>
+        public Organizer Organizer { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this event is a
         /// recurring event.
         /// </summary>
