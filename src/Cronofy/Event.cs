@@ -222,6 +222,7 @@ namespace Cronofy
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
                 && this.Recurring == other.Recurring
+                && this.Organizer == other.Organizer
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
@@ -233,7 +234,7 @@ namespace Cronofy
         public override string ToString()
         {
             return string.Format(
-                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}>",
+                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}, Organizer={10}>",
                 this.GetType(),
                 this.CalendarId,
                 this.EventId,
@@ -243,7 +244,8 @@ namespace Cronofy
                 this.End,
                 this.Deleted,
                 this.Recurring,
-                this.Attendees);
+                this.Attendees,
+                this.Organizer);
         }
     }
 }
