@@ -105,6 +105,7 @@
     <Compile Include="Responses\CreateCalendarResponse.cs" />
     <Compile Include="EventTimeConverter.cs" />
     <Compile Include="TimestampConverter.cs" />
+    <Compile Include="Organizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

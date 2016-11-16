@@ -429,6 +429,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
           ""status"": ""needs_action""
         }
       ],
+      ""organizer"": {
+        ""email"": ""example@cronofy.com"",
+        ""display_name"": ""Example Person"",
+      },
       ""created"": ""2014-09-01T08:00:01Z"",
       ""updated"": ""2014-09-01T09:24:16Z""
     }
@@ -459,6 +463,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         DisplayName = "Example Person",
                         Status = AttendeeStatus.NeedsAction,
                     }
+                },
+                Organizer = new Organizer {
+                    Email = "example@cronofy.com",
+                    DisplayName = "Example Person",
                 },
             }
         };
