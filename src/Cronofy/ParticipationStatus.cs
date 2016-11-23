@@ -1,9 +1,9 @@
 ﻿namespace Cronofy
 {
     /// <summary>
-    /// Partipation status enumeration.
+    /// Participation status enumeration.
     /// </summary>
-    public enum PartipationStatus
+    public enum ParticipationStatus
     {
         /// <summary>
         /// Accept the invite.

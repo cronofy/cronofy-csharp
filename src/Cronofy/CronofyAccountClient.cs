@@ -335,7 +335,7 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public void ChangeParticipationStatus(string calendarId, string eventUid, PartipationStatus status)
+        public void ChangeParticipationStatus(string calendarId, string eventUid, ParticipationStatus status)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
             Preconditions.NotEmpty("eventUid", eventUid);

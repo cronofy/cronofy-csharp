@@ -9,10 +9,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
         private const string eventId = "qTtZdczOccgaPncGJaCiLg";
 
-        [TestCase(PartipationStatus.Accepted, "accepted")]
-        [TestCase(PartipationStatus.Tentative, "tentative")]
-        [TestCase(PartipationStatus.Declined, "declined")]
-        public void CanDeleteEvent(PartipationStatus status, string expectedStatus)
+        [TestCase(ParticipationStatus.Accepted, "accepted")]
+        [TestCase(ParticipationStatus.Tentative, "tentative")]
+        [TestCase(ParticipationStatus.Declined, "declined")]
+        public void CanDeleteEvent(ParticipationStatus status, string expectedStatus)
         {
             Http.Stub(
                 HttpPost

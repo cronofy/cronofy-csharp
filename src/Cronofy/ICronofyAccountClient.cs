@@ -271,7 +271,7 @@
         /// <remarks>
         /// TODO Validation exceptions.
         /// </remarks>
-        void ChangeParticipationStatus(string calendarId, string eventUid, PartipationStatus status);
+        void ChangeParticipationStatus(string calendarId, string eventUid, ParticipationStatus status);
 
         /// <summary>
         /// Creates a notification channel.
