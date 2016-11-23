@@ -45,6 +45,11 @@ namespace Cronofy
         private const string ManagedEventUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events";
 
         /// <summary>
+        /// The URL format for the participation status endpoint.
+        /// </summary>
+        private const string ParticipationStatusUrlFormat = "https://api.cronofy.com/v1/calendars/{0}/events/{1}/participation_status";
+
+        /// <summary>
         /// The URL of the channels endpoint.
         /// </summary>
         private const string ChannelsUrl = "https://api.cronofy.com/v1/channels";
@@ -325,7 +330,29 @@ namespace Cronofy
 
             if (response.Code != 202)
             {
-                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ChangeParticipationStatus(string calendarId, string eventUid, PartipationStatus status)
+        {
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotEmpty("eventUid", eventUid);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = string.Format(ParticipationStatusUrlFormat, calendarId, eventUid);
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var requestBody = new { status = status.ToString().ToLower() };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202)
+            {
                 throw new CronofyException("Request failed");
             }
         }

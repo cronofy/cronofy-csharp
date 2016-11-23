@@ -69,6 +69,7 @@
     <Compile Include="CronofyAccountClientTests\CreateCalendar.cs" />
     <Compile Include="ExtremeTimesTests\JsonParsing.cs" />
     <Compile Include="ExtremeTimesTests\TimeHolder.cs" />
+    <Compile Include="CronofyAccountClientTests\ChangeParticipationStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

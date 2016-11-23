@@ -230,7 +230,7 @@
         /// Deletes an external event from the account's calendars.
         /// </summary>
         /// <param name="calendarId">
-        /// The ID of the calendar the event should be upserted to, must not be
+        /// The ID of the calendar the event should be deleted to, must not be
         /// empty.
         /// </param>
         /// <param name="eventUid">
@@ -247,6 +247,31 @@
         /// TODO Validation exceptions.
         /// </remarks>
         void DeleteExternalEvent(string calendarId, string eventUid);
+
+        /// <summary>
+        /// Changes the participation status of an event.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The ID of the calendar the event should be upserted to, must not be
+        /// empty.
+        /// </param>
+        /// <param name="eventUid">
+        /// The ID of the external event to delete, must not be empty.
+        /// </param>
+        /// <param name="status">
+        /// The status to change the event to.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> or
+        /// <paramref name="eventUid"/> are empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        void ChangeParticipationStatus(string calendarId, string eventUid, PartipationStatus status);
 
         /// <summary>
         /// Creates a notification channel.
