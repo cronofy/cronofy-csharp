@@ -230,7 +230,7 @@
         /// Deletes an external event from the account's calendars.
         /// </summary>
         /// <param name="calendarId">
-        /// The ID of the calendar the event should be deleted to, must not be
+        /// The ID of the calendar the event should be deleted from, must not be
         /// empty.
         /// </param>
         /// <param name="eventUid">
