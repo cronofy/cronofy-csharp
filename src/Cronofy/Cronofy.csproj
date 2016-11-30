@@ -106,6 +106,7 @@
     <Compile Include="EventTimeConverter.cs" />
     <Compile Include="TimestampConverter.cs" />
     <Compile Include="Organizer.cs" />
+    <Compile Include="ParticipationStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
