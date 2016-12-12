@@ -1,4 +1,3 @@
-using System;
 namespace Cronofy
 {
     using System.Linq;
@@ -72,7 +71,7 @@ namespace Cronofy
         public string[] Scope { get; private set; }
 
         /// <summary>
-        /// Gets the account ID of the OAuth authorization.
+        /// Gets or sets the account ID of the OAuth authorization.
         /// </summary>
         /// <value>
         /// The account ID of the OAuth authorization.
@@ -80,7 +79,7 @@ namespace Cronofy
         public string AccountId { get; set; }
 
         /// <summary>
-        /// Gets the linking profile of the OAuth authorization.
+        /// Gets or sets the linking profile of the OAuth authorization.
         /// </summary>
         /// <value>
         /// The linking profile of the OAuth authorization.

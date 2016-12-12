@@ -1,5 +1,4 @@
-﻿using System;
-namespace Cronofy
+﻿namespace Cronofy
 {
     /// <summary>
     /// Class representing the linking profile for an authorization.
@@ -41,7 +40,8 @@ namespace Cronofy
         {
             var other = obj as LinkingProfile;
 
-            if (other == null) {
+            if (other == null)
+            {
                 return false;
             }
 

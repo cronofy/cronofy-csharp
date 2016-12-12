@@ -1,5 +1,4 @@
-﻿using System;
-namespace Cronofy
+﻿namespace Cronofy
 {
     /// <summary>
     /// Class representing a user's information.
@@ -7,13 +6,19 @@ namespace Cronofy
     public class UserInfo
     {
         /// <summary>
-        /// Gets or sets the user's Cronofy account ID.
+        /// Gets or sets the accounts's Cronofy account ID.
         /// </summary>
+        /// <value>
+        /// The sub of the account.
+        /// </value>
         public string Sub { get; set; }
 
         /// <summary>
-        /// Gets or sets the user's Cronofy account type.
+        /// Gets or sets the account's Cronofy account type.
         /// </summary>
+        /// <value>
+        /// The type of the account.
+        /// </value>
         public string CronofyType { get; set; }
 
         /// <inheritdoc/>

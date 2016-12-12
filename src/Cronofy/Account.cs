@@ -1,7 +1,6 @@
-﻿using System.Linq;
-namespace Cronofy
+﻿namespace Cronofy
 {
-    using System;
+    using System.Linq;
 
     /// <summary>
     /// Class for representing an account.

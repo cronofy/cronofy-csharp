@@ -330,7 +330,8 @@ namespace Cronofy
 
             var response = this.HttpClient.GetResponse(request);
 
-            if (response.Code != 202) {
+            if (response.Code != 202)
+            {
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
@@ -352,7 +353,8 @@ namespace Cronofy
 
             var response = this.HttpClient.GetResponse(request);
 
-            if (response.Code != 202) {
+            if (response.Code != 202)
+            {
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
