@@ -109,6 +109,7 @@
     <Compile Include="ParticipationStatus.cs" />
     <Compile Include="NullableString.cs" />
     <Compile Include="NullableStringConverter.cs" />
+    <Compile Include="LinkingProfile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
