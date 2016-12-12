@@ -107,6 +107,8 @@
     <Compile Include="TimestampConverter.cs" />
     <Compile Include="Organizer.cs" />
     <Compile Include="ParticipationStatus.cs" />
+    <Compile Include="NullableString.cs" />
+    <Compile Include="NullableStringConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

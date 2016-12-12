@@ -72,6 +72,11 @@
         private string eventUid;
 
         /// <summary>
+        /// The URL of the event.
+        /// </summary>
+        private NullableString url;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -434,6 +439,25 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the URL of the event.
+        /// </summary>
+        /// <param name="url">
+        /// URL, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="url"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder Url(string url)
+        {
+            this.url = new NullableString(url);
+
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -445,6 +469,7 @@
                 Description = this.description,
                 Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
+                Url = this.url,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false)
