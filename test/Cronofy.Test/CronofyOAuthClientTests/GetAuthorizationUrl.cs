@@ -27,7 +27,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
                 UrlBuilder.EncodeParameter(clientId),
                 UrlBuilder.EncodeParameter(redirectUri));
@@ -46,7 +46,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events",
                 UrlBuilder.EncodeParameter(clientId),
                 UrlBuilder.EncodeParameter(redirectUri));
@@ -70,7 +70,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events",
                 UrlBuilder.EncodeParameter(clientId),
                 UrlBuilder.EncodeParameter(redirectUri));
@@ -91,7 +91,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&state={2}",
                 UrlBuilder.EncodeParameter(clientId),
@@ -112,7 +112,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&avoid_linking=true",
                 UrlBuilder.EncodeParameter(clientId),
@@ -132,7 +132,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&avoid_linking=false",
                 UrlBuilder.EncodeParameter(clientId),
@@ -150,7 +150,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
-					"&redirect_uri={1}" +
+                    "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
                 UrlBuilder.EncodeParameter(clientId),
                 UrlBuilder.EncodeParameter(redirectUri));
@@ -158,71 +158,71 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual(expectedAuthUrl, builder.ToString());
         }
 
-		[Test]
-		public void CanSetUrlAsEnterpriseConnect()
-		{
-			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
-								.EnterpriseConnect()
-								.Build();
+        [Test]
+        public void CanSetUrlAsEnterpriseConnect()
+        {
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                      .EnterpriseConnect()
+                      .Build();
 
-			var expectedAuthUrl = string.Format(
-				"https://app.cronofy.com/enterprise_connect/oauth/authorize" +
-				"?client_id={0}" +
-				"&response_type=code" +
-				"&redirect_uri={1}" +
-				"&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
-				"&scope=service_account%2Faccounts%2Fmanage%20service_account%2Fresources%2Fmanage",
-				UrlBuilder.EncodeParameter(clientId),
-				UrlBuilder.EncodeParameter(redirectUri));
+            var expectedAuthUrl = string.Format(
+              "https://app.cronofy.com/enterprise_connect/oauth/authorize" +
+              "?client_id={0}" +
+              "&response_type=code" +
+              "&redirect_uri={1}" +
+              "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
+              "&scope=service_account%2Faccounts%2Fmanage%20service_account%2Fresources%2Fmanage",
+              UrlBuilder.EncodeParameter(clientId),
+              UrlBuilder.EncodeParameter(redirectUri));
 
-			Assert.AreEqual(expectedAuthUrl, authUrl);
-		}
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
 
-		[Test]
-		public void CanOverrideEnterpriseConnectScope()
-		{
-			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
-			    .EnterpriseConnect()
-				.EnterpriseConnectScope("service_account/accounts/unrestricted_access", "service_account/resources/unrestricted_access")
-				.Build();
+        [Test]
+        public void CanOverrideEnterpriseConnectScope()
+        {
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                .EnterpriseConnect()
+              .EnterpriseConnectScope("service_account/accounts/unrestricted_access", "service_account/resources/unrestricted_access")
+              .Build();
 
-			var expectedAuthUrl = string.Format(
-				"https://app.cronofy.com/enterprise_connect/oauth/authorize" +
-				"?client_id={0}" +
-				"&response_type=code" +
-				"&redirect_uri={1}" +
-				"&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
-				"&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
-				UrlBuilder.EncodeParameter(clientId),
-				UrlBuilder.EncodeParameter(redirectUri));
+            var expectedAuthUrl = string.Format(
+              "https://app.cronofy.com/enterprise_connect/oauth/authorize" +
+              "?client_id={0}" +
+              "&response_type=code" +
+              "&redirect_uri={1}" +
+              "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
+              "&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
+              UrlBuilder.EncodeParameter(clientId),
+              UrlBuilder.EncodeParameter(redirectUri));
 
-			Assert.AreEqual(expectedAuthUrl, authUrl);
-		}
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
 
-		[Test]
-		public void CanOverrideEnterpriseConnectScopeWithEnumerable()
-		{
-			IEnumerable<string> scope = new List<string> {
-				"service_account/accounts/unrestricted_access", 
-				"service_account/resources/unrestricted_access"
-			};
+        [Test]
+        public void CanOverrideEnterpriseConnectScopeWithEnumerable()
+        {
+            IEnumerable<string> scope = new List<string> {
+                "service_account/accounts/unrestricted_access",
+                "service_account/resources/unrestricted_access"
+            };
 
-			var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
-				.EnterpriseConnectScope(scope)
-				.EnterpriseConnect()
-				.Build();
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+              .EnterpriseConnectScope(scope)
+              .EnterpriseConnect()
+              .Build();
 
-			var expectedAuthUrl = string.Format(
-				"https://app.cronofy.com/enterprise_connect/oauth/authorize" +
-				"?client_id={0}" +
-				"&response_type=code" +
-				"&redirect_uri={1}" +
-				"&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
-				"&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
-				UrlBuilder.EncodeParameter(clientId),
-				UrlBuilder.EncodeParameter(redirectUri));
+            var expectedAuthUrl = string.Format(
+              "https://app.cronofy.com/enterprise_connect/oauth/authorize" +
+              "?client_id={0}" +
+              "&response_type=code" +
+              "&redirect_uri={1}" +
+              "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
+              "&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
+              UrlBuilder.EncodeParameter(clientId),
+              UrlBuilder.EncodeParameter(redirectUri));
 
-			Assert.AreEqual(expectedAuthUrl, authUrl);
-		}
-	}
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
+    }
 }
