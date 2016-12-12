@@ -10,10 +10,15 @@
     /// </summary>
     public sealed class CronofyOAuthClient : ICronofyOAuthClient
     {
-        /// <summary>
-        /// The URL for the OAuth authorization endpoint.
-        /// </summary>
-        private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
+		/// <summary>
+		/// The URL for the OAuth authorization endpoint.
+		/// </summary>
+		private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
+
+		/// <summary>
+		/// The URL for the Enterprise Connect OAuth authorization endpoint.
+		/// </summary>
+		private const string EnterpriseConnectAuthorizationUrl = "https://app.cronofy.com/enterprise_connect/oauth/authorize";
 
         /// <summary>
         /// The URL for the OAuth token endpoint.
@@ -200,6 +205,15 @@
                 "delete_event",
             };
 
+			/// <summary>
+			/// The default scipes for a new Enterprise Connect OAuth authorization request.
+			/// </summary>
+			private static readonly string[] DefaultEnterpriseConnectScopes =
+			{
+				"service_account/accounts/manage",
+				"service_account/resources/manage",
+			};
+
             /// <summary>
             /// The client ID of the OAuth application.
             /// </summary>
@@ -226,6 +240,17 @@
             /// </summary>
             private bool? avoidLinking;
 
+			/// <summary>
+			/// Whether or not the OAuth URL is for Enterprise Connect or not.
+			/// </summary>
+			private bool enterpriseConnect;
+
+			/// <summary>
+			/// The scope the OAuth application is requestion from the Enterprise
+			/// Connect user.
+			/// </summary>
+			private string[] enterpriseConnectScope;
+
             /// <summary>
             /// Initializes a new instance of the
             /// <see cref="AuthorizationUrlBuilder"/> class.
@@ -249,6 +274,7 @@
                 this.clientId = clientId;
                 this.redirectUri = redirectUri;
                 this.scope = DefaultScopes;
+				this.enterpriseConnectScope = DefaultEnterpriseConnectScopes;
             }
 
             /// <summary>
@@ -329,6 +355,62 @@
                 return this;
             }
 
+			/// <summary>
+			/// Sets the URL to be an Enterprise Connect OAuth authorization
+			/// URL.
+			/// </summary>
+			/// <returns>
+			/// A reference to the builder.
+			/// </returns>
+			public AuthorizationUrlBuilder EnterpriseConnect()
+			{
+				this.enterpriseConnect = true;
+
+				return this;
+			}
+
+			/// <summary>
+			/// Sets the scope the authorization URL will request from the Enterprise
+			/// Connect user.
+			/// </summary>
+			/// <param name="scope">
+			/// The scope to request from the Enterprise Connect user, must not be empty.
+			/// </param>
+			/// <returns>
+			/// A reference to the builder
+			/// </returns>
+			/// <exception cref="System.ArgumentException">
+			/// Thrown if <paramref name="scope"/> is empty.
+			/// </exception>
+			public AuthorizationUrlBuilder EnterpriseConnectScope(params string[] scope)
+			{
+				Preconditions.NotEmpty("scope", scope);
+
+				this.enterpriseConnectScope = scope;
+
+				return this;
+			}
+
+			/// <summary>
+			/// Sets the scope the authorization URL will request from the Enterprise
+			/// Connect user.
+			/// </summary>
+			/// <param name="scope">
+			/// The scope to request from the Enterprise Connect user, must not be empty.
+			/// </param>
+			/// <returns>
+			/// A reference to the builder
+			/// </returns>
+			/// <exception cref="System.ArgumentException">
+			/// Thrown if <paramref name="scope"/> is empty.
+			/// </exception>
+			public AuthorizationUrlBuilder EnterpriseConnectScope(IEnumerable<string> scope)
+			{
+				this.enterpriseConnectScope = scope.ToArray();
+
+				return this;
+			}
+
             /// <summary>
             /// Generates an authorization URL based on the current state of the
             /// builder.
@@ -338,12 +420,23 @@
             /// </returns>
             public string Build()
             {
+				var authUrl = this.enterpriseConnect ? EnterpriseConnectAuthorizationUrl : AuthorizationUrl;
+
                 var urlBuilder = new UrlBuilder()
-                    .Url(AuthorizationUrl)
+                    .Url(authUrl)
                     .AddParameter("client_id", this.clientId)
                     .AddParameter("response_type", "code")
-                    .AddParameter("scope", string.Join(" ", this.scope))
                     .AddParameter("redirect_uri", this.redirectUri);
+
+				if (this.enterpriseConnect)
+				{
+					urlBuilder.AddParameter("delegated_scope", string.Join(" ", this.scope));
+					urlBuilder.AddParameter("scope", string.Join(" ", this.enterpriseConnectScope));
+				}
+				else
+				{
+					urlBuilder.AddParameter("scope", string.Join(" ", this.scope));
+				}
 
                 if (this.state != null)
                 {
