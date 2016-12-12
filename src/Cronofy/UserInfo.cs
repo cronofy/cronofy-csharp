@@ -14,7 +14,7 @@ namespace Cronofy
         /// <summary>
         /// Gets or sets the user's Cronofy account type.
         /// </summary>
-		public string CronofyType { get; set; }
+        public string CronofyType { get; set; }
 
         /// <inheritdoc/>
         public override int GetHashCode()
