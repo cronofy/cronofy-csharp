@@ -65,6 +65,11 @@ namespace Cronofy
         private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
 
         /// <summary>
+        /// The URL of the resources endpoint.
+        /// </summary>
+        private const string ResourcesUrl = "https://api.cronofy.com/v1/resources";
+
+        /// <summary>
         /// The access token for the OAuth authorization for the account.
         /// </summary>
         private readonly string accessToken;
@@ -453,6 +458,20 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<Resource> GetResources()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = ResourcesUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetJsonResponse<ResourcesResponse>(request);
+
+            return response.Resources.Select(x => x.ToResource());
         }
 
         /// <summary>
