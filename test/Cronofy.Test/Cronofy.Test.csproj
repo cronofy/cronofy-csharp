@@ -70,6 +70,7 @@
     <Compile Include="ExtremeTimesTests\JsonParsing.cs" />
     <Compile Include="ExtremeTimesTests\TimeHolder.cs" />
     <Compile Include="CronofyAccountClientTests\ChangeParticipationStatus.cs" />
+    <Compile Include="CronofyAccountClientTests\GetUserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
