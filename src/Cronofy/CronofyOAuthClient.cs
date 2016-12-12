@@ -110,6 +110,35 @@
             return new AuthorizationUrlBuilder(this.clientId, redirectUri);
         }
 
+        /// <summary>
+        /// Creates a new <see cref="AuthorizationUrlBuilder"/>, set as an Enterprise
+        /// Connect authorization URL, and seeded with your client configuration.
+        /// </summary>
+        /// <param name="redirectUri">
+        /// The URI to redirect the user's response for the authorization
+        /// request to, must not be empty.
+        /// </param>
+        /// <returns>
+        /// Returns a new <see cref="AuthorizationUrlBuilder"/>.
+        /// </returns>
+        /// <remarks>
+        /// The delegated scopes read_account, read_events, create_event, and delete_event
+        /// are requested by default.
+        /// 
+        /// The Enterprise Connect service_account/accounts/manage and
+        /// service_account/resources/manage are requested by default.
+        /// </remarks>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="redirectUri"/> is null or empty.
+        /// </exception>
+        public AuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri)
+        {
+            Preconditions.NotEmpty("redirectUri", redirectUri);
+
+            return new AuthorizationUrlBuilder(this.clientId, redirectUri)
+                .EnterpriseConnect();
+        }
+
         /// <inheritdoc/>
         public OAuthToken GetTokenFromCode(string code, string redirectUri)
         {
