@@ -24,7 +24,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             const string calendar1 = "cal_1234_5678";
             const string calendar2 = "cal_8765_4321";
-            
+
             Http.Stub(
                 HttpDelete
                     .Url("https://api.cronofy.com/v1/events")

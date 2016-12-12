@@ -1,4 +1,5 @@
-﻿namespace Cronofy
+﻿using System.Linq;
+namespace Cronofy
 {
     using System;
 
@@ -86,7 +87,7 @@
                 && this.Email == other.Email
                 && this.Name == other.Name
                 && this.DefaultTimeZoneId == other.DefaultTimeZoneId
-                && string.Join(" ", this.Scope) == string.Join(" ", other.Scope);
+                && this.Scope.SequenceEqual(other.Scope);
         }
 
         /// <inheritdoc/>
