@@ -37,7 +37,7 @@ namespace Cronofy
         /// <summary>
         /// The URL of the read events endpoint.
         /// </summary>
-        private const string ReadEventsUrl = "https://api.cronofy.com/v1/events";
+        private const string EventsUrl = "https://api.cronofy.com/v1/events";
 
         /// <summary>
         /// The URL format for the managed event endpoint.
@@ -192,7 +192,7 @@ namespace Cronofy
             var httpRequest = new HttpRequest();
 
             httpRequest.Method = "GET";
-            httpRequest.Url = ReadEventsUrl;
+            httpRequest.Url = EventsUrl;
             httpRequest.AddOAuthAuthorization(this.accessToken);
 
             httpRequest.QueryString.Add("tzid", request.TimeZoneId);
@@ -306,6 +306,48 @@ namespace Cronofy
 
             if (response.Code != 202)
             {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void DeleteAllEvents()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = EventsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var requestBody = new { delete_all = true };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202) {
+                // TODO More useful exceptions for validation errors
+                throw new CronofyException("Request failed");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void DeleteAllEventsForCalendars(params string[] calendarIds)
+        {
+            Preconditions.NotEmpty("calendarIds", calendarIds);
+
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = EventsUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var requestBody = new { calendar_ids = calendarIds };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202) {
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
