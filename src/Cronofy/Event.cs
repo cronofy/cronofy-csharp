@@ -154,7 +154,7 @@ namespace Cronofy
         /// Gets or sets the event's organizer.
         /// </summary>
         /// <value>
-        /// The event's Organizer
+        /// The event's Organizer.
         /// </value>
         public Organizer Organizer { get; set; }
 
