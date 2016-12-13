@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
@@ -46,6 +47,60 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             var actualToken = client.GetTokenFromCode(oauthCode, redirectUri);
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }));
+
+            Assert.AreEqual(expectedToken, actualToken);
+        }
+
+        [Test]
+        public void CanRedeemTokenWithLinkingProfileInfo()
+        {
+            const string accessToken = "asdnakjsdnas";
+            const int expiresIn = 3600;
+            const string refreshToken = "jerwpmsdkjngvdsk";
+            const string scope = "read_events create_event delete_event";
+            const string accountId = "acc_567236000909002";
+            const string providerName = "google";
+            const string profileId = "pro_n23kjnwrw2";
+            const string profileName = "example@cronofy.com";
+
+            http.Stub(
+                HttpPost
+                    .Url("https://app.cronofy.com/oauth/token")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
+                        clientId, clientSecret, oauthCode, redirectUri)
+                    .ResponseCode(200)
+                    .ResponseBodyFormat(
+                        "{{" +
+                        "\"token_type\":\"bearer\"," +
+                        "\"access_token\":\"{0}\"," +
+                        "\"expires_in\":{1}," +
+                        "\"refresh_token\":\"{2}\"," +
+                        "\"scope\":\"{3}\"," +
+                        "\"account_id\":\"{4}\"," +
+                        "\"linking_profile\":" +
+                            "{{" +
+                            "\"provider_name\":\"{5}\"," +
+                            "\"profile_id\":\"{6}\"," +
+                            "\"profile_name\":\"{7}\"" +
+                            "}}" +
+                        "}}",
+                        accessToken, expiresIn, refreshToken, scope,
+                        accountId, providerName, profileId, profileName)
+            );
+
+            var actualToken = client.GetTokenFromCode(oauthCode, redirectUri);
+            var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }))
+            {
+                AccountId = accountId,
+                LinkingProfile = new LinkingProfile()
+                {
+                    ProviderName = providerName,
+                    Id = profileId,
+                    Name = profileName,
+                },
+            };
 
             Assert.AreEqual(expectedToken, actualToken);
         }

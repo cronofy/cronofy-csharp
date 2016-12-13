@@ -1,6 +1,6 @@
 ﻿namespace Cronofy
 {
-    using System;
+    using System.Linq;
 
     /// <summary>
     /// Class for representing an account.
@@ -38,6 +38,14 @@
         /// The default time zone identifier of the account.
         /// </value>
         public string DefaultTimeZoneId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the scopes granted for the account.
+        /// </summary>
+        /// <value>
+        /// The scopes granted for the account.
+        /// </value>
+        public string[] Scope { get; set; }
 
         /// <inheritdoc/>
         public override int GetHashCode()
@@ -77,19 +85,21 @@
                 && this.Id == other.Id
                 && this.Email == other.Email
                 && this.Name == other.Name
-                && this.DefaultTimeZoneId == other.DefaultTimeZoneId;
+                && this.DefaultTimeZoneId == other.DefaultTimeZoneId
+                && this.Scope.SequenceEqual(other.Scope);
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format(
-                "<{0} Id={1}, Email={2}, Name={3}, DefaultTimeZoneId={4}>",
+                "<{0} Id={1}, Email={2}, Name={3}, DefaultTimeZoneId={4}, Scope={5}>",
                 this.GetType(),
                 this.Id,
                 this.Email,
                 this.Name,
-                this.DefaultTimeZoneId);
+                this.DefaultTimeZoneId,
+                string.Join(" ", this.Scope));
         }
     }
 }
