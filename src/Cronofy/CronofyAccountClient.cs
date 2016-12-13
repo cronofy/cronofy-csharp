@@ -65,6 +65,11 @@ namespace Cronofy
         private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
 
         /// <summary>
+        /// The URL of the resources endpoint.
+        /// </summary>
+        private const string ResourcesUrl = "https://api.cronofy.com/v1/resources";
+
+        /// <summary>
         /// The URL of the user info endpoint.
         /// </summary>
         private const string UserInfoUrl = "https://api.cronofy.com/v1/userinfo";
@@ -472,6 +477,20 @@ namespace Cronofy
             var response = this.HttpClient.GetJsonResponse<UserInfoResponse>(request);
 
             return response.ToUserInfo();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<Resource> GetResources()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = ResourcesUrl;
+            request.AddOAuthAuthorization(this.accessToken);
+
+            var response = this.HttpClient.GetJsonResponse<ResourcesResponse>(request);
+
+            return response.Resources.Select(x => x.ToResource());
         }
 
         /// <summary>
