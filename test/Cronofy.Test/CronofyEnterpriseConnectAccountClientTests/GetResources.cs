@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cronofy.Test.CronofyAccountClientTests
+namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
 {
     internal sealed class GetResources : Base
     {

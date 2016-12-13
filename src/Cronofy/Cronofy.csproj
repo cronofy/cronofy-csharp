@@ -111,6 +111,10 @@
     <Compile Include="Resource.cs" />
     <Compile Include="Responses\UserInfoResponse.cs" />
     <Compile Include="UserInfo.cs" />
+    <Compile Include="ICronofyEnterpriseConnectAccountClient.cs" />
+    <Compile Include="CronofyEnterpriseConnectAccountClient.cs" />
+    <Compile Include="ICronofyAccountClientBase.cs" />
+    <Compile Include="CronofyAccountClientBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
