@@ -70,6 +70,22 @@ namespace Cronofy
         /// </value>
         public string[] Scope { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the account ID of the OAuth authorization.
+        /// </summary>
+        /// <value>
+        /// The account ID of the OAuth authorization.
+        /// </value>
+        public string AccountId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the linking profile of the OAuth authorization.
+        /// </summary>
+        /// <value>
+        /// The linking profile of the OAuth authorization.
+        /// </value>
+        public LinkingProfile LinkingProfile { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -108,7 +124,23 @@ namespace Cronofy
                 && this.AccessToken == other.AccessToken
                 && this.RefreshToken == other.RefreshToken
                 && this.ExpiresIn == other.ExpiresIn
-                && this.Scope.SequenceEqual(other.Scope);
+                && this.Scope.SequenceEqual(other.Scope)
+                && this.AccountId == other.AccountId
+                && object.Equals(this.LinkingProfile, other.LinkingProfile);
+        }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return string.Format(
+                "<{0} AccessToken={1}, RefreshToken={2}, ExpiresIn={3}, Scope={4}, AccountId={5}, LinkingProfile={6}>",
+                this.GetType(),
+                this.AccessToken,
+                this.RefreshToken,
+                this.ExpiresIn,
+                string.Join(" ", this.Scope),
+                this.AccountId,
+                this.LinkingProfile);
         }
     }
 }

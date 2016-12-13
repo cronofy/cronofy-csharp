@@ -227,6 +227,34 @@
         void DeleteEvent(string calendarId, string eventId);
 
         /// <summary>
+        /// Deletes all events you are managing from the account's calendars.
+        /// </summary>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        void DeleteAllEvents();
+
+        /// <summary>
+        /// Deletes all events you are managing from the specified calendars.
+        /// </summary>
+        /// <param name="calendarIds">
+        /// The IDs for the calendars to delete events from.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarIds"/> is empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        void DeleteAllEventsForCalendars(params string[] calendarIds);
+
+        /// <summary>
         /// Deletes an external event from the account's calendars.
         /// </summary>
         /// <param name="calendarId">

@@ -74,6 +74,16 @@
         public RequestLocation Location { get; set; }
 
         /// <summary>
+        /// Gets or sets the URL of the event.
+        /// </summary>
+        /// <value>
+        /// The URL of the event.
+        /// </value>
+        [JsonProperty("url")]
+        [JsonConverter(typeof(NullableStringConverter))]
+        public NullableString Url { get; set; }
+
+        /// <summary>
         /// Gets or sets the reminders of the event.
         /// </summary>
         /// <value>

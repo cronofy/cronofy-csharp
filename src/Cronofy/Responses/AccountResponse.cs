@@ -75,6 +75,15 @@
             public string DefaultTimeZoneId { get; set; }
 
             /// <summary>
+            /// Gets or sets the scopes granted for the account.
+            /// </summary>
+            /// <value>
+            /// The scopes granted for the account.
+            /// </value>
+            [JsonProperty("scope")]
+            public string Scope { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Account"/>.
             /// </summary>
             /// <returns>
@@ -88,6 +97,7 @@
                     Email = this.Email,
                     Name = this.Name,
                     DefaultTimeZoneId = this.DefaultTimeZoneId,
+                    Scope = this.Scope.Split(' '),
                 };
             }
         }

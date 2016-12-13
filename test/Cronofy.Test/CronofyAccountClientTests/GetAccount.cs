@@ -19,7 +19,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
     ""account_id"": ""acc_567236000909002"",
     ""email"": ""janed@company.com"",
     ""name"": ""Jane Doe"",
-    ""default_tzid"": ""Europe/London""
+    ""default_tzid"": ""Europe/London"",
+    ""scope"": ""read_events create_event delete_event""
   }
 }")
             );
@@ -31,6 +32,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 Email = "janed@company.com",
                 Name = "Jane Doe",
                 DefaultTimeZoneId = "Europe/London",
+                Scope = new[] { "read_events", "create_event", "delete_event" },
             };
 
             Assert.AreEqual(expectedAccount, actualAccount);
