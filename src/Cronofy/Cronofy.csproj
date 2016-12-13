@@ -110,6 +110,8 @@
     <Compile Include="NullableString.cs" />
     <Compile Include="NullableStringConverter.cs" />
     <Compile Include="LinkingProfile.cs" />
+    <Compile Include="Responses\ResourcesResponse.cs" />
+    <Compile Include="Resource.cs" />
     <Compile Include="Responses\UserInfoResponse.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
