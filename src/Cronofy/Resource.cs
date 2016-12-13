@@ -10,11 +10,17 @@
         /// <summary>
         /// Gets or sets the email of the resource.
         /// </summary>
+        /// <value>
+        /// The resource's email.
+        /// </value>
         public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the resource.
         /// </summary>
+        /// <value>
+        /// The resource's name.
+        /// </value>
         public string Name { get; set; }
 
         /// <inheritdoc/>
