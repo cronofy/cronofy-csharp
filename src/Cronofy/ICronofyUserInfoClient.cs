@@ -6,7 +6,7 @@
     /// Interface for a Cronofy client base that manages the
     /// access token and any shared client methods.
     /// </summary>
-    public interface ICronofyAccountClientBase
+    public interface ICronofyUserInfoClient
     {
         /// <summary>
         /// Gets the user info belonging to the account.

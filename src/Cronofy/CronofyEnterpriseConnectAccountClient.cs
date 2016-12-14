@@ -9,7 +9,7 @@ namespace Cronofy
     /// Class for a Cronofy Enterprise Connect client that
     /// interacts with a service account's resources and users.
     /// </summary>
-    public class CronofyEnterpriseConnectAccountClient : CronofyAccountClientBase, ICronofyEnterpriseConnectAccountClient 
+    public class CronofyEnterpriseConnectAccountClient : CronofyAccountClientBase, ICronofyEnterpriseConnectAccountClient
     {
         /// <summary>
         /// The URL of the resources endpoint.
@@ -21,7 +21,8 @@ namespace Cronofy
         /// <see cref="Cronofy.CronofyEnterpriseConnectAccountClient"/> class.
         /// </summary>
         /// <param name="accessToken">
-        /// The user's access token.
+        /// The access token for the OAuth authorization for the account, must
+        /// not be empty.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.

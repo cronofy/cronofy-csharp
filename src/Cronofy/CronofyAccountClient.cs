@@ -69,7 +69,8 @@ namespace Cronofy
         /// <see cref="Cronofy.CronofyAccountClient"/> class.
         /// </summary>
         /// <param name="accessToken">
-        /// The user's access token.
+        /// The access token for the OAuth authorization for the account, must
+        /// not be empty.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.

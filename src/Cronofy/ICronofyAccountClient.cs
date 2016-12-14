@@ -8,7 +8,7 @@
     /// Interface for a Cronofy client that interacts with an account's
     /// calendars and events.
     /// </summary>
-    public interface ICronofyAccountClient : ICronofyAccountClientBase
+    public interface ICronofyAccountClient : ICronofyUserInfoClient
     {
         /// <summary>
         /// Gets the details of the account.

@@ -7,7 +7,7 @@
     /// Class for a Cronofy client base that manages the
     /// access token and any shared client methods.
     /// </summary>
-    public class CronofyAccountClientBase : ICronofyAccountClientBase
+    public class CronofyAccountClientBase : ICronofyUserInfoClient
     {
         /// <summary>
         /// The access token for the OAuth authorization for the account.

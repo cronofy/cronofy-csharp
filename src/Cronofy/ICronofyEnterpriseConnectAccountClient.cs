@@ -7,7 +7,7 @@
     /// Interface for a Cronofy Enterprise Connect client that
     /// interacts with a service account's resources and users.
     /// </summary>
-    public interface ICronofyEnterpriseConnectAccountClient : ICronofyAccountClientBase
+    public interface ICronofyEnterpriseConnectAccountClient : ICronofyUserInfoClient
     {
         /// <summary>
         /// Gets a list of the account's resources.
