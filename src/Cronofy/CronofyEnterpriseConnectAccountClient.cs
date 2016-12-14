@@ -17,6 +17,11 @@ namespace Cronofy
         private const string ResourcesUrl = "https://api.cronofy.com/v1/resources";
 
         /// <summary>
+        /// The URL of the service account user authorization endpoint.
+        /// </summary>
+        private const string AuthorizeWithServiceAccountUrl = "https://api.cronofy.com/v1/service_account_authorizations";
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.CronofyEnterpriseConnectAccountClient"/> class.
         /// </summary>
@@ -43,6 +48,45 @@ namespace Cronofy
             var response = this.HttpClient.GetJsonResponse<ResourcesResponse>(request);
 
             return response.Resources.Select(x => x.ToResource());
+        }
+
+        /// <inheritdoc/>
+        public void AuthorizeUser(string email, string callbackUrl, IEnumerable<string> scope)
+        {
+            Preconditions.NotNull("email", email);
+            Preconditions.NotNull("callbackUrl", callbackUrl);
+            Preconditions.NotNull("scope", scope);
+
+            AuthorizeUser(email, callbackUrl, String.Join(" ", scope.ToArray()));
+        }
+
+        /// <inheritdoc/>
+        public void AuthorizeUser(string email, string callbackUrl, string scope)
+        {
+            Preconditions.NotNull("email", email);
+            Preconditions.NotNull("callbackUrl", callbackUrl);
+            Preconditions.NotNull("scope", scope);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = AuthorizeWithServiceAccountUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            var requestBody = new
+            {
+                email,
+                callback_url = callbackUrl,
+                scope
+            };
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 202)
+            {
+                throw new CronofyException("Request failed");
+            }
         }
     }
 }
