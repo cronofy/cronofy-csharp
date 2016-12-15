@@ -53,19 +53,15 @@ namespace Cronofy
         /// <inheritdoc/>
         public void AuthorizeUser(string email, string callbackUrl, IEnumerable<string> scope)
         {
-            Preconditions.NotNull("email", email);
-            Preconditions.NotNull("callbackUrl", callbackUrl);
-            Preconditions.NotNull("scope", scope);
-
             AuthorizeUser(email, callbackUrl, String.Join(" ", scope.ToArray()));
         }
 
         /// <inheritdoc/>
         public void AuthorizeUser(string email, string callbackUrl, string scope)
         {
-            Preconditions.NotNull("email", email);
-            Preconditions.NotNull("callbackUrl", callbackUrl);
-            Preconditions.NotNull("scope", scope);
+            Preconditions.NotEmpty("email", email);
+            Preconditions.NotEmpty("callbackUrl", callbackUrl);
+            Preconditions.NotEmpty("scope", scope);
 
             var request = new HttpRequest();
 
