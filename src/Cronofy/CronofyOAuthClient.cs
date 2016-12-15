@@ -124,9 +124,10 @@
         /// <remarks>
         /// The delegated scopes read_account, read_events, create_event, and delete_event
         /// are requested by default.
-        /// 
+        /// <para>
         /// The Enterprise Connect service_account/accounts/manage and
         /// service_account/resources/manage are requested by default.
+        /// </para>
         /// </remarks>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="redirectUri"/> is null or empty.

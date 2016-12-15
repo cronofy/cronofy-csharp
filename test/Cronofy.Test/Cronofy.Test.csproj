@@ -71,8 +71,10 @@
     <Compile Include="ExtremeTimesTests\TimeHolder.cs" />
     <Compile Include="CronofyAccountClientTests\ChangeParticipationStatus.cs" />
     <Compile Include="CronofyAccountClientTests\BulkDelete.cs" />
-    <Compile Include="CronofyAccountClientTests\GetResources.cs" />
     <Compile Include="CronofyAccountClientTests\GetUserInfo.cs" />
+    <Compile Include="CronofyEnterpriseConnectAccountClientTests\GetResources.cs" />
+    <Compile Include="CronofyEnterpriseConnectAccountClientTests\GetUserInfo.cs" />
+    <Compile Include="CronofyEnterpriseConnectAccountClientTests\Base.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -91,5 +93,6 @@
     <Folder Include="CronofyOAuthClientTests\" />
     <Folder Include="PushNotificationTests\" />
     <Folder Include="ExtremeTimesTests\" />
+    <Folder Include="CronofyEnterpriseConnectAccountClientTests\" />
   </ItemGroup>
 </Project>

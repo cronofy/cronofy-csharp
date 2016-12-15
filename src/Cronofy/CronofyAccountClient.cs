@@ -12,7 +12,7 @@ namespace Cronofy
     /// Class for a Cronofy client that interacts with an account's calendars
     /// and events.
     /// </summary>
-    public sealed class CronofyAccountClient : ICronofyAccountClient
+    public sealed class CronofyAccountClient : CronofyAccountClientBase, ICronofyAccountClient 
     {
         /// <summary>
         /// The URL of the account endpoint.
@@ -65,21 +65,6 @@ namespace Cronofy
         private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
 
         /// <summary>
-        /// The URL of the resources endpoint.
-        /// </summary>
-        private const string ResourcesUrl = "https://api.cronofy.com/v1/resources";
-
-        /// <summary>
-        /// The URL of the user info endpoint.
-        /// </summary>
-        private const string UserInfoUrl = "https://api.cronofy.com/v1/userinfo";
-
-        /// <summary>
-        /// The access token for the OAuth authorization for the account.
-        /// </summary>
-        private readonly string accessToken;
-
-        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.CronofyAccountClient"/> class.
         /// </summary>
@@ -90,24 +75,9 @@ namespace Cronofy
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.
         /// </exception>
-        public CronofyAccountClient(string accessToken)
+        public CronofyAccountClient(string accessToken) : base(accessToken)
         {
-            Preconditions.NotEmpty("accessToken", accessToken);
-
-            this.accessToken = accessToken;
-            this.HttpClient = new ConcreteHttpClient();
         }
-
-        /// <summary>
-        /// Gets or sets the HTTP client.
-        /// </summary>
-        /// <value>
-        /// The HTTP client.
-        /// </value>
-        /// <remarks>
-        /// Intend for test purposes only.
-        /// </remarks>
-        internal IHttpClient HttpClient { get; set; }
 
         /// <inheritdoc/>
         public Account GetAccount()
@@ -116,7 +86,7 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = AccountUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetJsonResponse<AccountResponse>(request);
 
@@ -130,7 +100,7 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = ProfilesUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetJsonResponse<ProfilesResponse>(request);
 
@@ -144,7 +114,7 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = CalendarsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var calendarsResponse = this.HttpClient.GetJsonResponse<CalendarsResponse>(request);
 
@@ -161,7 +131,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = CalendarsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var calendarRequest = new CreateCalendarRequest
             {
@@ -203,7 +173,7 @@ namespace Cronofy
 
             httpRequest.Method = "GET";
             httpRequest.Url = EventsUrl;
-            httpRequest.AddOAuthAuthorization(this.accessToken);
+            httpRequest.AddOAuthAuthorization(this.AccessToken);
 
             httpRequest.QueryString.Add("tzid", request.TimeZoneId);
             httpRequest.QueryString.Add("localized_times", true);
@@ -218,7 +188,7 @@ namespace Cronofy
 
             return new PagedResultsIterator<ReadEventsResponse, Event>(
                 this.HttpClient,
-                this.accessToken,
+                this.AccessToken,
                 httpRequest);
         }
 
@@ -249,7 +219,7 @@ namespace Cronofy
 
             httpRequest.Method = "GET";
             httpRequest.Url = FreeBusyUrl;
-            httpRequest.AddOAuthAuthorization(this.accessToken);
+            httpRequest.AddOAuthAuthorization(this.AccessToken);
 
             httpRequest.QueryString.Add("tzid", request.TimeZoneId);
             httpRequest.QueryString.Add("localized_times", true);
@@ -260,7 +230,7 @@ namespace Cronofy
 
             return new PagedResultsIterator<FreeBusyResponse, FreeBusy>(
                 this.HttpClient,
-                this.accessToken,
+                this.AccessToken,
                 httpRequest);
         }
 
@@ -285,7 +255,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
             request.SetJsonBody(eventRequest);
 
             var response = this.HttpClient.GetResponse(request);
@@ -307,7 +277,7 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new { event_id = eventId };
             request.SetJsonBody(requestBody);
@@ -328,7 +298,7 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = EventsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new { delete_all = true };
             request.SetJsonBody(requestBody);
@@ -351,7 +321,7 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = EventsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new { calendar_ids = calendarIds };
             request.SetJsonBody(requestBody);
@@ -375,7 +345,7 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = string.Format(ManagedEventUrlFormat, calendarId);
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new { event_uid = eventUid };
             request.SetJsonBody(requestBody);
@@ -398,7 +368,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = string.Format(ParticipationStatusUrlFormat, calendarId, eventUid);
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new { status = status.ToString().ToLower() };
             request.SetJsonBody(requestBody);
@@ -430,7 +400,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = PermissionsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
             request.SetJsonBody(permissionsRequest);
 
             var response = this.HttpClient.GetJsonResponse<Responses.ElevatedPermissionsResponse>(request);
@@ -467,7 +437,7 @@ namespace Cronofy
 
             request.Method = "POST";
             request.Url = ChannelsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
             request.SetJsonBody(channelRequest);
 
             var response = this.HttpClient.GetJsonResponse<ChannelResponse>(request);
@@ -482,7 +452,7 @@ namespace Cronofy
 
             request.Method = "GET";
             request.Url = ChannelsUrl;
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetJsonResponse<ChannelsResponse>(request);
 
@@ -498,7 +468,7 @@ namespace Cronofy
 
             request.Method = "DELETE";
             request.Url = string.Format(ChannelUrlFormat, channelId);
-            request.AddOAuthAuthorization(this.accessToken);
+            request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetResponse(request);
 
@@ -507,34 +477,6 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
-        }
-
-        /// <inheritdoc/>
-        public UserInfo GetUserInfo()
-        {
-            var request = new HttpRequest();
-
-            request.Method = "GET";
-            request.Url = UserInfoUrl;
-            request.AddOAuthAuthorization(this.accessToken);
-
-            var response = this.HttpClient.GetJsonResponse<UserInfoResponse>(request);
-
-            return response.ToUserInfo();
-        }
-
-        /// <inheritdoc/>
-        public IEnumerable<Resource> GetResources()
-        {
-            var request = new HttpRequest();
-
-            request.Method = "GET";
-            request.Url = ResourcesUrl;
-            request.AddOAuthAuthorization(this.accessToken);
-
-            var response = this.HttpClient.GetJsonResponse<ResourcesResponse>(request);
-
-            return response.Resources.Select(x => x.ToResource());
         }
 
         /// <summary>
