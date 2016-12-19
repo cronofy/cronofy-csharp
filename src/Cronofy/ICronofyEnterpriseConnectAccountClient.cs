@@ -23,9 +23,21 @@
         /// <summary>
         /// Authorizes the user for this service account.
         /// </summary>
-        /// <param name="email">Email.</param>
-        /// <param name="callbackUrl">Callback URL.</param>
-        /// <param name="scope">Scope.</param>
+        /// <param name="email">
+        /// The email of the user to be authorized, must not be empty.
+        /// </param>
+        /// <param name="callbackUrl">
+        /// The URL that will receive the callback for the result of the
+        /// authorization attempt, must not be empty.
+        /// </param>
+        /// <param name="scope">
+        /// The scope to request authorization for, must not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="email"/>, <paramref name="callbackUrl"/>,
+        /// or <paramref name="scope"/> are empty.
+        /// are empty.
+        /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
@@ -34,9 +46,21 @@
         /// <summary>
         /// Authorizes the user for this service account.
         /// </summary>
-        /// <param name="email">Email.</param>
-        /// <param name="callbackUrl">Callback URL.</param>
-        /// <param name="scope">Scope.</param>
+        /// <param name="email">
+        /// The email of the user to be authorized, must not be empty.
+        /// </param>
+        /// <param name="callbackUrl">
+        /// The URL that will receive the callback for the result of the
+        /// authorization attempt, must not be empty.
+        /// </param>
+        /// <param name="scope">
+        /// The scope to request authorization for, must not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="email"/>, <paramref name="callbackUrl"/>,
+        /// or <paramref name="scope"/> are empty.
+        /// are empty.
+        /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>

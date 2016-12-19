@@ -53,7 +53,7 @@ namespace Cronofy
         /// <inheritdoc/>
         public void AuthorizeUser(string email, string callbackUrl, IEnumerable<string> scope)
         {
-            AuthorizeUser(email, callbackUrl, String.Join(" ", scope.ToArray()));
+            this.AuthorizeUser(email, callbackUrl, string.Join(" ", scope.ToArray()));
         }
 
         /// <inheritdoc/>
