@@ -53,7 +53,8 @@
         /// <inheritdoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var time = (DateTimeOffset)value;
+            writer.WriteValue(time.ToString("u"));
         }
     }
 }

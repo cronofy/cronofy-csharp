@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Cronofy.Test
 {
@@ -35,6 +36,18 @@ namespace Cronofy.Test
         public StubRequestBuilder RequestBodyFormat(string format, params object[] args)
         {
             return RequestBody(string.Format(format, args));
+        }
+
+        public StubRequestBuilder JsonRequest(string jsonBody)
+        {
+            this.RequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            var deserialized = JsonConvert.DeserializeObject(jsonBody);
+            var generatedBody = JsonConvert.SerializeObject(deserialized);
+
+            this.RequestBody(generatedBody);
+
+            return this;
         }
 
         public StubRequestBuilder ResponseCode(int code)

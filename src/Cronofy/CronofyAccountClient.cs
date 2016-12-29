@@ -4,9 +4,8 @@ namespace Cronofy
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Cronofy;
-    using Cronofy.Requests;
-    using Cronofy.Responses;
+    using Requests;
+    using Responses;
 
     /// <summary>
     /// Class for a Cronofy client that interacts with an account's calendars
@@ -63,6 +62,11 @@ namespace Cronofy
         /// The URL format for the elevated permissions endpoint.
         /// </summary>
         private const string PermissionsUrl = "https://api.cronofy.com/v1/permissions";
+
+        /// <summary>
+        /// The URL of the channels endpoint.
+        /// </summary>
+        private const string AvailabilityUrl = "https://api.cronofy.com/v1/availability";
 
         /// <summary>
         /// Initializes a new instance of the
@@ -382,11 +386,11 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public ElevatedPermissionsResponse ElevatedPermissions(ElevatedPermissionsBuilder permissionBuilder)
+        public ElevatedPermissionsResponse ElevatedPermissions(IBuilder<ElevatedPermissionsRequest> builder)
         {
-            Preconditions.NotNull("permissionBuilder", permissionBuilder);
+            Preconditions.NotNull("builder", builder);
 
-            var request = permissionBuilder.Build();
+            var request = builder.Build();
 
             return this.ElevatedPermissions(request);
         }
@@ -477,6 +481,33 @@ namespace Cronofy
                 // TODO More useful exceptions for validation errors
                 throw new CronofyException("Request failed");
             }
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<AvailablePeriod> GetAvailability(IBuilder<AvailabilityRequest> builder)
+        {
+            Preconditions.NotNull("builder", builder);
+
+            var request = builder.Build();
+
+            return this.GetAvailability(request);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<AvailablePeriod> GetAvailability(AvailabilityRequest availabilityRequest)
+        {
+            Preconditions.NotNull("availabilityRequest", availabilityRequest);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = AvailabilityUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+            request.SetJsonBody(availabilityRequest);
+
+            var response = this.HttpClient.GetJsonResponse<AvailabilityResponse>(request);
+
+            return response.AvailablePeriods.Select(ap => ap.ToAvailablePeriod());
         }
 
         /// <summary>

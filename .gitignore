@@ -44,3 +44,6 @@ Thumbs.db
 
 #dotCover
 *.dotCover
+
+#Rider
+.idea
