@@ -1,6 +1,5 @@
 ﻿namespace Cronofy
 {
-    using System;
     using Cronofy.Responses;
 
     /// <summary>
@@ -28,7 +27,7 @@
         /// not be empty.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="AccessToken"/> is null or empty.
+        /// Thrown if <paramref name="accessToken"/> is null or empty.
         /// </exception>
         public CronofyAccountClientBase(string accessToken)
         {
