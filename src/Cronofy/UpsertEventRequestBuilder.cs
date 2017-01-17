@@ -52,6 +52,16 @@
         private string locationDescription;
 
         /// <summary>
+        /// The latitude of the event's location.
+        /// </summary>
+        private string locationLatitude;
+
+        /// <summary>
+        /// The longitude of the event's location.
+        /// </summary>
+        private string locationLongitude;
+
+        /// <summary>
         /// The time zone ID of the event's start time.
         /// </summary>
         private string startTimeZoneId;
@@ -336,15 +346,38 @@
         /// <summary>
         /// Sets the description of the event's location.
         /// </summary>
-        /// <param name="location">
+        /// <param name="description">
         /// The description of the event's location.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
-        public UpsertEventRequestBuilder Location(string location)
+        public UpsertEventRequestBuilder Location(string description)
         {
-            this.locationDescription = location;
+            this.locationDescription = description;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the description of the event's location.
+        /// </summary>
+        /// <param name="description">
+        /// The description of the event's location.
+        /// </param>
+        /// <param name="latitude">
+        /// The latitude of the event's location.
+        /// </param>
+        /// <param name="longitude">
+        /// The longitude of the event's location.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder Location(string description, string latitude, string longitude)
+        {
+            this.locationDescription = description;
+            this.locationLatitude = latitude;
+            this.locationLongitude = longitude;
             return this;
         }
 
@@ -472,11 +505,15 @@
                 Url = this.url,
             };
 
-            if (string.IsNullOrEmpty(this.locationDescription) == false)
+            if (string.IsNullOrEmpty(this.locationDescription) == false
+                || string.IsNullOrEmpty(this.locationLatitude) == false
+                || string.IsNullOrEmpty(this.locationLongitude) == false)
             {
                 request.Location = new UpsertEventRequest.RequestLocation
                 {
                     Description = this.locationDescription,
+                    Latitude = this.locationLatitude,
+                    Longitude = this.locationLongitude,
                 };
             }
 
