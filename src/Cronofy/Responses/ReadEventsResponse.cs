@@ -286,6 +286,24 @@
                 public string Description { get; set; }
 
                 /// <summary>
+                /// Gets or sets the latitude of the location.
+                /// </summary>
+                /// <value>
+                /// The latitude of the location.
+                /// </value>
+                [JsonProperty("lat")]
+                public string Latitude { get; set; }
+
+                /// <summary>
+                /// Gets or sets the longitude of the location.
+                /// </summary>
+                /// <value>
+                /// The longitude of the location.
+                /// </value>
+                [JsonProperty("long")]
+                public string Longitude { get; set; }
+
+                /// <summary>
                 /// Converts the response into a <see cref="Cronofy.Location"/>.
                 /// </summary>
                 /// <returns>
@@ -293,10 +311,7 @@
                 /// </returns>
                 public Location ToLocation()
                 {
-                    return new Location
-                    {
-                        Description = this.Description,
-                    };
+                    return new Location(this.Description, this.Latitude, this.Longitude);
                 }
             }
 
