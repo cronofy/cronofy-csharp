@@ -88,7 +88,7 @@
                 case 422:
                     throw new CronofyResponseException("Validation failed", response);
                 default:
-                    throw new CronofyResponseException("Request failed", response);
+                    throw new CronofyResponseException(string.Format("Request failed - code={0}", response.Code), response);
             }
         }
     }
