@@ -6,6 +6,26 @@ namespace Cronofy
     public sealed class Location
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Cronofy.Location"/>
+        /// class.
+        /// </summary>
+        /// <param name="description">
+        /// The description for the location.
+        /// </param>
+        /// <param name="latitude">
+        /// The latitude for the location.
+        /// </param>
+        /// <param name="longitude">
+        /// The longitude for the location.
+        /// </param>
+        public Location(string description, string latitude, string longitude)
+        {
+            this.Description = description;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
+        }
+
+        /// <summary>
         /// Gets or sets the description of the location.
         /// </summary>
         /// <value>
@@ -28,26 +48,6 @@ namespace Cronofy
         /// The longitude of the location.
         /// </value>
         public string Longitude { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Cronofy.Location"/>
-        /// class.
-        /// </summary>
-        /// <param name="description">
-        /// The description for the location.
-        /// </param>
-        /// <param name="latitude">
-        /// The latitude for the location.
-        /// </param>
-        /// <param name="longitude">
-        /// The longitude for the location.
-        /// </param>
-        public Location(string description, string latitude, string longitude)
-        {
-            this.Description = description;
-            this.Latitude = latitude;
-            this.Longitude = longitude;
-        }
 
         /// <inheritdoc/>
         public override int GetHashCode()
