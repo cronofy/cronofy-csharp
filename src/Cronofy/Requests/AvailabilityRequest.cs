@@ -114,6 +114,15 @@
             /// </value>
             [JsonProperty("sub")]
             public string Sub { get; set; }
+
+            /// <summary>
+            /// Gets or sets the available periods for the member.
+            /// </summary>
+            /// <value>
+            /// The available periods for the request.
+            /// </value>
+            [JsonProperty("available_periods")]
+            public IEnumerable<AvailablePeriod> AvailablePeriods { get; set; }
         }
     }
 }

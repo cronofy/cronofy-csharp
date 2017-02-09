@@ -123,6 +123,7 @@
     <Compile Include="CronofyEnterpriseConnectAccountClient.cs" />
     <Compile Include="ICronofyUserInfoClient.cs" />
     <Compile Include="CronofyAccountClientBase.cs" />
+    <Compile Include="AvailabilityMemberBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
