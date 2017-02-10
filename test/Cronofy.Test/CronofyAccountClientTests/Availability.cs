@@ -130,7 +130,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     {
                       ""members"": [
                         { ""sub"": ""acc_567236000909002"" },
-                        { ""sub"": ""acc_678347111010113"" }
+                        {
+                          ""sub"": ""acc_678347111010113"",
+                          ""available_periods"": [
+                            {
+                              ""start"": ""2017-01-03 09:00:00Z"",
+                              ""end"": ""2017-01-03 12:00:00Z""
+                            }
+                          ]
+                        }
                       ],
                       ""required"": ""all""
                     },
@@ -151,14 +159,20 @@ namespace Cronofy.Test.CronofyAccountClientTests
                   ]
                 }";
 
+            var member = new AvailabilityMemberBuilder()
+                .Sub("acc_678347111010113")
+                .AddAvailablePeriod(
+                    new DateTimeOffset(2017, 1, 3, 9, 0, 0, TimeSpan.Zero),
+                    new DateTimeOffset(2017, 1, 3, 12, 0, 0, TimeSpan.Zero));
+
             var requiredGroup = new ParticipantGroupBuilder()
-                .AddParticipant("acc_567236000909002")
-                .AddParticipant("acc_678347111010113")
+                .AddMember("acc_567236000909002")
+                .AddMember(member)
                 .AllRequired();
 
             var representedGroup = new ParticipantGroupBuilder()
-                .AddParticipant("acc_678910200909001")
-                .AddParticipant("acc_879082061010114")
+                .AddMember("acc_678910200909001")
+                .AddMember("acc_879082061010114")
                 .Required(1);
 
             var builder = new AvailabilityRequestBuilder()

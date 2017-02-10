@@ -161,7 +161,7 @@
             if (this.requiredSubs.Count > 0)
             {
                 var requiredGroup = new ParticipantGroupBuilder()
-                    .AddParticipants(this.requiredSubs)
+                    .AddMembers(this.requiredSubs)
                     .AllRequired();
 
                 participantGroups.Add(requiredGroup.Build());

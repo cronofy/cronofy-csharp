@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Requests;
 
     /// <summary>
@@ -11,9 +10,9 @@
     public sealed class ParticipantGroupBuilder : IBuilder<AvailabilityRequest.ParticipantGroup>
     {
         /// <summary>
-        /// The subjects of the participants for the group.
+        /// The members for the group.
         /// </summary>
-        private readonly List<string> subs = new List<string>();
+        private readonly IList<AvailabilityRequest.Member> members = new List<AvailabilityRequest.Member>();
 
         /// <summary>
         /// The required attribute for the group.
@@ -21,10 +20,10 @@
         private object required;
 
         /// <summary>
-        /// Adds a participant to the group.
+        /// Adds a member to the group.
         /// </summary>
         /// <param name="sub">
-        /// The sub of the participant, must not be blank.
+        /// The sub of the member, must not be blank.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="ParticipantGroupBuilder"/>.
@@ -32,20 +31,58 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="sub"/> is blank.
         /// </exception>
-        public ParticipantGroupBuilder AddParticipant(string sub)
+        public ParticipantGroupBuilder AddMember(string sub)
         {
             Preconditions.NotBlank("sub", sub);
 
-            this.subs.Add(sub);
+            return this.AddMember(new AvailabilityMemberBuilder().Sub(sub));
+        }
+
+        /// <summary>
+        /// Adds a member to the group.
+        /// </summary>
+        /// <param name="member">
+        /// The member to add, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="ParticipantGroupBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="member"/> is <code>null</code>.
+        /// </exception>
+        public ParticipantGroupBuilder AddMember(AvailabilityRequest.Member member)
+        {
+            Preconditions.NotNull("member", member);
+
+            this.members.Add(member);
 
             return this;
         }
 
         /// <summary>
-        /// Adds participants to the group.
+        /// Adds a member to the group.
+        /// </summary>
+        /// <param name="builder">
+        /// A builder for the member to add, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="ParticipantGroupBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="builder"/> is <code>null</code>.
+        /// </exception>
+        public ParticipantGroupBuilder AddMember(IBuilder<AvailabilityRequest.Member> builder)
+        {
+            Preconditions.NotNull("builder", builder);
+
+            return this.AddMember(builder.Build());
+        }
+
+        /// <summary>
+        /// Adds members to the group.
         /// </summary>
         /// <param name="subs">
-        /// The subs of the participants, must not be <code>null</code>.
+        /// The subs of the members, must not be <code>null</code>.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="ParticipantGroupBuilder"/>.
@@ -53,11 +90,14 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="subs"/> is <code>null</code>.
         /// </exception>
-        public ParticipantGroupBuilder AddParticipants(IEnumerable<string> subs)
+        public ParticipantGroupBuilder AddMembers(IEnumerable<string> subs)
         {
             Preconditions.NotNull("subs", subs);
 
-            this.subs.AddRange(subs);
+            foreach (var sub in subs)
+            {
+                this.AddMember(sub);
+            }
 
             return this;
         }
@@ -102,7 +142,7 @@
             return new AvailabilityRequest.ParticipantGroup
             {
                 Required = this.required,
-                Members = this.subs.Select(sub => new AvailabilityRequest.Member { Sub = sub }),
+                Members = this.members,
             };
         }
     }
