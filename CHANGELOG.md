@@ -1,3 +1,7 @@
+## [0.3.0]
+
+ * Support member-specific available periods for Availability API [#18]
+
 ## [0.2.0]
 
  * Improved errors [#3]
@@ -29,6 +33,7 @@
 [0.1.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.1.0
 [0.1.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.1.1
 [0.2.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.2.0
+[0.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.3.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -37,3 +42,4 @@
 [#14]: https://github.com/cronofy/cronofy-csharp/pull/14
 [#15]: https://github.com/cronofy/cronofy-csharp/pull/15
 [#16]: https://github.com/cronofy/cronofy-csharp/pull/16
+[#18]: https://github.com/cronofy/cronofy-csharp/pull/18
