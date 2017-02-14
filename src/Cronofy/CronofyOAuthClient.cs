@@ -11,26 +11,6 @@
     public sealed class CronofyOAuthClient : ICronofyOAuthClient
     {
         /// <summary>
-        /// The URL for the OAuth authorization endpoint.
-        /// </summary>
-        private const string AuthorizationUrl = "https://app.cronofy.com/oauth/authorize";
-
-        /// <summary>
-        /// The URL for the Enterprise Connect OAuth authorization endpoint.
-        /// </summary>
-        private const string EnterpriseConnectAuthorizationUrl = "https://app.cronofy.com/enterprise_connect/oauth/authorize";
-
-        /// <summary>
-        /// The URL for the OAuth token endpoint.
-        /// </summary>
-        private const string TokenUrl = "https://app.cronofy.com/oauth/token";
-
-        /// <summary>
-        /// The URL for the OAuth token revocation endpoint.
-        /// </summary>
-        private const string TokenRevocationUrl = "https://app.cronofy.com/oauth/token/revoke";
-
-        /// <summary>
         /// The grant type for exchanging an OAuth authorization code.
         /// </summary>
         private const string CodeGrantType = "authorization_code";
@@ -51,6 +31,11 @@
         private readonly string clientSecret;
 
         /// <summary>
+        /// The URL provider.
+        /// </summary>
+        private readonly UrlProvider urlProvider;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.CronofyOAuthClient"/> class.
         /// </summary>
@@ -65,12 +50,35 @@
         /// <paramref name="clientSecret"/> are blank.
         /// </exception>
         public CronofyOAuthClient(string clientId, string clientSecret)
+            : this(clientId, clientSecret, string.Empty)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Cronofy.CronofyOAuthClient"/> class.
+        /// </summary>
+        /// <param name="clientId">
+        /// Your OAuth client_id, must not be blank.
+        /// </param>
+        /// <param name="clientSecret">
+        /// Your OAuth client_secret, must not be blank.
+        /// </param>
+        /// <param name="dataCentre">
+        /// The data centre to use.
+        /// </param>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="clientId"/> or
+        /// <paramref name="clientSecret"/> are blank.
+        /// </exception>
+        public CronofyOAuthClient(string clientId, string clientSecret, string dataCentre)
         {
             Preconditions.NotBlank("clientId", clientId);
             Preconditions.NotBlank("clientSecret", clientSecret);
 
             this.clientId = clientId;
             this.clientSecret = clientSecret;
+            this.urlProvider = UrlProviderFactory.GetProvider(dataCentre);
             this.HttpClient = new ConcreteHttpClient();
         }
 
@@ -107,7 +115,7 @@
         {
             Preconditions.NotEmpty("redirectUri", redirectUri);
 
-            return new AuthorizationUrlBuilder(this.clientId, redirectUri);
+            return new AuthorizationUrlBuilder(this.clientId, this.urlProvider, redirectUri);
         }
 
         /// <summary>
@@ -136,7 +144,7 @@
         {
             Preconditions.NotEmpty("redirectUri", redirectUri);
 
-            return new AuthorizationUrlBuilder(this.clientId, redirectUri)
+            return new AuthorizationUrlBuilder(this.clientId, this.urlProvider, redirectUri)
                 .EnterpriseConnect();
         }
 
@@ -149,7 +157,7 @@
             var request = new HttpRequest();
 
             request.Method = "POST";
-            request.Url = TokenUrl;
+            request.Url = this.urlProvider.TokenUrl;
 
             var requestBody = new OAuthTokenRequest
             {
@@ -175,7 +183,7 @@
             var request = new HttpRequest();
 
             request.Method = "POST";
-            request.Url = TokenRevocationUrl;
+            request.Url = this.urlProvider.TokenRevocationUrl;
 
             var requestBody = new OAuthTokenRevocationRequest
             {
@@ -202,7 +210,7 @@
             var request = new HttpRequest();
 
             request.Method = "POST";
-            request.Url = TokenUrl;
+            request.Url = this.urlProvider.TokenUrl;
 
             var requestBody = new OAuthTokenRefreshRequest
             {
@@ -250,6 +258,11 @@
             private readonly string clientId;
 
             /// <summary>
+            /// The URL provider for the client.
+            /// </summary>
+            private readonly UrlProvider urlProvider;
+
+            /// <summary>
             /// The URI to redirect the user's authorization response to.
             /// </summary>
             private readonly string redirectUri;
@@ -288,20 +301,27 @@
             /// <param name="clientId">
             /// The application's OAuth client_id, must not be blank.
             /// </param>
+            /// <param name="urlProvider">
+            /// The URL provider for the current context, must not be
+            /// <code>null</code>.
+            /// </param>
             /// <param name="redirectUri">
             /// The URI to redirect the user's response for the authorization
             /// request to, must not be empty.
             /// </param>
             /// <exception cref="System.ArgumentException">
-            /// Thrown if <paramref name="clientId"/> is blank, or if
+            /// Thrown if <paramref name="clientId"/> is blank,
+            /// <paramref name="urlProvider"/> is <code>null</code>, or if
             /// <paramref name="redirectUri"/> is empty.
             /// </exception>
-            internal AuthorizationUrlBuilder(string clientId, string redirectUri)
+            internal AuthorizationUrlBuilder(string clientId, UrlProvider urlProvider, string redirectUri)
             {
                 Preconditions.NotBlank("clientId", clientId);
+                Preconditions.NotNull("urlProvider", urlProvider);
                 Preconditions.NotEmpty("redirectUri", redirectUri);
 
                 this.clientId = clientId;
+                this.urlProvider = urlProvider;
                 this.redirectUri = redirectUri;
                 this.scope = DefaultScopes;
                 this.enterpriseConnectScope = DefaultEnterpriseConnectScopes;
@@ -450,7 +470,7 @@
             /// </returns>
             public string Build()
             {
-                var authUrl = this.enterpriseConnect ? EnterpriseConnectAuthorizationUrl : AuthorizationUrl;
+                var authUrl = this.enterpriseConnect ? this.urlProvider.EnterpriseConnectAuthorizationUrl : this.urlProvider.AuthorizationUrl;
 
                 var urlBuilder = new UrlBuilder()
                     .Url(authUrl)

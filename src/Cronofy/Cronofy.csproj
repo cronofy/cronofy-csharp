@@ -124,6 +124,8 @@
     <Compile Include="ICronofyUserInfoClient.cs" />
     <Compile Include="CronofyAccountClientBase.cs" />
     <Compile Include="AvailabilityMemberBuilder.cs" />
+    <Compile Include="UrlProviderFactory.cs" />
+    <Compile Include="UrlProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
