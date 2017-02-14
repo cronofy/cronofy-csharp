@@ -126,6 +126,7 @@
     <Compile Include="AvailabilityMemberBuilder.cs" />
     <Compile Include="UrlProviderFactory.cs" />
     <Compile Include="UrlProvider.cs" />
+    <Compile Include="Configuration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -56,6 +56,35 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
+        public void AlteredDefaultDataCentre()
+        {
+            var defaultDataCentre = Configuration.DefaultDataCentre;
+
+            try
+            {
+                Configuration.DefaultDataCentre = "de";
+
+                this.client = new CronofyOAuthClient(clientId, clientSecret);
+
+                var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
+                var expectedAuthUrl = string.Format(
+                    "https://app-de.cronofy.com/oauth/authorize" +
+                        "?client_id={0}" +
+                        "&response_type=code" +
+                        "&redirect_uri={1}" +
+                        "&scope=read_account%20read_events%20create_event%20delete_event",
+                    UrlBuilder.EncodeParameter(clientId),
+                    UrlBuilder.EncodeParameter(redirectUri));
+
+                Assert.AreEqual(expectedAuthUrl, authUrl);
+            }
+            finally
+            {
+                Configuration.DefaultDataCentre = defaultDataCentre;
+            }
+        }
+
+        [Test]
         public void HasDefaultScope()
         {
             var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();

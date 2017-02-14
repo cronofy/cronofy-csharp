@@ -50,7 +50,7 @@
         /// <paramref name="clientSecret"/> are blank.
         /// </exception>
         public CronofyOAuthClient(string clientId, string clientSecret)
-            : this(clientId, clientSecret, string.Empty)
+            : this(clientId, clientSecret, null)
         {
         }
 

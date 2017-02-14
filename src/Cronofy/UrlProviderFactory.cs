@@ -24,7 +24,7 @@
         /// </returns>
         public static UrlProvider GetProvider(string dataCentre)
         {
-            var key = (dataCentre ?? string.Empty).ToLowerInvariant();
+            var key = (dataCentre ?? Configuration.DefaultDataCentre ?? string.Empty).ToLowerInvariant();
 
             if (key == "us")
             {
