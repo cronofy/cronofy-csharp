@@ -62,7 +62,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             try
             {
-                Configuration.DefaultDataCentre = "de";
+                Configuration.DefaultDataCentre = DataCentre.German;
 
                 this.client = new CronofyOAuthClient(clientId, clientSecret);
 

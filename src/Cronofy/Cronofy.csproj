@@ -122,11 +122,12 @@
     <Compile Include="ICronofyEnterpriseConnectAccountClient.cs" />
     <Compile Include="CronofyEnterpriseConnectAccountClient.cs" />
     <Compile Include="ICronofyUserInfoClient.cs" />
-    <Compile Include="CronofyAccountClientBase.cs" />
+    <Compile Include="CronofyAccessTokenClient.cs" />
     <Compile Include="AvailabilityMemberBuilder.cs" />
     <Compile Include="UrlProviderFactory.cs" />
     <Compile Include="UrlProvider.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="DataCentre.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

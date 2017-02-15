@@ -11,7 +11,7 @@ namespace Cronofy
     /// Class for a Cronofy client that interacts with an account's calendars
     /// and events.
     /// </summary>
-    public sealed class CronofyAccountClient : CronofyAccountClientBase, ICronofyAccountClient 
+    public sealed class CronofyAccountClient : CronofyAccessTokenClient, ICronofyAccountClient
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -41,9 +41,29 @@ namespace Cronofy
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// empty.
         /// </exception>
         public CronofyAccountClient(string accessToken, string dataCentre)
+            : base(accessToken, dataCentre)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Cronofy.CronofyAccountClient"/> class.
+        /// </summary>
+        /// <param name="accessToken">
+        /// The access token for the OAuth authorization for the account, must
+        /// not be empty.
+        /// </param>
+        /// <param name="dataCentre">
+        /// The data centre to use, must not be <code>null</code>.
+        /// </param>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// </exception>
+        public CronofyAccountClient(string accessToken, DataCentre dataCentre)
             : base(accessToken, dataCentre)
         {
         }

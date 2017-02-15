@@ -6,7 +6,7 @@
     /// Class for a Cronofy client base that manages the
     /// access token and any shared client methods.
     /// </summary>
-    public class CronofyAccountClientBase : ICronofyUserInfoClient
+    public class CronofyAccessTokenClient : ICronofyUserInfoClient
     {
         /// <summary>
         /// The access token for the OAuth authorization for the account.
@@ -20,7 +20,7 @@
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyAccountClientBase"/> class.
+        /// <see cref="Cronofy.CronofyAccessTokenClient"/> class.
         /// </summary>
         /// <param name="accessToken">
         /// The access token for the OAuth authorization for the account, must
@@ -29,14 +29,14 @@
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.
         /// </exception>
-        public CronofyAccountClientBase(string accessToken)
+        public CronofyAccessTokenClient(string accessToken)
             : this(accessToken, string.Empty)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyAccountClientBase"/> class.
+        /// <see cref="Cronofy.CronofyAccessTokenClient"/> class.
         /// </summary>
         /// <param name="accessToken">
         /// The access token for the OAuth authorization for the account, must
@@ -47,14 +47,39 @@
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// empty.
         /// </exception>
-        public CronofyAccountClientBase(string accessToken, string dataCentre)
+        public CronofyAccessTokenClient(string accessToken, string dataCentre)
         {
             Preconditions.NotEmpty("accessToken", accessToken);
 
             this.AccessToken = accessToken;
             this.UrlProvider = UrlProviderFactory.GetProvider(dataCentre);
+            this.HttpClient = new ConcreteHttpClient();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Cronofy.CronofyAccessTokenClient"/> class.
+        /// </summary>
+        /// <param name="accessToken">
+        /// The access token for the OAuth authorization for the account, must
+        /// not be empty.
+        /// </param>
+        /// <param name="dataCentre">
+        /// The data centre to use, must not be <code>null</code>.
+        /// </param>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// </exception>
+        public CronofyAccessTokenClient(string accessToken, DataCentre dataCentre)
+        {
+            Preconditions.NotEmpty("accessToken", accessToken);
+            Preconditions.NotNull("dataCentre", dataCentre);
+
+            this.AccessToken = accessToken;
+            this.UrlProvider = UrlProviderFactory.GetProvider(dataCentre.Identifier);
             this.HttpClient = new ConcreteHttpClient();
         }
 
