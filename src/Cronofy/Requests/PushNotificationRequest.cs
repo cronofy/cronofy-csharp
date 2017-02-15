@@ -138,7 +138,7 @@
 
                     if (value != null && DateTime.TryParseExact(value, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out dtoResult))
                     {
-                        this.ChangesSince = dtoResult;
+                        this.ChangesSince = dtoResult.ToUniversalTime();
                     }
                 }
             }

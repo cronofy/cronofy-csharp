@@ -1,3 +1,7 @@
+## [0.4.0]
+
+ * Support multiple data centres [#21]
+
 ## [0.3.0]
 
  * Support member-specific available periods for Availability API [#18]
@@ -34,6 +38,7 @@
 [0.1.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.1.1
 [0.2.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.2.0
 [0.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.3.0
+[0.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.4.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -43,3 +48,4 @@
 [#15]: https://github.com/cronofy/cronofy-csharp/pull/15
 [#16]: https://github.com/cronofy/cronofy-csharp/pull/16
 [#18]: https://github.com/cronofy/cronofy-csharp/pull/18
+[#21]: https://github.com/cronofy/cronofy-csharp/pull/21

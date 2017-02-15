@@ -251,8 +251,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     Transparency = Transparency.Opaque,
                     EventStatus = EventStatus.Confirmed,
                     Categories = new string[] {},
-                    Created = DateTime.MinValue,
-                    Updated = DateTime.MinValue,
+                    Created = DateTime.MinValue.ToUniversalTime(),
+                    Updated = DateTime.MinValue.ToUniversalTime(),
                     Attendees = new[] {
                         new Attendee {
                             Email = "example@cronofy.com",
