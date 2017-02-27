@@ -93,6 +93,15 @@
         public IEnumerable<RequestReminder> Reminders { get; set; }
 
         /// <summary>
+        /// Gets or sets the transparency of the event.
+        /// </summary>
+        /// <value>
+        /// The transparency of the event.
+        /// </value>
+        [JsonProperty("transparency")]
+        public string Transparency { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the location for an upsert event
         /// request.
         /// </summary>

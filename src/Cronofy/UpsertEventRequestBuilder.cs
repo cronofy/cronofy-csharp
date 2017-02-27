@@ -87,6 +87,11 @@
         private NullableString url;
 
         /// <summary>
+        /// The transparency of the event.
+        /// </summary>
+        private string transparency;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -500,9 +505,16 @@
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="transparency"/> is not
+        /// transparent or opaque.
+        /// </exception> 
         public UpsertEventRequestBuilder Transparency(string transparency)
         {
-            throw new NotImplementedException();
+            Preconditions.True(new[] { "transparent", "opaque" }.Contains(transparency), "Transparency must be `transparent` or `opaque`");
+
+            this.transparency = transparency;
+
             return this;
         }
 
@@ -518,6 +530,7 @@
                 Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
                 Url = this.url,
+                Transparency = this.transparency,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
