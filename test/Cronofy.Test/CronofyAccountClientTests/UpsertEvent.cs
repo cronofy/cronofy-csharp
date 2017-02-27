@@ -16,6 +16,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
             const string startTimeString = "2014-08-05 15:30:00Z";
             const string endTimeString = "2014-08-05 17:00:00Z";
             const string locationDescription = "Board room";
+            const string transparency = Transparency.Opaque;
 
             Http.Stub(
                 HttpPost
@@ -28,14 +29,16 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
                     "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
-                    "\"location\":{{\"description\":\"{5}\"}}" +
+                    "\"location\":{{\"description\":\"{5}\"}}," +
+                    "\"transparency\":\"{6}\"" +
                     "}}",
                     eventId,
                     summary,
                     description,
                     startTimeString,
                     endTimeString,
-                    locationDescription)
+                    locationDescription,
+                    transparency)
                 .ResponseCode(202)
             );
 
@@ -45,7 +48,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Description(description)
                 .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
-                .Location(locationDescription);
+                .Location(locationDescription)
+                .Transparency(transparency);
 
             Client.UpsertEvent(calendarId, builder);
         }
@@ -59,6 +63,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
             const string startTimeString = "2014-08-05 15:30:00Z";
             const string endTimeString = "2014-08-05 17:00:00Z";
             const string locationDescription = "Board room";
+            const string transparency = Transparency.Opaque;
 
             Http.Stub(
                 HttpPost
@@ -71,14 +76,16 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
                     "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
-                    "\"location\":{{\"description\":\"{5}\"}}" +
+                    "\"location\":{{\"description\":\"{5}\"}}," +
+                    "\"transparency\":\"{6}\"" + 
                     "}}",
                     eventUid,
                     summary,
                     description,
                     startTimeString,
                     endTimeString,
-                    locationDescription)
+                    locationDescription,
+                    transparency)
                 .ResponseCode(202)
             );
 
@@ -88,7 +95,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Description(description)
                 .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
-                .Location(locationDescription);
+                .Location(locationDescription)
+                .Transparency(transparency);
 
             Client.UpsertEvent(calendarId, builder);
         }
@@ -428,6 +436,46 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Start(new Date(2014, 8, 5))
                 .End(new Date(2014, 8, 6))
                 .Url(null);
+
+            Client.UpsertEvent(calendarId, builder);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CantUpsertWithInvalidTransparency()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string startTimeString = "2014-08-05 15:30:00Z";
+            const string endTimeString = "2014-08-05 17:00:00Z";
+            const string transparency = Transparency.Unknown;
+
+            Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"summary\":\"{1}\"," +
+                    "\"start\":{{\"time\":\"{2}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"transparency\":\"{4}\"" +
+                    "}}",
+                    eventId,
+                    summary,
+                    startTimeString,
+                    endTimeString,
+                    transparency)
+                .ResponseCode(202)
+            );
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
+                .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
+                .Transparency(transparency);
 
             Client.UpsertEvent(calendarId, builder);
         }

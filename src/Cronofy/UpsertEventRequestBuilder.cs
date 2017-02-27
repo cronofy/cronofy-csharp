@@ -491,6 +491,21 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the transparency of the event.
+        /// </summary>
+        /// <param name="transparency">
+        /// Transparency, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder Transparency(string transparency)
+        {
+            throw new NotImplementedException();
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
