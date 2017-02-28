@@ -123,6 +123,15 @@
             /// </value>
             [JsonProperty("available_periods")]
             public IEnumerable<AvailablePeriod> AvailablePeriods { get; set; }
+
+            /// <summary>
+            /// Gets or sets the calendar IDs for the member.
+            /// </summary>
+            /// <value>
+            /// The calendar IDs for the request.
+            /// </value>
+            [JsonProperty("calendar_ids")]
+            public IEnumerable<string> CalendarIds { get; set; }
         }
     }
 }
