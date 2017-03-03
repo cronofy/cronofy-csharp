@@ -108,12 +108,7 @@ namespace Cronofy
             };
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 202)
-            {
-                throw new CronofyException("Request failed");
-            }
+            this.HttpClient.GetValidResponse(request);
         }
     }
 }
