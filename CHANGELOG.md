@@ -1,3 +1,8 @@
+## [0.5.0]
+
+ * Support setting event transparency [#22]
+ * Support member-specific calendar selection for Availability API [#23]
+
 ## [0.4.0]
 
  * Support multiple data centres [#21]
@@ -39,6 +44,7 @@
 [0.2.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.2.0
 [0.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.3.0
 [0.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.4.0
+[0.5.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -49,3 +55,5 @@
 [#16]: https://github.com/cronofy/cronofy-csharp/pull/16
 [#18]: https://github.com/cronofy/cronofy-csharp/pull/18
 [#21]: https://github.com/cronofy/cronofy-csharp/pull/21
+[#22]: https://github.com/cronofy/cronofy-csharp/pull/22
+[#23]: https://github.com/cronofy/cronofy-csharp/pull/23
