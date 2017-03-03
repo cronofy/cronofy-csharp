@@ -137,6 +137,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                               ""start"": ""2017-01-03 09:00:00Z"",
                               ""end"": ""2017-01-03 12:00:00Z""
                             }
+                          ],
+                          ""calendar_ids"": [
+                            ""cal_1234_5678"",
+                            ""cal_9876_5432""
                           ]
                         }
                       ],
@@ -163,7 +167,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Sub("acc_678347111010113")
                 .AddAvailablePeriod(
                     new DateTimeOffset(2017, 1, 3, 9, 0, 0, TimeSpan.Zero),
-                    new DateTimeOffset(2017, 1, 3, 12, 0, 0, TimeSpan.Zero));
+                    new DateTimeOffset(2017, 1, 3, 12, 0, 0, TimeSpan.Zero))
+                .CalendarIds(new[] { "cal_1234_5678", "cal_9876_5432" });
 
             var requiredGroup = new ParticipantGroupBuilder()
                 .AddMember("acc_567236000909002")

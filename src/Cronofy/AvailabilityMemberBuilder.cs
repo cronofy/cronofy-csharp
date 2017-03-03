@@ -20,6 +20,11 @@
         private IList<AvailabilityRequest.AvailablePeriod> availablePeriods;
 
         /// <summary>
+        /// The request's calendar IDs.
+        /// </summary>
+        private IEnumerable<string> calendarIds;
+
+        /// <summary>
         /// Sets the sub of the member.
         /// </summary>
         /// <param name="sub">
@@ -67,6 +72,47 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the calendar IDs for the request.
+        /// </summary>
+        /// <param name="calendarIds">
+        /// The calendar IDs to restrict the availability query to, must not be
+        /// null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarIds"/> is null.
+        /// </exception>
+        public AvailabilityMemberBuilder CalendarIds(IEnumerable<string> calendarIds)
+        {
+            Preconditions.NotNull("calendarIds", calendarIds);
+
+            this.calendarIds = calendarIds;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the calendar ID for the request.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The calendar ID to restrict the availability query to, must not be
+        /// null.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> is null.
+        /// </exception>
+        public AvailabilityMemberBuilder CalendarId(string calendarId)
+        {
+            Preconditions.NotNull("calendarId", calendarId);
+
+            return this.CalendarIds(new[] { calendarId });
+        }
+
         /// <inheritdoc />
         public AvailabilityRequest.Member Build()
         {
@@ -74,6 +120,7 @@
             {
                 Sub = this.sub,
                 AvailablePeriods = this.availablePeriods,
+                CalendarIds = this.calendarIds,
             };
         }
     }
