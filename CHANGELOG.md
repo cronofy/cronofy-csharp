@@ -50,6 +50,7 @@
 [0.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.3.0
 [0.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.4.0
 [0.5.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.0
+[0.5.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
