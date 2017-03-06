@@ -1,3 +1,8 @@
+## [0.5.1]
+
+ * Failures when authorizing a service account user now raise a more specific
+   error [#25]
+
 ## [0.5.0]
 
  * Support setting event transparency [#22]
