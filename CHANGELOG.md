@@ -1,3 +1,8 @@
+## [0.5.1]
+
+ * Failures when authorizing a service account user now raise a more specific
+   error [#25]
+
 ## [0.5.0]
 
  * Support setting event transparency [#22]
@@ -57,3 +62,4 @@
 [#21]: https://github.com/cronofy/cronofy-csharp/pull/21
 [#22]: https://github.com/cronofy/cronofy-csharp/pull/22
 [#23]: https://github.com/cronofy/cronofy-csharp/pull/23
+[#25]: https://github.com/cronofy/cronofy-csharp/pull/25
