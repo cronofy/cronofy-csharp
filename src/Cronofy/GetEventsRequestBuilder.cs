@@ -50,6 +50,11 @@
         private bool? onlyManaged;
 
         /// <summary>
+        /// The request's include geo flag.
+        /// </summary>
+        private bool? includeGeo;
+
+        /// <summary>
         /// The request's calendar IDs.
         /// </summary>
         private IEnumerable<string> calendarIds;
@@ -243,6 +248,22 @@
         }
 
         /// <summary>
+        /// Sets the include geo flag for the request.
+        /// </summary>
+        /// <param name="includeGeo">
+        /// A flag specifying whether latitude and longitude data should
+        /// be returned with events where available.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder IncludeGeo(bool includeGeo)
+        {
+            this.includeGeo = includeGeo;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the calendar IDs for the request.
         /// </summary>
         /// <param name="calendarIds">
@@ -294,6 +315,7 @@
                 IncludeMoved = this.includeMoved,
                 IncludeManaged = this.includeManaged,
                 OnlyManaged = this.onlyManaged,
+                IncludeGeo = this.includeGeo,
                 CalendarIds = this.calendarIds,
             };
         }

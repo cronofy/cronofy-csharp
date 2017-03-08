@@ -1,3 +1,7 @@
+## [0.6.0]
+
+ * Support for setting include_geo flag on read events [#27]
+
 ## [0.5.1]
 
  * Failures when authorizing a service account user now raise a more specific
@@ -51,6 +55,7 @@
 [0.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.4.0
 [0.5.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.0
 [0.5.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.1
+[0.6.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.6.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -64,3 +69,4 @@
 [#22]: https://github.com/cronofy/cronofy-csharp/pull/22
 [#23]: https://github.com/cronofy/cronofy-csharp/pull/23
 [#25]: https://github.com/cronofy/cronofy-csharp/pull/25
+[#27]: https://github.com/cronofy/cronofy-csharp/pull/27

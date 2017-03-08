@@ -73,6 +73,14 @@
         public bool? OnlyManaged { get; set; }
 
         /// <summary>
+        /// Gets or sets the include geo flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include geo flag for the request.
+        /// </value>
+        public bool? IncludeGeo { get; set; }
+
+        /// <summary>
         /// Gets or sets the calendar IDs for the request.
         /// </summary>
         /// <value>
