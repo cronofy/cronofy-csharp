@@ -525,6 +525,12 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
 
         [Test]
+        public void CanGetEventsWithIncludeGeo()
+        {
+            AssertParameter("include_geo=true", b => b.IncludeGeo(true));
+        }
+
+        [Test]
         public void CanGetEventsWithinOneCalendar()
         {
             const string calendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw";
