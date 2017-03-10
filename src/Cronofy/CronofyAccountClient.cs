@@ -478,6 +478,20 @@ namespace Cronofy
             return response.AvailablePeriods.Select(ap => ap.ToAvailablePeriod());
         }
 
+        /// <inheritdoc/>
+        public string CreateLinkToken()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.LinkTokensUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            var response = this.HttpClient.GetJsonResponse<LinkTokenResponse>(request);
+
+            return response.LinkToken;
+        }
+
         /// <summary>
         /// Iterator for a paged events response.
         /// </summary>

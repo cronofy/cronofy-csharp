@@ -289,5 +289,28 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
+
+        [Test]
+        public void CanSetLinkToken()
+        {
+            const string LinkToken = "LegendOfZelda";
+
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                .LinkToken(LinkToken)
+                .Build();
+
+            var expectedAuthUrl = string.Format(
+                "https://app.cronofy.com/oauth/authorize" +
+                    "?client_id={0}" +
+                    "&response_type=code" +
+                     "&redirect_uri={1}" +
+                    "&scope=read_account%20read_events%20create_event%20delete_event" +
+                    "&link_token={2}",
+                UrlBuilder.EncodeParameter(clientId),
+                UrlBuilder.EncodeParameter(redirectUri),
+                UrlBuilder.EncodeParameter(LinkToken));
+
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
     }
 }

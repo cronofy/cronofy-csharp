@@ -91,9 +91,14 @@ namespace Cronofy
         private const string PermissionsUrlFormat = "https://api{0}.cronofy.com/v1/permissions";
 
         /// <summary>
-        /// The URL of the channels endpoint.
+        /// The URL of the availability endpoint.
         /// </summary>
         private const string AvailabilityUrlFormat = "https://api{0}.cronofy.com/v1/availability";
+
+        /// <summary>
+        /// The URL of the link tokens endpoint.
+        /// </summary>
+        private const string LinkTokensUrlFormat = "https://api{0}.cronofy.com/v1/link_tokens";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
@@ -128,6 +133,7 @@ namespace Cronofy
             this.ChannelUrlFormat = string.Format(ChannelUrlFormatFormat, suffix);
             this.PermissionsUrl = string.Format(PermissionsUrlFormat, suffix);
             this.AvailabilityUrl = string.Format(AvailabilityUrlFormat, suffix);
+            this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
         }
 
         /// <summary>
@@ -341,6 +347,18 @@ namespace Cronofy
         /// The availability URL.
         /// </value>
         public string AvailabilityUrl
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the link tokens URL.
+        /// </summary>
+        /// <value>
+        /// The link tokens URL.
+        /// </value>
+        public string LinkTokensUrl
         {
             get;
             private set;

@@ -128,6 +128,7 @@
     <Compile Include="UrlProvider.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="DataCentre.cs" />
+    <Compile Include="Responses\LinkTokenResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

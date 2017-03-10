@@ -295,6 +295,11 @@
             private string[] enterpriseConnectScope;
 
             /// <summary>
+            /// The value of the link token for the OAuth authorization process.
+            /// </summary>
+            private string linkToken;
+
+            /// <summary>
             /// Initializes a new instance of the
             /// <see cref="AuthorizationUrlBuilder"/> class.
             /// </summary>
@@ -462,6 +467,23 @@
             }
 
             /// <summary>
+            /// Sets the link token parameter for the OAuth authorization
+            /// process.
+            /// </summary>
+            /// <param name="linkToken">
+            /// The link token to use for the OAuth authorization process.
+            /// </param>
+            /// <returns>
+            /// A reference to the builder.
+            /// </returns>
+            public AuthorizationUrlBuilder LinkToken(string linkToken)
+            {
+                this.linkToken = linkToken;
+
+                return this;
+            }
+
+            /// <summary>
             /// Generates an authorization URL based on the current state of the
             /// builder.
             /// </summary>
@@ -496,6 +518,11 @@
                 if (this.avoidLinking.HasValue)
                 {
                     urlBuilder.AddParameter("avoid_linking", this.avoidLinking.Value);
+                }
+
+                if (this.linkToken != null)
+                {
+                    urlBuilder.AddParameter("link_token", this.linkToken);
                 }
 
                 return urlBuilder.Build();
