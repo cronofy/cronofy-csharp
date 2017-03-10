@@ -455,5 +455,16 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         IEnumerable<AvailablePeriod> GetAvailability(AvailabilityRequest request);
+
+        /// <summary>
+        /// Creates a link token for the current account.
+        /// </summary>
+        /// <returns>
+        /// A link token for the current account.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        string CreateLinkToken();
     }
 }
