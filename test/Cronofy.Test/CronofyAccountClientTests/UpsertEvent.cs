@@ -77,7 +77,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
                     "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
                     "\"location\":{{\"description\":\"{5}\"}}," +
-                    "\"transparency\":\"{6}\"" + 
+                    "\"transparency\":\"{6}\"" +
                     "}}",
                     eventUid,
                     summary,
@@ -309,6 +309,48 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Description(description)
                 .Start(new Date(2014, 8, 5))
                 .End(new Date(2014, 8, 6));
+
+            Client.UpsertEvent(calendarId, builder);
+        }
+
+        [Test]
+        public void CanUpsertAttendees()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string description = "Discuss plans for the next quarter";
+            const string startTimeString = "2014-08-05";
+            const string endTimeString = "2014-08-06";
+
+            Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"summary\":\"{1}\"," +
+                    "\"description\":\"{2}\"," +
+                    "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"attendees\":{{\"invite\":[{{\"email\":\"test@attendee.com\",\"display_name\":\"Test attendee\"}}],\"remove\":[{{\"email\":\"remove@attendee.com\",\"display_name\":\"Test removal\"}}]}}" +
+                    "}}",
+                    eventId,
+                    summary,
+                    description,
+                    startTimeString,
+                    endTimeString)
+                .ResponseCode(202)
+            );
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Description(description)
+                .Start(new Date(2014, 8, 5))
+                .End(new Date(2014, 8, 6))
+                .AddAttendee("test@attendee.com", "Test attendee")
+                .RemoveAttendee("remove@attendee.com", "Test removal");
 
             Client.UpsertEvent(calendarId, builder);
         }
