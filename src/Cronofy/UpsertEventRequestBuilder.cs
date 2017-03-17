@@ -561,8 +561,8 @@
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
-        /// <param name="email">Email.</param>
-        /// <param name="displayName">Display name.</param>
+        /// <param name="email">The email of the attendee.</param>
+        /// <param name="displayName">The display name of the attendee.</param>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="email"/> is empty.
         /// </exception>
@@ -614,6 +614,7 @@
             {
                 request.Attendees = new UpsertEventRequest.RequestAttendees();
             }
+
             if (this.addedAttendees.Any())
             {
                 request.Attendees.Invite = this.addedAttendees;

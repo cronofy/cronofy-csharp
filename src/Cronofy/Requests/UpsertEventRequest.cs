@@ -208,7 +208,6 @@
             /// </value>
             [JsonProperty("display_name")]
             public string DisplayName { get; set; }
-
         }
     }
 }
