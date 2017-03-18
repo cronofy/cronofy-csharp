@@ -84,6 +84,7 @@ var eventBuilder = new UpsertEventRequestBuilder()
     .Description("Event description")
     .Start(2015, 10, 20, 17, 00)
     .End(2015, 10, 20, 17, 30)
+    .TimeZoneId("Europe/London")
     .Location("Meeting room");
 
 cronofy.UpsertEvent(calendarId, eventBuilder);
