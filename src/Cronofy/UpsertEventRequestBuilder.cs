@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Cronofy.Requests;
 
@@ -92,6 +93,16 @@
         private string transparency;
 
         /// <summary>
+        /// The removed attendees of the event.
+        /// </summary>
+        private ICollection<UpsertEventRequest.RequestAttendee> removedAttendees;
+
+        /// <summary>
+        /// The added attendees of the event.
+        /// </summary>
+        private ICollection<UpsertEventRequest.RequestAttendee> addedAttendees;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -99,6 +110,8 @@
         {
             this.startTimeZoneId = TimeZoneIdentifiers.Default;
             this.endTimeZoneId = TimeZoneIdentifiers.Default;
+            this.addedAttendees = new List<UpsertEventRequest.RequestAttendee>();
+            this.removedAttendees = new List<UpsertEventRequest.RequestAttendee>();
         }
 
         /// <summary>
@@ -518,6 +531,53 @@
             return this;
         }
 
+        /// <summary>
+        /// Adds the attendee to the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="email">The Email of the attendee.</param>
+        /// <param name="displayName">The Display name of the attendee.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="email"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder AddAttendee(string email, string displayName = null)
+        {
+            Preconditions.NotEmpty("email", email);
+
+            this.addedAttendees.Add(new UpsertEventRequest.RequestAttendee
+            {
+                Email = email,
+                DisplayName = displayName
+            });
+
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the attendee from the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="email">The email of the attendee.</param>
+        /// <param name="displayName">The display name of the attendee.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="email"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder RemoveAttendee(string email, string displayName = null)
+        {
+            Preconditions.NotEmpty("email", email);
+
+            this.removedAttendees.Add(new UpsertEventRequest.RequestAttendee
+            {
+                Email = email,
+                DisplayName = displayName
+            });
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -548,6 +608,21 @@
             if (this.reminders != null && this.reminders.Length > 0)
             {
                 request.Reminders = this.reminders.Select(minutes => new UpsertEventRequest.RequestReminder { Minutes = minutes });
+            }
+
+            if (this.addedAttendees.Any() || this.removedAttendees.Any())
+            {
+                request.Attendees = new UpsertEventRequest.RequestAttendees();
+            }
+
+            if (this.addedAttendees.Any())
+            {
+                request.Attendees.Invite = this.addedAttendees;
+            }
+
+            if (this.removedAttendees.Any())
+            {
+                request.Attendees.Remove = this.removedAttendees;
             }
 
             return request;
