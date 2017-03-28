@@ -66,6 +66,15 @@
             /// </value>
             [JsonProperty("scope")]
             public string Scope { get; set; }
+
+            /// <summary>
+            /// Gets or sets the oauth state.
+            /// </summary>
+            /// <value>
+            /// The state for the oauth flow.
+            /// </value>
+            [JsonProperty("state")]
+            public string State { get; set; }
         }
     }
 }

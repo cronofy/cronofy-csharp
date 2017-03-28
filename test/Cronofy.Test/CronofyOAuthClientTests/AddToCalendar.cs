@@ -12,6 +12,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
         private string redirectUrl = "http://example.com/redirectUri";
         private string scope = "test_scope";
+        private string state = "test_state";
 
         private string eventId = "testEventId";
         private string summary = "Test Summary";
@@ -51,6 +52,33 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     .Url("https://api.cronofy.com/v1/add_to_calendar")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
+                    "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_url\":\"{2}\",\"scope\":\"{3}\",\"state\":\"{4}\"}},\"event\":{{\"event_id\":\"{5}\",\"summary\":\"{6}\",\"start\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{8}\",\"tzid\":\"Etc/UTC\"}}}}}}",
+                        clientId, clientSecret, redirectUrl, scope, state, eventId, summary, startString, endString)
+                    .ResponseCode(200)
+                    .ResponseBodyFormat(
+                        "{{\"oauth_url\":\"{0}\"}}", expectedUrl)
+            );
+
+            var addToCalendarRequest = new AddToCalendarRequestBuilder()
+                .OAuthDetails(redirectUrl, scope, state)
+                .Event(@event)
+                .Build();
+
+            var actualUrl = client.AddToCalendar(addToCalendarRequest);
+
+            Assert.AreEqual(expectedUrl, actualUrl);
+        }
+
+        [Test]
+        public void CanGetOAuthUrlWithoutState()
+        {
+            var expectedUrl = "http://test.com";
+
+            http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/add_to_calendar")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
                     "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_url\":\"{2}\",\"scope\":\"{3}\"}},\"event\":{{\"event_id\":\"{4}\",\"summary\":\"{5}\",\"start\":{{\"time\":\"{6}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}}}}}}",
                         clientId, clientSecret, redirectUrl, scope, eventId, summary, startString, endString)
                     .ResponseCode(200)
@@ -59,7 +87,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             );
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
-                .OAuth(redirectUrl, scope)
+                .OAuthDetails(redirectUrl, scope)
                 .Event(@event)
                 .Build();
 

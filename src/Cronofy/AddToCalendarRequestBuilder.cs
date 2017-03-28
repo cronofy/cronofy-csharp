@@ -27,13 +27,16 @@
         /// <param name="scope">
         /// The scope for the request's oauth details, must not be blank.
         /// </param>
+        /// <param name="state">
+        /// The state for the request's oauth details.
+        /// </param>
         /// <returns>
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="redirectUrl"/> or <paramref name="scope"/> are empty.  
         /// </exception>
-        public AddToCalendarRequestBuilder OAuth(string redirectUrl, string scope)
+        public AddToCalendarRequestBuilder OAuthDetails(string redirectUrl, string scope, string state = null)
         {
             Preconditions.NotBlank("redirectUrl", redirectUrl);
             Preconditions.NotBlank("scope", scope);
@@ -41,7 +44,8 @@
             this.oauth = new AddToCalendarRequest.OAuthDetails
             {
                 RedirectUrl = redirectUrl,
-                Scope = scope
+                Scope = scope,
+                State = state
             };
 
             return this;
