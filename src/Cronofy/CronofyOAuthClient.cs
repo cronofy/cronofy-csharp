@@ -227,6 +227,25 @@
             return token.ToToken();
         }
 
+        /// <inheritdoc/>
+        public string AddToCalendar(AddToCalendarRequest addToCalendarRequest)
+        {
+            Preconditions.NotNull("addToCalendarRequest", addToCalendarRequest);
+
+            addToCalendarRequest.ClientId = this.clientId;
+            addToCalendarRequest.ClientSecret = this.clientSecret;
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.urlProvider.AddToCalendarUrl;
+            request.SetJsonBody(addToCalendarRequest);
+
+            var response = this.HttpClient.GetJsonResponse<AddToCalendarResponse>(request);
+
+            return response.OAuthUrl;
+        }
+
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>
