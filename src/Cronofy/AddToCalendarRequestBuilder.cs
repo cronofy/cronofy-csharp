@@ -54,6 +54,24 @@
         /// <summary>
         /// Sets the event details of the request.
         /// </summary>
+        /// <param name="upsertEventRequestBuilder">
+        /// The event details builder for the request, must not be null.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AddToCalendarRequestBuilder"/> 
+        /// </returns>
+        public AddToCalendarRequestBuilder UpsertEventRequestBuilder(UpsertEventRequestBuilder upsertEventRequestBuilder)
+        {
+            Preconditions.NotNull("event", upsertEventRequestBuilder);
+
+            this.upsertEventRequest = upsertEventRequestBuilder.Build();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the event details of the request.
+        /// </summary>
         /// <param name="upsertEventRequest">
         /// The event details for the request, must not be null.
         /// </param>
