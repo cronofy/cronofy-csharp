@@ -14,6 +14,11 @@
         private AddToCalendarRequest.OAuthDetails oauth;
 
         /// <summary>
+        /// The event details builder for the request.
+        /// </summary>
+        private UpsertEventRequestBuilder upsertEventRequestBuilder;
+
+        /// <summary>
         /// The event details for the request.
         /// </summary>
         private UpsertEventRequest upsertEventRequest;
@@ -64,7 +69,7 @@
         {
             Preconditions.NotNull("event", upsertEventRequestBuilder);
 
-            this.upsertEventRequest = upsertEventRequestBuilder.Build();
+            this.upsertEventRequestBuilder = upsertEventRequestBuilder;
 
             return this;
         }
@@ -90,10 +95,14 @@
         /// <inheritdoc />
         public AddToCalendarRequest Build()
         {
+            var upsertEventRequest = this.upsertEventRequestBuilder != null 
+                                         ? this.upsertEventRequestBuilder.Build() 
+                                         : this.upsertEventRequest;
+
             return new AddToCalendarRequest
             {
                 OAuth = this.oauth,
-                UpsertEventRequest = this.upsertEventRequest
+                UpsertEventRequest = upsertEventRequest
             };
         }
     }
