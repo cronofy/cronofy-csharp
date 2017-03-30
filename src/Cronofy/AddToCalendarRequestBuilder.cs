@@ -16,7 +16,7 @@
         /// <summary>
         /// The event details for the request.
         /// </summary>
-        private UpsertEventRequest @event;
+        private UpsertEventRequest upsertEventRequest;
 
         /// <summary>
         /// Sets the OAuth details of the request.
@@ -54,17 +54,17 @@
         /// <summary>
         /// Sets the event details of the request.
         /// </summary>
-        /// <param name="event">
+        /// <param name="upsertEventRequest">
         /// The event details for the request, must not be null.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
-        public AddToCalendarRequestBuilder Event(UpsertEventRequest @event)
+        public AddToCalendarRequestBuilder UpsertEventRequest(UpsertEventRequest upsertEventRequest)
         {
-            Preconditions.NotNull("event", @event);
+            Preconditions.NotNull("event", upsertEventRequest);
 
-            this.@event = @event;
+            this.upsertEventRequest = upsertEventRequest;
 
             return this;
         }
@@ -75,7 +75,7 @@
             return new AddToCalendarRequest
             {
                 OAuth = this.oauth,
-                Event = this.@event
+                UpsertEventRequest = this.upsertEventRequest
             };
         }
     }

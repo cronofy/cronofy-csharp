@@ -21,7 +21,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         private DateTimeOffset start = new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc);
         private DateTimeOffset end = new DateTime(2014, 8, 5, 16, 30, 0, DateTimeKind.Utc);
 
-        private UpsertEventRequest @event;
+        private UpsertEventRequest upsertEventRequest;
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -34,7 +34,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             client.HttpClient = http;
 
-            this.@event = new UpsertEventRequestBuilder()
+            this.upsertEventRequest = new UpsertEventRequestBuilder()
                 .EventId(eventId)
                 .Summary(summary)
                 .Start(start)
@@ -61,7 +61,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
                 .OAuthDetails(redirectUrl, scope, state)
-                .Event(@event)
+                .UpsertEventRequest(upsertEventRequest)
                 .Build();
 
             var actualUrl = client.AddToCalendar(addToCalendarRequest);
@@ -88,7 +88,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
                 .OAuthDetails(redirectUrl, scope)
-                .Event(@event)
+                .UpsertEventRequest(upsertEventRequest)
                 .Build();
 
             var actualUrl = client.AddToCalendar(addToCalendarRequest);

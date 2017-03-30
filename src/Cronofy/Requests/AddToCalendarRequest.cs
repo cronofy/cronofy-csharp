@@ -42,7 +42,7 @@
         /// The event details for the request.
         /// </value>
         [JsonProperty("event")]
-        public UpsertEventRequest Event { get; set; }
+        public UpsertEventRequest UpsertEventRequest { get; set; }
 
         /// <summary>
         /// Class for the serialization of the oauth details.
