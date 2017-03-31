@@ -68,7 +68,7 @@
                 State = state
             };
 
-            this.oauthBuilder = BuilderWrapper.For(oauthDetails);
+            this.oauthBuilder = Builder.Wrap(oauthDetails);
 
             return this;
         }
@@ -125,7 +125,7 @@
         {
             Preconditions.NotNull("event", upsertEventRequest);
 
-            this.upsertEventRequestBuilder = BuilderWrapper.For(upsertEventRequest);
+            this.upsertEventRequestBuilder = Builder.Wrap(upsertEventRequest);
 
             return this;
         }

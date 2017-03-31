@@ -3,17 +3,21 @@
     /// <summary>
     /// A class to turn an instance into an builder of its type.
     /// </summary>
-    internal static class BuilderWrapper
+    internal static class Builder
     {
         /// <summary>
-        /// Creates a wrapper the specified instance.
+        /// Creates a builder wrapping the specified instance.
         /// </summary>
-        /// <returns>A builder for this instance.</returns>
-        /// <param name="instance">The instance to wrap.</param>
         /// <typeparam name="T">
         /// The type of the instance to create a builder for.
         /// </typeparam>
-        internal static IBuilder<T> For<T>(T instance)
+        /// <param name="instance">
+        /// The instance to wrap.
+        /// </param>
+        /// <returns>
+        /// A builder for this instance.
+        /// </returns>
+        internal static IBuilder<T> Wrap<T>(T instance)
         {
             return new Wrapper<T>(instance);
         }
@@ -33,7 +37,7 @@
 
             /// <summary>
             /// Initializes a new instance of the
-            /// <see cref="T:Cronofy.BuilderWrapper.Wrapper`1"/> class.
+            /// <see cref="T:Cronofy.Builder.Wrapper`1"/> class.
             /// </summary>
             /// <param name="instance">
             /// The instance to wrap.
