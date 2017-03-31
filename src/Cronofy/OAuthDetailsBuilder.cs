@@ -4,9 +4,9 @@ namespace Cronofy
     using Cronofy.Requests;
 
     /// <summary>
-    /// Builder for OAuthDetails.
+    /// Builder for OAuthDetailsBuilder.
     /// </summary>
-    public class OAuthBuilder : IBuilder<AddToCalendarRequest.OAuthDetails>
+    public class OAuthDetailsBuilder : IBuilder<AddToCalendarRequest.OAuthDetails>
     {
         /// <summary>
         /// The redirectUri to set.
@@ -30,7 +30,7 @@ namespace Cronofy
         /// The redirectUri for the request, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="OAuthBuilder"/>.
+        /// A reference to the <see cref="OAuthDetailsBuilder"/>.
         /// </returns>
         public IBuilder<AddToCalendarRequest.OAuthDetails> RedirectUri(string redirectUri)
         {
@@ -46,7 +46,7 @@ namespace Cronofy
         /// The scope for the request, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="OAuthBuilder"/>.
+        /// A reference to the <see cref="OAuthDetailsBuilder"/>.
         /// </returns>
         public IBuilder<AddToCalendarRequest.OAuthDetails> Scope(string scope)
         {
@@ -62,11 +62,11 @@ namespace Cronofy
         /// The state for the request, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="OAuthBuilder"/>.
+        /// A reference to the <see cref="OAuthDetailsBuilder"/>.
         /// </returns>
         public IBuilder<AddToCalendarRequest.OAuthDetails> State(string state)
         {
-            Preconditions.NotBlank("redirectUri", state);
+            Preconditions.NotBlank("state", state);
             this.state = state;
             return this;
         }

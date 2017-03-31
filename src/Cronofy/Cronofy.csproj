@@ -133,7 +133,7 @@
     <Compile Include="Requests\AddToCalendarRequest.cs" />
     <Compile Include="Responses\AddToCalendarResponse.cs" />
     <Compile Include="BuilderWrapper.cs" />
-    <Compile Include="OAuthBuilder.cs" />
+    <Compile Include="OAuthDetailsBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

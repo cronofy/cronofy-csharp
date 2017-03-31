@@ -31,7 +31,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUrl"/> is empty.  
+        /// Thrown if <paramref name="redirectUrl"/> or <paramref name="scope"/> are empty. 
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope)
         {
@@ -59,19 +59,16 @@
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
             Preconditions.NotBlank("redirectUri", redirectUri);
+            Preconditions.NotBlank("scope", scope);
 
-            if (scope != null)
+            var oauthDetails = new AddToCalendarRequest.OAuthDetails
             {
-                Preconditions.NotBlank("scope", scope);
-            }
+                RedirectUri = redirectUri,
+                Scope = scope,
+                State = state
+            };
 
-            this.oauthBuilder = new BuilderWrapper<AddToCalendarRequest.OAuthDetails>(
-                new AddToCalendarRequest.OAuthDetails()
-                {
-                    RedirectUri = redirectUri,
-                    Scope = scope,
-                    State = state
-                });
+            this.oauthBuilder = BuilderWrapper<AddToCalendarRequest.OAuthDetails>.For(oauthDetails);
 
             return this;
         }
@@ -139,7 +136,7 @@
             return new AddToCalendarRequest
             {
                 OAuth = this.oauthBuilder.Build(),
-                UpsertEventRequest = this.upsertEventRequestBuilder.Build(),
+                Event = this.upsertEventRequestBuilder.Build(),
             };
         }
     }

@@ -22,6 +22,16 @@
             this.instance = instance;
         }
 
+        /// <summary>
+        /// Creates a wrapper the specified instance.
+        /// </summary>
+        /// <returns>A builder for this instance.</returns>
+        /// <param name="instance">The instance to wrap.</param>
+        public static IBuilder<T> For(T instance)
+        {
+            return new BuilderWrapper<T>(instance);
+        }
+
         /// <inheritdoc/>
         public T Build()
         {
