@@ -1,41 +1,53 @@
 ﻿namespace Cronofy
 {
     /// <summary>
-    /// A class to wrap a pre-built implementation.
+    /// A class to turn an instance into an builder of its type.
     /// </summary>
-    /// <typeparam name="T">
-    /// The type of the builder.
-    /// </typeparam>
-    public sealed class BuilderWrapper<T> : IBuilder<T>
+    internal static class BuilderWrapper
     {
-        /// <summary>
-        /// The instance to wrap.
-        /// </summary>
-        private T instance;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Cronofy.BuilderWrapper`1"/> class.
-        /// </summary>
-        /// <param name="instance">The instance to wrap.</param>
-        public BuilderWrapper(T instance)
-        {
-            this.instance = instance;
-        }
-
         /// <summary>
         /// Creates a wrapper the specified instance.
         /// </summary>
         /// <returns>A builder for this instance.</returns>
         /// <param name="instance">The instance to wrap.</param>
-        public static IBuilder<T> For(T instance)
+        /// <typeparam name="T">
+        /// The type of the instance to create a builder for.
+        /// </typeparam>
+        internal static IBuilder<T> For<T>(T instance)
         {
-            return new BuilderWrapper<T>(instance);
+            return new Wrapper<T>(instance);
         }
 
-        /// <inheritdoc/>
-        public T Build()
+        /// <summary>
+        /// Wraps an instance in a builder of its type.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the builder.
+        /// </typeparam>
+        private sealed class Wrapper<T> : IBuilder<T>
         {
-            return this.instance;
+            /// <summary>
+            /// The wrapped instance.
+            /// </summary>
+            private T instance;
+
+            /// <summary>
+            /// Initializes a new instance of the
+            /// <see cref="T:Cronofy.BuilderWrapper.Wrapper`1"/> class.
+            /// </summary>
+            /// <param name="instance">
+            /// The instance to wrap.
+            /// </param>
+            public Wrapper(T instance)
+            {
+                this.instance = instance;
+            }
+
+            /// <inheritdoc/>
+            public T Build()
+            {
+                return this.instance;
+            }
         }
     }
 }

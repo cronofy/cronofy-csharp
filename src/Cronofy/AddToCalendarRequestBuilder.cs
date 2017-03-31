@@ -68,7 +68,7 @@
                 State = state
             };
 
-            this.oauthBuilder = BuilderWrapper<AddToCalendarRequest.OAuthDetails>.For(oauthDetails);
+            this.oauthBuilder = BuilderWrapper.For(oauthDetails);
 
             return this;
         }
@@ -125,7 +125,7 @@
         {
             Preconditions.NotNull("event", upsertEventRequest);
 
-            this.upsertEventRequestBuilder = new BuilderWrapper<UpsertEventRequest>(upsertEventRequest);
+            this.upsertEventRequestBuilder = BuilderWrapper.For(upsertEventRequest);
 
             return this;
         }
