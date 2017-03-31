@@ -243,7 +243,7 @@
 
             var response = this.HttpClient.GetJsonResponse<AddToCalendarResponse>(request);
 
-            return response.OAuthUrl;
+            return response.Url;
         }
 
         /// <summary>

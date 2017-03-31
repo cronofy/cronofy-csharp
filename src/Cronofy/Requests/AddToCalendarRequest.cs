@@ -47,16 +47,16 @@
         /// <summary>
         /// Class for the serialization of the oauth details.
         /// </summary>
-        public sealed class OAuthDetails 
+        public sealed class OAuthDetails
         {
             /// <summary>
-            /// Gets or sets the oauth redirect url.
+            /// Gets or sets the oauth redirect uri.
             /// </summary>
             /// <value>
-            /// The redirect url for the oauth flow.
+            /// The redirect uri for the oauth flow.
             /// </value>
-            [JsonProperty("redirect_url")]
-            public string RedirectUrl { get; set; }
+            [JsonProperty("redirect_uri")]
+            public string RedirectUri { get; set; }
 
             /// <summary>
             /// Gets or sets the oauth scopes.

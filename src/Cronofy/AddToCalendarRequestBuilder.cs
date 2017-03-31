@@ -11,23 +11,38 @@
         /// <summary>
         /// The oauth details for the request.
         /// </summary>
-        private AddToCalendarRequest.OAuthDetails oauth;
+        private IBuilder<AddToCalendarRequest.OAuthDetails> oauthBuilder;
 
         /// <summary>
         /// The event details builder for the request.
         /// </summary>
-        private UpsertEventRequestBuilder upsertEventRequestBuilder;
-
-        /// <summary>
-        /// The event details for the request.
-        /// </summary>
-        private UpsertEventRequest upsertEventRequest;
+        private IBuilder<UpsertEventRequest> upsertEventRequestBuilder;
 
         /// <summary>
         /// Sets the OAuth details of the request.
         /// </summary>
-        /// <param name="redirectUrl">
-        /// The redirect url for the request's oauth details, must not be blank.
+        /// <param name="redirectUri">
+        /// The redirect uri for the request's oauth details, must not be blank.
+        /// </param>
+        /// <param name="scope">
+        /// The scope for the request's oauth details, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="redirectUrl"/> is empty.  
+        /// </exception>
+        public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope)
+        {
+            return this.OAuthDetails(redirectUri, scope, null);
+        }
+
+        /// <summary>
+        /// Sets the OAuth details of the request.
+        /// </summary>
+        /// <param name="redirectUri">
+        /// The redirect uri for the request's oauth details, must not be blank.
         /// </param>
         /// <param name="scope">
         /// The scope for the request's oauth details, must not be blank.
@@ -41,17 +56,43 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="redirectUrl"/> or <paramref name="scope"/> are empty.  
         /// </exception>
-        public AddToCalendarRequestBuilder OAuthDetails(string redirectUrl, string scope, string state = null)
+        public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
-            Preconditions.NotBlank("redirectUrl", redirectUrl);
-            Preconditions.NotBlank("scope", scope);
+            Preconditions.NotBlank("redirectUri", redirectUri);
 
-            this.oauth = new AddToCalendarRequest.OAuthDetails
+            if (scope != null)
             {
-                RedirectUrl = redirectUrl,
-                Scope = scope,
-                State = state
-            };
+                Preconditions.NotBlank("scope", scope);
+            }
+
+            this.oauthBuilder = new BuilderWrapper<AddToCalendarRequest.OAuthDetails>(
+                new AddToCalendarRequest.OAuthDetails()
+                {
+                    RedirectUri = redirectUri,
+                    Scope = scope,
+                    State = state
+                });
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the OAuth details of the request.
+        /// </summary>
+        /// <param name="oauthBuilder">
+        /// The builder for <see cref="AddToCalendarRequest.OAuthDetails"/>.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="oauthBuilder"/> is empty.  
+        /// </exception>
+        public AddToCalendarRequestBuilder OAuthDetails(IBuilder<AddToCalendarRequest.OAuthDetails> oauthBuilder)
+        {
+            Preconditions.NotNull("oauthBuilder", oauthBuilder);
+
+            this.oauthBuilder = oauthBuilder;
 
             return this;
         }
@@ -67,7 +108,7 @@
         /// </returns>
         public AddToCalendarRequestBuilder UpsertEventRequestBuilder(UpsertEventRequestBuilder upsertEventRequestBuilder)
         {
-            Preconditions.NotNull("event", upsertEventRequestBuilder);
+            Preconditions.NotNull("upsertEventRequestBuilder", upsertEventRequestBuilder);
 
             this.upsertEventRequestBuilder = upsertEventRequestBuilder;
 
@@ -87,7 +128,7 @@
         {
             Preconditions.NotNull("event", upsertEventRequest);
 
-            this.upsertEventRequest = upsertEventRequest;
+            this.upsertEventRequestBuilder = new BuilderWrapper<UpsertEventRequest>(upsertEventRequest);
 
             return this;
         }
@@ -95,14 +136,10 @@
         /// <inheritdoc />
         public AddToCalendarRequest Build()
         {
-            var upsertEventRequest = this.upsertEventRequestBuilder != null 
-                                         ? this.upsertEventRequestBuilder.Build() 
-                                         : this.upsertEventRequest;
-
             return new AddToCalendarRequest
             {
-                OAuth = this.oauth,
-                UpsertEventRequest = upsertEventRequest
+                OAuth = this.oauthBuilder.Build(),
+                UpsertEventRequest = this.upsertEventRequestBuilder.Build(),
             };
         }
     }
