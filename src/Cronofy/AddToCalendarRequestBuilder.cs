@@ -103,7 +103,7 @@
         /// <returns>
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/> 
         /// </returns>
-        public AddToCalendarRequestBuilder UpsertEventRequestBuilder(UpsertEventRequestBuilder upsertEventRequestBuilder)
+        public AddToCalendarRequestBuilder UpsertEventRequestBuilder(IBuilder<UpsertEventRequest> upsertEventRequestBuilder)
         {
             Preconditions.NotNull("upsertEventRequestBuilder", upsertEventRequestBuilder);
 
