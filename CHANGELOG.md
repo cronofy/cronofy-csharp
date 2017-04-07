@@ -1,6 +1,10 @@
-## [0.8.0]
+## [0.9.0]
 
  * Support for add to calendar [#31]
+
+## [0.8.0]
+
+ * Support for adding and removing attendees [#29]
 
 ## [0.7.0]
 
@@ -66,6 +70,7 @@
 [0.6.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.6.0
 [0.7.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.7.0
 [0.8.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.8.0
+[0.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.9.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -81,4 +86,5 @@
 [#25]: https://github.com/cronofy/cronofy-csharp/pull/25
 [#27]: https://github.com/cronofy/cronofy-csharp/pull/27
 [#28]: https://github.com/cronofy/cronofy-csharp/pull/28
+[#29]: https://github.com/cronofy/cronofy-csharp/pull/29
 [#31]: https://github.com/cronofy/cronofy-csharp/pull/31
