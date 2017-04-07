@@ -96,6 +96,11 @@ namespace Cronofy
         private const string AvailabilityUrlFormat = "https://api{0}.cronofy.com/v1/availability";
 
         /// <summary>
+        /// The URL for the add to calendar endpoint.
+        /// </summary>
+        private const string AddToCalendarUrlFormat = "https://api{0}.cronofy.com/v1/add_to_calendar";
+
+        /// <summary>
         /// The URL of the link tokens endpoint.
         /// </summary>
         private const string LinkTokensUrlFormat = "https://api{0}.cronofy.com/v1/link_tokens";
@@ -133,6 +138,7 @@ namespace Cronofy
             this.ChannelUrlFormat = string.Format(ChannelUrlFormatFormat, suffix);
             this.PermissionsUrl = string.Format(PermissionsUrlFormat, suffix);
             this.AvailabilityUrl = string.Format(AvailabilityUrlFormat, suffix);
+            this.AddToCalendarUrl = string.Format(AddToCalendarUrlFormat, suffix);
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
         }
 
@@ -347,6 +353,18 @@ namespace Cronofy
         /// The availability URL.
         /// </value>
         public string AvailabilityUrl
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the add to calendar URL.
+        /// </summary>
+        /// <value>
+        /// The add to calendar URL.
+        /// </value>
+        public string AddToCalendarUrl
         {
             get;
             private set;
