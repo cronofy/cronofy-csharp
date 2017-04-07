@@ -1,3 +1,7 @@
+## [0.8.0]
+
+ * Support for add to calendar [#31]
+
 ## [0.7.0]
 
  * Support for explicit linking of accounts [#28]
@@ -61,6 +65,7 @@
 [0.5.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.5.1
 [0.6.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.6.0
 [0.7.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.7.0
+[0.8.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.8.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -76,3 +81,4 @@
 [#25]: https://github.com/cronofy/cronofy-csharp/pull/25
 [#27]: https://github.com/cronofy/cronofy-csharp/pull/27
 [#28]: https://github.com/cronofy/cronofy-csharp/pull/28
+[#31]: https://github.com/cronofy/cronofy-csharp/pull/31
