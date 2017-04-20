@@ -31,7 +31,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUrl"/> or <paramref name="scope"/> are empty. 
+        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty. 
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope)
         {
@@ -54,7 +54,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUrl"/> or <paramref name="scope"/> are empty.  
+        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.  
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
