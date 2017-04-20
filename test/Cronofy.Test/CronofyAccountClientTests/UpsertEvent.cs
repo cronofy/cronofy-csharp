@@ -207,7 +207,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     "\"summary\":\"{1}\"," +
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"{5}\"}}," +
-                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"{5}\"}}" +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"{5}\"}}," +
+                    "\"tzid\":\"{5}\"" +
                     "}}",
                     eventId,
                     summary,
