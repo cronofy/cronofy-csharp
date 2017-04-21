@@ -223,7 +223,6 @@
 
             return this;
         }
-        
 
         /// <inheritdoc />
         public AddToCalendarRequest Build()
@@ -232,7 +231,7 @@
             {
                 OAuth = this.oauthBuilder.Build(),
                 Event = this.upsertEventRequestBuilder.Build(),
-                TargetCalendars = this.targetCalendars
+                TargetCalendars = this.targetCalendars,
             };
 
             if (this.availabilityRequestBuilder != null)

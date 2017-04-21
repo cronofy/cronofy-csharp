@@ -52,7 +52,7 @@
         /// The availability details for the request.
         /// </value>
         [JsonProperty("availability")]
-		public AvailabilityRequest Availability { get; set; }
+        public AvailabilityRequest Availability { get; set; }
 
         /// <summary>
         /// Gets or sets the target calendars for the request.
