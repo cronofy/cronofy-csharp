@@ -111,6 +111,13 @@
         public string Transparency { get; set; }
 
         /// <summary>
+        /// Gets or sets the timezone ID of the event.
+        /// </summary>
+        /// <value>The time zone identifier.</value>
+        [JsonProperty("tzid")]
+        public string TimeZoneId { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the location for an upsert event
         /// request.
         /// </summary>

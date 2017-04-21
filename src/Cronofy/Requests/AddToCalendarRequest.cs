@@ -1,6 +1,7 @@
 ﻿namespace Cronofy.Requests
 {
     using System;
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -45,6 +46,24 @@
         public UpsertEventRequest Event { get; set; }
 
         /// <summary>
+        /// Gets or sets the availability details for the request.
+        /// </summary>
+        /// <value>
+        /// The availability details for the request.
+        /// </value>
+        [JsonProperty("availability")]
+        public AvailabilityRequest Availability { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target calendars for the request.
+        /// </summary>
+        /// <value>
+        /// The target calendars for the request.
+        /// </value>
+        [JsonProperty("target_calendars")]
+        public IEnumerable<TargetCalendar> TargetCalendars { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the oauth details.
         /// </summary>
         public sealed class OAuthDetails
@@ -75,6 +94,30 @@
             /// </value>
             [JsonProperty("state")]
             public string State { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of the target calendars
+        /// </summary>
+        public sealed class TargetCalendar
+        {
+            /// <summary>
+            /// Gets or sets the sub for the target calendar.
+            /// </summary>
+            /// <value>
+            /// The sub for the target calendar.
+            /// </value>
+            [JsonProperty("sub")]
+            public string Sub { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ID for the target calendar.
+            /// </summary>
+            /// <value>
+            /// The ID for the target calendar.
+            /// </value>
+            [JsonProperty("calendar_id")]
+            public string CalendarId { get; set; }
         }
     }
 }

@@ -73,6 +73,11 @@
         private string endTimeZoneId;
 
         /// <summary>
+        /// The time zone of the event.
+        /// </summary>
+        private string timeZoneId;
+
+        /// <summary>
         /// The reminders for the event.
         /// </summary>
         private int[] reminders;
@@ -418,6 +423,7 @@
 
             this.startTimeZoneId = timeZoneId;
             this.endTimeZoneId = timeZoneId;
+            this.timeZoneId = timeZoneId;
 
             return this;
         }
@@ -591,6 +597,7 @@
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
                 Url = this.url,
                 Transparency = this.transparency,
+                TimeZoneId = this.timeZoneId,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
@@ -665,7 +672,7 @@
                 return new EventTime(date.Value, timeZoneId);
             }
 
-            throw new ArgumentException(string.Format("{0} is not specified", propertyName));
+            return null;
         }
     }
 }
