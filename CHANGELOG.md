@@ -1,3 +1,7 @@
+## [0.10.0]
+
+ * Support for add to calendar with availability [#34]
+
 ## [0.9.0]
 
  * Support for add to calendar [#31]
@@ -71,6 +75,7 @@
 [0.7.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.7.0
 [0.8.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.8.0
 [0.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.9.0
+[0.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.10.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -88,3 +93,4 @@
 [#28]: https://github.com/cronofy/cronofy-csharp/pull/28
 [#29]: https://github.com/cronofy/cronofy-csharp/pull/29
 [#31]: https://github.com/cronofy/cronofy-csharp/pull/31
+[#34]: https://github.com/cronofy/cronofy-csharp/pull/34
