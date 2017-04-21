@@ -97,7 +97,7 @@
         }
 
         /// <summary>
-        /// Class for the serialization of the target calendars
+        /// Class for the serialization of the target calendars.
         /// </summary>
         public sealed class TargetCalendar
         {
