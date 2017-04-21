@@ -27,7 +27,7 @@
         /// <summary>
         /// The target calendars builder for the request.
         /// </summary>
-        private IEnumerable<AddToCalendarRequest.TargetCalendar> targetCalendars;
+        private IList<AddToCalendarRequest.TargetCalendar> targetCalendars;
 
         /// <summary>
         /// Sets the OAuth details of the request.
@@ -178,7 +178,7 @@
         }
 
         /// <summary>
-        /// Sets the target calendar details of the request.
+        /// Adds a target calendar to the request.
         /// </summary>
         /// <param name="sub">
         /// The sub for the target calendar.
@@ -189,15 +189,23 @@
         /// <returns>
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
-        public AddToCalendarRequestBuilder TargetCalendars(string sub, string calendarId)
+        public AddToCalendarRequestBuilder AddTargetCalendar(string sub, string calendarId)
         {
             Preconditions.NotBlank("sub", sub);
             Preconditions.NotBlank("calendarId", calendarId);
 
-            return TargetCalendars(new[] { new AddToCalendarRequest.TargetCalendar { 
-                    Sub = sub, 
-                    CalendarId = calendarId 
-                } });
+            if (this.targetCalendars == null)
+            {
+                this.targetCalendars = new List<AddToCalendarRequest.TargetCalendar>();
+            }
+
+            this.targetCalendars.Add(new AddToCalendarRequest.TargetCalendar
+            {
+                Sub = sub,
+                CalendarId = calendarId
+            });
+
+            return this;
         }
 
         /// <summary>
@@ -209,7 +217,7 @@
         /// <returns>
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
-        public AddToCalendarRequestBuilder TargetCalendars(IEnumerable<AddToCalendarRequest.TargetCalendar> targetCalendars)
+        public AddToCalendarRequestBuilder TargetCalendars(IList<AddToCalendarRequest.TargetCalendar> targetCalendars)
         {
             this.targetCalendars = targetCalendars;
 

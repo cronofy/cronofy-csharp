@@ -167,7 +167,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .OAuthDetails(redirectUrl, scope)
                 .UpsertEventRequest(upsertEventRequestWithoutStartAndEnd)
                 .AvailabilityRequest(availabilityRequest)
-                .TargetCalendars(sub, calendarId)
+                .AddTargetCalendar(sub, calendarId)
                 .Build();
 
             var actualUrl = client.AddToCalendar(addToCalendarRequest);
