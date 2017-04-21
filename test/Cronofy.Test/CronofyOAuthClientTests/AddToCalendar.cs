@@ -52,7 +52,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .EventId(eventId)
                 .Summary(summary)
                 .TimeZoneId(timeZoneId)
-                .NoStartOrEnd()
                 .Build();
 
             this.availabilityRequest = new AvailabilityRequestBuilder()

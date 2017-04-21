@@ -108,11 +108,6 @@
         private ICollection<UpsertEventRequest.RequestAttendee> addedAttendees;
 
         /// <summary>
-        /// Flag stating that the event request has no start or end.
-        /// </summary>
-        private bool noStartOrEnd;
-
-        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -589,19 +584,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Sets the event as having no start or end.
-        /// </summary>
-        /// <returns>
-        /// A reference to the modified builder.
-        /// </returns>
-        public UpsertEventRequestBuilder NoStartOrEnd()
-        {
-            this.noStartOrEnd = true;
-
-            return this;
-        }
-
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -611,16 +593,12 @@
                 EventUid = this.eventUid,
                 Summary = this.summary,
                 Description = this.description,
+                Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId),
+                End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
                 Url = this.url,
                 Transparency = this.transparency,
                 TimeZoneId = this.timeZoneId,
             };
-
-            if (!this.noStartOrEnd)
-            {
-                request.Start = GetEventTime("Start", this.startTime, this.startDate, this.startTimeZoneId);
-                request.End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId);
-            }
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
                 || string.IsNullOrEmpty(this.locationLatitude) == false
@@ -694,7 +672,7 @@
                 return new EventTime(date.Value, timeZoneId);
             }
 
-            throw new ArgumentException(string.Format("{0} is not specified", propertyName));
+            return null;
         }
     }
 }
