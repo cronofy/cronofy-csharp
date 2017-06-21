@@ -7,7 +7,7 @@
     /// <summary>
     /// Class for the serialization of an add to calendar request.
     /// </summary>
-    public sealed class AddToCalendarRequest
+    public sealed class RealTimeSchedulingRequest
     {
         /// <summary>
         /// Gets or sets the client id for the request.
@@ -46,6 +46,33 @@
         public UpsertEventRequest Event { get; set; }
 
         /// <summary>
+        /// Gets or sets the availability details for the request.
+        /// </summary>
+        /// <value>
+        /// The availability details for the request.
+        /// </value>
+        [JsonProperty("availability")]
+        public AvailabilityRequest Availability { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target calendars for the request.
+        /// </summary>
+        /// <value>
+        /// The target calendars for the request.
+        /// </value>
+        [JsonProperty("target_calendars")]
+        public IEnumerable<TargetCalendar> TargetCalendars { get; set; }
+
+        /// <summary>
+        /// Gets or sets the timezone id for the request.
+        /// </summary>
+        /// <value>
+        /// The timezone id for the request.
+        /// </value>
+        [JsonProperty("tzid")]
+        public string Tzid { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the oauth details.
         /// </summary>
         public sealed class OAuthDetails
@@ -76,6 +103,30 @@
             /// </value>
             [JsonProperty("state")]
             public string State { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of the target calendars.
+        /// </summary>
+        public sealed class TargetCalendar
+        {
+            /// <summary>
+            /// Gets or sets the sub for the target calendar.
+            /// </summary>
+            /// <value>
+            /// The sub for the target calendar.
+            /// </value>
+            [JsonProperty("sub")]
+            public string Sub { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ID for the target calendar.
+            /// </summary>
+            /// <value>
+            /// The ID for the target calendar.
+            /// </value>
+            [JsonProperty("calendar_id")]
+            public string CalendarId { get; set; }
         }
     }
 }

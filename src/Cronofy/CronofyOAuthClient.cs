@@ -228,6 +228,25 @@
         }
 
         /// <inheritdoc/>
+        public string RealTimeScheduling(RealTimeSchedulingRequest realTimeSchedulingRequest)
+        {
+            Preconditions.NotNull("realTimeSchedulingRequest", realTimeSchedulingRequest);
+
+            realTimeSchedulingRequest.ClientId = this.clientId;
+            realTimeSchedulingRequest.ClientSecret = this.clientSecret;
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.urlProvider.RealTimeSchedulingUrl;
+            request.SetJsonBody(realTimeSchedulingRequest);
+
+            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingResponse>(request);
+
+            return response.Url;
+        }
+
+        /// <inheritdoc/>
         public string AddToCalendar(AddToCalendarRequest addToCalendarRequest)
         {
             Preconditions.NotNull("addToCalendarRequest", addToCalendarRequest);
