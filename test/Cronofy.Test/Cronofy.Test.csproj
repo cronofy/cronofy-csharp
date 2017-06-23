@@ -79,6 +79,7 @@
     <Compile Include="CronofyEnterpriseConnectAccountClientTests\AuthorizeUser.cs" />
     <Compile Include="CronofyAccountClientTests\CreateLinkToken.cs" />
     <Compile Include="CronofyOAuthClientTests\AddToCalendar.cs" />
+    <Compile Include="CronofyOAuthClientTests\RealTimeScheduling.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
