@@ -93,38 +93,38 @@
 
         private static void AddToCalendarExample()
         {
-			Console.Write("Enter Client id: ");
-			var clientId = Console.ReadLine();
-			Console.Write("Enter Secret: ");
-			var clientSecret = Console.ReadLine();
+            Console.Write("Enter Client id: ");
+            var clientId = Console.ReadLine();
+            Console.Write("Enter Secret: ");
+            var clientSecret = Console.ReadLine();
 
-			string redirectUrl = "http://example.com/redirectUri";
-			string scope = "read_events create_event";
+            string redirectUrl = "http://example.com/redirectUri";
+            string scope = "read_events create_event";
 
-			string eventId = "testEventId";
-			string summary = "Test Summary";
-			DateTimeOffset start = DateTime.Now;
-			DateTimeOffset end = DateTime.Now + new TimeSpan(2, 0, 0);
+            string eventId = "testEventId";
+            string summary = "Test Summary";
+            DateTimeOffset start = DateTime.Now;
+            DateTimeOffset end = DateTime.Now + new TimeSpan(2, 0, 0);
 
-			var client = new CronofyOAuthClient(clientId, clientSecret);
+            var client = new CronofyOAuthClient(clientId, clientSecret);
 
 
-			var upsertEventRequest = new UpsertEventRequestBuilder()
-				.EventId(eventId)
-				.Summary(summary)
-				.Start(start)
-				.End(end)
-				.Build();
+            var upsertEventRequest = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Start(start)
+                .End(end)
+                .Build();
 
             var request = new AddToCalendarRequestBuilder()
-				.OAuthDetails(redirectUrl, scope)
-				.UpsertEventRequest(upsertEventRequest)
-				.Build();
+                .OAuthDetails(redirectUrl, scope)
+                .UpsertEventRequest(upsertEventRequest)
+                .Build();
 
             var actualUrl = client.AddToCalendar(request);
-			Console.WriteLine(actualUrl);
+            Console.WriteLine(actualUrl);
 
-			Process.Start(actualUrl);
+            Process.Start(actualUrl);
         }
 
 
@@ -135,10 +135,10 @@
             var clientId = Console.ReadLine();
             Console.Write("Enter Secret: ");
             var clientSecret = Console.ReadLine();
-			Console.Write("Enter Account id for availablity: ");
-			var sub = Console.ReadLine();
-			Console.Write("Enter calendar id for availablity: ");
-			var calendarId = Console.ReadLine();
+            Console.Write("Enter Account id for availablity: ");
+            var sub = Console.ReadLine();
+            Console.Write("Enter calendar id for availablity: ");
+            var calendarId = Console.ReadLine();
 
             string redirectUrl = "http://example.com/redirectUri";
             string scope = "read_events create_event";
@@ -163,10 +163,10 @@
                 .Build();
 
             var request = new RealTimeSchedulingRequestBuilder()
-			    .OAuthDetails(redirectUrl, scope)
-			    .Timezone("Etc/UTC")
-			    .UpsertEventRequest(upsertEventRequest)
-			    .AvailabilityRequest(availabilityRequest)
+                .OAuthDetails(redirectUrl, scope)
+                .Timezone("Etc/UTC")
+                .UpsertEventRequest(upsertEventRequest)
+                .AvailabilityRequest(availabilityRequest)
                 .AddTargetCalendar(sub, calendarId)
                 .Build();
 
