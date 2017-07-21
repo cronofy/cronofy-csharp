@@ -1,3 +1,8 @@
+## [0.12.0]
+
+ * Support for color with calendar creation and event upsert [#38]
+ * Helper to verify push notification HMACs [#37]
+
 ## [0.11.0]
 
  * Support for real time booking [#36]
@@ -81,6 +86,7 @@
 [0.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.9.0
 [0.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.10.0
 [0.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.11.0
+[0.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.12.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -100,3 +106,5 @@
 [#31]: https://github.com/cronofy/cronofy-csharp/pull/31
 [#34]: https://github.com/cronofy/cronofy-csharp/pull/34
 [#36]: https://github.com/cronofy/cronofy-csharp/pull/36
+[#37]: https://github.com/cronofy/cronofy-csharp/pull/37
+[#38]: https://github.com/cronofy/cronofy-csharp/pull/38
