@@ -77,5 +77,24 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         void RevokeToken(string token);
+
+        /// <summary>
+        /// Validates whether the provided HMAC matches the one generated for
+        /// the corresponding request bytes.
+        /// </summary>
+        /// <param name="sha256Hmac">
+        /// The HMAC taken from the <code>Cronofy-HMAC-SHA256</code> header of
+        /// the request, must not be null or empty.
+        /// </param>
+        /// <param name="requestBytes">
+        /// The contents of the request.
+        /// </param>
+        /// <returns>
+        /// <code>true</code> if the HMAC matches, otherwise <code>false</code>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="sha256Hmac"/> is null or empty.
+        /// </exception>
+        bool HmacMatches(string sha256Hmac, byte[] requestBytes);
     }
 }
