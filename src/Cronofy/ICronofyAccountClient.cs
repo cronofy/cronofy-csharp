@@ -66,6 +66,31 @@
         Calendar CreateCalendar(string profileId, string name);
 
         /// <summary>
+        /// Creates a new calendar for the account.
+        /// </summary>
+        /// <param name="profileId">
+        /// The ID of the profile to create the calendar within, must not be
+        /// empty.
+        /// </param>
+        /// <param name="name">
+        /// The name to give the new calendar, must not be empty.
+        /// </param>
+        /// <param name="color">
+        /// The color to give the new calendar, must not be empty.
+        /// </param>
+        /// <returns>
+        /// The new <see cref="Calendar"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="profileId"/> or <paramref name="name"/>
+        /// are empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        Calendar CreateCalendar(string profileId, string name, string color);
+
+        /// <summary>
         /// Gets the events belonging to the account.
         /// </summary>
         /// <returns>

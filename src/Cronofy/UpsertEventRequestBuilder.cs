@@ -98,6 +98,11 @@
         private string transparency;
 
         /// <summary>
+        /// The color of the event.
+        /// </summary>
+        private string color;
+
+        /// <summary>
         /// The removed attendees of the event.
         /// </summary>
         private ICollection<UpsertEventRequest.RequestAttendee> removedAttendees;
@@ -538,6 +543,22 @@
         }
 
         /// <summary>
+        /// Sets the color of the event.
+        /// </summary>
+        /// <param name="color">
+        /// The color of the event.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder Color(string color)
+        {
+            this.color = color;
+
+            return this;
+        }
+
+        /// <summary>
         /// Adds the attendee to the event.
         /// </summary>
         /// <returns>
@@ -598,6 +619,7 @@
                 Url = this.url,
                 Transparency = this.transparency,
                 TimeZoneId = this.timeZoneId,
+                Color = this.color,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false

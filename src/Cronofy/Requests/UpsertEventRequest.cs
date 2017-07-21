@@ -118,6 +118,13 @@
         public string TimeZoneId { get; set; }
 
         /// <summary>
+        /// Gets or sets the color of the event.
+        /// </summary>
+        /// <value>The color.</value>
+        [JsonProperty("color")]
+        public string Color { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the location for an upsert event
         /// request.
         /// </summary>
