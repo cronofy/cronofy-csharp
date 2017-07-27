@@ -35,6 +35,11 @@
         private string tzid;
 
         /// <summary>
+        /// The hour format for the request.
+        /// </summary>
+        private string hourFormat;
+
+        /// <summary>
         /// Sets the OAuth details of the request.
         /// </summary>
         /// <param name="redirectUri">
@@ -71,6 +76,27 @@
             Preconditions.NotBlank("tzid", tzid);
 
             this.tzid = tzid;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the hour format of the request.
+        /// </summary>
+        /// <param name="hourFormat">
+        /// The hour format to use for the request, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="hourFormat"/> is empty. 
+        /// </exception>
+        public RealTimeSchedulingRequestBuilder HourFormat(string hourFormat)
+        {
+            Preconditions.NotBlank("hourFormat", hourFormat);
+
+            this.hourFormat = hourFormat;
 
             return this;
         }
@@ -264,6 +290,14 @@
             if (this.availabilityRequestBuilder != null)
             {
                 request.Availability = this.availabilityRequestBuilder.Build();
+            }
+
+            if (this.hourFormat != null)
+            {
+                request.Formatting = new SchedulingFormatting
+                {
+                    HourFormat = this.hourFormat,
+                };
             }
 
             return request;

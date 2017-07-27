@@ -95,5 +95,34 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             Assert.AreEqual(expectedUrl, actualUrl);
         }
+
+        [Test]
+        public void CanGetUrlWithHourFormatting()
+        {
+            var expectedUrl = "http://test.com";
+            var hourFormat = "h";
+
+            http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/add_to_calendar")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\"}},\"event\":{{\"event_id\":\"{4}\",\"summary\":\"{5}\",\"start\":{{\"time\":\"{6}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}}}},\"formatting\":{{\"hour_format\":\"{8}\"}}}}",
+                        clientId, clientSecret, redirectUrl, scope, eventId, summary, startString, endString, hourFormat)
+                    .ResponseCode(200)
+                    .ResponseBodyFormat(
+                        "{{\"url\":\"{0}\"}}", expectedUrl)
+            );
+
+            var addToCalendarRequest = new AddToCalendarRequestBuilder()
+                .OAuthDetails(redirectUrl, scope)
+                .UpsertEventRequest(upsertEventRequest)
+                .HourFormat("h")
+                .Build();
+
+            var actualUrl = client.AddToCalendar(addToCalendarRequest);
+
+            Assert.AreEqual(expectedUrl, actualUrl);
+        }
     }
 }

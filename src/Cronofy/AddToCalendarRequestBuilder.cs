@@ -9,6 +9,11 @@
     public sealed class AddToCalendarRequestBuilder : IBuilder<AddToCalendarRequest>
     {
         /// <summary>
+        /// The hour format for the request.
+        /// </summary>
+        private string hourFormat;
+
+        /// <summary>
         /// The oauth details for the request.
         /// </summary>
         private IBuilder<AddToCalendarRequest.OAuthDetails> oauthBuilder;
@@ -17,6 +22,27 @@
         /// The event details builder for the request.
         /// </summary>
         private IBuilder<UpsertEventRequest> upsertEventRequestBuilder;
+
+        /// <summary>
+        /// Sets the hour format of the request.
+        /// </summary>
+        /// <param name="hourFormat">
+        /// The hour format to use for the request, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="hourFormat"/> is empty. 
+        /// </exception>
+        public AddToCalendarRequestBuilder HourFormat(string hourFormat)
+        {
+            Preconditions.NotBlank("hourFormat", hourFormat);
+
+            this.hourFormat = hourFormat;
+
+            return this;
+        }
 
         /// <summary>
         /// Sets the OAuth details of the request.
@@ -138,6 +164,14 @@
                 OAuth = this.oauthBuilder.Build(),
                 Event = this.upsertEventRequestBuilder.Build(),
             };
+
+            if (this.hourFormat != null)
+            {
+                request.Formatting = new SchedulingFormatting
+                {
+                    HourFormat = this.hourFormat,
+                };
+            }
 
             return request;
         }
