@@ -46,6 +46,15 @@
         public UpsertEventRequest Event { get; set; }
 
         /// <summary>
+        /// Gets or sets the formatting for the request.
+        /// </summary>
+        /// <value>
+        /// The formatting for the request.
+        /// </value>
+        [JsonProperty("formatting")]
+        public SchedulingFormatting Formatting { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the oauth details.
         /// </summary>
         public sealed class OAuthDetails

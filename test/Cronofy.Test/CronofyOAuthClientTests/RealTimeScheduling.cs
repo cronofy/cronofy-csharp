@@ -50,46 +50,51 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
-        public void CanGetOAuthUrlWithAvailabilityAndTargetCalendars()
+        public void CanGetOAuthUrlWithAvailabilityTargetCalendarsAndHourFormat()
         {
             var expectedUrl = "http://test.com";
+            var hourFormat = "H";
 
             http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/real_time_scheduling")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
-                    "{{" +
-                        "\"client_id\":\"{0}\"," +
-                        "\"client_secret\":\"{1}\"," +
-                        "\"oauth\":{{" +
-                            "\"redirect_uri\":\"{2}\"," +
-                            "\"scope\":\"{3}\"" +
-                        "}}," +
-                        "\"event\":{{" +
-                            "\"event_id\":\"{4}\"," +
-                            "\"summary\":\"{5}\"" +
-                        "}}," +
-                        "\"availability\":{{" +
-                            "\"participants\":[{{" +
-                                "\"members\":[{{" +
-                                    "\"sub\":\"{6}\"" +
-                                "}}]" +
-                            "}}]," +
-                            "\"required_duration\":{{" +
-                                "\"minutes\":60" +
+                        "{{" +
+                            "\"client_id\":\"{0}\"," +
+                            "\"client_secret\":\"{1}\"," +
+                            "\"oauth\":{{" +
+                                "\"redirect_uri\":\"{2}\"," +
+                                "\"scope\":\"{3}\"" +
                             "}}," +
-                            "\"available_periods\":[{{" +
-                                "\"start\":\"{7}\"," +
-                                "\"end\":\"{8}\"" +
-                            "}}]" +
-                        "}}," +
-                        "\"target_calendars\":[{{" +
-                            "\"sub\":\"{9}\"," +
-                            "\"calendar_id\":\"{10}\"" +
-                        "}}]" +
-                    ",\"tzid\":\"Etc/UTC\"}}",
-                        clientId, clientSecret, redirectUrl, scope, eventId, summary, sub, startString, endString, sub, calendarId)
+                            "\"event\":{{" +
+                                "\"event_id\":\"{4}\"," +
+                                "\"summary\":\"{5}\"" +
+                            "}}," +
+                            "\"availability\":{{" +
+                                "\"participants\":[{{" +
+                                    "\"members\":[{{" +
+                                        "\"sub\":\"{6}\"" +
+                                    "}}]" +
+                                "}}]," +
+                                "\"required_duration\":{{" +
+                                    "\"minutes\":60" +
+                                "}}," +
+                                "\"available_periods\":[{{" +
+                                    "\"start\":\"{7}\"," +
+                                    "\"end\":\"{8}\"" +
+                                "}}]" +
+                            "}}," +
+                            "\"target_calendars\":[{{" +
+                                "\"sub\":\"{9}\"," +
+                                "\"calendar_id\":\"{10}\"" +
+                            "}}]," +
+                            "\"formatting\":{{" +
+                                "\"hour_format\":\"{11}\"" +
+                            "}}," +
+                            "\"tzid\":\"Etc/UTC\"" +
+                        "}}",
+                        clientId, clientSecret, redirectUrl, scope, eventId, summary, sub, startString, endString, sub, calendarId, hourFormat)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         "{{\"url\":\"{0}\"}}", expectedUrl)
@@ -101,6 +106,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .UpsertEventRequest(upsertEventRequestWithoutStartAndEnd)
                 .AvailabilityRequest(availabilityRequest)
                 .AddTargetCalendar(sub, calendarId)
+                .HourFormat("H")
                 .Build();
 
             var actualUrl = client.RealTimeScheduling(request);
