@@ -1,3 +1,7 @@
+## [0.13.0]
+
+ * Support for Real-Time Scheduling and Add To Calendar hour format option [#40]
+
 ## [0.12.0]
 
  * Support for color with calendar creation and event upsert [#38]
@@ -87,6 +91,7 @@
 [0.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.10.0
 [0.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.11.0
 [0.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.12.0
+[0.13.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.13.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -108,3 +113,4 @@
 [#36]: https://github.com/cronofy/cronofy-csharp/pull/36
 [#37]: https://github.com/cronofy/cronofy-csharp/pull/37
 [#38]: https://github.com/cronofy/cronofy-csharp/pull/38
+[#40]: https://github.com/cronofy/cronofy-csharp/pull/40
