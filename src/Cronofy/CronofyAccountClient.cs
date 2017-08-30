@@ -499,6 +499,20 @@ namespace Cronofy
             return response.LinkToken;
         }
 
+        /// <inheritdoc/>
+        public void RevokeProfileAuthorization(string profileId)
+        {
+            Preconditions.NotEmpty("profileId", profileId);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = string.Format(this.UrlProvider.RevokeProfileAuthorizationUrlFormat, profileId);
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            this.HttpClient.GetValidResponse(request);
+        }
+
         /// <summary>
         /// Creates a calendar.
         /// </summary>
