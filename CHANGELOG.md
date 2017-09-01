@@ -1,3 +1,7 @@
+## [0.14.0]
+
+ * Support for revoking profile authorization [#41]
+
 ## [0.13.0]
 
  * Support for Real-Time Scheduling and Add To Calendar hour format option [#40]
@@ -92,6 +96,7 @@
 [0.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.11.0
 [0.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.12.0
 [0.13.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.13.0
+[0.14.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.14.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -114,3 +119,4 @@
 [#37]: https://github.com/cronofy/cronofy-csharp/pull/37
 [#38]: https://github.com/cronofy/cronofy-csharp/pull/38
 [#40]: https://github.com/cronofy/cronofy-csharp/pull/40
+[#41]: https://github.com/cronofy/cronofy-csharp/pull/41

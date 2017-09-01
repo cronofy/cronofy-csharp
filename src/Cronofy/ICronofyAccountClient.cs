@@ -491,5 +491,16 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         string CreateLinkToken();
+
+        /// <summary>
+        /// Revokes the authorization for the specified profile.
+        /// </summary>
+        /// <param name="profileId">
+        /// The ID of the profile to revoke access to, must not be empty.
+        /// </param>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void RevokeProfileAuthorization(string profileId);
     }
 }
