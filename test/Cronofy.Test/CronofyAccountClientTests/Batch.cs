@@ -56,5 +56,42 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             this.Client.BatchRequest(batchBuilder);
         }
+
+        [Test]
+        public void CanDeleteEvent()
+        {
+            this.Http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/batch")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .JsonRequest(@"
+                        {
+                            ""batch"": [
+                                {
+                                    ""method"": ""DELETE"",
+                                    ""relative_url"": ""/v1/calendars/cal_n23kjnwrw2_jsdfjksn234/events"",
+                                    ""data"": {
+                                        ""event_id"": ""qTtZdczOccgaPncGJaCiLg""
+                                    }
+                                }
+                            ]
+                        }
+                    ")
+                    .ResponseCode(207)
+                    .ResponseBody(@"
+                        {
+                            ""batch"": [
+                                { ""status"": 202 }
+                            ]
+                        }
+                    ")
+            );
+
+            var batchBuilder = new BatchRequestBuilder();
+
+            batchBuilder.DeleteEvent("cal_n23kjnwrw2_jsdfjksn234", "qTtZdczOccgaPncGJaCiLg");
+
+            this.Client.BatchRequest(batchBuilder);
+        }
     }
 }

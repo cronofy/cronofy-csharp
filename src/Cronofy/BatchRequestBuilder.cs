@@ -20,14 +20,6 @@ namespace Cronofy
             this.batchEntryBuilders = new List<IBuilder<BatchRequest.Entry>>();
         }
 
-        private class BatchEntryBuilder : IBuilder<BatchRequest.Entry>
-        {
-            public BatchRequest.Entry Build()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         /// <summary>
         /// Add an event upsert to the batch.
         /// </summary>
@@ -46,11 +38,9 @@ namespace Cronofy
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
-        public BatchRequestBuilder UpsertEvent(string calendarId, UpsertEventRequestBuilder eventBuilder)
+        public BatchRequestBuilder UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
         {
-            this.batchEntryBuilders.Add(new UpsertEventEntryBuilder(calendarId, eventBuilder));
-
-            return this;
+            return this.WithEntry(new UpsertEventEntryBuilder(calendarId, eventBuilder));
         }
 
         /// <summary>
@@ -73,9 +63,25 @@ namespace Cronofy
         /// </returns>
         public BatchRequestBuilder UpsertEvent(string calendarId, UpsertEventRequest eventRequest)
         {
-            this.batchEntryBuilders.Add(new UpsertEventEntryBuilder(calendarId, eventRequest));
+            Preconditions.NotNull("eventRequest", eventRequest);
 
-            return this;
+            return this.WithEntry(new UpsertEventEntryBuilder(calendarId, Builder.Wrap(eventRequest)));
+        }
+
+        /// <summary>
+        /// Adds an event delete to the batch.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The ID of the calendar the event should be deleted from, must not be
+        /// empty.
+        /// </param>
+        /// <param name="eventId">
+        /// The ID of the event to delete, must not be empty.
+        /// </param>
+        /// <returns></returns>
+        public BatchRequestBuilder DeleteEvent(string calendarId, string eventId)
+        {
+            return this.WithEntry(new DeleteEventEntryBuilder(calendarId, eventId));
         }
 
         private class UpsertEventEntryBuilder : IBuilder<BatchRequest.Entry>
@@ -92,24 +98,37 @@ namespace Cronofy
                 this.eventBuilder = eventBuilder;
             }
 
-            public UpsertEventEntryBuilder(string calendarId, UpsertEventRequest eventRequest)
+            public BatchRequest.Entry Build()
+            {
+                return new BatchRequest.EntryBuilder()
+                    .Method("POST")
+                    .RelativeUrlFormat("/v1/calendars/{0}/events", this.calendarId)
+                    .Data(this.eventBuilder)
+                    .Build();
+            }
+        }
+
+        private class DeleteEventEntryBuilder : IBuilder<BatchRequest.Entry>
+        {
+            private readonly string calendarId;
+            private readonly string eventId;
+
+            public DeleteEventEntryBuilder(string calendarId, string eventId)
             {
                 Preconditions.NotEmpty("calendarId", calendarId);
-                Preconditions.NotNull("eventRequest", eventRequest);
+                Preconditions.NotEmpty("eventId", eventId);
 
                 this.calendarId = calendarId;
-                this.eventBuilder = Builder.Wrap(eventRequest);
+                this.eventId = eventId;
             }
 
             public BatchRequest.Entry Build()
             {
-                var entry = new BatchRequest.Entry();
-
-                entry.Method = "POST";
-                entry.RelativeUrl = string.Format("/v1/calendars/{0}/events", this.calendarId);
-                entry.Data = this.eventBuilder.Build();
-
-                return entry;
+                return new BatchRequest.EntryBuilder()
+                    .Method("DELETE")
+                    .RelativeUrlFormat("/v1/calendars/{0}/events", this.calendarId)
+                    .Data(new { event_id = this.eventId })
+                    .Build();
             }
         }
 
@@ -121,6 +140,13 @@ namespace Cronofy
             request.Batch = this.batchEntryBuilders.Select(builder => builder.Build()).ToArray();
 
             return request;
+        }
+
+        private BatchRequestBuilder WithEntry(IBuilder<BatchRequest.Entry> entryBuilder)
+        {
+            this.batchEntryBuilders.Add(entryBuilder);
+
+            return this;
         }
     }
 }
