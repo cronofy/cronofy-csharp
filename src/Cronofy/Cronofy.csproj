@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AvailabilityRequestBuilder.cs" />
     <Compile Include="AvailablePeriod.cs" />
+    <Compile Include="BatchRequestBuilder.cs" />
     <Compile Include="ElevatedPermissionsResponse.cs" />
     <Compile Include="ElevatedPermissionsBuilder.cs" />
     <Compile Include="EventOptions.cs" />
@@ -49,10 +50,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AvailabilityRequest.cs" />
     <Compile Include="Requests\BaseEventRequest.cs" />
+    <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="Requests\ElevatedPermissionsRequest.cs" />
     <Compile Include="Requests\SmartInviteCancelRequest.cs" />
     <Compile Include="Requests\SmartInviteEventRequest.cs" />
     <Compile Include="Responses\AvailabilityResponse.cs" />
+    <Compile Include="Responses\BatchResponse.cs" />
     <Compile Include="Responses\ElevatedPermissionsResponse.cs" />
     <Compile Include="Responses\SmartInviteResponse.cs" />
     <Compile Include="SmartInvite.cs" />

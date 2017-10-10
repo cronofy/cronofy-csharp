@@ -232,6 +232,29 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public BatchResponse BatchRequest(IBuilder<BatchRequest> batchBuilder)
+        {
+            Preconditions.NotNull("batchBuilder", batchBuilder);
+
+            var request = batchBuilder.Build();
+
+            return this.BatchRequest(request);
+        }
+
+        /// <inheritdoc/>
+        public BatchResponse BatchRequest(BatchRequest batchRequest)
+        {
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.BatchUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+            request.SetJsonBody(batchRequest);
+
+            return this.HttpClient.GetJsonResponse<BatchResponse>(request);
+        }
+
+        /// <inheritdoc/>
         public void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
