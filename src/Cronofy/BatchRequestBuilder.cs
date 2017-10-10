@@ -40,7 +40,15 @@ namespace Cronofy
         /// </returns>
         public BatchRequestBuilder UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
         {
-            return this.WithEntry(new UpsertEventEntryBuilder(calendarId, eventBuilder));
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotNull("eventBuilder", eventBuilder);
+
+            return this.WithEntry(
+                new BatchRequest.EntryBuilder()
+                    .Method("POST")
+                    .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
+                    .Data(eventBuilder)
+                );
         }
 
         /// <summary>
@@ -65,7 +73,7 @@ namespace Cronofy
         {
             Preconditions.NotNull("eventRequest", eventRequest);
 
-            return this.WithEntry(new UpsertEventEntryBuilder(calendarId, Builder.Wrap(eventRequest)));
+            return this.UpsertEvent(calendarId, Builder.Wrap(eventRequest));
         }
 
         /// <summary>
@@ -81,55 +89,12 @@ namespace Cronofy
         /// <returns></returns>
         public BatchRequestBuilder DeleteEvent(string calendarId, string eventId)
         {
-            return this.WithEntry(new DeleteEventEntryBuilder(calendarId, eventId));
-        }
-
-        private class UpsertEventEntryBuilder : IBuilder<BatchRequest.Entry>
-        {
-            private readonly string calendarId;
-            private readonly IBuilder<UpsertEventRequest> eventBuilder;
-
-            public UpsertEventEntryBuilder(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
-            {
-                Preconditions.NotEmpty("calendarId", calendarId);
-                Preconditions.NotNull("eventBuilder", eventBuilder);
-
-                this.calendarId = calendarId;
-                this.eventBuilder = eventBuilder;
-            }
-
-            public BatchRequest.Entry Build()
-            {
-                return new BatchRequest.EntryBuilder()
-                    .Method("POST")
-                    .RelativeUrlFormat("/v1/calendars/{0}/events", this.calendarId)
-                    .Data(this.eventBuilder)
-                    .Build();
-            }
-        }
-
-        private class DeleteEventEntryBuilder : IBuilder<BatchRequest.Entry>
-        {
-            private readonly string calendarId;
-            private readonly string eventId;
-
-            public DeleteEventEntryBuilder(string calendarId, string eventId)
-            {
-                Preconditions.NotEmpty("calendarId", calendarId);
-                Preconditions.NotEmpty("eventId", eventId);
-
-                this.calendarId = calendarId;
-                this.eventId = eventId;
-            }
-
-            public BatchRequest.Entry Build()
-            {
-                return new BatchRequest.EntryBuilder()
+            return this.WithEntry(
+                new BatchRequest.EntryBuilder()
                     .Method("DELETE")
-                    .RelativeUrlFormat("/v1/calendars/{0}/events", this.calendarId)
-                    .Data(new { event_id = this.eventId })
-                    .Build();
-            }
+                    .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
+                    .Data(new { event_id = eventId })
+                );
         }
 
         /// <inheritdoc />
