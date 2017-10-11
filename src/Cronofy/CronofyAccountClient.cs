@@ -251,7 +251,14 @@ namespace Cronofy
             request.AddOAuthAuthorization(this.AccessToken);
             request.SetJsonBody(batchRequest);
 
-            return this.HttpClient.GetJsonResponse<BatchResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<BatchResponse>(request);
+
+            for (int i = 0; i < response.Batch.Length; i++)
+            {
+                response.Batch[i].Request = batchRequest.Batch[i];
+            }
+
+            return response;
         }
 
         /// <inheritdoc/>
@@ -293,7 +300,7 @@ namespace Cronofy
             request.Url = string.Format(this.UrlProvider.ManagedEventUrlFormat, calendarId);
             request.AddOAuthAuthorization(this.AccessToken);
 
-            var requestBody = new { event_id = eventId };
+            var requestBody = new DeleteEventRequest { EventId = eventId };
             request.SetJsonBody(requestBody);
 
             this.HttpClient.GetValidResponse(request);

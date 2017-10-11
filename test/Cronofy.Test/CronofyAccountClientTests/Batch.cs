@@ -1,4 +1,5 @@
 ﻿using System;
+using Cronofy.Requests;
 using NUnit.Framework;
 
 namespace Cronofy.Test.CronofyAccountClientTests
@@ -44,17 +45,28 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             var batchBuilder = new BatchRequestBuilder();
 
-            var upsertBuilder = new UpsertEventRequestBuilder()
+            var upsertRequest = new UpsertEventRequestBuilder()
                 .EventId("qTtZdczOccgaPncGJaCiLg")
                 .Summary("Board meeting")
                 .Description("Discuss plans for the next quarter.")
                 .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
-                .Location("Board room");
+                .Location("Board room")
+                .Build();
 
-            batchBuilder.UpsertEvent("cal_n23kjnwrw2_jsdfjksn234", upsertBuilder);
+            batchBuilder.UpsertEvent("cal_n23kjnwrw2_jsdfjksn234", upsertRequest);
 
-            this.Client.BatchRequest(batchBuilder);
+            var response = this.Client.BatchRequest(batchBuilder);
+
+            Assert.AreEqual(202, response.Batch[0].Status);
+
+            var expectedRequestEntry = new BatchRequest.EntryBuilder()
+                .Method("POST")
+                .RelativeUrl("/v1/calendars/cal_n23kjnwrw2_jsdfjksn234/events")
+                .Data(upsertRequest)
+                .Build();
+
+            Assert.AreEqual(expectedRequestEntry, response.Batch[0].Request);
         }
 
         [Test]
@@ -91,7 +103,17 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             batchBuilder.DeleteEvent("cal_n23kjnwrw2_jsdfjksn234", "qTtZdczOccgaPncGJaCiLg");
 
-            this.Client.BatchRequest(batchBuilder);
+            var response = this.Client.BatchRequest(batchBuilder);
+
+            Assert.AreEqual(202, response.Batch[0].Status);
+
+            var expectedRequestEntry = new BatchRequest.EntryBuilder()
+                .Method("DELETE")
+                .RelativeUrl("/v1/calendars/cal_n23kjnwrw2_jsdfjksn234/events")
+                .Data(new DeleteEventRequest { EventId = "qTtZdczOccgaPncGJaCiLg" })
+                .Build();
+
+            Assert.AreEqual(expectedRequestEntry, response.Batch[0].Request);
         }
     }
 }

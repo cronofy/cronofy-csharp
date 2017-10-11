@@ -93,7 +93,7 @@ namespace Cronofy
                 new BatchRequest.EntryBuilder()
                     .Method("DELETE")
                     .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
-                    .Data(new { event_id = eventId })
+                    .Data(new DeleteEventRequest { EventId = eventId })
                 );
         }
 

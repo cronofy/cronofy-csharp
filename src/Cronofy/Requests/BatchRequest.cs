@@ -22,6 +22,7 @@ namespace Cronofy.Requests
         /// </summary>
         public sealed class Entry
         {
+
             /// <summary>
             /// Gets or sets the method of the batch entry.
             /// </summary>
@@ -39,6 +40,54 @@ namespace Cronofy.Requests
             /// </summary>
             [JsonProperty("data")]
             public object Data { get; set; }
+
+            /// <inheritdoc />
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+
+                var entry = obj as Entry;
+
+                return entry != null && this.Equals(entry);
+            }
+
+            /// <inheritdoc />
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = (this.Method != null ? this.Method.GetHashCode() : 0);
+                    hashCode = (hashCode * 397) ^ (this.RelativeUrl != null ? this.RelativeUrl.GetHashCode() : 0);
+                    hashCode = (hashCode * 397) ^ (this.Data != null ? this.Data.GetHashCode() : 0);
+                    return hashCode;
+                }
+            }
+
+            /// <summary>
+            /// Determines whether the specified <see cref="Entry"/> is equal to
+            /// the current <see cref="Entry"/>.
+            /// </summary>
+            /// <param name="other">
+            /// The <see cref="Entry"/> to compare with the current
+            /// <see cref="Entry"/>.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the specified <see cref="Entry"/> is equal to the
+            /// current <see cref="Entry"/>; otherwise, <c>false</c>.
+            /// </returns>
+            public bool Equals(Entry other)
+            {
+                return this.Method == other.Method
+                    && this.RelativeUrl == other.RelativeUrl
+                    && this.Data == null ? other.Data == null : this.Data.Equals(other.Data);
+            }
+
+            /// <inheritdoc />
+            public override string ToString()
+            {
+                return $"{nameof(this.Method)}: {this.Method}, {nameof(this.RelativeUrl)}: {this.RelativeUrl}, {nameof(this.Data)}: {this.Data}";
+            }
         }
 
         /// <summary>
