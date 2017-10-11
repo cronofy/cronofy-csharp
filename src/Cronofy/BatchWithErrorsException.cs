@@ -1,18 +1,13 @@
-﻿using Cronofy.Responses;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using Responses;
+
     /// <summary>
     /// Exception thrown by the Cronofy SDK when a batch request contains
     /// non-successful entries.
     /// </summary>
     public sealed class BatchWithErrorsException : CronofyException
     {
-        /// <summary>
-        /// Gets the batch response that contains non-successful entries.
-        /// </summary>
-        public BatchResponse Response { get; }
-
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="BatchWithErrorsException"/> class.
@@ -34,5 +29,13 @@ namespace Cronofy
 
             this.Response = response;
         }
+
+        /// <summary>
+        /// Gets the batch response that contains non-successful entries.
+        /// </summary>
+        /// <value>
+        /// The batch response.
+        /// </value>
+        public BatchResponse Response { get; private set; }
     }
 }

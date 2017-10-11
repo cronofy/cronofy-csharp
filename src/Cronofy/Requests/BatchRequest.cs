@@ -1,9 +1,6 @@
-﻿using System.Web;
-
-namespace Cronofy.Requests
+﻿namespace Cronofy.Requests
 {
     using System;
-    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -14,6 +11,9 @@ namespace Cronofy.Requests
         /// <summary>
         /// Gets or sets the entries of the batch request.
         /// </summary>
+        /// <value>
+        /// The batch of entries for the request.
+        /// </value>
         [JsonProperty("batch")]
         public Entry[] Batch { get; set; }
 
@@ -22,30 +22,45 @@ namespace Cronofy.Requests
         /// </summary>
         public sealed class Entry
         {
-
             /// <summary>
             /// Gets or sets the method of the batch entry.
             /// </summary>
+            /// <value>
+            /// The method of the batch entry.
+            /// </value>
             [JsonProperty("method")]
             public string Method { get; set; }
 
             /// <summary>
             /// Gets or sets the relative URL of the batch entry.
             /// </summary>
+            /// <value>
+            /// The relative URL of the batch entry.
+            /// </value>
             [JsonProperty("relative_url")]
             public string RelativeUrl { get; set; }
 
             /// <summary>
             /// Gets or sets the data of the batch entry.
             /// </summary>
+            /// <value>
+            /// The data of the batch entry.
+            /// </value>
             [JsonProperty("data")]
             public object Data { get; set; }
 
             /// <inheritdoc />
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
+                if (ReferenceEquals(null, obj))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(this, obj))
+                {
+                    return true;
+                }
 
                 var entry = obj as Entry;
 
@@ -57,7 +72,7 @@ namespace Cronofy.Requests
             {
                 unchecked
                 {
-                    var hashCode = (this.Method != null ? this.Method.GetHashCode() : 0);
+                    var hashCode = this.Method != null ? this.Method.GetHashCode() : 0;
                     hashCode = (hashCode * 397) ^ (this.RelativeUrl != null ? this.RelativeUrl.GetHashCode() : 0);
                     hashCode = (hashCode * 397) ^ (this.Data != null ? this.Data.GetHashCode() : 0);
                     return hashCode;
@@ -86,7 +101,12 @@ namespace Cronofy.Requests
             /// <inheritdoc />
             public override string ToString()
             {
-                return $"{nameof(this.Method)}: {this.Method}, {nameof(this.RelativeUrl)}: {this.RelativeUrl}, {nameof(this.Data)}: {this.Data}";
+                return string.Format(
+                    "<{0} Method={1}, RelativeUrl={2}, Data={3}",
+                    this.GetType(),
+                    this.Method,
+                    this.RelativeUrl,
+                    this.Data);
             }
         }
 
@@ -95,8 +115,19 @@ namespace Cronofy.Requests
         /// </summary>
         public sealed class EntryBuilder : IBuilder<Entry>
         {
+            /// <summary>
+            /// The method of the builder.
+            /// </summary>
             private string method;
+
+            /// <summary>
+            /// The relative URL of the builder.
+            /// </summary>
             private string relativeUrl;
+
+            /// <summary>
+            /// The data of the builder.
+            /// </summary>
             private object data;
 
             /// <summary>
@@ -168,6 +199,9 @@ namespace Cronofy.Requests
             /// <param name="dataBuilder">
             /// The builder for the data for the entry.
             /// </param>
+            /// <typeparam name="T">
+            /// The type of the data object that will be built.
+            /// </typeparam>
             /// <returns>
             /// A reference to the modified builder.
             /// </returns>

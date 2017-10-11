@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cronofy.Requests;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Requests;
+
     /// <summary>
     /// Class to build a batch request.
     /// </summary>
     public sealed class BatchRequestBuilder : IBuilder<BatchRequest>
     {
+        /// <summary>
+        /// The collected batch entry builders.
+        /// </summary>
         private readonly IList<IBuilder<BatchRequest.Entry>> batchEntryBuilders;
 
         /// <summary>
-        /// Creates a new instance of <see cref="BatchRequestBuilder"/>.
+        /// Initializes a new instance of the <see cref="BatchRequestBuilder"/>
+        /// class.
         /// </summary>
         public BatchRequestBuilder()
         {
@@ -47,8 +51,7 @@ namespace Cronofy
                 new BatchRequest.EntryBuilder()
                     .Method("POST")
                     .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
-                    .Data(eventBuilder)
-                );
+                    .Data(eventBuilder));
         }
 
         /// <summary>
@@ -86,15 +89,23 @@ namespace Cronofy
         /// <param name="eventId">
         /// The ID of the event to delete, must not be empty.
         /// </param>
-        /// <returns></returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> is empty or if
+        /// <paramref name="eventId"/> is null.
+        /// </exception>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
         public BatchRequestBuilder DeleteEvent(string calendarId, string eventId)
         {
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotEmpty("eventId", eventId);
+
             return this.WithEntry(
                 new BatchRequest.EntryBuilder()
                     .Method("DELETE")
                     .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
-                    .Data(new DeleteEventRequest { EventId = eventId })
-                );
+                    .Data(new DeleteEventRequest { EventId = eventId }));
         }
 
         /// <inheritdoc />
@@ -107,6 +118,15 @@ namespace Cronofy
             return request;
         }
 
+        /// <summary>
+        /// Adds an entry to the builder list.
+        /// </summary>
+        /// <param name="entryBuilder">
+        /// The entry builder to add to the list.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
         private BatchRequestBuilder WithEntry(IBuilder<BatchRequest.Entry> entryBuilder)
         {
             this.batchEntryBuilders.Add(entryBuilder);

@@ -1,10 +1,9 @@
-﻿using Cronofy.Responses;
-
-namespace Cronofy
+﻿namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
     using Cronofy.Requests;
+    using Cronofy.Responses;
 
     /// <summary>
     /// Interface for a Cronofy client that interacts with an account's
