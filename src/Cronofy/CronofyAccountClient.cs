@@ -258,6 +258,12 @@ namespace Cronofy
                 response.Batch[i].Request = batchRequest.Batch[i];
             }
 
+            if (response.HasErrors)
+            {
+                var message = string.Format("Batch contains {0} errors", response.Errors.Count);
+                throw new BatchWithErrorsException(message, response);
+            }
+
             return response;
         }
 

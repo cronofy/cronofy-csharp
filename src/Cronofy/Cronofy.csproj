@@ -46,6 +46,7 @@
     <Compile Include="ElevatedPermissionsResponse.cs" />
     <Compile Include="ElevatedPermissionsBuilder.cs" />
     <Compile Include="EventOptions.cs" />
+    <Compile Include="BatchWithErrorsException.cs" />
     <Compile Include="ParticipantGroupBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AvailabilityRequest.cs" />

@@ -214,6 +214,9 @@ namespace Cronofy
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="batchRequest"/> is null.
         /// </exception>
+        /// <exception cref="BatchWithErrorsException">
+        /// Thrown if any of the batch entries receives an error in response.
+        /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
