@@ -122,6 +122,55 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
 
         [Test]
+        public void CanDeleteExternalEvent()
+        {
+            this.Http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/batch")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .JsonRequest(@"
+                        {
+                            ""batch"": [
+                                {
+                                    ""method"": ""DELETE"",
+                                    ""relative_url"": ""/v1/calendars/cal_n23kjnwrw2_jsdfjksn234/events"",
+                                    ""data"": {
+                                        ""event_uid"": ""evt_external_1234abcd""
+                                    }
+                                }
+                            ]
+                        }
+                    ")
+                    .ResponseCode(207)
+                    .ResponseBody(@"
+                        {
+                            ""batch"": [
+                                { ""status"": 202 }
+                            ]
+                        }
+                    ")
+            );
+
+            var batchBuilder = new BatchRequestBuilder();
+
+            batchBuilder.DeleteExternalEvent("cal_n23kjnwrw2_jsdfjksn234", "evt_external_1234abcd");
+
+            var response = this.Client.BatchRequest(batchBuilder);
+
+            var expected = new BatchResponse.EntryResponse
+            {
+                Status = 202,
+                Request = new BatchRequest.EntryBuilder()
+                    .Method("DELETE")
+                    .RelativeUrl("/v1/calendars/cal_n23kjnwrw2_jsdfjksn234/events")
+                    .Data(new DeleteExternalEventRequest { EventUid = "evt_external_1234abcd" })
+                    .Build(),
+            };
+
+            Assert.AreEqual(expected, response.Batch[0]);
+        }
+
+        [Test]
         public void RaiseExceptionOnPartialSuccess()
         {
             this.Http.Stub(

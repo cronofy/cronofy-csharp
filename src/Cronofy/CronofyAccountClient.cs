@@ -368,7 +368,7 @@ namespace Cronofy
             request.Url = string.Format(this.UrlProvider.ManagedEventUrlFormat, calendarId);
             request.AddOAuthAuthorization(this.AccessToken);
 
-            var requestBody = new { event_uid = eventUid };
+            var requestBody = new DeleteExternalEventRequest { EventUid = eventUid };
             request.SetJsonBody(requestBody);
 
             var response = this.HttpClient.GetResponse(request);

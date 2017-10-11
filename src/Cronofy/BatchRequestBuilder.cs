@@ -108,6 +108,35 @@
                     .Data(new DeleteEventRequest { EventId = eventId }));
         }
 
+        /// <summary>
+        /// Adds an external event delete to the batch.
+        /// </summary>
+        /// <param name="calendarId">
+        /// The ID of the calendar the event should be deleted from, must not be
+        /// empty.
+        /// </param>
+        /// <param name="eventUid">
+        /// The UID of the event to delete, must not be empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="calendarId"/> is empty or if
+        /// <paramref name="eventUid"/> is null.
+        /// </exception>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public BatchRequestBuilder DeleteExternalEvent(string calendarId, string eventUid)
+        {
+            Preconditions.NotEmpty("calendarId", calendarId);
+            Preconditions.NotEmpty("eventUid", eventUid);
+
+            return this.WithEntry(
+                new BatchRequest.EntryBuilder()
+                    .Method("DELETE")
+                    .RelativeUrlFormat("/v1/calendars/{0}/events", calendarId)
+                    .Data(new DeleteExternalEventRequest { EventUid = eventUid }));
+        }
+
         /// <inheritdoc />
         public BatchRequest Build()
         {

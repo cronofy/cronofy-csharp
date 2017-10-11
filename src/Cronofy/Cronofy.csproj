@@ -53,6 +53,7 @@
     <Compile Include="Requests\BaseEventRequest.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="Requests\DeleteEventRequest.cs" />
+    <Compile Include="Requests\DeleteExternalEventRequest.cs" />
     <Compile Include="Requests\ElevatedPermissionsRequest.cs" />
     <Compile Include="Requests\SmartInviteCancelRequest.cs" />
     <Compile Include="Requests\SmartInviteEventRequest.cs" />
