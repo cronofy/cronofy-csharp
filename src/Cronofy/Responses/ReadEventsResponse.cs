@@ -8,7 +8,7 @@
     /// <summary>
     /// Class for the deserialization of a read events response.
     /// </summary>
-    internal sealed class ReadEventsResponse : IPagedResultsResponse<Event>
+    public sealed class ReadEventsResponse : IPagedResultsResponse<Event>
     {
         /// <summary>
         /// Gets or sets the array of events.
@@ -37,7 +37,7 @@
         /// <summary>
         /// Class for the deserialization of an event.
         /// </summary>
-        internal sealed class EventResponse
+        public sealed class EventResponse
         {
             /// <summary>
             /// Gets or sets the ID of the calendar the event is within.
@@ -274,7 +274,7 @@
             /// Class for the deserialization of the location for a read event
             /// response.
             /// </summary>
-            internal sealed class ResponseLocation
+            public sealed class ResponseLocation
             {
                 /// <summary>
                 /// Gets or sets the description of the location.
@@ -319,7 +319,7 @@
             /// Class for the deserialization of the options for a read event
             /// response.
             /// </summary>
-            internal sealed class EventOptions
+            public sealed class EventOptions
             {
                 /// <summary>
                 /// Gets or sets a value indicating whether this event can be
@@ -365,7 +365,7 @@
             /// Class for the deserialization of an attendee for a read event
             /// response.
             /// </summary>
-            internal sealed class AttendeeResponse
+            public sealed class AttendeeResponse
             {
                 /// <summary>
                 /// Gets or sets the email of the attendee.
@@ -415,7 +415,7 @@
             /// Class for the deserialization of an organizer for a read event
             /// response.
             /// </summary>
-            internal sealed class OrganizerResponse
+            public sealed class OrganizerResponse
             {
                 /// <summary>
                 /// Gets or sets the email of the organizer.

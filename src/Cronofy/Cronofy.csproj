@@ -51,6 +51,9 @@
     <Compile Include="Requests\ElevatedPermissionsRequest.cs" />
     <Compile Include="Responses\AvailabilityResponse.cs" />
     <Compile Include="Responses\ElevatedPermissionsResponse.cs" />
+    <Compile Include="Responses\SmartInviteResponse.cs" />
+    <Compile Include="SmartInvite.cs" />
+    <Compile Include="SmartInviteRequestBuilder.cs" />
     <Compile Include="UrlBuilder.cs" />
     <Compile Include="Preconditions.cs" />
     <Compile Include="OAuthToken.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Requests\RealTimeSchedulingRequest.cs" />
     <Compile Include="RealTimeSchedulingRequestBuilder.cs" />
     <Compile Include="Responses\RealTimeSchedulingResponse.cs" />
+    <Compile Include="Requests\SmartInviteRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

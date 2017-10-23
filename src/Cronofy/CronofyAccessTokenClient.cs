@@ -1,4 +1,6 @@
-﻿namespace Cronofy
+﻿using Cronofy.Requests;
+
+namespace Cronofy
 {
     using Cronofy.Responses;
 
