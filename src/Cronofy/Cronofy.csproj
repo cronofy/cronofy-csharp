@@ -141,6 +141,7 @@
     <Compile Include="RealTimeSchedulingRequestBuilder.cs" />
     <Compile Include="Responses\RealTimeSchedulingResponse.cs" />
     <Compile Include="Requests\SmartInviteRequest.cs" />
+    <Compile Include="Requests\SchedulingFormatting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

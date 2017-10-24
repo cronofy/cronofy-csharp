@@ -18,7 +18,6 @@
         /// </param>
         public static void Main(string[] args)
         {
-
             if (args.Any(t => t == "real-time-scheduling"))
             {
                 RealTimeSchedulingExample();
@@ -91,6 +90,9 @@
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Add To Calendar example.
+        /// </summary>
         private static void AddToCalendarExample()
         {
             Console.Write("Enter Client id: ");
@@ -107,7 +109,6 @@
             DateTimeOffset end = DateTime.Now + new TimeSpan(2, 0, 0);
 
             var client = new CronofyOAuthClient(clientId, clientSecret);
-
 
             var upsertEventRequest = new UpsertEventRequestBuilder()
                 .EventId(eventId)
@@ -127,8 +128,9 @@
             Process.Start(actualUrl);
         }
 
-
-
+        /// <summary>
+        /// Real-Time Scheduling example.
+        /// </summary>
         private static void RealTimeSchedulingExample()
         {
             Console.Write("Enter Client id: ");
@@ -149,7 +151,6 @@
             DateTimeOffset end = DateTime.Now + new TimeSpan(2, 0, 0);
 
             var client = new CronofyOAuthClient(clientId, clientSecret);
-
 
             var upsertEventRequest = new UpsertEventRequestBuilder()
                 .EventId(eventId)

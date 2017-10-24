@@ -1,7 +1,10 @@
 ﻿namespace Cronofy
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
     using Cronofy.Requests;
     using Cronofy.Responses;
 
@@ -263,6 +266,20 @@
             var response = this.HttpClient.GetJsonResponse<AddToCalendarResponse>(request);
 
             return response.Url;
+        }
+
+        /// <inheritdoc/>
+        public bool HmacMatches(string sha256Hmac, byte[] requestBytes)
+        {
+            Preconditions.NotEmpty("sha256Hmac", sha256Hmac);
+
+            var keyBytes = Encoding.UTF8.GetBytes(this.clientSecret);
+
+            using (var hmacsha256 = new HMACSHA256(keyBytes))
+            {
+                var requestHash = hmacsha256.ComputeHash(requestBytes);
+                return sha256Hmac == Convert.ToBase64String(requestHash);
+            }
         }
 
         /// <summary>

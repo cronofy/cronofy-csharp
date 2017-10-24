@@ -116,23 +116,30 @@ namespace Cronofy
             Preconditions.NotEmpty("profileId", profileId);
             Preconditions.NotEmpty("name", name);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.UrlProvider.CalendarsUrl;
-            request.AddOAuthAuthorization(this.AccessToken);
-
             var calendarRequest = new CreateCalendarRequest
             {
                 ProfileId = profileId,
                 Name = name,
             };
 
-            request.SetJsonBody(calendarRequest);
+            return this.CreateCalendar(calendarRequest);
+        }
 
-            var response = this.HttpClient.GetJsonResponse<CreateCalendarResponse>(request);
+        /// <inheritdoc/>
+        public Calendar CreateCalendar(string profileId, string name, string color)
+        {
+            Preconditions.NotEmpty("profileId", profileId);
+            Preconditions.NotEmpty("name", name);
+            Preconditions.NotEmpty("color", color);
 
-            return response.ToCalendar();
+            var calendarRequest = new CreateCalendarRequest
+            {
+                ProfileId = profileId,
+                Name = name,
+                Color = color,
+            };
+
+            return this.CreateCalendar(calendarRequest);
         }
 
         /// <inheritdoc/>
@@ -490,6 +497,42 @@ namespace Cronofy
             var response = this.HttpClient.GetJsonResponse<LinkTokenResponse>(request);
 
             return response.LinkToken;
+        }
+
+        /// <inheritdoc/>
+        public void RevokeProfileAuthorization(string profileId)
+        {
+            Preconditions.NotEmpty("profileId", profileId);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = string.Format(this.UrlProvider.RevokeProfileAuthorizationUrlFormat, profileId);
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            this.HttpClient.GetValidResponse(request);
+        }
+
+        /// <summary>
+        /// Creates a calendar.
+        /// </summary>
+        /// <param name="calendarRequest">
+        /// The calendar request from which to make the calendar.
+        /// </param>
+        /// <returns>The created calendar.</returns>
+        private Calendar CreateCalendar(CreateCalendarRequest calendarRequest)
+        {
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.CalendarsUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            request.SetJsonBody(calendarRequest);
+
+            var response = this.HttpClient.GetJsonResponse<CreateCalendarResponse>(request);
+
+            return response.ToCalendar();
         }
 
         /// <summary>

@@ -64,6 +64,15 @@
         public IEnumerable<TargetCalendar> TargetCalendars { get; set; }
 
         /// <summary>
+        /// Gets or sets the formatting for the request.
+        /// </summary>
+        /// <value>
+        /// The formatting for the request.
+        /// </value>
+        [JsonProperty("formatting")]
+        public SchedulingFormatting Formatting { get; set; }
+
+        /// <summary>
         /// Gets or sets the timezone id for the request.
         /// </summary>
         /// <value>

@@ -111,6 +111,11 @@ namespace Cronofy
         private const string LinkTokensUrlFormat = "https://api{0}.cronofy.com/v1/link_tokens";
 
         /// <summary>
+        /// The URL of the revoke profile authorization endpoint.
+        /// </summary>
+        private const string RevokeProfileAuthorizationUrlFormatFormat = "https://api{0}.cronofy.com/v1/profiles/{{0}}/revoke";
+
+        /// <summary>
         /// The URL of the smart invite endpoint.
         /// </summary>
         private const string SmartInviteUrlFormat = "https://api{0}.cronofy.com/v1/smart_invites";
@@ -152,6 +157,7 @@ namespace Cronofy
             this.RealTimeSchedulingUrl = string.Format(RealTimeSchedulingUrlFormat, suffix);
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
             this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
+            this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
         }
 
         /// <summary>
@@ -401,6 +407,18 @@ namespace Cronofy
         /// The link tokens URL.
         /// </value>
         public string LinkTokensUrl
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the revoke profile authorization URL format.
+        /// </summary>
+        /// <value>
+        /// The revoke profile authorization URL format.
+        /// </value>
+        public string RevokeProfileAuthorizationUrlFormat
         {
             get;
             private set;

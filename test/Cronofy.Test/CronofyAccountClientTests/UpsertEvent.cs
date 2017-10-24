@@ -522,5 +522,48 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Client.UpsertEvent(calendarId, builder);
         }
+
+        [Test]
+        public void CanUpsertColor()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string description = "Discuss plans for the next quarter";
+            const string startTimeString = "2014-08-05";
+            const string endTimeString = "2014-08-06";
+            const string color = "#49BED8";
+
+            Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"summary\":\"{1}\"," +
+                    "\"description\":\"{2}\"," +
+                    "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
+					"\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"color\":\"{5}\"" +
+                    "}}",
+                    eventId,
+                    summary,
+                    description,
+                    startTimeString,
+                    endTimeString,
+                    color)
+                .ResponseCode(202)
+            );
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Description(description)
+                .Start(new Date(2014, 8, 5))
+                .End(new Date(2014, 8, 6))
+                .Color(color);
+
+            Client.UpsertEvent(calendarId, builder);
+        }
     }
 }
