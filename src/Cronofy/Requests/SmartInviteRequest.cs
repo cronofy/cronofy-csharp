@@ -41,7 +41,7 @@
         /// The details for the event.
         /// </value>
         [JsonProperty("event")]
-        public UpsertEventRequest Event { get; set; }
+        public SmartInviteEventRequest Event { get; set; }
 
         /// <summary>
         /// Class for the serialization of an smart invite request recipient.

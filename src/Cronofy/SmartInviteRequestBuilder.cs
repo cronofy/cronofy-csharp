@@ -12,7 +12,7 @@
     {
         private string smartInviteId;
         private string callbackUrl;
-        private UpsertEventRequest inviteEvent;
+        private SmartInviteEventRequest inviteEvent;
         private SmartInviteRequest.InviteRecipient recipient;
 
         /// <summary>
@@ -75,7 +75,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="inviteEvent"/> is null.
         /// </exception>
-        public SmartInviteRequestBuilder Event(UpsertEventRequest inviteEvent)
+        public SmartInviteRequestBuilder Event(SmartInviteEventRequest inviteEvent)
         {
             Preconditions.NotNull("inviteEvent", inviteEvent);
 

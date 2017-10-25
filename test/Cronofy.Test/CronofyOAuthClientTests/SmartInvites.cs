@@ -19,7 +19,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         private DateTimeOffset start = new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc);
         private DateTimeOffset end = new DateTime(2014, 8, 5, 16, 30, 0, DateTimeKind.Utc);
 
-        private UpsertEventRequest upsertEventRequest;
+        private SmartInviteEventRequest upsertEventRequest;
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -32,7 +32,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             client.HttpClient = http;
 
-            this.upsertEventRequest = new UpsertEventRequestBuilder()
+            this.upsertEventRequest = new SmartInviteEventRequestBuilder()
                 .Summary(summary)
                 .Start(start)
                 .End(end)
@@ -88,7 +88,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
             Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
         }
-        
+
         [Test]
         public void CanGetEventDetails()
         {
@@ -143,7 +143,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.NotNull(reply1);
             Assert.AreEqual("person1@example.com", reply1.Email);
             Assert.AreEqual("accepted", reply1.Status);
-            
+
             var reply2 = actual.Replies.LastOrDefault();
             Assert.NotNull(reply2);
             Assert.AreEqual("person2@example.com", reply2.Email);
