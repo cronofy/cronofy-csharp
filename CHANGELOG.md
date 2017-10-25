@@ -1,3 +1,7 @@
+## [0.15.0]
+
+ * Support for Smart Invites [#43]
+
 ## [0.14.0]
 
  * Support for revoking profile authorization [#41]
@@ -97,6 +101,7 @@
 [0.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.12.0
 [0.13.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.13.0
 [0.14.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.14.0
+[0.15.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -120,3 +125,5 @@
 [#38]: https://github.com/cronofy/cronofy-csharp/pull/38
 [#40]: https://github.com/cronofy/cronofy-csharp/pull/40
 [#41]: https://github.com/cronofy/cronofy-csharp/pull/41
+[#42]: https://github.com/cronofy/cronofy-csharp/pull/42
+[#43]: https://github.com/cronofy/cronofy-csharp/pull/43
