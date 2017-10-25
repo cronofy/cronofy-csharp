@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CronofyAccountClientTests\Availability.cs" />
     <Compile Include="CronofyAccountClientTests\ElevatedPermissions.cs" />
+    <Compile Include="CronofyOAuthClientTests\SmartInvites.cs" />
     <Compile Include="UrlBuilderTests\EncodeParameter.cs" />
     <Compile Include="StubHttpClient.cs" />
     <Compile Include="StubRequestBuilder.cs" />

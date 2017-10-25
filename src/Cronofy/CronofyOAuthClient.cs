@@ -283,6 +283,67 @@
         }
 
         /// <summary>
+        /// Creates a smart invite for the given request.
+        /// </summary>
+        /// <param name="smartInviteRequest">
+        /// The details of the invite, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// A smart invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        public SmartInvite CreateInvite(SmartInviteRequest smartInviteRequest)
+        {
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.SmartInviteUrl
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(smartInviteRequest);
+
+            var response = this.HttpClient.GetJsonResponse<SmartInviteResponse>(request);
+            return response.ToSmartInvite();
+        }
+
+        /// <summary>
+        /// Retreives detials of a smart invite.
+        /// </summary>
+        /// <param name="smartInviteId">
+        /// The invite id.
+        /// </param>
+        /// <param name="emailAddress">
+        /// The email address of the invitee.
+        /// </param>
+        /// <returns>
+        /// A smart invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        public SmartInvite GetSmartInvite(string smartInviteId, string emailAddress)
+        {
+            var request = new HttpRequest
+            {
+                Method = "GET",
+                Url = this.urlProvider.SmartInviteUrl,
+                QueryString = new HttpRequest.QueryStringCollection
+                {
+                    {"smart_invite_id", smartInviteId},
+                    {"recipient_email", emailAddress}
+                }
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+
+            var response = this.HttpClient.GetJsonResponse<SmartInviteResponse>(request);
+            return response.ToSmartInvite();
+        }
+
+        /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>
         public sealed class AuthorizationUrlBuilder

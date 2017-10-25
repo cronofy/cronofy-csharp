@@ -330,11 +330,11 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
                     "{{\"event_id\":\"{0}\"," +
+                    "\"attendees\":{{\"invite\":[{{\"email\":\"test@attendee.com\",\"display_name\":\"Test attendee\"}}],\"remove\":[{{\"email\":\"remove@attendee.com\",\"display_name\":\"Test removal\"}}]}}," +
                     "\"summary\":\"{1}\"," +
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
-                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
-                    "\"attendees\":{{\"invite\":[{{\"email\":\"test@attendee.com\",\"display_name\":\"Test attendee\"}}],\"remove\":[{{\"email\":\"remove@attendee.com\",\"display_name\":\"Test removal\"}}]}}" +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}" +
                     "}}",
                     eventId,
                     summary,

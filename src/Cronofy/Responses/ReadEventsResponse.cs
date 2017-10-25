@@ -334,7 +334,7 @@
 
                 /// <summary>
                 /// Gets or sets a value indicating whether this event can be
-                /// updated.                
+                /// updated.
                 /// </summary>
                 /// <value>
                 /// <c>true</c> if the event can be updated; otherwise,

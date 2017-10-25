@@ -116,6 +116,11 @@ namespace Cronofy
         private const string RevokeProfileAuthorizationUrlFormatFormat = "https://api{0}.cronofy.com/v1/profiles/{{0}}/revoke";
 
         /// <summary>
+        /// The URL of the smart invite endpoint.
+        /// </summary>
+        private const string SmartInviteUrlFormat = "https://api{0}.cronofy.com/v1/smart_invites";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -151,6 +156,7 @@ namespace Cronofy
             this.AddToCalendarUrl = string.Format(AddToCalendarUrlFormat, suffix);
             this.RealTimeSchedulingUrl = string.Format(RealTimeSchedulingUrlFormat, suffix);
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
+            this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
             this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
         }
 
@@ -417,5 +423,10 @@ namespace Cronofy
             get;
             private set;
         }
+
+        /// <summary>
+        /// Gets the smart invite URL.
+        /// </summary>
+        public string SmartInviteUrl { get; private set; }
     }
 }
