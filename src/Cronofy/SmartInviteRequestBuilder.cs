@@ -4,7 +4,7 @@
     using Cronofy.Requests;
 
     /// <summary>
-/// Builder class for
+    /// Builder class for
     /// <see cref="CronofyOAuthClient.CreateInvite(SmartInviteRequest)"/>
     /// method calls.
     /// </summary>
@@ -62,7 +62,7 @@
             this.callbackUrl = callbackUrl;
             return this;
         }
-        
+
         /// <summary>
         /// Sets the Event details.
         /// </summary>
@@ -82,7 +82,7 @@
             this.inviteEvent = inviteEvent;
             return this;
         }
-        
+
         /// <summary>
         /// Sets the Recipient details.
         /// </summary>

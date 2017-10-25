@@ -5,7 +5,7 @@
     /// <summary>
     /// Class for the deserialization of the paging information.
     /// </summary>
-    public sealed class PagesResponse
+    internal sealed class PagesResponse
     {
         /// <summary>
         /// Gets or sets the current page.

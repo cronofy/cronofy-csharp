@@ -1,11 +1,11 @@
 ﻿namespace Cronofy.Requests
 {
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Class for the serialization of an smart invite request.
     /// </summary>
-    public class SmartInviteRequest
+    public sealed class SmartInviteRequest
     {
         /// <summary>
         /// Gets or sets the Id for the invite.

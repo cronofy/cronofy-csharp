@@ -6,7 +6,7 @@
     /// <summary>
     /// Class to represent a smart invite response
     /// </summary>
-    public sealed class SmartInviteResponse
+    internal sealed class SmartInviteResponse
     {
         /// <summary>
         /// The smart invite id.
@@ -15,29 +15,29 @@
         public string SmartInviteId { get; set; }
 
         /// <summary>
-        /// The callback URL 
+        /// The callback URL
         /// </summary>
         [JsonProperty("callback_url")]
         public string CallbackUrl { get; set; }
-        
+
         /// <summary>
         /// The replies to the invite.
         /// </summary>
         [JsonProperty("replies")]
         public ResponseAttendee[] Replies { get; set; }
-        
+
         /// <summary>
         /// The current state of the primary recipient.
         /// </summary>
         [JsonProperty("recipient")]
         public ResponseAttendee Recipient { get; set; }
-        
+
         /// <summary>
         /// The event details for the invite
         /// </summary>
         [JsonProperty("event")]
         public ReadEventsResponse.EventResponse Event { get; set; }
-        
+
         /// <summary>
         /// The attachment details for the invite
         /// </summary>
@@ -69,9 +69,9 @@
                 };
             }
         }
-        
+
         /// <summary>
-        /// Class to represent the attendee. 
+        /// Class to represent the attendee.
         /// </summary>
         public sealed class ResponseAttendee
         {
@@ -80,7 +80,7 @@
             /// </summary>
             [JsonProperty("email")]
             public string Email { get; set; }
-            
+
             /// <summary>
             /// The current status of the recipient.
             /// </summary>
@@ -102,9 +102,9 @@
                 };
             }
         }
-        
+
         /// <summary>
-        /// Converts this response to a SmartInvite object. 
+        /// Converts this response to a SmartInvite object.
         /// </summary>
         /// <returns>A Smart invite object.</returns>
         public SmartInvite ToSmartInvite()
@@ -112,7 +112,7 @@
             var invite = new SmartInvite();
             invite.SmartInviteId = this.SmartInviteId;
             invite.CallbackUrl = this.CallbackUrl;
-            
+
             if (this.Replies != null)
             {
                 invite.Replies = this.Replies.Select(t => t.ToAttendee());
@@ -121,7 +121,7 @@
             {
                 invite.Replies = Enumerable.Empty<SmartInvite.Attendee>();
             }
-            
+
             invite.Recipient = this.Recipient.ToAttendee();
             invite.Event = this.Event.ToEvent();
             invite.Attachments = this.Attachments.ToAttachments();

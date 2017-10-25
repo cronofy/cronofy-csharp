@@ -8,7 +8,7 @@
     /// <summary>
     /// Class for the deserialization of a read events response.
     /// </summary>
-    public sealed class ReadEventsResponse : IPagedResultsResponse<Event>
+    internal sealed class ReadEventsResponse : IPagedResultsResponse<Event>
     {
         /// <summary>
         /// Gets or sets the array of events.
@@ -37,7 +37,7 @@
         /// <summary>
         /// Class for the deserialization of an event.
         /// </summary>
-        public sealed class EventResponse
+        internal sealed class EventResponse
         {
             /// <summary>
             /// Gets or sets the ID of the calendar the event is within.
@@ -274,7 +274,7 @@
             /// Class for the deserialization of the location for a read event
             /// response.
             /// </summary>
-            public sealed class ResponseLocation
+            internal sealed class ResponseLocation
             {
                 /// <summary>
                 /// Gets or sets the description of the location.
@@ -319,7 +319,7 @@
             /// Class for the deserialization of the options for a read event
             /// response.
             /// </summary>
-            public sealed class EventOptions
+            internal sealed class EventOptions
             {
                 /// <summary>
                 /// Gets or sets a value indicating whether this event can be
@@ -334,7 +334,7 @@
 
                 /// <summary>
                 /// Gets or sets a value indicating whether this event can be
-                /// updated.                
+                /// updated.
                 /// </summary>
                 /// <value>
                 /// <c>true</c> if the event can be updated; otherwise,
@@ -365,7 +365,7 @@
             /// Class for the deserialization of an attendee for a read event
             /// response.
             /// </summary>
-            public sealed class AttendeeResponse
+            internal sealed class AttendeeResponse
             {
                 /// <summary>
                 /// Gets or sets the email of the attendee.
@@ -415,7 +415,7 @@
             /// Class for the deserialization of an organizer for a read event
             /// response.
             /// </summary>
-            public sealed class OrganizerResponse
+            internal sealed class OrganizerResponse
             {
                 /// <summary>
                 /// Gets or sets the email of the organizer.
