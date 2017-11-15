@@ -8,6 +8,15 @@
     public sealed class SmartInviteRequest
     {
         /// <summary>
+        /// Gets or sets the method for the invite.
+        /// </summary>
+        /// <value>
+        /// The method of the invite.
+        /// </value>
+        [JsonProperty("method")]
+        public string Method { get; set; }
+
+        /// <summary>
         /// Gets or sets the Id for the invite.
         /// </summary>
         /// <value>

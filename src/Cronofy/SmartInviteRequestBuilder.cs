@@ -11,6 +11,7 @@
     public sealed class SmartInviteRequestBuilder : IBuilder<SmartInviteRequest>
     {
         private string smartInviteId;
+        private string method;
         private string callbackUrl;
         private SmartInviteEventRequest inviteEvent;
         private SmartInviteRequest.InviteRecipient recipient;
@@ -21,6 +22,26 @@
         /// </summary>
         public SmartInviteRequestBuilder()
         {
+        }
+
+        /// <method>
+        /// Sets the method for the invite.
+        /// </method>
+        /// <param name="method">
+        /// The method for the invite, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="method"/> is empty.
+        /// </exception>
+        public SmartInviteRequestBuilder Method(string method)
+        {
+            Preconditions.NotEmpty("method", method);
+
+            this.method = method;
+            return this;
         }
 
         /// <summary>
@@ -116,6 +137,11 @@
                 Event = this.inviteEvent,
                 Recipient = this.recipient,
             };
+
+            if (string.IsNullOrEmpty(this.method) == false) 
+            {
+                request.Method = this.method;
+            }
 
             return request;
         }
