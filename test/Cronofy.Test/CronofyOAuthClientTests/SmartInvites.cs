@@ -93,6 +93,51 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
+        public void CanCancelInvite()
+        {
+            http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/smart_invites")
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBody(
+                        @"{""method"":""cancel"",""smart_invite_id"":""testEventId"",""recipient"":{""email"":""example@example.com""}}")
+                    .ResponseCode(200)
+                    .ResponseBody(@"{
+                      ""recipient"": {
+                        ""email"": ""cronofy@example.com"",
+                        ""status"": ""pending""
+                      },
+                      ""method"": ""request"",
+                      ""smart_invite_id"": ""your-unique-identifier-for-invite"",
+                      ""callback_url"": ""https://example.yourapp.com/cronofy/smart_invite/notifications"",
+                      ""event"": {
+                        ""summary"": ""Board meeting"",
+                        ""description"": ""Discuss plans for the next quarter."",
+                        ""start"": ""2017-10-05T09:30:00Z"",
+                        ""end"": ""2017-10-05T10:00:00Z"",
+                        ""tzid"": ""Europe/London"",
+                        ""location"": {
+                          ""description"": ""Board room""
+                        }
+                      },
+                      ""attachments"": {
+                        ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
+                      }
+                    }")
+            );
+
+            var actual = client.CancelInvite(inviteId, "example@example.com");
+
+            Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
+            Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
+            Assert.AreEqual("pending", actual.Recipient.Status);
+            Assert.AreEqual("request", actual.Method);
+            Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
+            Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
+        }
+
+        [Test]
         public void CanGetEventDetails()
         {
             http.Stub(

@@ -310,6 +310,34 @@
         }
 
         /// <summary>
+        /// Cancels a smart invite for the given request.
+        /// </summary>
+        /// <param name="smartInviteId">The invite id to cancel</param>
+        /// <param name="recipientEmail">The recipient for the cancellation</param>
+        /// <returns>
+        /// A smart invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        public SmartInvite CancelInvite(string smartInviteId, string recipientEmail)
+        {
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.SmartInviteUrl
+            };
+
+            var smartInviteRequest = new SmartInviteCancelRequest(smartInviteId, recipientEmail);
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(smartInviteRequest);
+
+            var response = this.HttpClient.GetJsonResponse<SmartInviteResponse>(request);
+            return response.ToSmartInvite();
+        }
+
+        /// <summary>
         /// Retreives detials of a smart invite.
         /// </summary>
         /// <param name="smartInviteId">
