@@ -35,6 +35,11 @@
         }
 
         /// <summary>
+        /// The method for the smart invite.
+        /// </summary>
+        public string Method { get; set; }
+
+        /// <summary>
         /// The smart invite id.
         /// </summary>
         public string SmartInviteId { get; set; }

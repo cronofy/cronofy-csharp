@@ -3,10 +3,24 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Class for the serialization of an smart invite request.
+    /// Class for the serialization of an smart invite cancel request.
     /// </summary>
-    public sealed class SmartInviteRequest
+    public sealed class SmartInviteCancelRequest
     {
+        /// <summary>
+        /// Creates a new instance.
+        /// </summary>
+        /// <param name="smartInviteId">The invite id to cancel</param>
+        /// <param name="recipientEmail">The recipient for the cancellation</param>
+        public SmartInviteCancelRequest(string smartInviteId, string recipientEmail)
+        {
+            this.Method = "cancel";
+            this.SmartInviteId = smartInviteId;
+            this.Recipient = new InviteRecipient()
+            {
+                Email = recipientEmail
+            };
+        }
         /// <summary>
         /// Gets or sets the method for the invite.
         /// </summary>
@@ -26,15 +40,6 @@
         public string SmartInviteId { get; set; }
 
         /// <summary>
-        /// Gets or sets the callback url for notifications.
-        /// </summary>
-        /// <value>
-        /// The callback url for notifications.
-        /// </value>
-        [JsonProperty("callback_url")]
-        public string CallbackUrl { get; set; }
-
-        /// <summary>
         /// Gets or sets the recipient for the invite.
         /// </summary>
         /// <value>
@@ -42,15 +47,6 @@
         /// </value>
         [JsonProperty("recipient")]
         public InviteRecipient Recipient { get; set; }
-
-        /// <summary>
-        /// Gets or sets the details for the event.
-        /// </summary>
-        /// <value>
-        /// The details for the event.
-        /// </value>
-        [JsonProperty("event")]
-        public SmartInviteEventRequest Event { get; set; }
 
         /// <summary>
         /// Class for the serialization of an smart invite request recipient.

@@ -9,6 +9,15 @@
     internal sealed class SmartInviteResponse
     {
         /// <summary>
+        /// Gets or sets the method for the invite.
+        /// </summary>
+        /// <value>
+        /// The method of the invite.
+        /// </value>
+        [JsonProperty("method")]
+        public string Method { get; set; }
+
+        /// <summary>
         /// The smart invite id.
         /// </summary>
         [JsonProperty("smart_invite_id")]
@@ -112,6 +121,7 @@
             var invite = new SmartInvite();
             invite.SmartInviteId = this.SmartInviteId;
             invite.CallbackUrl = this.CallbackUrl;
+            invite.Method = this.Method;
 
             if (this.Replies != null)
             {

@@ -48,13 +48,14 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
-                        @"{""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}}}")
+                        @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}}}")
                     .ResponseCode(200)
                     .ResponseBody(@"{
                       ""recipient"": {
                         ""email"": ""cronofy@example.com"",
                         ""status"": ""pending""
                       },
+                      ""method"": ""request"",
                       ""smart_invite_id"": ""your-unique-identifier-for-invite"",
                       ""callback_url"": ""https://example.yourapp.com/cronofy/smart_invite/notifications"",
                       ""event"": {
@@ -74,6 +75,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             );
 
             var smartInviteRequest = new SmartInviteRequestBuilder()
+                .Method("request")
                 .CallbackUrl(callbackUrl)
                 .InviteId(inviteId)
                 .Recipient("example@example.com")
@@ -85,6 +87,52 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
             Assert.AreEqual("pending", actual.Recipient.Status);
+            Assert.AreEqual("request", actual.Method);
+            Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
+            Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
+        }
+
+        [Test]
+        public void CanCancelInvite()
+        {
+            http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/smart_invites")
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBody(
+                        @"{""method"":""cancel"",""smart_invite_id"":""testEventId"",""recipient"":{""email"":""example@example.com""}}")
+                    .ResponseCode(200)
+                    .ResponseBody(@"{
+                      ""recipient"": {
+                        ""email"": ""cronofy@example.com"",
+                        ""status"": ""pending""
+                      },
+                      ""method"": ""request"",
+                      ""smart_invite_id"": ""your-unique-identifier-for-invite"",
+                      ""callback_url"": ""https://example.yourapp.com/cronofy/smart_invite/notifications"",
+                      ""event"": {
+                        ""summary"": ""Board meeting"",
+                        ""description"": ""Discuss plans for the next quarter."",
+                        ""start"": ""2017-10-05T09:30:00Z"",
+                        ""end"": ""2017-10-05T10:00:00Z"",
+                        ""tzid"": ""Europe/London"",
+                        ""location"": {
+                          ""description"": ""Board room""
+                        }
+                      },
+                      ""attachments"": {
+                        ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
+                      }
+                    }")
+            );
+
+            var actual = client.CancelInvite(inviteId, "example@example.com");
+
+            Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
+            Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
+            Assert.AreEqual("pending", actual.Recipient.Status);
+            Assert.AreEqual("request", actual.Method);
             Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
             Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
         }
@@ -114,6 +162,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ],
                       ""smart_invite_id"": ""your-unique-identifier-for-invite"",
                       ""callback_url"": ""https://example.yourapp.com/cronofy/smart_invite/notifications"",
+                      ""method"": ""request"",
                       ""event"": {
                         ""summary"": ""Board meeting"",
                         ""description"": ""Discuss plans for the next quarter."",
@@ -135,6 +184,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
             Assert.AreEqual("pending", actual.Recipient.Status);
+            Assert.AreEqual("request", actual.Method);
             Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
             Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
             Assert.AreEqual(2, actual.Replies.Count());
