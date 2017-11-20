@@ -1,3 +1,7 @@
+## [0.15.1]
+
+ * Support for Cancelling Smart Invites [#44]
+
 ## [0.15.0]
 
  * Support for Smart Invites [#43]
@@ -102,6 +106,7 @@
 [0.13.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.13.0
 [0.14.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.14.0
 [0.15.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.0
+[0.15.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -127,3 +132,4 @@
 [#41]: https://github.com/cronofy/cronofy-csharp/pull/41
 [#42]: https://github.com/cronofy/cronofy-csharp/pull/42
 [#43]: https://github.com/cronofy/cronofy-csharp/pull/43
+[#44]: https://github.com/cronofy/cronofy-csharp/pull/44
