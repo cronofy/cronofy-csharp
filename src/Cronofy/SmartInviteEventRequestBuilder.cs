@@ -92,7 +92,7 @@
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
+        /// <see cref="Cronofy.SmartInviteEventRequestBuilder"/> class.
         /// </summary>
         public SmartInviteEventRequestBuilder()
         {

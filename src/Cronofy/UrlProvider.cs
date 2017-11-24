@@ -427,6 +427,7 @@ namespace Cronofy
         /// <summary>
         /// Gets the smart invite URL.
         /// </summary>
+        /// <value>The smart invite url.</value>
         public string SmartInviteUrl { get; private set; }
     }
 }

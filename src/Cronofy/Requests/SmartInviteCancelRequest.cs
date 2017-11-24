@@ -8,10 +8,10 @@
     public sealed class SmartInviteCancelRequest
     {
         /// <summary>
-        /// Creates a new instance.
+        /// Initializes a new instance of the <see cref="T:Cronofy.Requests.SmartInviteCancelRequest"/> class.
         /// </summary>
-        /// <param name="smartInviteId">The invite id to cancel</param>
-        /// <param name="recipientEmail">The recipient for the cancellation</param>
+        /// <param name="smartInviteId">The smart invite identifier.</param>
+        /// <param name="recipientEmail">The recipient email.</param>
         public SmartInviteCancelRequest(string smartInviteId, string recipientEmail)
         {
             this.Method = "cancel";
@@ -21,6 +21,7 @@
                 Email = recipientEmail
             };
         }
+
         /// <summary>
         /// Gets or sets the method for the invite.
         /// </summary>

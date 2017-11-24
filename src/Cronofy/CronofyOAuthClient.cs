@@ -312,8 +312,8 @@
         /// <summary>
         /// Cancels a smart invite for the given request.
         /// </summary>
-        /// <param name="smartInviteId">The invite id to cancel</param>
-        /// <param name="recipientEmail">The recipient for the cancellation</param>
+        /// <param name="smartInviteId">The invite id to cancel.</param>
+        /// <param name="recipientEmail">The recipient for the cancellation.</param>
         /// <returns>
         /// A smart invite for the given request.
         /// </returns>
@@ -360,8 +360,8 @@
                 Url = this.urlProvider.SmartInviteUrl,
                 QueryString = new HttpRequest.QueryStringCollection
                 {
-                    {"smart_invite_id", smartInviteId},
-                    {"recipient_email", emailAddress}
+                    { "smart_invite_id", smartInviteId },
+                    { "recipient_email", emailAddress }
                 }
             };
 
