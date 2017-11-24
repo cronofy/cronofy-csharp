@@ -92,9 +92,9 @@
         public sealed class AttachmentsResponse
         {
             /// <summary>
-            /// Gets or sets the IC alendar.
+            /// Gets or sets the ICalendar attachment.
             /// </summary>
-            /// <value>The IC alendar.</value>
+            /// <value>The ICalendar attachment.</value>
             [JsonProperty("icalendar")]
             public string ICalendar { get; set; }
 
