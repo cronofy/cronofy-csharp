@@ -5,6 +5,5 @@
     /// </summary>
     public sealed class SmartInviteEventRequest : BaseEventRequest
     {
-
     }
 }

@@ -10,10 +10,29 @@
     /// </summary>
     public sealed class SmartInviteRequestBuilder : IBuilder<SmartInviteRequest>
     {
+        /// <summary>
+        /// The smart invite identifier.
+        /// </summary>
         private string smartInviteId;
+
+        /// <summary>
+        /// The method.
+        /// </summary>
         private string method;
+
+        /// <summary>
+        /// The callback URL.
+        /// </summary>
         private string callbackUrl;
+
+        /// <summary>
+        /// The invite event.
+        /// </summary>
         private SmartInviteEventRequest inviteEvent;
+
+        /// <summary>
+        /// The recipient.
+        /// </summary>
         private SmartInviteRequest.InviteRecipient recipient;
 
         /// <summary>
@@ -24,9 +43,9 @@
         {
         }
 
-        /// <method>
+        /// <summary>
         /// Sets the method for the invite.
-        /// </method>
+        /// </summary>
         /// <param name="method">
         /// The method for the invite, must not be empty.
         /// </param>
@@ -108,7 +127,7 @@
         /// Sets the Recipient details.
         /// </summary>
         /// <param name="email">
-        /// The email address of the recipient
+        /// The email address of the recipient.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.
@@ -138,7 +157,7 @@
                 Recipient = this.recipient,
             };
 
-            if (string.IsNullOrEmpty(this.method) == false) 
+            if (string.IsNullOrEmpty(this.method) == false)
             {
                 request.Method = this.method;
             }
