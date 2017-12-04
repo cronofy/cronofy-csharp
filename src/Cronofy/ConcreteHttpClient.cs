@@ -62,6 +62,9 @@
 
             MapHeaders(request, httpRequest);
 
+            httpRequest.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            httpRequest.Headers["Content-Encoding"] = "gzip;q=1.0,deflate;q=0.6,identity;q=0.3";
+
             try
             {
                 WriteRequestBody(request, httpRequest);
