@@ -1,3 +1,8 @@
+## [0.16.0]
+
+ * Support for batch endpoint [#42]
+ * Set default compression headers [#46]
+
 ## [0.15.1]
 
  * Support for Cancelling Smart Invites [#44]
@@ -107,6 +112,7 @@
 [0.14.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.14.0
 [0.15.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.0
 [0.15.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.1
+[0.16.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.16.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -133,3 +139,4 @@
 [#42]: https://github.com/cronofy/cronofy-csharp/pull/42
 [#43]: https://github.com/cronofy/cronofy-csharp/pull/43
 [#44]: https://github.com/cronofy/cronofy-csharp/pull/44
+[#46]: https://github.com/cronofy/cronofy-csharp/pull/46
