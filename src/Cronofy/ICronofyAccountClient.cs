@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Cronofy.Requests;
+    using Cronofy.Responses;
 
     /// <summary>
     /// Interface for a Cronofy client that interacts with an account's
@@ -181,6 +182,44 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         IEnumerable<FreeBusy> GetFreeBusy(GetFreeBusyRequest request);
+
+        /// <summary>
+        /// Performs a batch request for the account.
+        /// </summary>
+        /// <param name="batchBuilder">
+        /// The builder from which to create a
+        /// <see cref="Requests.BatchRequest"/>, must not be null.
+        /// </param>
+        /// <returns>
+        /// The result of a the batch request.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="batchBuilder"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        BatchResponse BatchRequest(IBuilder<BatchRequest> batchBuilder);
+
+        /// <summary>
+        /// Performs a batch request for the account.
+        /// </summary>
+        /// <param name="batchRequest">
+        /// The details of the request to make, must not be null.
+        /// </param>
+        /// <returns>
+        /// The result of a the batch request.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="batchRequest"/> is null.
+        /// </exception>
+        /// <exception cref="BatchWithErrorsException">
+        /// Thrown if any of the batch entries receives an error in response.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        BatchResponse BatchRequest(BatchRequest batchRequest);
 
         /// <summary>
         /// Upserts an event to the account's calendar.

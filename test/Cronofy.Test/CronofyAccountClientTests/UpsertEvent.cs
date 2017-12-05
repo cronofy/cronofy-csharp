@@ -5,7 +5,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 {
     internal sealed class UpsertEvent : Base
     {
-        private const string calendarId = "cal_123456_abcdef";
+        private const string CalendarId = "cal_123456_abcdef";
 
         [Test]
         public void CanUpsertEvent()
@@ -20,7 +20,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -51,7 +51,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Location(locationDescription)
                 .Transparency(transparency);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -98,7 +98,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Location(locationDescription)
                 .Transparency(transparency);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -137,7 +137,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc));
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -184,7 +184,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .Location(locationDescription, locationLatitude, locationLongitude);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -199,7 +199,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -227,7 +227,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .TimeZoneId(timeZoneId);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -243,7 +243,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -272,7 +272,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .EndTimeZoneId(endTimeZoneId);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -286,7 +286,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -311,7 +311,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Start(new Date(2014, 8, 5))
                 .End(new Date(2014, 8, 6));
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -325,7 +325,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -353,7 +353,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .AddAttendee("test@attendee.com", "Test attendee")
                 .RemoveAttendee("remove@attendee.com", "Test removal");
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -369,7 +369,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -396,7 +396,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new Date(2014, 8, 6))
                 .Reminders(reminders);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -411,7 +411,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -439,7 +439,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new Date(2014, 8, 6))
                 .Url(url);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -453,7 +453,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -480,7 +480,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new Date(2014, 8, 6))
                 .Url(null);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -495,7 +495,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -520,7 +520,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .Transparency(transparency);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
 
         [Test]
@@ -535,7 +535,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             Http.Stub(
                 HttpPost
-                .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
@@ -543,7 +543,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     "\"summary\":\"{1}\"," +
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
-					"\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
                     "\"color\":\"{5}\"" +
                     "}}",
                     eventId,
@@ -563,7 +563,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new Date(2014, 8, 6))
                 .Color(color);
 
-            Client.UpsertEvent(calendarId, builder);
+            Client.UpsertEvent(CalendarId, builder);
         }
     }
 }

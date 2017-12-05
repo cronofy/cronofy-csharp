@@ -121,6 +121,11 @@ namespace Cronofy
         private const string SmartInviteUrlFormat = "https://api{0}.cronofy.com/v1/smart_invites";
 
         /// <summary>
+        /// The URL of the batch request endpoint.
+        /// </summary>
+        private const string BatchUrlFormat = "https://api{0}.cronofy.com/v1/batch";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -158,6 +163,7 @@ namespace Cronofy
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
             this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
             this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
+            this.BatchUrl = string.Format(BatchUrlFormat, suffix);
         }
 
         /// <summary>
@@ -429,5 +435,17 @@ namespace Cronofy
         /// </summary>
         /// <value>The smart invite url.</value>
         public string SmartInviteUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the batch request URL.
+        /// </summary>
+        /// <value>
+        /// The batch request URL.
+        /// </value>
+        public string BatchUrl
+        {
+            get;
+            private set;
+        }
     }
 }

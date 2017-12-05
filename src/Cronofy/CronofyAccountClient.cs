@@ -232,6 +232,42 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public BatchResponse BatchRequest(IBuilder<BatchRequest> batchBuilder)
+        {
+            Preconditions.NotNull("batchBuilder", batchBuilder);
+
+            var request = batchBuilder.Build();
+
+            return this.BatchRequest(request);
+        }
+
+        /// <inheritdoc/>
+        public BatchResponse BatchRequest(BatchRequest batchRequest)
+        {
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.BatchUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+            request.SetJsonBody(batchRequest);
+
+            var response = this.HttpClient.GetJsonResponse<BatchResponse>(request);
+
+            for (int i = 0; i < response.Batch.Length; i++)
+            {
+                response.Batch[i].Request = batchRequest.Batch[i];
+            }
+
+            if (response.HasErrors)
+            {
+                var message = string.Format("Batch contains {0} errors", response.Errors.Count);
+                throw new BatchWithErrorsException(message, response);
+            }
+
+            return response;
+        }
+
+        /// <inheritdoc/>
         public void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder)
         {
             Preconditions.NotEmpty("calendarId", calendarId);
@@ -270,7 +306,7 @@ namespace Cronofy
             request.Url = string.Format(this.UrlProvider.ManagedEventUrlFormat, calendarId);
             request.AddOAuthAuthorization(this.AccessToken);
 
-            var requestBody = new { event_id = eventId };
+            var requestBody = new DeleteEventRequest { EventId = eventId };
             request.SetJsonBody(requestBody);
 
             this.HttpClient.GetValidResponse(request);
@@ -332,7 +368,7 @@ namespace Cronofy
             request.Url = string.Format(this.UrlProvider.ManagedEventUrlFormat, calendarId);
             request.AddOAuthAuthorization(this.AccessToken);
 
-            var requestBody = new { event_uid = eventUid };
+            var requestBody = new DeleteExternalEventRequest { EventUid = eventUid };
             request.SetJsonBody(requestBody);
 
             var response = this.HttpClient.GetResponse(request);
