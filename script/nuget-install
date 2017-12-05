@@ -1,7 +1,7 @@
 #! /bin/bash
 
 tools_dir=tools
-nuget_url=https://www.nuget.org/nuget.exe
+nuget_url=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 nuget_path=$tools_dir/nuget.exe
 
 if [ -e "$nuget_path" ] ; then
