@@ -1,3 +1,7 @@
+## [0.17.0]
+
+ * Support for create-only reminders [#47]
+
 ## [0.16.0]
 
  * Support for batch endpoint [#42]
@@ -113,6 +117,7 @@
 [0.15.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.0
 [0.15.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.1
 [0.16.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.16.0
+[0.17.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.17.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -140,3 +145,4 @@
 [#43]: https://github.com/cronofy/cronofy-csharp/pull/43
 [#44]: https://github.com/cronofy/cronofy-csharp/pull/44
 [#46]: https://github.com/cronofy/cronofy-csharp/pull/46
+[#47]: https://github.com/cronofy/cronofy-csharp/pull/47
