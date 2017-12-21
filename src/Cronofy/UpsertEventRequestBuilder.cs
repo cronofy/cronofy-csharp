@@ -83,6 +83,11 @@
         private int[] reminders;
 
         /// <summary>
+        /// Whether reminders are only set on event creation.
+        /// </summary>
+        private bool? remindersCreateOnly;
+
+        /// <summary>
         /// The OAuth application's ID for the external event.
         /// </summary>
         private string eventUid;
@@ -460,6 +465,22 @@
         }
 
         /// <summary>
+        /// Sets whether reminders are only set on event creation.
+        /// </summary>
+        /// <param name="remindersCreateOnly">
+        /// Whether reminders are only set on event creation.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder RemindersCreateOnly(bool remindersCreateOnly)
+        {
+            this.remindersCreateOnly = remindersCreateOnly;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the time zone identifier for the start time of the event.
         /// </summary>
         /// <param name="timeZoneId">
@@ -620,6 +641,7 @@
                 Transparency = this.transparency,
                 TimeZoneId = this.timeZoneId,
                 Color = this.color,
+                RemindersCreateOnly = this.remindersCreateOnly,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false

@@ -36,6 +36,16 @@
         public RequestAttendees Attendees { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether reminders are only set on
+        /// event creation.
+        /// </summary>
+        /// <value>
+        /// Whether reminders are only set on event creation.
+        /// </value>
+        [JsonProperty("reminders_create_only")]
+        public bool? RemindersCreateOnly { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>
