@@ -36,6 +36,14 @@ namespace Cronofy
         public string EventUid { get; set; }
 
         /// <summary>
+        /// Gets or sets the Google event ID of the event.
+        /// </summary>
+        /// <value>
+        /// The Google event ID of the event.
+        /// </value>
+        public string GoogleEventId { get; set; }
+
+        /// <summary>
         /// Gets or sets the event's summary.
         /// </summary>
         /// <value>
@@ -211,6 +219,7 @@ namespace Cronofy
         {
             return other != null
                 && this.EventUid == other.EventUid
+                && this.GoogleEventId == other.GoogleEventId
                 && this.EventId == other.EventId
                 && this.CalendarId == other.CalendarId
                 && this.Created == other.Created

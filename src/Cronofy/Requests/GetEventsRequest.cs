@@ -81,6 +81,14 @@
         public bool? IncludeGeo { get; set; }
 
         /// <summary>
+        /// Gets or sets the Google event IDs flag for the request.
+        /// </summary>
+        /// <value>
+        /// The Google event IDs flag for the request.
+        /// </value>
+        public bool? GoogleEventIds { get; set; }
+
+        /// <summary>
         /// Gets or sets the calendar IDs for the request.
         /// </summary>
         /// <value>

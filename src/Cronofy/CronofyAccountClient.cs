@@ -181,6 +181,7 @@ namespace Cronofy
             httpRequest.QueryString.Add("include_managed", request.IncludeManaged);
             httpRequest.QueryString.Add("only_managed", request.OnlyManaged);
             httpRequest.QueryString.Add("include_geo", request.IncludeGeo);
+            httpRequest.QueryString.Add("google_event_ids", request.GoogleEventIds);
             httpRequest.QueryString.Add("calendar_ids[]", request.CalendarIds);
 
             return new PagedResultsIterator<ReadEventsResponse, Event>(
