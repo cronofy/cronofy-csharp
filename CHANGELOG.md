@@ -1,3 +1,7 @@
+## [0.18.0]
+
+ * Support returning Google event IDs [#48]
+
 ## [0.17.0]
 
  * Support for create-only reminders [#47]
@@ -118,6 +122,7 @@
 [0.15.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.15.1
 [0.16.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.16.0
 [0.17.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.17.0
+[0.18.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.18.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -146,3 +151,4 @@
 [#44]: https://github.com/cronofy/cronofy-csharp/pull/44
 [#46]: https://github.com/cronofy/cronofy-csharp/pull/46
 [#47]: https://github.com/cronofy/cronofy-csharp/pull/47
+[#48]: https://github.com/cronofy/cronofy-csharp/pull/48

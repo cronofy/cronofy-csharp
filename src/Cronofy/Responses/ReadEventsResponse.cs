@@ -69,6 +69,15 @@
             public string EventUid { get; set; }
 
             /// <summary>
+            /// Gets or sets the Google event ID of the event.
+            /// </summary>
+            /// <value>
+            /// The Google event ID of the event.
+            /// </value>
+            [JsonProperty("google_event_id")]
+            public string GoogleEventId { get; set; }
+
+            /// <summary>
             /// Gets or sets the event's summary.
             /// </summary>
             /// <value>
@@ -233,6 +242,7 @@
                     CalendarId = this.CalendarId,
                     EventId = this.EventId,
                     EventUid = this.EventUid,
+                    GoogleEventId = this.GoogleEventId,
                     Summary = this.Summary,
                     Description = this.Description,
                     Start = this.Start,

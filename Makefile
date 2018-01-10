@@ -29,10 +29,10 @@ set_version:
 
 build: clean set_version mono_version install_tools
 	mono $(NUGET) restore $(SLN)
-	xbuild $(SLN)
+	msbuild $(SLN)
 
 build_release: build
-	xbuild /p:Configuration=Release $(SLN)
+	msbuild /p:Configuration=Release $(SLN)
 
 test: build
 	mkdir -p build/NUnit

@@ -55,6 +55,11 @@
         private bool? includeGeo;
 
         /// <summary>
+        /// The request's Google event IDs flag.
+        /// </summary>
+        private bool? googleEventIds;
+
+        /// <summary>
         /// The request's calendar IDs.
         /// </summary>
         private IEnumerable<string> calendarIds;
@@ -264,6 +269,22 @@
         }
 
         /// <summary>
+        /// Sets the Google event IDs flag for the request.
+        /// </summary>
+        /// <param name="googleEventIds">
+        /// A flag specifying whether Google's ID should be included for
+        /// relevant events.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetEventsRequestBuilder GoogleEventIds(bool googleEventIds)
+        {
+            this.googleEventIds = googleEventIds;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the calendar IDs for the request.
         /// </summary>
         /// <param name="calendarIds">
@@ -316,6 +337,7 @@
                 IncludeManaged = this.includeManaged,
                 OnlyManaged = this.onlyManaged,
                 IncludeGeo = this.includeGeo,
+                GoogleEventIds = this.googleEventIds,
                 CalendarIds = this.calendarIds,
             };
         }
