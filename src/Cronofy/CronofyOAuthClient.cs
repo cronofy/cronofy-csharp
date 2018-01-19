@@ -371,6 +371,30 @@
             return response.ToSmartInvite();
         }
 
+        /// <inheritdoc />
+        public OAuthToken ApplicationCalendar(string applicationCalendarId)
+        {
+            Preconditions.NotEmpty("applicationCalendarId", applicationCalendarId);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.urlProvider.ApplicationCalendarUrl;
+
+            var requestBody = new ApplicationCalendarRequest
+            {
+                ClientId = this.clientId,
+                ClientSecret = this.clientSecret,
+                ApplicationCalendarId = applicationCalendarId,
+            };
+
+            request.SetJsonBody(requestBody);
+
+            var tokenResponse = this.HttpClient.GetJsonResponse<OAuthTokenResponse>(request);
+
+            return tokenResponse.ToToken();
+        }
+
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>
