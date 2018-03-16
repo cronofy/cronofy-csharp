@@ -22,7 +22,7 @@
         /// <inheritdoc/>
         public override bool CanConvert(Type objectType)
         {
-            return false;
+            return typeof(EventTime).IsAssignableFrom(objectType);
         }
 
         /// <inheritdoc/>
