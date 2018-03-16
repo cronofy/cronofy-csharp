@@ -1,3 +1,7 @@
+## [0.19.0]
+
+ * Make EventTimeConverter public [#50]
+
 ## [0.18.0]
 
  * Support returning Google event IDs [#48]
@@ -123,6 +127,7 @@
 [0.16.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.16.0
 [0.17.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.17.0
 [0.18.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.18.0
+[0.19.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -152,3 +157,4 @@
 [#46]: https://github.com/cronofy/cronofy-csharp/pull/46
 [#47]: https://github.com/cronofy/cronofy-csharp/pull/47
 [#48]: https://github.com/cronofy/cronofy-csharp/pull/48
+[#50]: https://github.com/cronofy/cronofy-csharp/pull/50
