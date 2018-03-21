@@ -157,7 +157,18 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                        },
                        {
                          ""email"": ""person2@example.com"",
-                         ""status"": ""declined""
+                         ""status"": ""declined"",
+                         ""comment"": ""example comment"",
+                         ""proposal"": {
+                            ""start"": {
+                              ""time"": ""2014-09-13T23:00:00+02:00"",
+                              ""tzid"": ""Europe/Paris""
+                            },
+                            ""end"": {
+                              ""time"": ""2014-09-13T23:00:00+02:00"",
+                              ""tzid"": ""Europe/Paris""
+                            }
+                          }
                        }
                       ],
                       ""smart_invite_id"": ""your-unique-identifier-for-invite"",
@@ -198,6 +209,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.NotNull(reply2);
             Assert.AreEqual("person2@example.com", reply2.Email);
             Assert.AreEqual("declined", reply2.Status);
+            Assert.AreEqual("example comment", reply2.Comment);
+            Assert.AreEqual(new EventTime(new DateTimeOffset(2014, 9, 13, 23, 00, 00, TimeSpan.FromHours(2)), "Europe/Paris"), reply2.Proposal.Start);
+            Assert.AreEqual(new EventTime(new DateTimeOffset(2014, 9, 13, 23, 00, 00, TimeSpan.FromHours(2)), "Europe/Paris"), reply2.Proposal.End);
         }
 
     }
