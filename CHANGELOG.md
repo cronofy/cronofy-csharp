@@ -1,3 +1,9 @@
+## [0.20.0]
+
+ * Application Calendar support [#49]
+ * Add subject to oauth token responses [#53]
+ * Added support for smart invite proposal [#52]
+
 ## [0.19.1]
 
  * Make EventTimeConverter serialize without the need for an attribute [#51]
@@ -133,6 +139,7 @@
 [0.18.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.18.0
 [0.19.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.0
 [0.19.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.1
+[0.20.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.20.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -162,5 +169,8 @@
 [#46]: https://github.com/cronofy/cronofy-csharp/pull/46
 [#47]: https://github.com/cronofy/cronofy-csharp/pull/47
 [#48]: https://github.com/cronofy/cronofy-csharp/pull/48
+[#49]: https://github.com/cronofy/cronofy-csharp/pull/49
 [#50]: https://github.com/cronofy/cronofy-csharp/pull/50
 [#51]: https://github.com/cronofy/cronofy-csharp/pull/51
+[#52]: https://github.com/cronofy/cronofy-csharp/pull/52
+[#53]: https://github.com/cronofy/cronofy-csharp/pull/53

@@ -126,6 +126,11 @@ namespace Cronofy
         private const string BatchUrlFormat = "https://api{0}.cronofy.com/v1/batch";
 
         /// <summary>
+        /// The URL of the application calendar endpoint.
+        /// </summary>
+        private const string ApplicationCalendarUrlFormat = "https://api{0}.cronofy.com/v1/application_calendar";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -164,6 +169,7 @@ namespace Cronofy
             this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
             this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
             this.BatchUrl = string.Format(BatchUrlFormat, suffix);
+            this.ApplicationCalendarUrl = string.Format(ApplicationCalendarUrlFormat, suffix);
         }
 
         /// <summary>
@@ -447,5 +453,11 @@ namespace Cronofy
             get;
             private set;
         }
+
+        /// <summary>
+        /// Gets the application calendar URL.
+        /// </summary>
+        /// <value>The application calendar URL.</value>
+        public string ApplicationCalendarUrl { get; private set; }
     }
 }

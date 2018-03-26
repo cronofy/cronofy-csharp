@@ -58,6 +58,27 @@
         OAuthToken GetTokenFromRefreshToken(string refreshToken);
 
         /// <summary>
+        /// Gets the OAuth tokens for an Application Calendar.
+        /// </summary>
+        /// <param name="applicationCalendarId">
+        /// The application calendar id to create.
+        /// </param>
+        /// <returns>
+        /// Returns an <see cref="OAuthToken"/> for the provided authorization
+        /// code.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="applicationCalendarId"/> is null or empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <remarks>
+        /// TODO Validation exceptions.
+        /// </remarks>
+        OAuthToken ApplicationCalendar(string applicationCalendarId);
+
+        /// <summary>
         /// Revokes the given authorization token.
         /// </summary>
         /// <param name="token">
