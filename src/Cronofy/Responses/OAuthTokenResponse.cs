@@ -54,6 +54,15 @@
         public string AccountId { get; set; }
 
         /// <summary>
+        /// Gets or sets the subject of the <see cref="AccessToken"/>.
+        /// </summary>
+        /// <value>
+        /// The subject of the <see cref="AccessToken"/>.
+        /// </value>
+        [JsonProperty("sub")]
+        public string Sub { get; set; }
+
+        /// <summary>
         /// Gets or sets the linking profile of the <see cref="AccessToken"/>.
         /// </summary>
         /// <value>
@@ -95,6 +104,7 @@
                 this.GetScopeArray());
 
             token.AccountId = this.AccountId;
+            token.Sub = this.Sub;
 
             if (this.LinkingProfile != null)
             {

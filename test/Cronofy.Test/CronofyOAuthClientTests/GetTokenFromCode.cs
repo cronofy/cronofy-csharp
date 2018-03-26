@@ -79,6 +79,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                         "\"refresh_token\":\"{2}\"," +
                         "\"scope\":\"{3}\"," +
                         "\"account_id\":\"{4}\"," +
+                        "\"sub\":\"{4}\"," +
                         "\"linking_profile\":" +
                             "{{" +
                             "\"provider_name\":\"{5}\"," +
@@ -94,6 +95,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }))
             {
                 AccountId = accountId,
+                Sub = accountId,
                 LinkingProfile = new LinkingProfile()
                 {
                     ProviderName = providerName,

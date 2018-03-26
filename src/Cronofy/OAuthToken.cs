@@ -79,6 +79,14 @@ namespace Cronofy
         public string AccountId { get; set; }
 
         /// <summary>
+        /// Gets or sets the subject of the OAuth authorization.
+        /// </summary>
+        /// <value>
+        /// The subject of the OAuth authorization.
+        /// </value>
+        public string Sub { get; set; }
+
+        /// <summary>
         /// Gets or sets the linking profile of the OAuth authorization.
         /// </summary>
         /// <value>
