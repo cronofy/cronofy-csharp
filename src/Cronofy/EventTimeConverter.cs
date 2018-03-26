@@ -8,7 +8,7 @@
     /// <summary>
     /// Convertor for translating <see cref="EventTime"/>s to and from JSON.
     /// </summary>
-    internal sealed class EventTimeConverter : JsonConverter
+    public sealed class EventTimeConverter : JsonConverter
     {
         /// <summary>
         /// The date time offset formats using for parsing times.
@@ -22,7 +22,7 @@
         /// <inheritdoc/>
         public override bool CanConvert(Type objectType)
         {
-            return false;
+            return typeof(EventTime).IsAssignableFrom(objectType);
         }
 
         /// <inheritdoc/>

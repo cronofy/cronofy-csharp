@@ -69,6 +69,38 @@
             /// The status.
             /// </value>
             public string Status { get; set; }
+
+            /// <summary>
+            /// Gets or sets the current comment of the recipient.
+            /// </summary>
+            /// <value>
+            /// The status.
+            /// </value>
+            public string Comment { get; set; }
+
+            /// <summary>
+            /// Gets or sets the counter proposal.
+            /// </summary>
+            /// <value>The proposal.</value>
+            public Proposal Proposal { get; set; }
+        }
+
+        /// <summary>
+        /// Class to represent an attendee.
+        /// </summary>
+        public sealed class Proposal
+        {
+            /// <summary>
+            /// Gets or sets the start time.
+            /// </summary>
+            /// <value>The start.</value>
+            public EventTime Start { get; set; }
+
+            /// <summary>
+            /// Gets or sets the end time.
+            /// </summary>
+            /// <value>The end.</value>
+            public EventTime End { get; set; }
         }
 
         /// <summary>
