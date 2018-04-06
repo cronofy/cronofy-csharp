@@ -60,6 +60,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ],
       ""created"": ""2014-09-01T08:00:01Z"",
       ""updated"": ""2014-09-01T09:24:16Z"",
+      ""event_private"": true,
       ""options"": {
         ""delete"": true,
         ""update"": true
@@ -100,7 +101,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         {
                             Delete = true,
                             Update = true
-                        }
+                        },
+                        EventPrivate = true,
                     }
                 },
                 events);

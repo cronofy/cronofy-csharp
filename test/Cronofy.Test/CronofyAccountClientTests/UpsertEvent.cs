@@ -25,6 +25,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
                     "{{\"event_id\":\"{0}\"," +
+                    "\"event_private\":true," +
                     "\"summary\":\"{1}\"," +
                     "\"description\":\"{2}\"," +
                     "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
@@ -49,7 +50,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .Location(locationDescription)
-                .Transparency(transparency);
+                .Transparency(transparency)
+                .EventPrivate(true);
 
             Client.UpsertEvent(CalendarId, builder);
         }
