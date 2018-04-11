@@ -1,3 +1,7 @@
+## [0.21.0]
+
+ * Private event support [#54]
+
 ## [0.20.0]
 
  * Application Calendar support [#49]
@@ -140,6 +144,7 @@
 [0.19.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.0
 [0.19.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.1
 [0.20.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.20.0
+[0.21.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.21.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -174,3 +179,4 @@
 [#51]: https://github.com/cronofy/cronofy-csharp/pull/51
 [#52]: https://github.com/cronofy/cronofy-csharp/pull/52
 [#53]: https://github.com/cronofy/cronofy-csharp/pull/53
+[#54]: https://github.com/cronofy/cronofy-csharp/pull/54
