@@ -177,6 +177,14 @@ namespace Cronofy
         public bool Recurring { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this event is private.
+        /// </summary>
+        /// <value>
+        /// The event is private only set on event creation.
+        /// </value>
+        public bool EventPrivate { get; set; }
+
+        /// <summary>
         /// Gets or sets the permissable options for this event.
         /// </summary>
         /// <value>

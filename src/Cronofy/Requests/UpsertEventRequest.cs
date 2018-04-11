@@ -46,6 +46,16 @@
         public bool? RemindersCreateOnly { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this event is private on
+        /// event creation.
+        /// </summary>
+        /// <value>
+        /// The event is private only set on event creation.
+        /// </value>
+        [JsonProperty("event_private")]
+        public bool? EventPrivate { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>

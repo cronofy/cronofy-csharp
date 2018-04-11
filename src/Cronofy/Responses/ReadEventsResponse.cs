@@ -230,6 +230,15 @@
             public EventOptions Options { get; set; }
 
             /// <summary>
+            /// Gets or sets a value indicating whether this event is private.
+            /// </summary>
+            /// <value>
+            /// The event is private only.
+            /// </value>
+            [JsonProperty("event_private")]
+            public bool EventPrivate { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Event"/>.
             /// </summary>
             /// <returns>
@@ -254,7 +263,8 @@
                     Categories = this.Categories,
                     Created = this.Created,
                     Updated = this.Updated,
-                    Recurring = this.Recurring
+                    Recurring = this.Recurring,
+                    EventPrivate = this.EventPrivate,
                 };
 
                 if (this.Location != null)

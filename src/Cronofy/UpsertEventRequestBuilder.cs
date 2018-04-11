@@ -88,6 +88,11 @@
         private bool? remindersCreateOnly;
 
         /// <summary>
+        /// Whether the event is private or not.
+        /// </summary>
+        private bool? eventPrivate;
+
+        /// <summary>
         /// The OAuth application's ID for the external event.
         /// </summary>
         private string eventUid;
@@ -481,6 +486,22 @@
         }
 
         /// <summary>
+        /// Sets the event as private or public.
+        /// </summary>
+        /// <param name="eventPrivate">
+        /// Whether the event is private or not.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public UpsertEventRequestBuilder EventPrivate(bool eventPrivate)
+        {
+            this.eventPrivate = eventPrivate;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the time zone identifier for the start time of the event.
         /// </summary>
         /// <param name="timeZoneId">
@@ -642,6 +663,7 @@
                 TimeZoneId = this.timeZoneId,
                 Color = this.color,
                 RemindersCreateOnly = this.remindersCreateOnly,
+                EventPrivate = this.eventPrivate,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
