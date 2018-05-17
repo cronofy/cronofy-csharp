@@ -36,6 +36,11 @@
         private SmartInviteRequest.InviteRecipient recipient;
 
         /// <summary>
+        /// The organizer.
+        /// </summary>
+        private SmartInviteRequest.InviteOrganizer organizer;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.SmartInviteRequestBuilder"/> class.
         /// </summary>
@@ -146,6 +151,29 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the Organizer details.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the organizer.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="name"/> is null.
+        /// </exception>
+        public SmartInviteRequestBuilder Organizer(string name)
+        {
+            Preconditions.NotNull("name", name);
+
+            this.organizer = new SmartInviteRequest.InviteOrganizer
+            {
+                Name = name
+            };
+            return this;
+        }
+
         /// <inheritdoc/>
         public SmartInviteRequest Build()
         {
@@ -156,6 +184,11 @@
                 Event = this.inviteEvent,
                 Recipient = this.recipient,
             };
+
+            if (this.organizer != null)
+            {
+                request.Organizer = this.organizer;
+            }
 
             if (string.IsNullOrEmpty(this.method) == false)
             {
