@@ -48,7 +48,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
-                        @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}}}")
+                        @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}},""organizer"":{""name"":""My Cool Application""}}")
                     .ResponseCode(200)
                     .ResponseBody(@"{
                       ""recipient"": {
@@ -79,6 +79,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .CallbackUrl(callbackUrl)
                 .InviteId(inviteId)
                 .Recipient("example@example.com")
+                .Organizer("My Cool Application")
                 .Event(upsertEventRequest)
                 .Build();
 

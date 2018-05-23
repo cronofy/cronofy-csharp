@@ -53,6 +53,15 @@
         public SmartInviteEventRequest Event { get; set; }
 
         /// <summary>
+        /// Gets or sets the organizer for the invite.
+        /// </summary>
+        /// <value>
+        /// The organizer for the invite.
+        /// </value>
+        [JsonProperty("organizer")]
+        public InviteOrganizer Organizer { get; set; }
+
+        /// <summary>
         /// Class for the serialization of an smart invite request recipient.
         /// </summary>
         public sealed class InviteRecipient
@@ -65,6 +74,21 @@
             /// </value>
             [JsonProperty("email")]
             public string Email { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of an smart invite request organizer.
+        /// </summary>
+        public sealed class InviteOrganizer
+        {
+            /// <summary>
+            /// Gets or sets the name.
+            /// </summary>
+            /// <value>
+            /// The name.
+            /// </value>
+            [JsonProperty("name")]
+            public string Name { get; set; }
         }
     }
 }
