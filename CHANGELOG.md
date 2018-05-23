@@ -1,3 +1,7 @@
+## [0.22.0]
+
+ * Allow setting of smart invite organizer name [#55]
+
 ## [0.21.0]
 
  * Private event support [#54]
@@ -145,6 +149,7 @@
 [0.19.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.19.1
 [0.20.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.20.0
 [0.21.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.21.0
+[0.22.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.22.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -180,3 +185,4 @@
 [#52]: https://github.com/cronofy/cronofy-csharp/pull/52
 [#53]: https://github.com/cronofy/cronofy-csharp/pull/53
 [#54]: https://github.com/cronofy/cronofy-csharp/pull/54
+[#55]: https://github.com/cronofy/cronofy-csharp/pull/55
