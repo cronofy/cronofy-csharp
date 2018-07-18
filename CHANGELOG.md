@@ -1,3 +1,7 @@
+## [0.23.0]
+
+ * Allow no reminders to be set explicitly [#58]
+
 ## [0.22.0]
 
  * Allow setting of smart invite organizer name [#55]
@@ -150,6 +154,7 @@
 [0.20.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.20.0
 [0.21.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.21.0
 [0.22.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.22.0
+[0.23.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.23.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -186,3 +191,4 @@
 [#53]: https://github.com/cronofy/cronofy-csharp/pull/53
 [#54]: https://github.com/cronofy/cronofy-csharp/pull/54
 [#55]: https://github.com/cronofy/cronofy-csharp/pull/55
+[#58]: https://github.com/cronofy/cronofy-csharp/pull/58
