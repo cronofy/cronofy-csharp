@@ -678,7 +678,7 @@
                 };
             }
 
-            if (this.reminders != null && this.reminders.Length > 0)
+            if (this.reminders != null)
             {
                 request.Reminders = this.reminders.Select(minutes => new UpsertEventRequest.RequestReminder { Minutes = minutes });
             }
