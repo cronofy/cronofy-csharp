@@ -250,6 +250,25 @@
         }
 
         /// <inheritdoc/>
+        public string RealTimeSequencing(RealTimeSequencingRequest realTimeSequencingRequest)
+        {
+            Preconditions.NotNull("realTimeSequencingRequest", realTimeSequencingRequest);
+
+            realTimeSequencingRequest.ClientId = this.clientId;
+            realTimeSequencingRequest.ClientSecret = this.clientSecret;
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.urlProvider.RealTimeSequencingUrl;
+            request.SetJsonBody(realTimeSequencingRequest);
+
+            var response = this.HttpClient.GetJsonResponse<RealTimeSequencingResponse>(request);
+
+            return response.Url;
+        }
+
+        /// <inheritdoc/>
         public string AddToCalendar(AddToCalendarRequest addToCalendarRequest)
         {
             Preconditions.NotNull("addToCalendarRequest", addToCalendarRequest);

@@ -131,6 +131,16 @@ namespace Cronofy
         private const string ApplicationCalendarUrlFormat = "https://api{0}.cronofy.com/v1/application_calendar";
 
         /// <summary>
+        /// The URL of the real time sequencing endpoint.
+        /// </summary>
+        private const string RealTimeSequencingFormat = "https://api{0}.cronofy.com/v1/real_time_sequencing";
+
+        /// <summary>
+        /// The URL of the sequenced availability endpoint.
+        /// </summary>
+        private const string SequencedAvailablityFormat = "https://api{0}.cronofy.com/v1/sequenced_availability";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -170,6 +180,8 @@ namespace Cronofy
             this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
             this.BatchUrl = string.Format(BatchUrlFormat, suffix);
             this.ApplicationCalendarUrl = string.Format(ApplicationCalendarUrlFormat, suffix);
+            this.RealTimeSequencingUrl = string.Format(RealTimeSequencingFormat, suffix);
+            this.SequencedAvailabilityUrl = string.Format(SequencedAvailablityFormat, suffix);
         }
 
         /// <summary>
@@ -459,5 +471,17 @@ namespace Cronofy
         /// </summary>
         /// <value>The application calendar URL.</value>
         public string ApplicationCalendarUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the real time sequencing URL.
+        /// </summary>
+        /// <value>The real time sequencing URL.</value>
+        public string RealTimeSequencingUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the sequenced availability URL.
+        /// </summary>
+        /// <value>The sequenced availability URL.</value>
+        public string SequencedAvailabilityUrl { get; private set; }
     }
 }

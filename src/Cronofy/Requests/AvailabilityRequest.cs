@@ -37,6 +37,62 @@
         public IEnumerable<AvailablePeriod> AvailablePeriods { get; set; }
 
         /// <summary>
+        /// Gets or sets the start interval for the request.
+        /// </summary>
+        /// <value>
+        /// The start interval for the request.
+        /// </value>
+        [JsonProperty("start_interval")]
+        public Duration StartInterval { get; set; }
+
+        /// <summary>
+        /// Gets or sets the buffer.
+        /// </summary>
+        /// <value>The buffer.</value>
+        [JsonProperty("buffer")]
+        public Buffers Buffer { get; set; }
+
+        /// <summary>
+        /// Class for serialization of a buffer.
+        /// </summary>
+        public sealed class Buffers
+        {
+            /// <summary>
+            /// Gets or sets the before buffer.
+            /// </summary>
+            /// <value>The before.</value>
+            [JsonProperty("before")]
+            public BufferDefintion Before { get; set; }
+
+            /// <summary>
+            /// Gets or sets the after buffer.
+            /// </summary>
+            /// <value>The after.</value>
+            [JsonProperty("after")]
+            public BufferDefintion After { get; set; }
+        }
+
+        /// <summary>
+        /// Class for seralization of a buffer.
+        /// </summary>
+        public sealed class BufferDefintion
+        {
+            /// <summary>
+            /// Gets or sets the minimum duration.
+            /// </summary>
+            /// <value>The minimum.</value>
+            [JsonProperty("minimum")]
+            public Duration Minimum { get; set; }
+
+            /// <summary>
+            /// Gets or sets the maximum duration.
+            /// </summary>
+            /// <value>The maximum.</value>
+            [JsonProperty("maximum")]
+            public Duration Maximum { get; set; }
+        }
+
+        /// <summary>
         /// Class for the serialization of a duration.
         /// </summary>
         public sealed class AvailablePeriod

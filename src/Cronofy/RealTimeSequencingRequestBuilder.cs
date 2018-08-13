@@ -5,9 +5,9 @@
     using Cronofy.Requests;
 
     /// <summary>
-    /// Class to build an real time scheduling request.
+    /// Class to build an real time sequencing request.
     /// </summary>
-    public sealed class RealTimeSchedulingRequestBuilder : IBuilder<RealTimeSchedulingRequest>
+    public sealed class RealTimeSequencingRequestBuilder : IBuilder<RealTimeSequencingRequest>
     {
         /// <summary>
         /// The oauth details for the request.
@@ -22,7 +22,7 @@
         /// <summary>
         /// The availability details builder for the request.
         /// </summary>
-        private IBuilder<AvailabilityRequest> availabilityRequestBuilder;
+        private IBuilder<SequencedAvailabilityRequest> availabilityRequestBuilder;
 
         /// <summary>
         /// The target calendars builder for the request.
@@ -49,12 +49,12 @@
         /// The scope for the request's oauth details, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty. 
         /// </exception>
-        public RealTimeSchedulingRequestBuilder OAuthDetails(string redirectUri, string scope)
+        public RealTimeSequencingRequestBuilder OAuthDetails(string redirectUri, string scope)
         {
             return this.OAuthDetails(redirectUri, scope, null);
         }
@@ -66,12 +66,12 @@
         /// The timezone to use for the request, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="tzid"/> is empty. 
         /// </exception>
-        public RealTimeSchedulingRequestBuilder Timezone(string tzid)
+        public RealTimeSequencingRequestBuilder Timezone(string tzid)
         {
             Preconditions.NotBlank("tzid", tzid);
 
@@ -87,12 +87,12 @@
         /// The hour format to use for the request, must not be blank.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="hourFormat"/> is empty. 
         /// </exception>
-        public RealTimeSchedulingRequestBuilder HourFormat(string hourFormat)
+        public RealTimeSequencingRequestBuilder HourFormat(string hourFormat)
         {
             Preconditions.NotBlank("hourFormat", hourFormat);
 
@@ -114,12 +114,12 @@
         /// The state for the request's oauth details.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.  
         /// </exception>
-        public RealTimeSchedulingRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
+        public RealTimeSequencingRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
             Preconditions.NotBlank("redirectUri", redirectUri);
             Preconditions.NotBlank("scope", scope);
@@ -143,12 +143,12 @@
         /// The builder for <see cref="RealTimeSchedulingBaseRequest.OAuthDetails"/>.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="oauthBuilder"/> is empty.  
         /// </exception>
-        public RealTimeSchedulingRequestBuilder OAuthDetails(IBuilder<RealTimeSchedulingBaseRequest.OAuthDetails> oauthBuilder)
+        public RealTimeSequencingRequestBuilder OAuthDetails(IBuilder<RealTimeSchedulingBaseRequest.OAuthDetails> oauthBuilder)
         {
             Preconditions.NotNull("oauthBuilder", oauthBuilder);
 
@@ -164,9 +164,9 @@
         /// The event details builder for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/> 
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/> 
         /// </returns>
-        public RealTimeSchedulingRequestBuilder UpsertEventRequestBuilder(IBuilder<UpsertEventRequest> upsertEventRequestBuilder)
+        public RealTimeSequencingRequestBuilder UpsertEventRequestBuilder(IBuilder<UpsertEventRequest> upsertEventRequestBuilder)
         {
             Preconditions.NotNull("upsertEventRequestBuilder", upsertEventRequestBuilder);
 
@@ -182,9 +182,9 @@
         /// The event details for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
-        public RealTimeSchedulingRequestBuilder UpsertEventRequest(UpsertEventRequest upsertEventRequest)
+        public RealTimeSequencingRequestBuilder UpsertEventRequest(UpsertEventRequest upsertEventRequest)
         {
             Preconditions.NotNull("event", upsertEventRequest);
 
@@ -200,9 +200,9 @@
         /// The availability details builder for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/> 
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/> 
         /// </returns>
-        public RealTimeSchedulingRequestBuilder AvailabilityRequestBuilder(IBuilder<AvailabilityRequest> availabilityRequestBuilder)
+        public RealTimeSequencingRequestBuilder SequencedAvailabilityRequestBuilder(IBuilder<SequencedAvailabilityRequest> availabilityRequestBuilder)
         {
             Preconditions.NotNull("availabilityRequestBuilder", availabilityRequestBuilder);
 
@@ -218,9 +218,9 @@
         /// The event details for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
-        public RealTimeSchedulingRequestBuilder AvailabilityRequest(AvailabilityRequest availabilityRequest)
+        public RealTimeSequencingRequestBuilder SequencedAvailabilityRequest(SequencedAvailabilityRequest availabilityRequest)
         {
             Preconditions.NotNull("availability", availabilityRequest);
 
@@ -239,9 +239,9 @@
         /// The target calendar's id.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
-        public RealTimeSchedulingRequestBuilder AddTargetCalendar(string sub, string calendarId)
+        public RealTimeSequencingRequestBuilder AddTargetCalendar(string sub, string calendarId)
         {
             Preconditions.NotBlank("sub", sub);
             Preconditions.NotBlank("calendarId", calendarId);
@@ -267,9 +267,9 @@
         /// The target calendars.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
         /// </returns>
-        public RealTimeSchedulingRequestBuilder TargetCalendars(IList<RealTimeSchedulingRequest.TargetCalendar> targetCalendars)
+        public RealTimeSequencingRequestBuilder TargetCalendars(IList<RealTimeSchedulingRequest.TargetCalendar> targetCalendars)
         {
             this.targetCalendars = targetCalendars;
 
@@ -277,9 +277,9 @@
         }
 
         /// <inheritdoc />
-        public RealTimeSchedulingRequest Build()
+        public RealTimeSequencingRequest Build()
         {
-            var request = new RealTimeSchedulingRequest
+            var request = new RealTimeSequencingRequest
             {
                 OAuth = this.oauthBuilder.Build(),
                 Event = this.upsertEventRequestBuilder.Build(),

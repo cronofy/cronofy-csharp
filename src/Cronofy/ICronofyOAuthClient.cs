@@ -1,6 +1,7 @@
 ﻿namespace Cronofy
 {
     using System;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Interface for a Cronofy client that performs OAuth related operations.
@@ -117,5 +118,25 @@
         /// Thrown if <paramref name="sha256Hmac"/> is null or empty.
         /// </exception>
         bool HmacMatches(string sha256Hmac, byte[] requestBytes);
+
+        /// <summary>
+        /// Generates a link for real time scheduling based on the request provided.
+        /// </summary>
+        /// <returns>The url to visit for a real time scheduling flow.</returns>
+        /// <param name="realTimeSchedulingRequest">Real time scheduling request.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="realTimeSchedulingRequest"/> is null.
+        /// </exception>
+        string RealTimeScheduling(RealTimeSchedulingRequest realTimeSchedulingRequest);
+
+        /// <summary>
+        /// Generates a link for real time sequencing based on the request provided.
+        /// </summary>
+        /// <returns>The url to visit for a real time scheduling flow.</returns>
+        /// <param name="realTimeSequencingRequest">Real time scheduling request.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="realTimeSequencingRequest"/> is null.
+        /// </exception>
+        string RealTimeSequencing(RealTimeSequencingRequest realTimeSequencingRequest);
     }
 }
