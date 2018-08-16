@@ -30,6 +30,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .RequiredDuration(60)
                 .Ordinal(1)
                 .SequenceId("First Event")
+                .Event(upsertEventRequestWithoutStartAndEnd)
                 .AddRequiredParticipant("acc_567236000909002")
                 .AddRequiredParticipant("acc_678347111010113");
 
@@ -50,6 +51,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                               {
                                 ""ordinal"":1,
                                 ""sequence_id"":""First Event"",
+                                ""event"":{
+                                    ""event_id"":""testEventId"",
+                                    ""summary"":""Test Summary""
+                                },
                                 ""participants"":[
                                   {
                                     ""members"":[

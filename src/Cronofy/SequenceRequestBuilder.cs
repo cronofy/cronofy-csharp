@@ -49,6 +49,11 @@ namespace Cronofy
         private string sequenceId;
 
         /// <summary>
+        /// The event request.
+        /// </summary>
+        private UpsertEventRequest eventRequest;
+
+        /// <summary>
         /// Sets the required duration of the request.
         /// </summary>
         /// <param name="minutes">
@@ -193,6 +198,25 @@ namespace Cronofy
             return this;
         }
 
+        /// <summary>
+        /// Sets the event on the builder.
+        /// </summary>
+        /// <returns>
+        /// A reference to the <see cref="SequenceRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="eventRequest"/> is <code>null</code>.
+        /// </exception>
+        /// <param name="eventRequest">Event request.</param>
+        public SequenceRequestBuilder Event(UpsertEventRequest eventRequest)
+        {
+            Preconditions.NotNull("eventRequest", eventRequest);
+
+            this.eventRequest = eventRequest;
+
+            return this;
+        }
+
         /// <inheritdoc />
         public SequencedAvailabilityRequest.SequenceRequest Build()
         {
@@ -212,6 +236,11 @@ namespace Cronofy
                     .AllRequired();
 
                 participantGroups.Add(requiredGroup.Build());
+            }
+
+            if (this.eventRequest != null)
+            {
+                request.Event = this.eventRequest;
             }
 
             if (this.groups.Count > 0)
