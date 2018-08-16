@@ -26,7 +26,18 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         }
                       ],
                       ""required_duration"":{ ""minutes"":60 },
-                      ""available_periods"":[ ]
+                      ""start_interval"":{ ""minutes"":30 },
+                      ""available_periods"":[ ],
+                      ""buffer"":{
+                        ""before"":{
+                          ""minimum"":{ ""minutes"":30 },
+                          ""maximum"":{ ""minutes"":45 }
+                        },
+                        ""after"":{
+                          ""minimum"":{ ""minutes"":45 },
+                          ""maximum"":{ ""minutes"":60 }
+                        }
+                      }
                     }
                   ],
                   ""available_periods"":[
@@ -43,6 +54,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             var sequenceBuilder = new SequenceRequestBuilder()
                 .RequiredDuration(60)
+                .StartInterval(30)
+                .BeforeBuffer(30, 45)
+                .AfterBuffer(45, 60)
                 .Ordinal(1)
                 .SequenceId("First Event")
                 .AddRequiredParticipant("acc_567236000909002")

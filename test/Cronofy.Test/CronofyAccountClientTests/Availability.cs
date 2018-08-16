@@ -122,6 +122,68 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
 
         [Test]
+        public void CanPerformAvailabilityWithBuffersAndIntervalQuery()
+        {
+            const string requestBody = @"
+                {
+                  ""participants"": [
+                    {
+                      ""members"": [
+                        { ""sub"": ""acc_567236000909002"" },
+                        { ""sub"": ""acc_678347111010113"" }
+                      ],
+                      ""required"": ""all""
+                    }
+                  ],
+                  ""required_duration"": { ""minutes"": 60 },
+                  ""available_periods"": [
+                    {
+                      ""start"": ""2017-01-03 09:00:00Z"",
+                      ""end"": ""2017-01-03 18:00:00Z""
+                    }
+                  ],
+                  ""start_interval"":{ ""minutes"": 60 },
+                  ""buffer"":{
+                    ""before"":{
+                      ""minimum"":{ ""minutes"": 30 } 
+                    },
+                    ""after"":{
+                      ""minimum"":{ ""minutes"": 60 } 
+                    }
+                  }
+                }";
+
+            var builder = new AvailabilityRequestBuilder()
+                .RequiredDuration(60)
+                .StartInterval(60)
+                .BeforeBuffer(30)
+                .AfterBuffer(60)
+                .AddAvailablePeriod(
+                    new DateTimeOffset(2017, 1, 3, 9, 0, 0, TimeSpan.Zero),
+                    new DateTimeOffset(2017, 1, 3, 18, 0, 0, TimeSpan.Zero))
+                .AddRequiredParticipant("acc_567236000909002")
+                .AddRequiredParticipant("acc_678347111010113");
+
+            const string responseBody = @"
+                {
+                  ""available_periods"": [ ]
+                }";
+
+            Http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/availability")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .JsonRequest(requestBody)
+                    .ResponseCode(200)
+                    .ResponseBody(responseBody)
+            );
+
+            var availability = Client.GetAvailability(builder);
+
+            Assert.IsEmpty(availability);
+        }
+
+        [Test]
         public void CanPerformComplexAvailabilityQuery()
         {
             const string requestBody = @"
