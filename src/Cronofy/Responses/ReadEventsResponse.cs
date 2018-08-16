@@ -239,6 +239,15 @@
             public bool EventPrivate { get; set; }
 
             /// <summary>
+            /// Gets or sets the event's meeting URL.
+            /// </summary>
+            /// <value>
+            /// The event's meeting URL.
+            /// </value>
+            [JsonProperty("meeting_url")]
+            public string MeetingUrl { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Event"/>.
             /// </summary>
             /// <returns>
@@ -265,6 +274,7 @@
                     Updated = this.Updated,
                     Recurring = this.Recurring,
                     EventPrivate = this.EventPrivate,
+                    MeetingUrl = this.MeetingUrl,
                 };
 
                 if (this.Location != null)

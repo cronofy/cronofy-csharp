@@ -192,6 +192,14 @@ namespace Cronofy
         /// </value>
         public EventOptions Options { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value for the event's meeting URL.
+        /// </summary>
+        /// <value>
+        /// The event's meeting URL.
+        /// </value>
+        public string MeetingUrl { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -239,6 +247,7 @@ namespace Cronofy
                 && this.Transparency == other.Transparency
                 && this.EventStatus == other.EventStatus
                 && this.Recurring == other.Recurring
+                && this.MeetingUrl == other.MeetingUrl
                 && object.Equals(this.Organizer, other.Organizer)
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
