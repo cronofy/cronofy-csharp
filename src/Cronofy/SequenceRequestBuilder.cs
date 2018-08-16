@@ -44,6 +44,21 @@ namespace Cronofy
         private int? ordinal;
 
         /// <summary>
+        /// The start interval of the request.
+        /// </summary>
+        private int? startInterval;
+
+        /// <summary>
+        /// The after buffer of the request.
+        /// </summary>
+        private AvailabilityRequest.BufferDefintion afterBuffer;
+
+        /// <summary>
+        /// The before buffer of the request.
+        /// </summary>
+        private AvailabilityRequest.BufferDefintion beforeBuffer;
+
+        /// <summary>
         /// The sequence id of the request.
         /// </summary>
         private string sequenceId;
@@ -70,6 +85,129 @@ namespace Cronofy
             Preconditions.True(minutes > 0, "minutes must be greater than zero");
 
             this.requiredDuration = minutes;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the start interval of the request.
+        /// </summary>
+        /// <param name="minutes">
+        /// The number of minutes for the start interval, must be greater than zero.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="SequenceRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="minutes"/> is not greater than zero.
+        /// </exception>
+        public SequenceRequestBuilder StartInterval(int minutes)
+        {
+            Preconditions.True(minutes > 0, "minutes must be greater than zero");
+
+            this.startInterval = minutes;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the before buffer of the request.
+        /// </summary>
+        /// <param name="minimum">
+        /// The number of minutes for the minimum buffer.
+        /// </param>
+        /// <param name="maximum">
+        /// The number of minutes for the maximum buffer.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="SequenceRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="minimum"/> is not null or is negative.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="maximum"/> is not null or is negative.
+        /// </exception>
+        public SequenceRequestBuilder BeforeBuffer(int? minimum, int? maximum = null)
+        {
+            if (minimum.HasValue)
+            {
+                Preconditions.True(minimum.Value >= 0, "minimum buffer must be postive");
+            }
+
+            if (maximum.HasValue)
+            {
+                Preconditions.True(maximum.Value >= 0, "maximum buffer must be postive");
+            }
+
+            this.beforeBuffer = new AvailabilityRequest.BufferDefintion();
+
+            if (minimum.HasValue)
+            {
+                this.beforeBuffer.Minimum = new AvailabilityRequest.Duration
+                {
+                    Minutes = minimum.Value
+                };
+            }
+
+            if (maximum.HasValue)
+            {
+                this.beforeBuffer.Maximum = new AvailabilityRequest.Duration
+                {
+                    Minutes = maximum.Value
+                };
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the after buffer of the request.
+        /// </summary>
+        /// <param name="minimum">
+        /// The number of minutes for the minimum buffer.
+        /// </param>
+        /// <param name="maximum">
+        /// The number of minutes for the maximum buffer.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="SequenceRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="minimum"/> is not null or is negative.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="maximum"/> is not null or is negative.
+        /// </exception>
+        public SequenceRequestBuilder AfterBuffer(int? minimum, int? maximum = null)
+        {
+            if (minimum.HasValue)
+            {
+                Preconditions.True(minimum.Value >= 0, "minimum buffer must be postive");
+            }
+
+            if (maximum.HasValue)
+            {
+                Preconditions.True(maximum.Value >= 0, "maximum buffer must be postive");
+            }
+
+            this.afterBuffer = new AvailabilityRequest.BufferDefintion();
+
+            if (minimum.HasValue)
+            {
+                this.afterBuffer.Minimum = new AvailabilityRequest.Duration
+                {
+                    Minutes = minimum.Value
+                };
+            }
+
+            if (maximum.HasValue)
+            {
+                this.afterBuffer.Maximum = new AvailabilityRequest.Duration
+                {
+                    Minutes = maximum.Value
+                };
+            }
 
             return this;
         }
@@ -251,6 +389,29 @@ namespace Cronofy
             if (this.groupBuilders.Count > 0)
             {
                 participantGroups.AddRange(this.groupBuilders.Select(gb => gb.Build()));
+            }
+
+            if (this.beforeBuffer != null || this.afterBuffer != null)
+            {
+                request.Buffer = new AvailabilityRequest.Buffers();
+
+                if (this.beforeBuffer != null)
+                {
+                    request.Buffer.Before = this.beforeBuffer;
+                }
+
+                if (this.afterBuffer != null)
+                {
+                    request.Buffer.After = this.afterBuffer;
+                }
+            }
+
+            if (this.startInterval.HasValue)
+            {
+                request.StartInterval = new AvailabilityRequest.Duration
+                {
+                    Minutes = this.startInterval.Value
+                };
             }
 
             request.Participants = participantGroups;

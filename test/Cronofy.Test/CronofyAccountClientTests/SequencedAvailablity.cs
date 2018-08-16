@@ -57,7 +57,6 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     new DateTimeOffset(2017, 1, 4, 9, 0, 0, TimeSpan.Zero),
                     new DateTimeOffset(2017, 1, 4, 18, 0, 0, TimeSpan.Zero));
 
-
             const string responseBody = @"
             {
               ""sequences"":[
