@@ -87,6 +87,8 @@
     <Compile Include="CronofyAccountClientTests\RevokeProfileAuthorization.cs" />
     <Compile Include="CronofyOAuthClientTests\ApplicationCalendar.cs" />
     <Compile Include="SerializationTests.cs" />
+    <Compile Include="CronofyAccountClientTests\SequencedAvailablity.cs" />
+    <Compile Include="CronofyOAuthClientTests\RealTimeSequencing.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

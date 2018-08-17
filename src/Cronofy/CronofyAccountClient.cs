@@ -523,6 +523,32 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public AvailableSequences GetSequencedAvailability(IBuilder<SequencedAvailabilityRequest> builder)
+        {
+            Preconditions.NotNull("builder", builder);
+
+            var request = builder.Build();
+
+            return this.GetSequencedAvailability(request);
+        }
+
+        /// <inheritdoc/>
+        public AvailableSequences GetSequencedAvailability(SequencedAvailabilityRequest availabilityRequest)
+        {
+            Preconditions.NotNull("availabilityRequest", availabilityRequest);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.SequencedAvailabilityUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+            request.SetJsonBody(availabilityRequest);
+
+            var response = this.HttpClient.GetJsonResponse<SequencedAvailabilityResponse>(request);
+            return response.ToSequence();
+        }
+
+        /// <inheritdoc/>
         public string CreateLinkToken()
         {
             var request = new HttpRequest();

@@ -39,6 +39,21 @@
         private int requiredDuration;
 
         /// <summary>
+        /// The before buffer of the request.
+        /// </summary>
+        private int? beforeBuffer;
+
+        /// <summary>
+        /// The after buffer of the request.
+        /// </summary>
+        private int? afterBuffer;
+
+        /// <summary>
+        /// The start interval of the request.
+        /// </summary>
+        private int? startInterval;
+
+        /// <summary>
         /// Sets the required duration of the request.
         /// </summary>
         /// <param name="minutes">
@@ -55,6 +70,75 @@
             Preconditions.True(minutes > 0, "minutes must be greater than zero");
 
             this.requiredDuration = minutes;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the start interval of the request.
+        /// </summary>
+        /// <param name="minutes">
+        /// The number of minutes for the start interval, must be greater than zero.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="minutes"/> is not greater than zero.
+        /// </exception>
+        public AvailabilityRequestBuilder StartInterval(int minutes)
+        {
+            Preconditions.True(minutes > 0, "minutes must be greater than zero");
+
+            this.startInterval = minutes;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the before buffer of the request.
+        /// </summary>
+        /// <param name="beforeBuffer">
+        /// The number of minutes for the before buffer.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="beforeBuffer"/> is not null or is negative.
+        /// </exception>
+        public AvailabilityRequestBuilder BeforeBuffer(int? beforeBuffer)
+        {
+            if (beforeBuffer.HasValue)
+            {
+                Preconditions.True(beforeBuffer.Value >= 0, "buffer must be postive");
+            }
+
+            this.beforeBuffer = beforeBuffer;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the after buffer of the request.
+        /// </summary>
+        /// <param name="afterBuffer">
+        /// The number of minutes for the after buffer.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="afterBuffer"/> is not null or is negative.
+        /// </exception>
+        public AvailabilityRequestBuilder AfterBuffer(int? afterBuffer)
+        {
+            if (afterBuffer.HasValue)
+            {
+                Preconditions.True(afterBuffer.Value >= 0, "buffer must be postive");
+            }
+
+            this.afterBuffer = afterBuffer;
 
             return this;
         }
@@ -175,6 +259,41 @@
             if (this.groupBuilders.Count > 0)
             {
                 participantGroups.AddRange(this.groupBuilders.Select(gb => gb.Build()));
+            }
+
+            if (this.startInterval.HasValue)
+            {
+                request.StartInterval = new AvailabilityRequest.Duration
+                {
+                    Minutes = this.startInterval.Value
+                };
+            }
+
+            if (this.beforeBuffer.HasValue || this.afterBuffer.HasValue)
+            {
+                request.Buffer = new AvailabilityRequest.Buffers();
+
+                if (this.beforeBuffer.HasValue)
+                {
+                    request.Buffer.Before = new AvailabilityRequest.BufferDefintion
+                    {
+                        Minimum = new AvailabilityRequest.Duration
+                        {
+                            Minutes = this.beforeBuffer.Value
+                        }
+                    };
+                }
+
+                if (this.afterBuffer.HasValue)
+                {
+                    request.Buffer.After = new AvailabilityRequest.BufferDefintion
+                    {
+                        Minimum = new AvailabilityRequest.Duration
+                        {
+                            Minutes = this.afterBuffer.Value
+                        }
+                    };
+                }
             }
 
             request.Participants = participantGroups;

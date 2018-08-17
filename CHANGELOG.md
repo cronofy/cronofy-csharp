@@ -1,3 +1,8 @@
+## [0.24.0]
+
+ * Added support for sequences, buffers and intervals [#59]
+ * Added read only meeting url [#60]
+
 ## [0.23.0]
 
  * Allow no reminders to be set explicitly [#58]
@@ -155,6 +160,7 @@
 [0.21.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.21.0
 [0.22.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.22.0
 [0.23.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.23.0
+[0.24.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.24.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -192,3 +198,5 @@
 [#54]: https://github.com/cronofy/cronofy-csharp/pull/54
 [#55]: https://github.com/cronofy/cronofy-csharp/pull/55
 [#58]: https://github.com/cronofy/cronofy-csharp/pull/58
+[#59]: https://github.com/cronofy/cronofy-csharp/pull/59
+[#60]: https://github.com/cronofy/cronofy-csharp/pull/60

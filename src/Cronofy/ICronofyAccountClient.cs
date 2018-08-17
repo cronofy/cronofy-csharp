@@ -521,6 +521,40 @@
         IEnumerable<AvailablePeriod> GetAvailability(AvailabilityRequest request);
 
         /// <summary>
+        /// Gets the availability for a given set of criteria.
+        /// </summary>
+        /// <param name="builder">
+        /// A builder for the criteria for the availability request, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// The <see cref="AvailableSequences"/> which match the set of criteria.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="builder"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        AvailableSequences GetSequencedAvailability(IBuilder<SequencedAvailabilityRequest> builder);
+
+        /// <summary>
+        /// Gets the availability for a given set of criteria.
+        /// </summary>
+        /// <param name="request">
+        /// The criteria for the availability request, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// The <see cref="AvailableSequences"/> which match the set of criteria.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="request"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        AvailableSequences GetSequencedAvailability(SequencedAvailabilityRequest request);
+
+        /// <summary>
         /// Creates a link token for the current account.
         /// </summary>
         /// <returns>

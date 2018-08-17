@@ -61,16 +61,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                         "{{" +
-                            "\"client_id\":\"{0}\"," +
-                            "\"client_secret\":\"{1}\"," +
-                            "\"oauth\":{{" +
-                                "\"redirect_uri\":\"{2}\"," +
-                                "\"scope\":\"{3}\"" +
-                            "}}," +
-                            "\"event\":{{" +
-                                "\"event_id\":\"{4}\"," +
-                                "\"summary\":\"{5}\"" +
-                            "}}," +
                             "\"availability\":{{" +
                                 "\"participants\":[{{" +
                                     "\"members\":[{{" +
@@ -84,6 +74,16 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                                     "\"start\":\"{7}\"," +
                                     "\"end\":\"{8}\"" +
                                 "}}]" +
+                            "}}," +
+                            "\"client_id\":\"{0}\"," +
+                            "\"client_secret\":\"{1}\"," +
+                            "\"oauth\":{{" +
+                                "\"redirect_uri\":\"{2}\"," +
+                                "\"scope\":\"{3}\"" +
+                            "}}," +
+                            "\"event\":{{" +
+                                "\"event_id\":\"{4}\"," +
+                                "\"summary\":\"{5}\"" +
                             "}}," +
                             "\"target_calendars\":[{{" +
                                 "\"sub\":\"{9}\"," +
