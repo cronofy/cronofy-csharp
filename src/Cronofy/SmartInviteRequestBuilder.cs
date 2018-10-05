@@ -1,6 +1,7 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
     using Cronofy.Requests;
 
     /// <summary>
@@ -34,6 +35,11 @@
         /// The recipient.
         /// </summary>
         private SmartInviteRequest.InviteRecipient recipient;
+
+        /// <summary>
+        /// The recipients
+        /// </summary>
+        private IList<SmartInviteRequest.InviteRecipient> recipients;
 
         /// <summary>
         /// The organizer.
@@ -148,6 +154,36 @@
             {
                 Email = email
             };
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add a new recipient to the recipients list
+        /// </summary>
+        /// <param name="email">
+        /// The email address of the recipient.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="email"/> is null.
+        /// </exception>
+        public SmartInviteRequestBuilder AddRecipient(string email)
+        {
+            Preconditions.NotNull("email", email);
+
+            if (this.recipients == null)
+            {
+                this.recipients = new List<SmartInviteRequest.InviteRecipient>();
+            }
+
+            recipients.Add(new SmartInviteRequest.InviteRecipient
+            {
+                Email = email
+            });
+
             return this;
         }
 
@@ -183,6 +219,7 @@
                 CallbackUrl = this.callbackUrl,
                 Event = this.inviteEvent,
                 Recipient = this.recipient,
+                Recipients = this.recipients
             };
 
             if (this.organizer != null)

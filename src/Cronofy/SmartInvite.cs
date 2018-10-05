@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System.Collections.Generic;
 
@@ -36,6 +36,12 @@
         /// </summary>
         /// <value>The primary recipient.</value>
         public Attendee Recipient { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current state of the recipients.
+        /// </summary>
+        /// <value>The recipients.</value>
+        public IEnumerable<Attendee> Recipients { get; set; }
 
         /// <summary>
         /// Gets or sets the event details for the invite.

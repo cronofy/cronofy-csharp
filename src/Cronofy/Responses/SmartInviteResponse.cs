@@ -1,5 +1,6 @@
-﻿namespace Cronofy.Responses
+namespace Cronofy.Responses
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
 
@@ -46,6 +47,13 @@
         public ResponseAttendee Recipient { get; set; }
 
         /// <summary>
+        /// Gets or sets the recipients list.
+        /// </summary>
+        /// <value>The recipient.</value>
+        [JsonProperty("recipients")]
+        public IEnumerable<ResponseAttendee> Recipients { get; set; }
+
+        /// <summary>
         /// Gets or sets the event.
         /// </summary>
         /// <value>The event.</value>
@@ -79,7 +87,20 @@
                 invite.Replies = Enumerable.Empty<SmartInvite.Attendee>();
             }
 
-            invite.Recipient = this.Recipient.ToAttendee();
+            if (this.Recipient != null)
+            {
+                invite.Recipient = this.Recipient.ToAttendee();
+            }
+
+            if(this.Recipients != null)
+            {
+                invite.Recipients = this.Recipients.Select(t => t.ToAttendee());
+            }
+            else
+            {
+                invite.Recipients = Enumerable.Empty<SmartInvite.Attendee>();
+            }
+
             invite.Event = this.Event.ToEvent();
             invite.Attachments = this.Attachments.ToAttachments();
 

@@ -1,5 +1,6 @@
-﻿namespace Cronofy.Requests
+namespace Cronofy.Requests
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -42,6 +43,15 @@
         /// </value>
         [JsonProperty("recipient")]
         public InviteRecipient Recipient { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recipients for the invite.
+        /// </summary>
+        /// <value>
+        /// The recipients for the invite.
+        /// </value>
+        [JsonProperty("recipients")]
+        public IEnumerable<InviteRecipient> Recipients { get; set; }
 
         /// <summary>
         /// Gets or sets the details for the event.
