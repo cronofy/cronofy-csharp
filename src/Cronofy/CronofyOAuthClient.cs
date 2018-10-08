@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
@@ -301,18 +301,7 @@
             }
         }
 
-        /// <summary>
-        /// Creates a smart invite for the given request.
-        /// </summary>
-        /// <param name="smartInviteRequest">
-        /// The details of the invite, must not be <code>null</code>.
-        /// </param>
-        /// <returns>
-        /// A smart invite for the given request.
-        /// </returns>
-        /// <exception cref="CronofyException">
-        /// Thrown if an error is encountered whilst making the request.
-        /// </exception>
+        /// <inheritdoc/>
         public SmartInvite CreateInvite(SmartInviteRequest smartInviteRequest)
         {
             var request = new HttpRequest
@@ -328,17 +317,7 @@
             return response.ToSmartInvite();
         }
 
-        /// <summary>
-        /// Cancels a smart invite for the given request.
-        /// </summary>
-        /// <param name="smartInviteId">The invite id to cancel.</param>
-        /// <param name="recipientEmail">The recipient for the cancellation.</param>
-        /// <returns>
-        /// A smart invite for the given request.
-        /// </returns>
-        /// <exception cref="CronofyException">
-        /// Thrown if an error is encountered whilst making the request.
-        /// </exception>
+        /// <inheritdoc/>
         public SmartInvite CancelInvite(string smartInviteId, string recipientEmail)
         {
             var request = new HttpRequest
@@ -356,21 +335,7 @@
             return response.ToSmartInvite();
         }
 
-        /// <summary>
-        /// Retreives detials of a smart invite.
-        /// </summary>
-        /// <param name="smartInviteId">
-        /// The invite id.
-        /// </param>
-        /// <param name="emailAddress">
-        /// The email address of the invitee.
-        /// </param>
-        /// <returns>
-        /// A smart invite for the given request.
-        /// </returns>
-        /// <exception cref="CronofyException">
-        /// Thrown if an error is encountered whilst making the request.
-        /// </exception>
+        /// <inheritdoc/>
         public SmartInvite GetSmartInvite(string smartInviteId, string emailAddress)
         {
             var request = new HttpRequest
