@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
     using Cronofy.Requests;
@@ -138,5 +138,77 @@
         /// Thrown if <paramref name="realTimeSequencingRequest"/> is null.
         /// </exception>
         string RealTimeSequencing(RealTimeSequencingRequest realTimeSequencingRequest);
+
+        /// <summary>
+        /// Creates a Smart Invite for the given request.
+        /// </summary>
+        /// <param name="smartInviteRequest">
+        /// The details of the invite, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// A Smart Invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        SmartInvite CreateInvite(SmartInviteRequest smartInviteRequest);
+
+        /// <summary>
+        /// Cancels a Smart Invite for the given request.
+        /// </summary>
+        /// <param name="smartInviteId">The invite id to cancel.</param>
+        /// <param name="recipientEmail">The recipient for the cancellation.</param>
+        /// <returns>
+        /// A Smart Invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        SmartInvite CancelInvite(string smartInviteId, string recipientEmail);
+
+        /// <summary>
+        /// Retreives details of a Smart Invite.
+        /// </summary>
+        /// <param name="smartInviteId">
+        /// The invite id.
+        /// </param>
+        /// <param name="emailAddress">
+        /// The email address of the invitee.
+        /// </param>
+        /// <returns>
+        /// A Smart Invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        SmartInvite GetSmartInvite(string smartInviteId, string emailAddress);
+
+        /// <summary>
+        /// Creates a Smart Invite for the given request.
+        /// </summary>
+        /// <param name="smartInviteRequest">
+        /// The details of the invite, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// A Smart Invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        SmartInviteMultiRecipient CreateInvite(SmartInviteMultiRecipientRequest smartInviteRequest);
+
+        /// <summary>
+        /// Retreives details of a Smart Invite.
+        /// </summary>
+        /// <param name="smartInviteId">
+        /// The invite id.
+        /// </param>
+        /// <returns>
+        /// A Smart Invite for the given request.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        SmartInviteMultiRecipient GetSmartInvite(string smartInviteId);
     }
 }

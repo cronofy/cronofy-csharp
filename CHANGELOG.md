@@ -1,3 +1,7 @@
+## [0.25.0]
+
+ * Added support for multi-recipient Smart Invites [#62]
+
 ## [0.24.0]
 
  * Added support for sequences, buffers and intervals [#59]
@@ -9,7 +13,7 @@
 
 ## [0.22.0]
 
- * Allow setting of smart invite organizer name [#55]
+ * Allow setting of Smart Invite organizer name [#55]
 
 ## [0.21.0]
 
@@ -19,7 +23,7 @@
 
  * Application Calendar support [#49]
  * Add subject to oauth token responses [#53]
- * Added support for smart invite proposal [#52]
+ * Added support for Smart Invite proposal [#52]
 
 ## [0.19.1]
 
@@ -161,6 +165,7 @@
 [0.22.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.22.0
 [0.23.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.23.0
 [0.24.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.24.0
+[0.25.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -200,3 +205,4 @@
 [#58]: https://github.com/cronofy/cronofy-csharp/pull/58
 [#59]: https://github.com/cronofy/cronofy-csharp/pull/59
 [#60]: https://github.com/cronofy/cronofy-csharp/pull/60
+[#62]: https://github.com/cronofy/cronofy-csharp/pull/62

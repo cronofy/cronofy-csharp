@@ -6,7 +6,7 @@
     /// <summary>
     /// Class for the serialization of an Smart Invite request.
     /// </summary>
-    public sealed class SmartInviteRequest
+    public sealed class SmartInviteMultiRecipientRequest
     {
         /// <summary>
         /// Gets or sets the method for the invite.
@@ -36,13 +36,13 @@
         public string CallbackUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the recipient for the invite.
+        /// Gets or sets the recipients for the invite.
         /// </summary>
         /// <value>
-        /// The recipient for the invite.
+        /// The recipients for the invite.
         /// </value>
-        [JsonProperty("recipient")]
-        public InviteRecipient Recipient { get; set; }
+        [JsonProperty("recipients")]
+        public IEnumerable<InviteRecipient> Recipients { get; set; }
 
         /// <summary>
         /// Gets or sets the details for the event.

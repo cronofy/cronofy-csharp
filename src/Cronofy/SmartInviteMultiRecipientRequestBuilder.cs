@@ -6,10 +6,10 @@
 
     /// <summary>
     /// Builder class for
-    /// <see cref="CronofyOAuthClient.CreateInvite(SmartInviteRequest)"/>
+    /// <see cref="ICronofyOAuthClient.CreateInvite(SmartInviteMultiRecipientRequest)"/>
     /// method calls.
     /// </summary>
-    public sealed class SmartInviteRequestBuilder : IBuilder<SmartInviteRequest>
+    public sealed class SmartInviteMultiRecipientRequestBuilder : IBuilder<SmartInviteMultiRecipientRequest>
     {
         /// <summary>
         /// The Smart Invite identifier.
@@ -32,21 +32,22 @@
         private SmartInviteEventRequest inviteEvent;
 
         /// <summary>
-        /// The recipient.
+        /// The recipients.
         /// </summary>
-        private SmartInviteRequest.InviteRecipient recipient;
+        private IList<SmartInviteMultiRecipientRequest.InviteRecipient> recipients;
 
         /// <summary>
         /// The organizer.
         /// </summary>
-        private SmartInviteRequest.InviteOrganizer organizer;
+        private SmartInviteMultiRecipientRequest.InviteOrganizer organizer;
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="Cronofy.SmartInviteRequestBuilder"/> class.
+        /// <see cref="Cronofy.SmartInviteMultiRecipientRequestBuilder"/> class.
         /// </summary>
-        public SmartInviteRequestBuilder()
+        public SmartInviteMultiRecipientRequestBuilder()
         {
+            this.recipients = new List<SmartInviteMultiRecipientRequest.InviteRecipient>();
         }
 
         /// <summary>
@@ -61,7 +62,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="method"/> is empty.
         /// </exception>
-        public SmartInviteRequestBuilder Method(string method)
+        public SmartInviteMultiRecipientRequestBuilder Method(string method)
         {
             Preconditions.NotEmpty("method", method);
 
@@ -81,7 +82,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="smartInviteId"/> is empty.
         /// </exception>
-        public SmartInviteRequestBuilder InviteId(string smartInviteId)
+        public SmartInviteMultiRecipientRequestBuilder InviteId(string smartInviteId)
         {
             Preconditions.NotEmpty("smartInviteId", smartInviteId);
 
@@ -101,7 +102,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="callbackUrl"/> is empty.
         /// </exception>
-        public SmartInviteRequestBuilder CallbackUrl(string callbackUrl)
+        public SmartInviteMultiRecipientRequestBuilder CallbackUrl(string callbackUrl)
         {
             Preconditions.NotEmpty("callbackUrl", callbackUrl);
 
@@ -121,7 +122,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="inviteEvent"/> is null.
         /// </exception>
-        public SmartInviteRequestBuilder Event(SmartInviteEventRequest inviteEvent)
+        public SmartInviteMultiRecipientRequestBuilder Event(SmartInviteEventRequest inviteEvent)
         {
             Preconditions.NotNull("inviteEvent", inviteEvent);
 
@@ -130,7 +131,7 @@
         }
 
         /// <summary>
-        /// Sets the Recipient details.
+        /// Add a new recipient to the recipients list.
         /// </summary>
         /// <param name="email">
         /// The email address of the recipient.
@@ -141,14 +142,14 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="email"/> is null.
         /// </exception>
-        public SmartInviteRequestBuilder Recipient(string email)
+        public SmartInviteMultiRecipientRequestBuilder AddRecipient(string email)
         {
             Preconditions.NotNull("email", email);
 
-            this.recipient = new SmartInviteRequest.InviteRecipient
+            this.recipients.Add(new SmartInviteMultiRecipientRequest.InviteRecipient
             {
                 Email = email
-            };
+            });
 
             return this;
         }
@@ -165,26 +166,27 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="name"/> is null.
         /// </exception>
-        public SmartInviteRequestBuilder Organizer(string name)
+        public SmartInviteMultiRecipientRequestBuilder Organizer(string name)
         {
             Preconditions.NotNull("name", name);
 
-            this.organizer = new SmartInviteRequest.InviteOrganizer
+            this.organizer = new SmartInviteMultiRecipientRequest.InviteOrganizer
             {
                 Name = name
             };
+
             return this;
         }
 
         /// <inheritdoc/>
-        public SmartInviteRequest Build()
+        public SmartInviteMultiRecipientRequest Build()
         {
-            var request = new SmartInviteRequest()
+            var request = new SmartInviteMultiRecipientRequest()
             {
                 SmartInviteId = this.smartInviteId,
                 CallbackUrl = this.callbackUrl,
                 Event = this.inviteEvent,
-                Recipient = this.recipient,
+                Recipients = this.recipients,
             };
 
             if (this.organizer != null)

@@ -3,20 +3,20 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Class to represent a smart invite.
+    /// Class to represent a Smart Invite.
     /// </summary>
     public sealed class SmartInvite
     {
         /// <summary>
-        /// Gets or sets the method for the smart invite.
+        /// Gets or sets the method for the Smart Invite.
         /// </summary>
         /// <value>The method.</value>
         public string Method { get; set; }
 
         /// <summary>
-        /// Gets or sets the smart invite id.
+        /// Gets or sets the Smart Invite id.
         /// </summary>
-        /// <value>The smart invite id.</value>
+        /// <value>The Smart Invite id.</value>
         public string SmartInviteId { get; set; }
 
         /// <summary>
@@ -36,6 +36,12 @@
         /// </summary>
         /// <value>The primary recipient.</value>
         public Attendee Recipient { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current state of the recipients.
+        /// </summary>
+        /// <value>The recipients.</value>
+        public IEnumerable<Attendee> Recipients { get; set; }
 
         /// <summary>
         /// Gets or sets the event details for the invite.
