@@ -92,7 +92,7 @@ namespace Cronofy.Responses
                 invite.Recipient = this.Recipient.ToAttendee();
             }
 
-            if(this.Recipients != null)
+            if (this.Recipients != null)
             {
                 invite.Recipients = this.Recipients.Select(t => t.ToAttendee());
             }

@@ -37,7 +37,7 @@ namespace Cronofy
         private SmartInviteRequest.InviteRecipient recipient;
 
         /// <summary>
-        /// The recipients
+        /// The recipients.
         /// </summary>
         private IList<SmartInviteRequest.InviteRecipient> recipients;
 
@@ -159,7 +159,7 @@ namespace Cronofy
         }
 
         /// <summary>
-        /// Add a new recipient to the recipients list
+        /// Add a new recipient to the recipients list.
         /// </summary>
         /// <param name="email">
         /// The email address of the recipient.
@@ -179,7 +179,7 @@ namespace Cronofy
                 this.recipients = new List<SmartInviteRequest.InviteRecipient>();
             }
 
-            recipients.Add(new SmartInviteRequest.InviteRecipient
+            this.recipients.Add(new SmartInviteRequest.InviteRecipient
             {
                 Email = email
             });
