@@ -1,4 +1,4 @@
-namespace Cronofy
+﻿namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Cronofy
     public sealed class SmartInviteMultiRecipientRequestBuilder : IBuilder<SmartInviteMultiRecipientRequest>
     {
         /// <summary>
-        /// The smart invite identifier.
+        /// The Smart Invite identifier.
         /// </summary>
         private string smartInviteId;
 
@@ -71,10 +71,10 @@ namespace Cronofy
         }
 
         /// <summary>
-        /// Sets the smart invite id.
+        /// Sets the Smart Invite id.
         /// </summary>
         /// <param name="smartInviteId">
-        /// The smart invite id.
+        /// The Smart Invite id.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.

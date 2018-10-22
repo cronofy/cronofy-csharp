@@ -1,4 +1,4 @@
-namespace Cronofy
+﻿namespace Cronofy
 {
     /// <summary>
     /// Class for providing URLs.
@@ -116,7 +116,7 @@ namespace Cronofy
         private const string RevokeProfileAuthorizationUrlFormatFormat = "https://api{0}.cronofy.com/v1/profiles/{{0}}/revoke";
 
         /// <summary>
-        /// The URL of the smart invite endpoint.
+        /// The URL of the Smart Invite endpoint.
         /// </summary>
         private const string SmartInviteUrlFormat = "https://api{0}.cronofy.com/v1/smart_invites";
 
@@ -449,9 +449,9 @@ namespace Cronofy
         }
 
         /// <summary>
-        /// Gets the smart invite URL.
+        /// Gets the Smart Invite URL.
         /// </summary>
-        /// <value>The smart invite url.</value>
+        /// <value>The Smart Invite url.</value>
         public string SmartInviteUrl { get; private set; }
 
         /// <summary>

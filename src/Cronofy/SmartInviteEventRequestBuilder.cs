@@ -6,7 +6,7 @@
     using Cronofy.Requests;
 
     /// <summary>
-    /// Builder class for smart invite events.
+    /// Builder class for Smart Invite events.
     /// </summary>
     public sealed class SmartInviteEventRequestBuilder : IBuilder<SmartInviteEventRequest>
     {

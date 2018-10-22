@@ -1,11 +1,11 @@
-namespace Cronofy.Responses
+﻿namespace Cronofy.Responses
 {
     using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Class to represent a smart invite response.
+    /// Class to represent a Smart Invite response.
     /// </summary>
     internal sealed class SmartInviteResponse
     {
@@ -19,9 +19,9 @@ namespace Cronofy.Responses
         public string Method { get; set; }
 
         /// <summary>
-        /// Gets or sets the smart invite identifier.
+        /// Gets or sets the Smart Invite identifier.
         /// </summary>
-        /// <value>The smart invite identifier.</value>
+        /// <value>The Smart Invite identifier.</value>
         [JsonProperty("smart_invite_id")]
         public string SmartInviteId { get; set; }
 

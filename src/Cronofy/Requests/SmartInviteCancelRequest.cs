@@ -3,14 +3,14 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Class for the serialization of an smart invite cancel request.
+    /// Class for the serialization of an Smart Invite cancel request.
     /// </summary>
     public sealed class SmartInviteCancelRequest
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Cronofy.Requests.SmartInviteCancelRequest"/> class.
         /// </summary>
-        /// <param name="smartInviteId">The smart invite identifier.</param>
+        /// <param name="smartInviteId">The Smart Invite identifier.</param>
         /// <param name="recipientEmail">The recipient email.</param>
         public SmartInviteCancelRequest(string smartInviteId, string recipientEmail)
         {
@@ -50,7 +50,7 @@
         public InviteRecipient Recipient { get; set; }
 
         /// <summary>
-        /// Class for the serialization of an smart invite request recipient.
+        /// Class for the serialization of an Smart Invite request recipient.
         /// </summary>
         public sealed class InviteRecipient
         {

@@ -1,10 +1,10 @@
-namespace Cronofy.Requests
+﻿namespace Cronofy.Requests
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Class for the serialization of an smart invite request.
+    /// Class for the serialization of an Smart Invite request.
     /// </summary>
     public sealed class SmartInviteMultiRecipientRequest
     {
@@ -63,7 +63,7 @@ namespace Cronofy.Requests
         public InviteOrganizer Organizer { get; set; }
 
         /// <summary>
-        /// Class for the serialization of an smart invite request recipient.
+        /// Class for the serialization of an Smart Invite request recipient.
         /// </summary>
         public sealed class InviteRecipient
         {
@@ -78,7 +78,7 @@ namespace Cronofy.Requests
         }
 
         /// <summary>
-        /// Class for the serialization of an smart invite request organizer.
+        /// Class for the serialization of an Smart Invite request organizer.
         /// </summary>
         public sealed class InviteOrganizer
         {

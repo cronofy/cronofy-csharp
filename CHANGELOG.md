@@ -9,7 +9,7 @@
 
 ## [0.22.0]
 
- * Allow setting of smart invite organizer name [#55]
+ * Allow setting of Smart Invite organizer name [#55]
 
 ## [0.21.0]
 
@@ -19,7 +19,7 @@
 
  * Application Calendar support [#49]
  * Add subject to oauth token responses [#53]
- * Added support for smart invite proposal [#52]
+ * Added support for Smart Invite proposal [#52]
 
 ## [0.19.1]
 
