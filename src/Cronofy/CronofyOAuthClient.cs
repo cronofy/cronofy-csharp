@@ -320,6 +320,9 @@ namespace Cronofy
         /// <inheritdoc/>
         public SmartInvite CancelInvite(string smartInviteId, string recipientEmail)
         {
+            Preconditions.NotEmpty("smartInviteId", smartInviteId);
+            Preconditions.NotEmpty("emailAddress", recipientEmail);
+
             var request = new HttpRequest
             {
                 Method = "POST",
@@ -338,6 +341,9 @@ namespace Cronofy
         /// <inheritdoc/>
         public SmartInvite GetSmartInvite(string smartInviteId, string emailAddress)
         {
+            Preconditions.NotEmpty("smartInviteId", smartInviteId);
+            Preconditions.NotEmpty("emailAddress", emailAddress);
+
             var request = new HttpRequest
             {
                 Method = "GET",
@@ -352,6 +358,43 @@ namespace Cronofy
             request.AddOAuthAuthorization(this.clientSecret);
 
             var response = this.HttpClient.GetJsonResponse<SmartInviteResponse>(request);
+            return response.ToSmartInvite();
+        }
+
+        /// <inheritdoc/>
+        public SmartInviteMultiRecipient CreateInvite(SmartInviteMultiRecipientRequest smartInviteRequest)
+        {
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.SmartInviteUrl
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(smartInviteRequest);
+
+            var response = this.HttpClient.GetJsonResponse<SmartInviteMultiRecipientResponse>(request);
+            return response.ToSmartInvite();
+        }
+
+        /// <inheritdoc/>
+        public SmartInviteMultiRecipient GetSmartInvite(string smartInviteId)
+        {
+            Preconditions.NotEmpty("smartInviteId", smartInviteId);
+
+            var request = new HttpRequest
+            {
+                Method = "GET",
+                Url = this.urlProvider.SmartInviteUrl,
+                QueryString = new HttpRequest.QueryStringCollection
+                {
+                    { "smart_invite_id", smartInviteId }
+                }
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+
+            var response = this.HttpClient.GetJsonResponse<SmartInviteMultiRecipientResponse>(request);
             return response.ToSmartInvite();
         }
 
