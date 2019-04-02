@@ -97,7 +97,6 @@
     <Compile Include="IHttpClientExtensions.cs" />
     <Compile Include="IBuilder.cs" />
     <Compile Include="CronofyException.cs" />
-    <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="GetEventsRequestBuilder.cs" />
     <Compile Include="Requests\GetEventsRequest.cs" />
     <Compile Include="CronofyResponseException.cs" />
