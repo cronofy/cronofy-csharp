@@ -49,7 +49,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -85,7 +85,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -132,7 +132,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""location"": {
         ""description"": ""The Country"",
@@ -173,7 +173,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -220,7 +220,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""transparent"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -256,7 +256,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -303,7 +303,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""transparent"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -340,7 +340,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -387,7 +387,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""deleted"": false,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -418,7 +418,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     Deleted = false,
                     ParticipationStatus = AttendeeStatus.NeedsAction,
                     Transparency = Transparency.Opaque,
-                    EventStatus = EventStatus.Confirmed,
+                    Status = EventStatus.Confirmed,
                     Categories = new string[] {},
                     Created = DateTime.MinValue.ToUniversalTime(),
                     Updated = DateTime.MinValue.ToUniversalTime(),
@@ -461,7 +461,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""transparent"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -504,7 +504,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -551,7 +551,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""deleted"": false,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -589,7 +589,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""deleted"": false,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -620,7 +620,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = false,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -643,7 +643,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = false,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
@@ -766,7 +766,7 @@ string.Format(@"{{
       ""recurring"": true,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {{
@@ -803,7 +803,7 @@ string.Format(@"{{
                         Recurring = true,
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
-                        EventStatus = EventStatus.Confirmed,
+                        Status = EventStatus.Confirmed,
                         Categories = new string[] {},
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
@@ -860,7 +860,7 @@ string.Format(@"{{
       ""deleted"": false,
       ""participation_status"": ""needs_action"",
       ""transparency"": ""opaque"",
-      ""event_status"": ""confirmed"",
+      ""status"": ""confirmed"",
       ""categories"": [],
       ""attendees"": [
         {
@@ -891,7 +891,7 @@ string.Format(@"{{
                 Deleted = false,
                 ParticipationStatus = AttendeeStatus.NeedsAction,
                 Transparency = Transparency.Opaque,
-                EventStatus = EventStatus.Confirmed,
+                Status = EventStatus.Confirmed,
                 Categories = new string[] {
 
                 },

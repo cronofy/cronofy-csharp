@@ -170,8 +170,8 @@
             /// <value>
             /// The status of the event.
             /// </value>
-            [JsonProperty("event_status")]
-            public string EventStatus { get; set; }
+            [JsonProperty("status")]
+            public string Status { get; set; }
 
             /// <summary>
             /// Gets or sets the categories assigned to the event.
@@ -268,7 +268,7 @@
                     Deleted = this.Deleted,
                     ParticipationStatus = this.ParticipationStatus,
                     Transparency = this.Transparency,
-                    EventStatus = this.EventStatus,
+                    Status = this.Status,
                     Categories = this.Categories,
                     Created = this.Created,
                     Updated = this.Updated,

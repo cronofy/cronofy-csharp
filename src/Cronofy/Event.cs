@@ -116,6 +116,27 @@ namespace Cronofy
         public string Transparency { get; set; }
 
         /// <summary>
+        /// Gets or sets <see cref="Event"/>.
+        /// This property is deprecated and kept for backwards compatibility.
+        /// </summary>
+        /// <value>
+        /// The same as <see cref="Status"/>.
+        /// </value>
+        [Obsolete]
+        public string EventStatus
+        {
+            get
+            {
+                return this.Status;
+            }
+
+            set
+            {
+                this.Status = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the status of the event.
         /// </summary>
         /// <value>
@@ -124,7 +145,7 @@ namespace Cronofy
         /// <remarks>
         /// See <see cref="Cronofy.EventStatus"/> for potential values.
         /// </remarks>
-        public string EventStatus { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Gets or sets the categories assigned to the event.
@@ -245,7 +266,7 @@ namespace Cronofy
                 && this.Description == other.Description
                 && this.ParticipationStatus == other.ParticipationStatus
                 && this.Transparency == other.Transparency
-                && this.EventStatus == other.EventStatus
+                && this.Status == other.Status
                 && this.Recurring == other.Recurring
                 && this.MeetingUrl == other.MeetingUrl
                 && object.Equals(this.Organizer, other.Organizer)
