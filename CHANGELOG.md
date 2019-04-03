@@ -1,3 +1,7 @@
+## [0.25.1]
+
+ * Fixed mapping of event status [#66]
+
 ## [0.25.0]
 
  * Added support for multi-recipient Smart Invites [#62]
@@ -166,6 +170,7 @@
 [0.23.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.23.0
 [0.24.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.24.0
 [0.25.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.0
+[0.25.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -206,3 +211,4 @@
 [#59]: https://github.com/cronofy/cronofy-csharp/pull/59
 [#60]: https://github.com/cronofy/cronofy-csharp/pull/60
 [#62]: https://github.com/cronofy/cronofy-csharp/pull/62
+[#66]: https://github.com/cronofy/cronofy-csharp/pull/66

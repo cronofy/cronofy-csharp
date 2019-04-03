@@ -170,7 +170,7 @@
             /// <value>
             /// The status of the event.
             /// </value>
-            [JsonProperty("event_status")]
+            [JsonProperty("status")]
             public string EventStatus { get; set; }
 
             /// <summary>
