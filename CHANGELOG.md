@@ -1,3 +1,7 @@
+## [0.25.3]
+
+ * Update how license is published [#69]
+
 ## [0.25.2]
 
  * Fixed Application Calendar URL [#68]
@@ -176,6 +180,7 @@
 [0.25.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.0
 [0.25.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.1
 [0.25.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.2
+[0.25.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.3
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -218,3 +223,4 @@
 [#62]: https://github.com/cronofy/cronofy-csharp/pull/62
 [#66]: https://github.com/cronofy/cronofy-csharp/pull/66
 [#68]: https://github.com/cronofy/cronofy-csharp/pull/68
+[#69]: https://github.com/cronofy/cronofy-csharp/pull/69
