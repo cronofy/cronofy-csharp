@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
     [TestFixture]
-    public sealed class ApplicationCalendar
+    public sealed class ApplicationCalendars
     {
         private const string clientId = "abcdef123456";
         private const string clientSecret = "s3cr3t1v3";
@@ -33,7 +33,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
 
             http.Stub(
                 HttpPost
-                    .Url("https://api.cronofy.com/v1/application_calendar")
+                    .Url("https://api.cronofy.com/v1/application_calendars")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                     "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"application_calendar_id\":\"{2}\"}}",
