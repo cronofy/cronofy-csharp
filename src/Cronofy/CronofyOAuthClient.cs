@@ -406,7 +406,7 @@ namespace Cronofy
             var request = new HttpRequest();
 
             request.Method = "POST";
-            request.Url = this.urlProvider.ApplicationCalendarUrl;
+            request.Url = this.urlProvider.ApplicationCalendarsUrl;
 
             var requestBody = new ApplicationCalendarRequest
             {

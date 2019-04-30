@@ -85,7 +85,7 @@
     <Compile Include="CronofyOAuthClientTests\RealTimeScheduling.cs" />
     <Compile Include="PushNotificationTests\HmacVerification.cs" />
     <Compile Include="CronofyAccountClientTests\RevokeProfileAuthorization.cs" />
-    <Compile Include="CronofyOAuthClientTests\ApplicationCalendar.cs" />
+    <Compile Include="CronofyOAuthClientTests\ApplicationCalendars.cs" />
     <Compile Include="SerializationTests.cs" />
     <Compile Include="CronofyAccountClientTests\SequencedAvailablity.cs" />
     <Compile Include="CronofyOAuthClientTests\RealTimeSequencing.cs" />
