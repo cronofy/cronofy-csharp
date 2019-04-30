@@ -6,14 +6,14 @@
     <title>Cronofy calendar API SDK</title>
     <authors>Garry Shutler</authors>
     <owners>Cronofy</owners>
-    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <license type="file">LICENSE</license>
     <projectUrl>https://github.com/cronofy/cronofy-csharp</projectUrl>
     <iconUrl>http://d1kwv30jm1b7sr.cloudfront.net/2015/05/12085035/cronofy_logo_200.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Cronofy provide a unified API over all major calendar services, allowing you to focus on developing your application.
     </description>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2019</copyright>
     <tags>calendar cronofy</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="7.0.1" />
@@ -29,5 +29,6 @@
     <file src="build/VERSION.txt" target="VERSION.txt" />
     <file src="CHANGELOG.md" target="CHANGELOG.md" />
     <file src="README.md" target="README.md" />
+    <file src="LICENSE" target="LICENSE" />
   </files>
 </package>
