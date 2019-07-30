@@ -572,7 +572,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
+        //[ExpectedException(typeof(ArgumentException))]
         public void CantUpsertWithInvalidTransparency()
         {
             const string eventId = "qTtZdczOccgaPncGJaCiLg";
@@ -608,7 +608,8 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
                 .Transparency(transparency);
 
-            Client.UpsertEvent(CalendarId, builder);
+            // Client.UpsertEvent(CalendarId, builder);
+            Assert.Throws<ArgumentException>(() => Client.UpsertEvent(CalendarId, builder));
         }
 
         [TestCase(true)]
