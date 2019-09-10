@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -309,6 +309,29 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 UrlBuilder.EncodeParameter(clientId),
                 UrlBuilder.EncodeParameter(redirectUri),
                 UrlBuilder.EncodeParameter(LinkToken));
+
+            Assert.AreEqual(expectedAuthUrl, authUrl);
+        }
+
+        [Test]
+        public void CanSetProviderName()
+        {
+            const string ProviderName = "exchange";
+
+            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+                .ProviderName(ProviderName)
+                .Build();
+
+            var expectedAuthUrl = string.Format(
+                "https://app.cronofy.com/oauth/authorize" +
+                    "?client_id={0}" +
+                    "&response_type=code" +
+                     "&redirect_uri={1}" +
+                    "&scope=read_account%20read_events%20create_event%20delete_event" +
+                    "&provider_name={2}",
+                UrlBuilder.EncodeParameter(clientId),
+                UrlBuilder.EncodeParameter(redirectUri),
+                UrlBuilder.EncodeParameter(ProviderName));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
