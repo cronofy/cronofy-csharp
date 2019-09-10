@@ -495,6 +495,11 @@ namespace Cronofy
             private string linkToken;
 
             /// <summary>
+            /// The value of the provider name for the OAuth authorization process.
+            /// </summary>
+            private string providerName;
+
+            /// <summary>
             /// Initializes a new instance of the
             /// <see cref="AuthorizationUrlBuilder"/> class.
             /// </summary>
@@ -679,6 +684,23 @@ namespace Cronofy
             }
 
             /// <summary>
+            /// Sets the provider name parameter for the OAuth authorization
+            /// process.
+            /// </summary>
+            /// <param name="providerName">
+            /// The provider name to use for the OAuth authorization process.
+            /// </param>
+            /// <returns>
+            /// A reference to the builder.
+            /// </returns>
+            public AuthorizationUrlBuilder ProviderName(string providerName)
+            {
+                this.providerName = providerName;
+
+                return this;
+            }
+
+            /// <summary>
             /// Generates an authorization URL based on the current state of the
             /// builder.
             /// </summary>
@@ -718,6 +740,11 @@ namespace Cronofy
                 if (this.linkToken != null)
                 {
                     urlBuilder.AddParameter("link_token", this.linkToken);
+                }
+
+                if (this.providerName != null)
+                {
+                    urlBuilder.AddParameter("provider_name", this.providerName);
                 }
 
                 return urlBuilder.Build();
