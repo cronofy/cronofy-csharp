@@ -90,6 +90,15 @@
             /// </value>
             [JsonProperty("name")]
             public string Name { get; set; }
+
+            /// <summary>
+            /// Gets or sets the email.
+            /// </summary>
+            /// <value>
+            /// The name.
+            /// </value>
+            [JsonProperty("email")]
+            public string Email { get; set; }
         }
     }
 }

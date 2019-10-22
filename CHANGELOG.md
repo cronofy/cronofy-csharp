@@ -1,3 +1,7 @@
+## [0.27.1]
+
+ * Support organizer email for single recipient form of Smart Invites [#77]
+
 ## [0.27.0]
 
  * Support Smart Invite organizer email [#76]
@@ -191,6 +195,7 @@
 [0.25.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.25.3
 [0.26.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.26.0
 [0.27.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.27.0
+[0.27.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.27.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -236,3 +241,4 @@
 [#69]: https://github.com/cronofy/cronofy-csharp/pull/69
 [#73]: https://github.com/cronofy/cronofy-csharp/pull/73
 [#76]: https://github.com/cronofy/cronofy-csharp/pull/76
+[#77]: https://github.com/cronofy/cronofy-csharp/pull/77
