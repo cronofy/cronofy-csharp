@@ -176,6 +176,36 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the Organizer details.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the organizer.
+        /// </param>
+        /// <param name="email">
+        /// The email of the organizer. Note that you must set up forwarding if
+        /// using this parameter.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="name"/> or <paramref name="email"/> is null.
+        /// </exception>
+        public SmartInviteRequestBuilder Organizer(string name, string email)
+        {
+            Preconditions.NotNull("name", name);
+            Preconditions.NotNull("email", email);
+
+            this.organizer = new SmartInviteRequest.InviteOrganizer
+            {
+                Name = name,
+                Email = email,
+            };
+
+            return this;
+        }
+
         /// <inheritdoc/>
         public SmartInviteRequest Build()
         {
