@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
@@ -210,7 +210,7 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <param name="start">
         /// The start time of the event.
@@ -226,7 +226,7 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <param name="year">
         /// The year of the start time.
@@ -256,10 +256,10 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <param name="start">
-        /// The start time of the event.
+        /// The start time of the event in UTC.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.
@@ -272,7 +272,7 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event. Represented as UTC regardless of timezone
         /// </summary>
         /// <param name="year">
         /// The year of the start time.
@@ -296,7 +296,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event. Represented as UTC regardless of timezone
         /// </summary>
         /// <param name="end">
         /// The end time of the event.
@@ -312,7 +312,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event. Represented as UTC regardless of timezone
         /// </summary>
         /// <param name="year">
         /// The year of the end time.
@@ -342,7 +342,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event. Represented as UTC regardless of timezone
         /// </summary>
         /// <param name="end">
         /// The end time of the event.
@@ -358,7 +358,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <param name="year">
         /// The year of the end time.
@@ -421,7 +421,7 @@
 
         /// <summary>
         /// Sets the time zone identifier for the start and end times of the
-        /// event.
+        /// event. Please note that start and end time must still be represented as UTC.
         /// </summary>
         /// <param name="timeZoneId">
         /// Time zone identifier, must not be empty.
@@ -502,7 +502,7 @@
         }
 
         /// <summary>
-        /// Sets the time zone identifier for the start time of the event.
+        /// Sets the time zone identifier for the start time of the event. Please note that start and end time must still be represented as UTC.
         /// </summary>
         /// <param name="timeZoneId">
         /// Time zone identifier, must not be empty.
@@ -523,7 +523,7 @@
         }
 
         /// <summary>
-        /// Sets the time zone identifier for the end time of the event.
+        /// Sets the time zone identifier for the end time of the event. Please note that start and end time must still be represented as UTC.
         /// </summary>
         /// <param name="timeZoneId">
         /// Time zone identifier, must not be empty.

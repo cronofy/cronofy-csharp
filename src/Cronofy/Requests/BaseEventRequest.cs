@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Requests
+namespace Cronofy.Requests
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
@@ -27,7 +27,7 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the start time of the event.
+        /// Gets or sets the start time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <value>
         /// The start time of the event.
@@ -37,7 +37,7 @@
         public EventTime Start { get; set; }
 
         /// <summary>
-        /// Gets or sets the end time of the event.
+        /// Gets or sets the end time of the event. Represented as UTC regardless of timezone.
         /// </summary>
         /// <value>
         /// The end time of the event.
@@ -84,7 +84,7 @@
         public string Transparency { get; set; }
 
         /// <summary>
-        /// Gets or sets the timezone ID of the event.
+        /// Gets or sets the timezone ID of the event. Please note that start and end time must still be represented as UTC.
         /// </summary>
         /// <value>The time zone identifier.</value>
         [JsonProperty("tzid")]
