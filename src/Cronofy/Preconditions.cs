@@ -1,6 +1,8 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Collection of precondition methods for code contract enforcement.
@@ -70,9 +72,9 @@
         /// An array is considered empty if it is <c>null</c> or contains no
         /// values.
         /// </remarks>
-        public static void NotEmpty(string name, string[] value)
+        public static void NotEmpty(string name, IEnumerable<string> value)
         {
-            if (value == null || value.Length == 0)
+            if (value == null || !value.Any())
             {
                 throw new ArgumentException(string.Format("{0} must not be empty", name));
             }

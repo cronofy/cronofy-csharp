@@ -422,6 +422,25 @@ namespace Cronofy
             return tokenResponse.ToToken();
         }
 
+        /// <inheritdoc />
+        public void SubmitApplicationVerification(ApplicationVerificationRequest applicationVerificationRequest)
+        {
+            Preconditions.NotNull(nameof(applicationVerificationRequest), applicationVerificationRequest);
+            Preconditions.NotEmpty(nameof(applicationVerificationRequest.RedirectUris), applicationVerificationRequest.RedirectUris);
+            Preconditions.NotEmpty(nameof(applicationVerificationRequest.Contact.Email), applicationVerificationRequest.Contact.Email);
+
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.ApplicationVerificationUrl
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(applicationVerificationRequest);
+
+            this.HttpClient.GetValidResponse(request);
+        }
+
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>

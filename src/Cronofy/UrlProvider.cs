@@ -141,6 +141,16 @@ namespace Cronofy
         private const string SequencedAvailablityFormat = "https://api{0}.cronofy.com/v1/sequenced_availability";
 
         /// <summary>
+        /// The URL of the application verification submission endpoint.
+        /// </summary>
+        private const string ApplicationVerificationUrlFormat = "https://api{0}.cronofy.com/v1/application_verification";
+
+        /// <summary>
+        /// The URL of the application provisioning endpoint.
+        /// </summary>
+        private const string ProvisionApplicationUrlFormat = "https://api{0}.cronofy.com/v1/applications";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -182,6 +192,8 @@ namespace Cronofy
             this.ApplicationCalendarsUrl = string.Format(ApplicationCalendarsUrlFormat, suffix);
             this.RealTimeSequencingUrl = string.Format(RealTimeSequencingFormat, suffix);
             this.SequencedAvailabilityUrl = string.Format(SequencedAvailablityFormat, suffix);
+            this.ApplicationVerificationUrl = string.Format(ApplicationVerificationUrlFormat, suffix);
+            this.ProvisionApplicationUrl = string.Format(ProvisionApplicationUrlFormat, suffix);
         }
 
         /// <summary>
@@ -483,5 +495,17 @@ namespace Cronofy
         /// </summary>
         /// <value>The sequenced availability URL.</value>
         public string SequencedAvailabilityUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the application verification submission URL.
+        /// </summary>
+        /// <value>The application verification submission URL.</value>
+        public string ApplicationVerificationUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the application provisioning URL.
+        /// </summary>
+        /// <value>The application provisioning URL.</value>
+        public string ProvisionApplicationUrl { get; private set; }
     }
 }
