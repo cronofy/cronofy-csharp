@@ -49,7 +49,7 @@ namespace Cronofy
         /// <remarks>
         /// Intended for test purposes only.
         /// </remarks>
-        internal ConcreteHttpClient HttpClient { get; set; }
+        internal IHttpClient HttpClient { get; set; }
 
         /// <inheritdoc/>
         public ProvisionApplicationResponse ProvisionApplication(ProvisionApplicationRequest provisionApplicationRequest)
