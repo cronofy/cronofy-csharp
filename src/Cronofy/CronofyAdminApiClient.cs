@@ -6,7 +6,7 @@ namespace Cronofy
     /// <summary>
     /// A client for performing operations at a Cronofy Developer account level.
     /// </summary>
-    public class CronofyApiKeyClient : ICronofyApiKeyClient
+    public class CronofyAdminApiClient : ICronofyAdminApiClient
     {
         /// <summary>
         /// The admin api key.
@@ -20,7 +20,7 @@ namespace Cronofy
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyApiKeyClient"/> class.
+        /// <see cref="Cronofy.CronofyAdminApiClient"/> class.
         /// </summary>
         /// <param name="adminApiKey">
         /// Your admin API key, must not be blank.
@@ -31,7 +31,7 @@ namespace Cronofy
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="adminApiKey"/> is blank.
         /// </exception>
-        public CronofyApiKeyClient(string adminApiKey, string dataCentre = null)
+        public CronofyAdminApiClient(string adminApiKey, string dataCentre = null)
         {
             Preconditions.NotBlank(nameof(adminApiKey), adminApiKey);
 

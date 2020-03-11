@@ -42,8 +42,8 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CronofyApiKeyClient.cs" />
-    <Compile Include="ICronofyApiKeyClient.cs" />
+    <Compile Include="CronofyAdminApiClient.cs" />
+    <Compile Include="ICronofyAdminApiClient.cs" />
     <Compile Include="Requests\ApplicationVerificationRequest.cs" />
     <Compile Include="AvailabilityRequestBuilder.cs" />
     <Compile Include="AvailablePeriod.cs" />

@@ -27,44 +27,44 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .Url("https://api.cronofy.com/v1/application_verification")
                 .RequestHeader("Authorization", $"Bearer {clientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
-                .RequestBody(@"{""redirect_uris"":[""https://app.samson.com""],""contact"":{""email"":""brock@samson.com"",""display_name"":""Brock Samson""}}")
-                .ResponseCode(200)
+                .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com"",""display_name"":""Kenneth Calloway""}}")
+                .ResponseCode(202)
                 .ResponseBody("{}"));
 
             this.client.SubmitApplicationVerification(new ApplicationVerificationRequest
             {
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
-                    DisplayName = "Brock Samson",
-                    Email = "brock@samson.com"
+                    DisplayName = "Kenneth Calloway",
+                    Email = "kenneth.calloway@pinpoint.com"
                 },
                 RedirectUris = new[]
                 {
-                    "https://app.samson.com"
+                    "https://app.pinpoint.com"
                 }
             });
         }
 
         [Test]
-        public void CanSendNullDisplayName()
+        public void CanOmitDisplayName()
         {
             this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/application_verification")
                 .RequestHeader("Authorization", $"Bearer {clientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
-                .RequestBody(@"{""redirect_uris"":[""https://app.samson.com""],""contact"":{""email"":""brock@samson.com""}}")
-                .ResponseCode(200)
+                .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com""}}")
+                .ResponseCode(202)
                 .ResponseBody("{}"));
 
             this.client.SubmitApplicationVerification(new ApplicationVerificationRequest
             {
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
-                    Email = "brock@samson.com"
+                    Email = "kenneth.calloway@pinpoint.com"
                 },
                 RedirectUris = new[]
                 {
-                    "https://app.samson.com"
+                    "https://app.pinpoint.com"
                 }
             });
         }
@@ -76,22 +76,22 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .Url("https://api.cronofy.com/v1/application_verification")
                 .RequestHeader("Authorization", $"Bearer {clientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
-                .RequestBody(@"{""redirect_uris"":[""https://app.samson.com"",""https://app2.samson.com"",""https://app3.samson.com""],""contact"":{""email"":""brock@samson.com"",""display_name"":""Brock Samson""}}")
-                .ResponseCode(200)
+                .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com"",""https://app2.pinpoint.com"",""https://app3.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com"",""display_name"":""Kenneth Calloway""}}")
+                .ResponseCode(202)
                 .ResponseBody("{}"));
 
             this.client.SubmitApplicationVerification(new ApplicationVerificationRequest
             {
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
-                    DisplayName = "Brock Samson",
-                    Email = "brock@samson.com"
+                    DisplayName = "Kenneth Calloway",
+                    Email = "kenneth.calloway@pinpoint.com"
                 },
                 RedirectUris = new[]
                 {
-                    "https://app.samson.com",
-                    "https://app2.samson.com",
-                    "https://app3.samson.com",
+                    "https://app.pinpoint.com",
+                    "https://app2.pinpoint.com",
+                    "https://app3.pinpoint.com",
                 }
             });
         }

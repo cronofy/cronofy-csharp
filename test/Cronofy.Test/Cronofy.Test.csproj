@@ -90,7 +90,7 @@
     <Compile Include="CronofyAccountClientTests\SequencedAvailablity.cs" />
     <Compile Include="CronofyOAuthClientTests\RealTimeSequencing.cs" />
     <Compile Include="CronofyOAuthClientTests\SubmitApplicationVerification.cs" />
-    <Compile Include="CronofyApiKeyClientTests\ProvisionApplication.cs" />
+    <Compile Include="CronofyAdminApiClientTests\ProvisionApplication.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -110,6 +110,6 @@
     <Folder Include="PushNotificationTests\" />
     <Folder Include="ExtremeTimesTests\" />
     <Folder Include="CronofyEnterpriseConnectAccountClientTests\" />
-    <Folder Include="CronofyApiKeyClientTests\" />
+    <Folder Include="CronofyAdminApiClientTests\" />
   </ItemGroup>
 </Project>

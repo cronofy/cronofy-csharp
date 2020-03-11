@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Cronofy.Test.CronofyApiKeyClientTests
+namespace Cronofy.Test.CronofyAdminApiClientTests
 {
     [TestFixture]
     public sealed class ProvisionApplication
@@ -9,13 +9,13 @@ namespace Cronofy.Test.CronofyApiKeyClientTests
         private const string clientId = "abcdef123456";
         private const string clientSecret = "s3cr3t1v3";
 
-        private CronofyApiKeyClient client;
+        private CronofyAdminApiClient client;
         private StubHttpClient http;
 
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyApiKeyClient(apiKey);
+            this.client = new CronofyAdminApiClient(apiKey);
             this.http = new StubHttpClient();
 
             client.HttpClient = http;

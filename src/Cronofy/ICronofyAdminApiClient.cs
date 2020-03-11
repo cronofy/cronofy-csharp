@@ -6,7 +6,7 @@ namespace Cronofy
     /// <summary>
     /// Interface for a client for performing operations at a Cronofy Developer account level.
     /// </summary>
-    public interface ICronofyApiKeyClient
+    public interface ICronofyAdminApiClient
     {
         /// <summary>
         /// Provision a new application within your developer account.
