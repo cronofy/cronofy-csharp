@@ -210,5 +210,19 @@ namespace Cronofy
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         SmartInviteMultiRecipient GetSmartInvite(string smartInviteId);
+
+        /// <summary>
+        /// Submits your application for verification.
+        /// </summary>
+        /// <param name="applicationVerificationRequest">
+        /// The details of the verification request, must not be <code>null</code>.
+        /// </param>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="applicationVerificationRequest"/> is null or invalid.
+        /// </exception>
+        void SubmitApplicationVerification(ApplicationVerificationRequest applicationVerificationRequest);
     }
 }
