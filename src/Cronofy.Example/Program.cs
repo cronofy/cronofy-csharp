@@ -137,9 +137,9 @@
             var clientId = Console.ReadLine();
             Console.Write("Enter Secret: ");
             var clientSecret = Console.ReadLine();
-            Console.Write("Enter Account id for availablity: ");
+            Console.Write("Enter Account id for availability: ");
             var sub = Console.ReadLine();
-            Console.Write("Enter calendar id for availablity: ");
+            Console.Write("Enter calendar id for availability: ");
             var calendarId = Console.ReadLine();
 
             string redirectUrl = "http://example.com/redirectUri";

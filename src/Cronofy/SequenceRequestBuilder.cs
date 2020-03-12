@@ -304,7 +304,7 @@ namespace Cronofy
         /// A reference to the <see cref="SequenceRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="builder"/> is <code>null</code>.
+        /// Thrown if <paramref name="builder"/> is <code>null.</code>.
         /// </exception>
         public SequenceRequestBuilder AddParticipantGroup(IBuilder<AvailabilityRequest.ParticipantGroup> builder)
         {
