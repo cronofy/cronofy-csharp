@@ -8,7 +8,7 @@
   <PropertyGroup>
     <PackageId>Cronofy</PackageId>
     <Title>Cronofy calendar API SDK</Title>
-    <Version>0.28.0</Version>
+    <Version>1.0.0-dev</Version>
     <Authors>Garry Shutler</Authors>
     <Company>Cronofy</Company>
     <PackageDescription>Cronofy provide a unified API over all major calendar services, allowing you to focus on developing your application.</PackageDescription>
@@ -18,6 +18,7 @@
     <PackageIcon>cronofy-logo.png</PackageIcon>
     <PackageTags>cronofy;calendar</PackageTags>
     <RepositoryUrl>https://github.com/cronofy/cronofy-csharp</RepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,15 +31,17 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
   <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <None Include="$(OutputPath)/GITCOMMIT.txt" Pack="true" PackagePath="." />
     <None Include="../../resources/cronofy-logo.png" Pack="true" PackagePath="." />
     <None Include="../../CHANGELOG.md"  Pack="true" PackagePath="." />
     <None Include="../../README.md"  Pack="true" PackagePath="." />
     <None Include="../../LICENSE"  Pack="true" PackagePath="." />
+    <None Include="../../VERSION"  Pack="true" PackagePath="." />
   </ItemGroup>
+
+  <Target Name="GetGitCommit" BeforeTargets="BeforeBuild" Condition="'$(Configuration)'=='Release'">
+    <Exec Command="git rev-parse --verify HEAD > $(OutputPath)/GITCOMMIT.txt" />
+  </Target>
 
 </Project>
