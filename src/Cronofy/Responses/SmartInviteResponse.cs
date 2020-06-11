@@ -70,6 +70,7 @@
             invite.SmartInviteId = this.SmartInviteId;
             invite.CallbackUrl = this.CallbackUrl;
             invite.Method = this.Method;
+            invite.Event = this.Event.ToEvent();
 
             if (this.Replies != null)
             {
@@ -85,8 +86,10 @@
                 invite.Recipient = this.Recipient.ToAttendee();
             }
 
-            invite.Event = this.Event.ToEvent();
-            invite.Attachments = this.Attachments.ToAttachments();
+            if (this.Attachments != null)
+            {
+                invite.Attachments = this.Attachments.ToAttachments();
+            }
 
             return invite;
         }

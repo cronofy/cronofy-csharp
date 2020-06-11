@@ -184,9 +184,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                         ""location"": {
                           ""description"": ""Board room""
                         }
-                      },
-                      ""attachments"": {
-                        ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
                     }")
             );
@@ -198,7 +195,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual("pending", actual.Recipient.Status);
             Assert.AreEqual("request", actual.Method);
             Assert.AreEqual("cronofy@example.com", actual.Recipient.Email);
-            Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
             Assert.AreEqual(2, actual.Replies.Count());
 
             var reply1 = actual.Replies.FirstOrDefault();
@@ -320,9 +316,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                         ""location"": {
                           ""description"": ""Board room""
                         }
-                      },
-                      ""attachments"": {
-                        ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
                     }")
             );
@@ -332,7 +325,6 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
             Assert.AreEqual("request", actual.Method);
-            Assert.AreEqual("BEGIN:VCALENDAR\nVERSION:2.0...", actual.Attachments.ICalendar);
 
             Assert.AreEqual(2, actual.Recipients.Count());
 
