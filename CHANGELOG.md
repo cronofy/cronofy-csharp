@@ -1,3 +1,7 @@
+## [0.28.1]
+
+ * Fix NRE in Smart Invite methods [#82]
+
 ## [0.28.0]
 
  * Add Admin API methods [#80]
@@ -201,6 +205,7 @@
 [0.27.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.27.0
 [0.27.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.27.1
 [0.28.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.0
+[0.28.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -248,3 +253,4 @@
 [#76]: https://github.com/cronofy/cronofy-csharp/pull/76
 [#77]: https://github.com/cronofy/cronofy-csharp/pull/77
 [#80]: https://github.com/cronofy/cronofy-csharp/pull/80
+[#82]: https://github.com/cronofy/cronofy-csharp/pull/82
