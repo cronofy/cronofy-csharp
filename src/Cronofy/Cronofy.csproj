@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <Target Name="GetGitCommit" BeforeTargets="BeforeBuild" Condition="'$(Configuration)'=='Release'">
-    <Exec Command="git rev-parse --verify HEAD > $(OutputPath)/GITCOMMIT.txt" />
+    <Exec Command="mkdir -p $(OutputPath); git rev-parse --verify HEAD > $(OutputPath)/GITCOMMIT.txt" />
   </Target>
 
 </Project>
