@@ -96,7 +96,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""formatting"":{
                         ""hour_format"":""H""
                       },
-                      ""tzid"":""Etc/UTC""
+                      ""tzid"":""Etc/UTC"",
+                      ""callback_url"":""http://example.com/callback""
                     }")
                     .ResponseCode(200)
                     .ResponseBodyFormat("{{\"url\":\"{0}\"}}", expectedUrl)
@@ -109,6 +110,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .SequencedAvailabilityRequest(availabilityRequest)
                 .AddTargetCalendar("sub", "calendarId")
                 .HourFormat("H")
+                .CallbackUrl("http://example.com/callback")
                 .Build();
 
             var actualUrl = client.RealTimeSequencing(request);

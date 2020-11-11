@@ -40,6 +40,11 @@
         private string hourFormat;
 
         /// <summary>
+        /// The callback URL for the request.
+        /// </summary>
+        private string callbackUrl;
+
+        /// <summary>
         /// Sets the OAuth details of the request.
         /// </summary>
         /// <param name="redirectUri">
@@ -276,6 +281,27 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the callback URL for the request.
+        /// </summary>
+        /// <param name="callbackUrl">
+        /// The callback URL to use for the request, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSequencingRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="callbackUrl"/> is empty. 
+        /// </exception>
+        public RealTimeSequencingRequestBuilder CallbackUrl(string callbackUrl)
+        {
+            Preconditions.NotBlank(nameof(callbackUrl), callbackUrl);
+
+            this.callbackUrl = callbackUrl;
+
+            return this;
+        }
+
         /// <inheritdoc />
         public RealTimeSequencingRequest Build()
         {
@@ -285,6 +311,7 @@
                 Event = this.upsertEventRequestBuilder.Build(),
                 TargetCalendars = this.targetCalendars,
                 Tzid = this.tzid,
+                CallbackUrl = this.callbackUrl,
             };
 
             if (this.availabilityRequestBuilder != null)

@@ -40,6 +40,16 @@
         private string hourFormat;
 
         /// <summary>
+        /// The callback URL for the request.
+        /// </summary>
+        private string callbackUrl;
+
+        /// <summary>
+        /// The completed URL for the request.
+        /// </summary>
+        private string completedUrl;
+
+        /// <summary>
         /// Sets the OAuth details of the request.
         /// </summary>
         /// <param name="redirectUri">
@@ -276,6 +286,48 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the callback URL for the request.
+        /// </summary>
+        /// <param name="callbackUrl">
+        /// The callback URL to use for the request, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="callbackUrl"/> is empty. 
+        /// </exception>
+        public RealTimeSchedulingRequestBuilder CallbackUrl(string callbackUrl)
+        {
+            Preconditions.NotBlank(nameof(callbackUrl), callbackUrl);
+
+            this.callbackUrl = callbackUrl;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the redirect URLs for the request.
+        /// </summary>
+        /// <param name="completedUrl">
+        /// The completed URL to use for the request, must not be blank.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="completedUrl"/> is empty. 
+        /// </exception>
+        public RealTimeSchedulingRequestBuilder RedirectUrls(string completedUrl)
+        {
+            Preconditions.NotBlank(nameof(completedUrl), completedUrl);
+
+            this.completedUrl = completedUrl;
+
+            return this;
+        }
+
         /// <inheritdoc />
         public RealTimeSchedulingRequest Build()
         {
@@ -285,7 +337,16 @@
                 Event = this.upsertEventRequestBuilder.Build(),
                 TargetCalendars = this.targetCalendars,
                 Tzid = this.tzid,
+                CallbackUrl = this.callbackUrl,
             };
+
+            if (this.completedUrl != null)
+            {
+                request.RedirectUrls = new RealTimeSchedulingRequest.RedirectUrlsInfo
+                {
+                    CompletedUrl = this.completedUrl,
+                };
+            }
 
             if (this.availabilityRequestBuilder != null)
             {
