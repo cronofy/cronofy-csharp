@@ -156,6 +156,11 @@ namespace Cronofy
         private const string ProvisionApplicationUrlFormat = "https://api{0}.cronofy.com/v1/applications";
 
         /// <summary>
+        /// The URL of the Element Tokens endpoint.
+        /// </summary>
+        private const string ElementTokensUrlFormat = "https://api{0}.cronofy.com/v1/element_tokens";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCentre">
@@ -200,6 +205,7 @@ namespace Cronofy
             this.SequencedAvailabilityUrl = string.Format(SequencedAvailablityFormat, suffix);
             this.ApplicationVerificationUrl = string.Format(ApplicationVerificationUrlFormat, suffix);
             this.ProvisionApplicationUrl = string.Format(ProvisionApplicationUrlFormat, suffix);
+            this.ElementTokensUrl = string.Format(ElementTokensUrlFormat, suffix);
         }
 
         /// <summary>
@@ -525,5 +531,11 @@ namespace Cronofy
         /// </summary>
         /// <value>The application provisioning URL.</value>
         public string ProvisionApplicationUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the element tokens URL.
+        /// </summary>
+        /// <value>The element tokens URL.</value>
+        public string ElementTokensUrl { get; private set; }
     }
 }
