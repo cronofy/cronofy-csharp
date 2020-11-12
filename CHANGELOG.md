@@ -1,3 +1,11 @@
+## [0.28.2]
+
+ * Adds missing Real-Time Scheduling functionality [#84]
+   * Get Status
+   * Disabling
+   * Adding callback URLs and return URLs to RTS requests
+ * Adds Element Token authorization endpoint support [#83]
+
 ## [0.28.1]
 
  * Fix NRE in Smart Invite methods [#82]
@@ -206,6 +214,7 @@
 [0.27.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.27.1
 [0.28.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.0
 [0.28.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.1
+[0.28.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.2
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -254,3 +263,5 @@
 [#77]: https://github.com/cronofy/cronofy-csharp/pull/77
 [#80]: https://github.com/cronofy/cronofy-csharp/pull/80
 [#82]: https://github.com/cronofy/cronofy-csharp/pull/82
+[#83]: https://github.com/cronofy/cronofy-csharp/pull/83
+[#84]: https://github.com/cronofy/cronofy-csharp/pull/84
