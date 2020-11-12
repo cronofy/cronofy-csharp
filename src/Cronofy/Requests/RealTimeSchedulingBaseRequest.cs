@@ -73,6 +73,13 @@ namespace Cronofy.Requests
         public string Tzid { get; set; }
 
         /// <summary>
+        /// Gets or sets the callback URL for the request.
+        /// </summary>
+        /// <value>The callback URL for the request.</value>
+        [JsonProperty("callback_url")]
+        public string CallbackUrl { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the oauth details.
         /// </summary>
         public sealed class OAuthDetails

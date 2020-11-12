@@ -106,6 +106,11 @@ namespace Cronofy
         private const string RealTimeSchedulingUrlFormat = "https://api{0}.cronofy.com/v1/real_time_scheduling";
 
         /// <summary>
+        /// The URL format for the real time scheduling disable endpoint.
+        /// </summary>
+        private const string DisableRealTimeSchedulingUrlFormatFormat = "https://api{0}.cronofy.com/v1/real_time_scheduling/{{0}}/disable";
+
+        /// <summary>
         /// The URL of the link tokens endpoint.
         /// </summary>
         private const string LinkTokensUrlFormat = "https://api{0}.cronofy.com/v1/link_tokens";
@@ -185,6 +190,7 @@ namespace Cronofy
             this.AvailabilityUrl = string.Format(AvailabilityUrlFormat, suffix);
             this.AddToCalendarUrl = string.Format(AddToCalendarUrlFormat, suffix);
             this.RealTimeSchedulingUrl = string.Format(RealTimeSchedulingUrlFormat, suffix);
+            this.DisableRealTimeSchedulingUrlFormat = string.Format(DisableRealTimeSchedulingUrlFormatFormat, suffix);
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
             this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
             this.RevokeProfileAuthorizationUrlFormat = string.Format(RevokeProfileAuthorizationUrlFormatFormat, suffix);
@@ -431,6 +437,18 @@ namespace Cronofy
         /// The real time scheduling URL.
         /// </value>
         public string RealTimeSchedulingUrl
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the real time scheduling disable URL format.
+        /// </summary>
+        /// <value>
+        /// The real time scheduling disable URL format.
+        /// </value>
+        public string DisableRealTimeSchedulingUrlFormat
         {
             get;
             private set;

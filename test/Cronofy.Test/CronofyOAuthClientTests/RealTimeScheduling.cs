@@ -50,7 +50,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
-        public void CanGetOAuthUrlWithAvailabilityTargetCalendarsAndHourFormat()
+        public void CanGetRTSUrlWithAvailabilityTargetCalendarsAndHourFormat()
         {
             var expectedUrl = "http://test.com";
             var hourFormat = "H";
@@ -107,6 +107,79 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .AvailabilityRequest(availabilityRequest)
                 .AddTargetCalendar(sub, calendarId)
                 .HourFormat("H")
+                .Build();
+
+            var actualUrl = client.RealTimeScheduling(request);
+
+            Assert.AreEqual(expectedUrl, actualUrl);
+        }
+
+        [Test]
+        public void CanGetRTSUrlWithCallbackUrlAndCompletedUrl()
+        {
+            var expectedUrl = "http://test.com";
+            var hourFormat = "H";
+            var callbackUrl = "https://test.com/callback_url";
+            var completedUrl = "https://test.com/completed_url";
+
+            http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/real_time_scheduling")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{" +
+                            "\"availability\":{{" +
+                                "\"participants\":[{{" +
+                                    "\"members\":[{{" +
+                                        "\"sub\":\"{6}\"" +
+                                    "}}]" +
+                                "}}]," +
+                                "\"required_duration\":{{" +
+                                    "\"minutes\":60" +
+                                "}}," +
+                                "\"available_periods\":[{{" +
+                                    "\"start\":\"{7}\"," +
+                                    "\"end\":\"{8}\"" +
+                                "}}]" +
+                            "}}," +
+                            "\"redirect_urls\":{{" +
+                                "\"completed_url\":\"{13}\"" +
+                            "}}," +
+                            "\"client_id\":\"{0}\"," +
+                            "\"client_secret\":\"{1}\"," +
+                            "\"oauth\":{{" +
+                                "\"redirect_uri\":\"{2}\"," +
+                                "\"scope\":\"{3}\"" +
+                            "}}," +
+                            "\"event\":{{" +
+                                "\"event_id\":\"{4}\"," +
+                                "\"summary\":\"{5}\"" +
+                            "}}," +
+                            "\"target_calendars\":[{{" +
+                                "\"sub\":\"{9}\"," +
+                                "\"calendar_id\":\"{10}\"" +
+                            "}}]," +
+                            "\"formatting\":{{" +
+                                "\"hour_format\":\"{11}\"" +
+                            "}}," +
+                            "\"tzid\":\"Etc/UTC\"," +
+                            "\"callback_url\":\"{12}\"" +
+                        "}}",
+                        clientId, clientSecret, redirectUrl, scope, eventId, summary, sub, startString, endString, sub, calendarId, hourFormat, callbackUrl, completedUrl)
+                    .ResponseCode(200)
+                    .ResponseBodyFormat(
+                        "{{\"url\":\"{0}\"}}", expectedUrl)
+            );
+
+            var request = new RealTimeSchedulingRequestBuilder()
+                .OAuthDetails(redirectUrl, scope)
+                .Timezone("Etc/UTC")
+                .UpsertEventRequest(upsertEventRequestWithoutStartAndEnd)
+                .AvailabilityRequest(availabilityRequest)
+                .AddTargetCalendar(sub, calendarId)
+                .HourFormat("H")
+                .CallbackUrl(callbackUrl)
+                .RedirectUrls(completedUrl)
                 .Build();
 
             var actualUrl = client.RealTimeScheduling(request);

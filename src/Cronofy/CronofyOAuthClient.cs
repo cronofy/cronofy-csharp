@@ -250,6 +250,46 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public RealTimeSchedulingLinkStatus DisableRealTimeSchedulingLink(string realTimeSchedulingId, string displayMessage)
+        {
+            Preconditions.NotBlank(nameof(realTimeSchedulingId), realTimeSchedulingId);
+            Preconditions.NotBlank(nameof(displayMessage), displayMessage);
+
+            var disableRealTimeSchedulingRequest = new DisableRealTimeSchedulingRequest
+            {
+                DisplayMessage = displayMessage
+            };
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = string.Format(this.urlProvider.DisableRealTimeSchedulingUrlFormat, realTimeSchedulingId);
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(disableRealTimeSchedulingRequest);
+
+            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingStatusResponse>(request);
+
+            return response.ToRealTimeSchedulingLinkStatus();
+        }
+
+        /// <inheritdoc/>
+        public RealTimeSchedulingLinkStatus GetRealTimeSchedulingLinkStatus(string linkToken)
+        {
+            Preconditions.NotBlank(nameof(linkToken), linkToken);
+
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = string.Format(this.urlProvider.RealTimeSchedulingUrl);
+            request.QueryString.Add("token", linkToken);
+            request.AddOAuthAuthorization(this.clientSecret);
+
+            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingStatusResponse>(request);
+
+            return response.ToRealTimeSchedulingLinkStatus();
+        }
+
+        /// <inheritdoc/>
         public string RealTimeSequencing(RealTimeSequencingRequest realTimeSequencingRequest)
         {
             Preconditions.NotNull("realTimeSequencingRequest", realTimeSequencingRequest);
