@@ -224,5 +224,22 @@ namespace Cronofy
         /// Thrown if <paramref name="applicationVerificationRequest"/> is null or invalid.
         /// </exception>
         void SubmitApplicationVerification(ApplicationVerificationRequest applicationVerificationRequest);
+
+        /// <summary>
+        /// Gets an Element Token for use with UI Elements.
+        /// </summary>
+        /// <param name="elementTokenRequest">
+        /// The details of the Element Token request, must not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        /// Returns an <see cref="ElementToken"/>.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="elementTokenRequest"/> is null or invalid.
+        /// </exception>
+        ElementToken GetElementToken(ElementTokenRequest elementTokenRequest);
     }
 }

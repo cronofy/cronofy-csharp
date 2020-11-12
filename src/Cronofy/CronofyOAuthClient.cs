@@ -481,6 +481,28 @@ namespace Cronofy
             this.HttpClient.GetValidResponse(request);
         }
 
+        /// <inheritdoc/>
+        public ElementToken GetElementToken(ElementTokenRequest elementTokenRequest)
+        {
+            Preconditions.NotNull(nameof(elementTokenRequest), elementTokenRequest);
+            Preconditions.NotEmpty(nameof(elementTokenRequest.Permissions), elementTokenRequest.Permissions);
+            Preconditions.NotEmpty(nameof(elementTokenRequest.Subs), elementTokenRequest.Subs);
+            Preconditions.NotEmpty(nameof(elementTokenRequest.Origin), elementTokenRequest.Origin);
+
+            var request = new HttpRequest
+             {
+                 Method = "POST",
+                 Url = this.urlProvider.ElementTokensUrl
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(elementTokenRequest);
+
+            var elementTokenResponse = this.HttpClient.GetJsonResponse<ElementTokenResponse>(request);
+
+            return elementTokenResponse.ToElementToken();
+        }
+
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>
