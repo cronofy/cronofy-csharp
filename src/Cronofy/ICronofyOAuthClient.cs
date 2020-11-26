@@ -127,7 +127,18 @@ namespace Cronofy
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="realTimeSchedulingRequest"/> is null.
         /// </exception>
+        [Obsolete("Use CreateRealTimeSchedulingLink() instead and access the response's Url attribute")]
         string RealTimeScheduling(RealTimeSchedulingRequest realTimeSchedulingRequest);
+
+        /// <summary>
+        /// Generates a link for real time scheduling based on the request provided.
+        /// </summary>
+        /// <returns>The status of the newly-created link.</returns>
+        /// <param name="realTimeSchedulingRequest">Real time scheduling request.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="realTimeSchedulingRequest"/> is null.
+        /// </exception>
+        RealTimeSchedulingLinkStatus CreateRealTimeSchedulingLink(RealTimeSchedulingRequest realTimeSchedulingRequest);
 
         /// <summary>
         /// Generates a link for real time sequencing based on the request provided.

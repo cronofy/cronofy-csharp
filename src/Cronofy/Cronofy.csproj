@@ -156,7 +156,6 @@
     <Compile Include="OAuthDetailsBuilder.cs" />
     <Compile Include="Requests\RealTimeSchedulingRequest.cs" />
     <Compile Include="RealTimeSchedulingRequestBuilder.cs" />
-    <Compile Include="Responses\RealTimeSchedulingResponse.cs" />
     <Compile Include="Requests\SmartInviteRequest.cs" />
     <Compile Include="Requests\SchedulingFormatting.cs" />
     <Compile Include="Requests\ApplicationCalendarRequest.cs" />

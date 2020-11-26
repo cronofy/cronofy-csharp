@@ -82,7 +82,7 @@
     <Compile Include="CronofyEnterpriseConnectAccountClientTests\AuthorizeUser.cs" />
     <Compile Include="CronofyAccountClientTests\CreateLinkToken.cs" />
     <Compile Include="CronofyOAuthClientTests\AddToCalendar.cs" />
-    <Compile Include="CronofyOAuthClientTests\RealTimeScheduling.cs" />
+    <Compile Include="CronofyOAuthClientTests\CreateRealTimeSchedulingLink.cs" />
     <Compile Include="PushNotificationTests\HmacVerification.cs" />
     <Compile Include="CronofyAccountClientTests\RevokeProfileAuthorization.cs" />
     <Compile Include="CronofyOAuthClientTests\ApplicationCalendars.cs" />

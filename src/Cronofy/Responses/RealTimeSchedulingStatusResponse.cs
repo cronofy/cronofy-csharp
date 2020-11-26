@@ -6,7 +6,7 @@ namespace Cronofy.Responses
     internal class RealTimeSchedulingStatusResponse
     {
         [JsonProperty("real_time_scheduling")]
-        public RealTimeSequencingStatusResponseContent RealTimeScheduling { get; set; }
+        public RealTimeSchedulingResponseContent RealTimeScheduling { get; set; }
 
         public RealTimeSchedulingLinkStatus ToRealTimeSchedulingLinkStatus()
         {
@@ -19,7 +19,7 @@ namespace Cronofy.Responses
             };
         }
 
-        internal class RealTimeSequencingStatusResponseContent
+        internal class RealTimeSchedulingResponseContent
         {
             [JsonProperty("real_time_scheduling_id")]
             public string RealTimeSchedulingId { get; set; }
