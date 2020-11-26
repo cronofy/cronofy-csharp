@@ -233,6 +233,12 @@ namespace Cronofy
         /// <inheritdoc/>
         public string RealTimeScheduling(RealTimeSchedulingRequest realTimeSchedulingRequest)
         {
+            return this.CreateRealTimeSchedulingLink(realTimeSchedulingRequest).Url;
+        }
+
+        /// <inheritdoc/>
+        public RealTimeSchedulingLinkStatus CreateRealTimeSchedulingLink(RealTimeSchedulingRequest realTimeSchedulingRequest)
+        {
             Preconditions.NotNull("realTimeSchedulingRequest", realTimeSchedulingRequest);
 
             realTimeSchedulingRequest.ClientId = this.clientId;
@@ -244,9 +250,9 @@ namespace Cronofy
             request.Url = this.urlProvider.RealTimeSchedulingUrl;
             request.SetJsonBody(realTimeSchedulingRequest);
 
-            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingStatusResponse>(request);
 
-            return response.Url;
+            return response.ToRealTimeSchedulingLinkStatus();
         }
 
         /// <inheritdoc/>

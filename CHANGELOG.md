@@ -1,3 +1,7 @@
+## [0.29.0]
+
+ * Exposes full response when creating Real-Time Scheduling link [#85]
+
 ## [0.28.2]
 
  * Adds missing Real-Time Scheduling functionality [#84]
@@ -215,6 +219,7 @@
 [0.28.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.0
 [0.28.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.1
 [0.28.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.2
+[0.29.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.29.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -265,3 +270,4 @@
 [#82]: https://github.com/cronofy/cronofy-csharp/pull/82
 [#83]: https://github.com/cronofy/cronofy-csharp/pull/83
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/84
+[#84]: https://github.com/cronofy/cronofy-csharp/pull/85
