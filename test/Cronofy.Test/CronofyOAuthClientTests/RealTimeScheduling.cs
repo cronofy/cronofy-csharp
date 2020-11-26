@@ -5,7 +5,7 @@ using Cronofy.Requests;
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
     [TestFixture]
-    public sealed class CreateRealTimeSchedulingLink
+    public sealed class RealTimeScheduling
     {
         private const string clientId = "abcdef123456";
         private const string clientSecret = "s3cr3t1v3";
@@ -109,22 +109,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .HourFormat("H")
                 .Build();
 
-            var response = client.CreateRealTimeSchedulingLink(request);
+            var actualUrl = client.RealTimeScheduling(request);
 
-            var expectedResponse = new RealTimeSchedulingLinkStatus
-            {
-                RealTimeSchedulingId = "sch_123",
-                Status = RealTimeSchedulingLinkStatus.LinkStatus.Open,
-                Url = expectedUrl,
-                Event = new Event
-                {
-                    Summary = summary,
-                    EventId = eventId,
-                    EventPrivate = false,
-                }
-            };
-
-            Assert.AreEqual(response, expectedResponse);
+            Assert.AreEqual(expectedUrl, actualUrl);
         }
 
         [Test]
@@ -181,7 +168,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                         clientId, clientSecret, redirectUrl, scope, eventId, summary, sub, startString, endString, sub, calendarId, hourFormat, callbackUrl, completedUrl)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
-                        @"{{""url"": ""{0}"", ""real_time_scheduling"":{{""real_time_scheduling_id"":""sch_123"",""url"":""{0}"",""status"":""open"",""event"":{{""summary"":""{1}"",""event_id"":""{2}"",""event_private"":false}}}}}}", expectedUrl, summary, eventId));
+                        @"{{""url"": ""{0}"", ""real_time_scheduling"":{{""real_time_scheduling_id"":""sch_123"",""url"":""{0}"",""status"":""open"",""event"":{{""summary"":""{1}"",""event_id"":""{2}"",""event_private"":false}}}}}}", expectedUrl, summary, eventId)
+            );
 
             var request = new RealTimeSchedulingRequestBuilder()
                 .OAuthDetails(redirectUrl, scope)
@@ -194,22 +182,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 .RedirectUrls(completedUrl)
                 .Build();
 
-            var response = client.CreateRealTimeSchedulingLink(request);
+            var actualUrl = client.RealTimeScheduling(request);
 
-            var expectedResponse = new RealTimeSchedulingLinkStatus
-            {
-                RealTimeSchedulingId = "sch_123",
-                Status = RealTimeSchedulingLinkStatus.LinkStatus.Open,
-                Url = expectedUrl,
-                Event = new Event
-                {
-                    Summary = summary,
-                    EventId = eventId,
-                    EventPrivate = false,
-                }
-            };
-
-            Assert.AreEqual(response, expectedResponse);
+            Assert.AreEqual(expectedUrl, actualUrl);
         }
     }
 }

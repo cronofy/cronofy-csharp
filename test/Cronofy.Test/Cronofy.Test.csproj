@@ -94,6 +94,7 @@
     <Compile Include="CronofyOAuthClientTests\DisableRealTimeSchedulingLink.cs" />
     <Compile Include="CronofyOAuthClientTests\GetRealTimeSchedulingLinkStatus.cs" />
     <Compile Include="CronofyOAuthClientTests\GetElementToken.cs" />
+    <Compile Include="CronofyOAuthClientTests\RealTimeScheduling.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
