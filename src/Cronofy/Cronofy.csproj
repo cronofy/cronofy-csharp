@@ -8,7 +8,6 @@
   <PropertyGroup>
     <PackageId>Cronofy</PackageId>
     <Title>Cronofy calendar API SDK</Title>
-    <Version>1.0.0-dev</Version>
     <Authors>Garry Shutler</Authors>
     <Company>Cronofy</Company>
     <PackageDescription>Cronofy provide a unified API over all major calendar services, allowing you to focus on developing your application.</PackageDescription>
