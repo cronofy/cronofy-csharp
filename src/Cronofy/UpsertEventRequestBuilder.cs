@@ -448,7 +448,7 @@
         /// </summary>
         /// <param name="reminders">
         /// The times that reminders should be triggered, must not be
-        /// <code>null</code>.
+        /// <c>null</c>.
         /// <para>
         /// Each value is a number of minutes before the event start that a
         /// reminder should be triggered.
@@ -574,7 +574,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="transparency"/> is not
         /// transparent or opaque.
-        /// </exception> 
+        /// </exception>
         public UpsertEventRequestBuilder Transparency(string transparency)
         {
             Preconditions.True(new[] { "transparent", "opaque" }.Contains(transparency), "Transparency must be `transparent` or `opaque`");
@@ -618,7 +618,7 @@
             this.addedAttendees.Add(new UpsertEventRequest.RequestAttendee
             {
                 Email = email,
-                DisplayName = displayName
+                DisplayName = displayName,
             });
 
             return this;
@@ -642,7 +642,7 @@
             this.removedAttendees.Add(new UpsertEventRequest.RequestAttendee
             {
                 Email = email,
-                DisplayName = displayName
+                DisplayName = displayName,
             });
             return this;
         }
@@ -713,18 +713,18 @@
         /// </param>
         /// <param name="time">
         /// The time to create the <see cref="EventTime"/> from when not
-        /// <code>null</code>.
+        /// <c>null</c>.
         /// </param>
         /// <param name="date">
         /// The date to create the <see cref="EventTime"/> from when not
-        /// <code>null</code>.
+        /// <c>null</c>.
         /// </param>
         /// <param name="timeZoneId">
         /// Time zone identifier for the <see cref="EventTime"/>.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Raised when both <paramref name="time"/> and <paramref name="date"/>
-        /// are <code>null</code>.
+        /// are <c>null</c>.
         /// </exception>
         private static EventTime GetEventTime(string propertyName, DateTimeOffset? time, Date? date, string timeZoneId)
         {

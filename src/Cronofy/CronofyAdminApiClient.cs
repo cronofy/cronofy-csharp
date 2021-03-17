@@ -61,7 +61,7 @@ namespace Cronofy
             var request = new HttpRequest
             {
                 Method = "POST",
-                Url = this.urlProvider.ProvisionApplicationUrl
+                Url = this.urlProvider.ProvisionApplicationUrl,
             };
 
             request.SetJsonBody(provisionApplicationRequest);

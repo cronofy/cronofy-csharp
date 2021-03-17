@@ -386,7 +386,7 @@
                     return new Cronofy.EventOptions
                     {
                         Delete = this.Delete,
-                        Update = this.Update
+                        Update = this.Update,
                     };
                 }
             }

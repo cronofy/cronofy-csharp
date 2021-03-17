@@ -39,7 +39,7 @@ namespace Cronofy
         /// The data centre to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
         public CronofyEnterpriseConnectAccountClient(string accessToken, string dataCentre)
@@ -56,11 +56,11 @@ namespace Cronofy
         /// not be empty.
         /// </param>
         /// <param name="dataCentre">
-        /// The data centre to use, must not be <code>null</code>.
+        /// The data centre to use, must not be <c>null</c>.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
+        /// empty, or if <paramref name="dataCentre"/> is <c>null</c>.
         /// </exception>
         public CronofyEnterpriseConnectAccountClient(string accessToken, DataCentre dataCentre)
             : base(accessToken, dataCentre)
@@ -94,17 +94,18 @@ namespace Cronofy
             Preconditions.NotEmpty("callbackUrl", callbackUrl);
             Preconditions.NotEmpty("scope", scope);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.UrlProvider.AuthorizeWithServiceAccountUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.UrlProvider.AuthorizeWithServiceAccountUrl,
+            };
             request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new
             {
                 email,
                 callback_url = callbackUrl,
-                scope
+                scope,
             };
             request.SetJsonBody(requestBody);
 

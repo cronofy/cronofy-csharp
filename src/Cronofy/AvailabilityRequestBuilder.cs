@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Class to build an availability request.
@@ -199,7 +199,7 @@
         /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="builder"/> is <code>null</code>.
+        /// Thrown if <paramref name="builder"/> is <c>null</c>.
         /// </exception>
         public AvailabilityRequestBuilder AddParticipantGroup(IBuilder<AvailabilityRequest.ParticipantGroup> builder)
         {
@@ -220,7 +220,7 @@
         /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="participantGroup"/> is <code>null</code>.
+        /// Thrown if <paramref name="participantGroup"/> is <c>null</c>.
         /// </exception>
         public AvailabilityRequestBuilder AddParticipantGroup(AvailabilityRequest.ParticipantGroup participantGroup)
         {
@@ -234,11 +234,11 @@
         /// <inheritdoc />
         public AvailabilityRequest Build()
         {
-            var request = new AvailabilityRequest();
-
-            request.RequiredDuration = this.GetRequiredDuration();
-
-            request.AvailablePeriods = this.availablePeriods.ToArray();
+            var request = new AvailabilityRequest
+            {
+                RequiredDuration = this.GetRequiredDuration(),
+                AvailablePeriods = this.availablePeriods.ToArray(),
+            };
 
             var participantGroups = new List<AvailabilityRequest.ParticipantGroup>();
 
@@ -265,7 +265,7 @@
             {
                 request.StartInterval = new AvailabilityRequest.Duration
                 {
-                    Minutes = this.startInterval.Value
+                    Minutes = this.startInterval.Value,
                 };
             }
 
@@ -279,8 +279,8 @@
                     {
                         Minimum = new AvailabilityRequest.Duration
                         {
-                            Minutes = this.beforeBuffer.Value
-                        }
+                            Minutes = this.beforeBuffer.Value,
+                        },
                     };
                 }
 
@@ -290,8 +290,8 @@
                     {
                         Minimum = new AvailabilityRequest.Duration
                         {
-                            Minutes = this.afterBuffer.Value
-                        }
+                            Minutes = this.afterBuffer.Value,
+                        },
                     };
                 }
             }

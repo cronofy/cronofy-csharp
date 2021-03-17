@@ -490,7 +490,7 @@
         /// Gets the availability for a given set of criteria.
         /// </summary>
         /// <param name="builder">
-        /// A builder for the criteria for the availability request, must not be <code>null</code>.
+        /// A builder for the criteria for the availability request, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// The <see cref="AvailablePeriod"/>s which match the set of criteria.
@@ -507,7 +507,7 @@
         /// Gets the availability for a given set of criteria.
         /// </summary>
         /// <param name="request">
-        /// The criteria for the availability request, must not be <code>null</code>.
+        /// The criteria for the availability request, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// The <see cref="AvailablePeriod"/>s which match the set of criteria.
@@ -524,7 +524,7 @@
         /// Gets the availability for a given set of criteria.
         /// </summary>
         /// <param name="builder">
-        /// A builder for the criteria for the availability request, must not be <code>null</code>.
+        /// A builder for the criteria for the availability request, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// The <see cref="AvailableSequences"/> which match the set of criteria.
@@ -541,7 +541,7 @@
         /// Gets the availability for a given set of criteria.
         /// </summary>
         /// <param name="request">
-        /// The criteria for the availability request, must not be <code>null</code>.
+        /// The criteria for the availability request, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// The <see cref="AvailableSequences"/> which match the set of criteria.

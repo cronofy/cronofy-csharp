@@ -37,7 +37,7 @@
 
             /// <summary>
             /// Initializes a new instance of the
-            /// <see cref="T:Cronofy.Builder.Wrapper`1"/> class.
+            /// <see cref="Wrapper{T}"/> class.
             /// </summary>
             /// <param name="instance">
             /// The instance to wrap.

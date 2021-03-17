@@ -26,7 +26,7 @@ namespace Cronofy
             /// <summary>
             /// The link has been disabled before a slot was chosen.
             /// </summary>
-            Disabled
+            Disabled,
         }
 
         /// <summary>

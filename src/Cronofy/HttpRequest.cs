@@ -16,7 +16,7 @@
         private static readonly JsonSerializerSettings DefaultSerializerSettings =
             new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore
+                NullValueHandling = NullValueHandling.Ignore,
             };
 
         /// <summary>

@@ -46,7 +46,7 @@
         /// The data centre to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
         public CronofyAccessTokenClient(string accessToken, string dataCentre)
@@ -67,11 +67,11 @@
         /// not be empty.
         /// </param>
         /// <param name="dataCentre">
-        /// The data centre to use, must not be <code>null</code>.
+        /// The data centre to use, must not be <c>null</c>.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
+        /// empty, or if <paramref name="dataCentre"/> is <c>null</c>.
         /// </exception>
         public CronofyAccessTokenClient(string accessToken, DataCentre dataCentre)
         {
@@ -97,10 +97,11 @@
         /// <inheritdoc/>
         public UserInfo GetUserInfo()
         {
-            var request = new HttpRequest();
-
-            request.Method = "GET";
-            request.Url = this.UrlProvider.UserInfoUrl;
+            var request = new HttpRequest
+            {
+                Method = "GET",
+                Url = this.UrlProvider.UserInfoUrl,
+            };
             request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetJsonResponse<UserInfoResponse>(request);

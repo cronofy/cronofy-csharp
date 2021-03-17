@@ -7,13 +7,13 @@
     /// </summary>
     public class CronofyException : ApplicationException
     {
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ApplicationException"/>
         public CronofyException(string message)
             : base(message)
         {
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ApplicationException"/>
         public CronofyException(string message, Exception innerException)
             : base(message, innerException)
         {

@@ -2,30 +2,31 @@
 {
     /// <summary>
     /// Represents a string that differentiates between an explicit
-    /// <code>null</code> and the omission of the value.
+    /// <c>null</c> and the omission of the value.
     /// </summary>
     public sealed class NullableString
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Cronofy.NullableString"/> class.
+        /// Initializes a new instance of the <see cref="NullableString"/> class.
         /// </summary>
         /// <param name="value">
         /// The explicit value.
         /// </param>
         /// <remarks>
-        /// Sets <see cref="HasValue"/> as <code>true</code>.
+        /// Sets <see cref="HasValue"/> as <c>true</c>.
         /// </remarks>
-        public NullableString(string value) : this()
+        public NullableString(string value)
+            : this()
         {
             this.Value = value;
             this.HasValue = true;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Cronofy.NullableString"/> class.
+        /// Initializes a new instance of the <see cref="NullableString"/> class.
         /// </summary>
         /// <remarks>
-        /// Sets <see cref="HasValue"/> as <code>true</code>.
+        /// Sets <see cref="HasValue"/> as <c>true</c>.
         /// </remarks>
         public NullableString()
         {
@@ -44,8 +45,8 @@
         /// Gets a value indicating whether there is an explicit value.
         /// </summary>
         /// <value>
-        /// <code>true</code> if the value has been set explicitly, otherwise
-        /// <code>false</code>.
+        /// <c>true</c> if the value has been set explicitly, otherwise
+        /// <c>false</c>.
         /// </value>
         public bool HasValue { get; private set; }
     }

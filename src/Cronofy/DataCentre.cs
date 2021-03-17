@@ -21,7 +21,7 @@
         public static readonly DataCentre German = new DataCentre("de");
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Cronofy.DataCentre"/> class.
+        /// Initializes a new instance of the <see cref="DataCentre"/> class.
         /// </summary>
         /// <param name="identifier">
         /// The identifier of the data centre.

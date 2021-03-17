@@ -20,8 +20,16 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>SA1633</NoWarn> <!-- no file header requirement -->
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,17 +38,23 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="../../stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+
   <ItemGroup Condition="'$(Configuration)'=='Release'">
     <None Include="$(OutputPath)/GITCOMMIT.txt" Pack="true" PackagePath="." />
     <None Include="../../resources/cronofy-logo.png" Pack="true" PackagePath="." />
-    <None Include="../../CHANGELOG.md"  Pack="true" PackagePath="." />
-    <None Include="../../README.md"  Pack="true" PackagePath="." />
-    <None Include="../../LICENSE"  Pack="true" PackagePath="." />
-    <None Include="../../VERSION"  Pack="true" PackagePath="." />
+    <None Include="../../CHANGELOG.md" Pack="true" PackagePath="." />
+    <None Include="../../README.md" Pack="true" PackagePath="." />
+    <None Include="../../LICENSE" Pack="true" PackagePath="." />
+    <None Include="../../VERSION" Pack="true" PackagePath="." />
   </ItemGroup>
 
   <Target Name="GetGitCommit" BeforeTargets="BeforeBuild" Condition="'$(Configuration)'=='Release'">
-    <Exec Command="mkdir -p $(OutputPath); git rev-parse --verify HEAD > $(OutputPath)/GITCOMMIT.txt" />
+    <Exec Command="mkdir -p $(OutputPath); git rev-parse --verify HEAD &gt; $(OutputPath)/GITCOMMIT.txt" />
   </Target>
 
 </Project>

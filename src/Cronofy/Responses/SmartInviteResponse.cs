@@ -66,11 +66,13 @@
         /// <returns>A Smart invite object.</returns>
         public SmartInvite ToSmartInvite()
         {
-            var invite = new SmartInvite();
-            invite.SmartInviteId = this.SmartInviteId;
-            invite.CallbackUrl = this.CallbackUrl;
-            invite.Method = this.Method;
-            invite.Event = this.Event.ToEvent();
+            var invite = new SmartInvite
+            {
+                SmartInviteId = this.SmartInviteId,
+                CallbackUrl = this.CallbackUrl,
+                Method = this.Method,
+                Event = this.Event.ToEvent(),
+            };
 
             if (this.Replies != null)
             {
@@ -116,7 +118,7 @@
             {
                 return new SmartInvite.InviteAttachments()
                 {
-                    ICalendar = this.ICalendar
+                    ICalendar = this.ICalendar,
                 };
             }
         }

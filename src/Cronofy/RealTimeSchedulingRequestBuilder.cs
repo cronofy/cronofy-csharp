@@ -62,7 +62,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty. 
+        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder OAuthDetails(string redirectUri, string scope)
         {
@@ -79,7 +79,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="tzid"/> is empty. 
+        /// Thrown if <paramref name="tzid"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder Timezone(string tzid)
         {
@@ -100,7 +100,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="hourFormat"/> is empty. 
+        /// Thrown if <paramref name="hourFormat"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder HourFormat(string hourFormat)
         {
@@ -127,7 +127,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> is empty.  
+        /// Thrown if <paramref name="redirectUri"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
@@ -137,7 +137,7 @@
             {
                 RedirectUri = redirectUri,
                 Scope = scope,
-                State = state
+                State = state,
             };
 
             this.oauthBuilder = Builder.Wrap(oauthDetails);
@@ -155,7 +155,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="oauthBuilder"/> is empty.  
+        /// Thrown if <paramref name="oauthBuilder"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder OAuthDetails(IBuilder<RealTimeSchedulingBaseRequest.OAuthDetails> oauthBuilder)
         {
@@ -173,7 +173,7 @@
         /// The event details builder for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/> 
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         public RealTimeSchedulingRequestBuilder UpsertEventRequestBuilder(IBuilder<UpsertEventRequest> upsertEventRequestBuilder)
         {
@@ -209,7 +209,7 @@
         /// The availability details builder for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/> 
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         public RealTimeSchedulingRequestBuilder AvailabilityRequestBuilder(IBuilder<AvailabilityRequest> availabilityRequestBuilder)
         {
@@ -263,7 +263,7 @@
             this.targetCalendars.Add(new RealTimeSchedulingRequest.TargetCalendar
             {
                 Sub = sub,
-                CalendarId = calendarId
+                CalendarId = calendarId,
             });
 
             return this;
@@ -295,7 +295,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="callbackUrl"/> is empty. 
+        /// Thrown if <paramref name="callbackUrl"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder CallbackUrl(string callbackUrl)
         {
@@ -316,7 +316,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="completedUrl"/> is empty. 
+        /// Thrown if <paramref name="completedUrl"/> is empty.
         /// </exception>
         public RealTimeSchedulingRequestBuilder RedirectUrls(string completedUrl)
         {

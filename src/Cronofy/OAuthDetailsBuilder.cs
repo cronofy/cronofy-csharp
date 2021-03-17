@@ -78,7 +78,7 @@ namespace Cronofy
             {
                 RedirectUri = this.redirectUri,
                 Scope = this.scope,
-                State = this.state
+                State = this.state,
             };
         }
     }

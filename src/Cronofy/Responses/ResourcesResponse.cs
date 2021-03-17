@@ -45,7 +45,7 @@
                 return new Resource
                 {
                     Email = this.Email,
-                    Name = this.Name
+                    Name = this.Name,
                 };
             }
         }
