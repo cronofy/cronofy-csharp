@@ -9,16 +9,6 @@
     public class CronofyAccessTokenClient : ICronofyUserInfoClient
     {
         /// <summary>
-        /// The access token for the OAuth authorization for the account.
-        /// </summary>
-        protected readonly string AccessToken;
-
-        /// <summary>
-        /// The URL provider for the context.
-        /// </summary>
-        protected readonly UrlProvider UrlProvider;
-
-        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.CronofyAccessTokenClient"/> class.
         /// </summary>
@@ -93,6 +83,16 @@
         /// Intend for test purposes only.
         /// </remarks>
         internal IHttpClient HttpClient { get; set; }
+
+        /// <summary>
+        /// Gets the access token for the OAuth authorization for the account.
+        /// </summary>
+        protected string AccessToken { get; }
+
+        /// <summary>
+        /// Gets or sets the URL provider for the context.
+        /// </summary>
+        protected UrlProvider UrlProvider { get; set; }
 
         /// <inheritdoc/>
         public UserInfo GetUserInfo()
