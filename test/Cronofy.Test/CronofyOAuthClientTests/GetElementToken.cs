@@ -1,13 +1,12 @@
-using System;
-using NUnit.Framework;
-
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class GetElementToken
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -15,10 +14,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
         }
 
         [Test]
@@ -26,7 +25,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/element_tokens")
-                .RequestHeader("Authorization", $"Bearer {clientSecret}")
+                .RequestHeader("Authorization", $"Bearer {ClientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBody(@"{""permissions"":[""agenda"",""availability""],""subs"":[""acc_123"",""acc_456""],""origin"":""https://evenitron.com"",""version"":""1""}")
                 .ResponseCode(200)
@@ -47,17 +46,16 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void ExceptionWhenBadRequest()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                 .Url("https://api.cronofy.com/v1/element_tokens")
-                .RequestHeader("Authorization", $"Bearer {clientSecret}")
+                .RequestHeader("Authorization", $"Bearer {ClientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBody(@"{""permissions"":[""all_the_things""],""subs"":[""acc_123"",""acc_456""],""origin"":""https://evenitron.com"",""version"":""1""}")
                 .ResponseCode(400)
-                .ResponseBody("{\"permissions\":\"not_recognized\"}")
-            );
+                .ResponseBody("{\"permissions\":\"not_recognized\"}"));
 
-            Assert.Throws<CronofyResponseException>(() => client.GetElementToken(new ElementTokenRequest
+            Assert.Throws<CronofyResponseException>(() => this.client.GetElementToken(new ElementTokenRequest
             {
                 Origin = "https://evenitron.com",
                 Permissions = new[] { "all_the_things" },

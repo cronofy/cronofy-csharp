@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 namespace Cronofy.Test
 {
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+
     public sealed class StubRequestBuilder
     {
         private readonly string method;
@@ -35,7 +34,7 @@ namespace Cronofy.Test
 
         public StubRequestBuilder RequestBodyFormat(string format, params object[] args)
         {
-            return RequestBody(string.Format(format, args));
+            return this.RequestBody(string.Format(format, args));
         }
 
         public StubRequestBuilder JsonRequest(string jsonBody)
@@ -69,7 +68,8 @@ namespace Cronofy.Test
 
         public StubRequest Build()
         {
-            return new StubRequest {
+            return new StubRequest
+            {
                 Method = this.method,
                 Url = this.url,
                 RequestHeaders = this.requestHeaders,
@@ -80,13 +80,19 @@ namespace Cronofy.Test
         }
     }
 
+#pragma warning disable SA1402 // Allow multiple types in single file
     public sealed class StubRequest
     {
         public string Method { get; set; }
+
         public string Url { get; set; }
+
         public IEnumerable<KeyValuePair<string, string>> RequestHeaders { get; set; }
+
         public string RequestBody { get; set; }
+
         public int ResponseCode { get; set; }
+
         public string ResponseBody { get; set; }
     }
 
@@ -113,4 +119,5 @@ namespace Cronofy.Test
             return new StubRequestBuilder("DELETE", url);
         }
     }
+#pragma warning restore SA1402 // Disllow multiple types in single file
 }

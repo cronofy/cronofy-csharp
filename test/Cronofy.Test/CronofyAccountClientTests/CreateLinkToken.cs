@@ -1,8 +1,7 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     internal sealed class CreateLinkToken : Base
     {
         [Test]
@@ -10,15 +9,14 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             const string LinkToken = "LegendOfZelda";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/link_tokens")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .ResponseCode(200)
-                .ResponseBodyFormat(@"{{""link_token"": ""{0}""}}", LinkToken)
-            );
+                .ResponseBodyFormat(@"{{""link_token"": ""{0}""}}", LinkToken));
 
-            var actual = Client.CreateLinkToken();
+            var actual = this.Client.CreateLinkToken();
 
             Assert.AreEqual(LinkToken, actual);
         }

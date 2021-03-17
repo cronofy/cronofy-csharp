@@ -1,14 +1,12 @@
-﻿using System;
-using NUnit.Framework;
-using Cronofy.Requests;
-
-namespace Cronofy.Test.CronofyOAuthClientTests
+﻿namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class DisableRealTimeSchedulingLink
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -16,10 +14,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
         }
 
         [Test]
@@ -29,18 +27,17 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             var rtsUrl = "https://app.cronofy.com/add_to_calendar/scheduling/rtsToken";
             var displayMessage = "disabled";
 
-            http.Stub(HttpPost
+            this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/real_time_scheduling/sch_123/disable")
-                .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
                     @"{{""display_message"":""{0}""}}", displayMessage)
                 .ResponseCode(200)
                 .ResponseBodyFormat(
-                    @"{{""real_time_scheduling"":{{""real_time_scheduling_id"":""{0}"",""url"":""{1}"",""status"":""disabled"",""event"":{{""summary"":""event summary"",""event_id"":""event id"",""event_private"":false}}}}}}", rtsId, rtsUrl)
-            );
+                    @"{{""real_time_scheduling"":{{""real_time_scheduling_id"":""{0}"",""url"":""{1}"",""status"":""disabled"",""event"":{{""summary"":""event summary"",""event_id"":""event id"",""event_private"":false}}}}}}", rtsId, rtsUrl));
 
-            var response = client.DisableRealTimeSchedulingLink(rtsId, displayMessage);
+            var response = this.client.DisableRealTimeSchedulingLink(rtsId, displayMessage);
             var expectedResponse = new RealTimeSchedulingLinkStatus
             {
                 RealTimeSchedulingId = rtsId,
@@ -51,7 +48,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     Summary = "event summary",
                     EventId = "event id",
                     EventPrivate = false,
-                }
+                },
             };
 
             Assert.AreEqual(response, expectedResponse);

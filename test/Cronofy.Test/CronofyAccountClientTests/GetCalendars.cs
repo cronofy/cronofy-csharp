@@ -1,16 +1,15 @@
-﻿using System;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
     internal sealed class GetCalendars : Base
     {
         [Test]
         public void CanGetCalendars()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/calendars")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -49,15 +48,17 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""calendar_primary"": false
     }
   ]
-}")
-        );
+}"));
 
-            var calendars = Client.GetCalendars();
+            var calendars = this.Client.GetCalendars();
 
             CollectionAssert.AreEqual(
-                new List<Calendar> {
-                    new Calendar {
-                        Profile = new Calendar.ProfileSummary {
+                new List<Calendar>
+                {
+                    new Calendar
+                    {
+                        Profile = new Calendar.ProfileSummary
+                        {
                             ProviderName = "google",
                             ProfileId = "pro_n23kjnwrw2",
                             Name = "example@cronofy.com",
@@ -68,8 +69,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = false,
                         Primary = true,
                     },
-                    new Calendar {
-                        Profile = new Calendar.ProfileSummary {
+                    new Calendar
+                    {
+                        Profile = new Calendar.ProfileSummary
+                        {
                             ProviderName = "google",
                             ProfileId = "pro_n23kjnwrw2",
                             Name = "example@cronofy.com",
@@ -80,8 +83,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         Deleted = true,
                         Primary = false,
                     },
-                    new Calendar {
-                        Profile = new Calendar.ProfileSummary {
+                    new Calendar
+                    {
+                        Profile = new Calendar.ProfileSummary
+                        {
                             ProviderName = "apple",
                             ProfileId = "pro_n23kjnkopy",
                             Name = "example@cronofy.com",

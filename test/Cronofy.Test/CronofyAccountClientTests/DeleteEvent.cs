@@ -1,27 +1,25 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     internal sealed class DeleteEvent : Base
     {
-        private const string calendarId = "cal_123456_abcdef";
+        private const string CalendarId = "cal_123456_abcdef";
 
         [Test]
         public void CanDeleteEvent()
         {
             const string eventId = "qTtZdczOccgaPncGJaCiLg";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpDelete
-                    .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                    .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(@"{{""event_id"":""{0}""}}", eventId)
-                    .ResponseCode(202)
-            );
+                    .ResponseCode(202));
 
-            Client.DeleteEvent(calendarId, eventId);
+            this.Client.DeleteEvent(CalendarId, eventId);
         }
 
         [Test]
@@ -29,16 +27,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             const string eventUid = "external_event_id";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpDelete
-                    .Url("https://api.cronofy.com/v1/calendars/" + calendarId + "/events")
+                    .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(@"{{""event_uid"":""{0}""}}", eventUid)
-                    .ResponseCode(202)
-            );
+                    .ResponseCode(202));
 
-            Client.DeleteExternalEvent(calendarId, eventUid);
+            this.Client.DeleteExternalEvent(CalendarId, eventUid);
         }
     }
 }

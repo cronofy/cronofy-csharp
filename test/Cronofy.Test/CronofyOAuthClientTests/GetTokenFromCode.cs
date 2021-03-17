@@ -1,16 +1,14 @@
-﻿using System;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-namespace Cronofy.Test.CronofyOAuthClientTests
+﻿namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class GetTokenFromCode
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
-        private const string oauthCode = "zyxvut987654";
-        private const string redirectUri = "http://example.com/redirectUri";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
+        private const string OauthCode = "zyxvut987654";
+        private const string RedirectUri = "http://example.com/redirectUri";
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -18,10 +16,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
         }
 
         [Test]
@@ -32,20 +30,19 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             const string refreshToken = "jerwpmsdkjngvdsk";
             const string scope = "read_events create_event delete_event";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://app.cronofy.com/oauth/token")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                         "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
-                        clientId, clientSecret, oauthCode, redirectUri)
+                        ClientId, ClientSecret, OauthCode, RedirectUri)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         "{{\"token_type\":\"bearer\",\"access_token\":\"{0}\",\"expires_in\":{1},\"refresh_token\":\"{2}\",\"scope\":\"{3}\"}}",
-                        accessToken, expiresIn, refreshToken, scope)
-            );
+                        accessToken, expiresIn, refreshToken, scope));
 
-            var actualToken = client.GetTokenFromCode(oauthCode, redirectUri);
+            var actualToken = this.client.GetTokenFromCode(OauthCode, RedirectUri);
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }));
 
             Assert.AreEqual(expectedToken, actualToken);
@@ -63,13 +60,13 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             const string profileId = "pro_n23kjnwrw2";
             const string profileName = "example@cronofy.com";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://app.cronofy.com/oauth/token")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                         "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
-                        clientId, clientSecret, oauthCode, redirectUri)
+                        ClientId, ClientSecret, OauthCode, RedirectUri)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         "{{" +
@@ -88,10 +85,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                             "}}" +
                         "}}",
                         accessToken, expiresIn, refreshToken, scope,
-                        accountId, providerName, profileId, profileName)
-            );
+                        accountId, providerName, profileId, profileName));
 
-            var actualToken = client.GetTokenFromCode(oauthCode, redirectUri);
+            var actualToken = this.client.GetTokenFromCode(OauthCode, RedirectUri);
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }))
             {
                 AccountId = accountId,
@@ -110,18 +106,17 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void ExceptionWhenBadRequest()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                 .Url("https://app.cronofy.com/oauth/token")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBodyFormat(
                     "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"grant_type\":\"authorization_code\",\"code\":\"{2}\",\"redirect_uri\":\"{3}\"}}",
-                    clientId, clientSecret, oauthCode, redirectUri)
+                    ClientId, ClientSecret, OauthCode, RedirectUri)
                 .ResponseCode(400)
-                .ResponseBody("{\"error\":\"invalid_grant\"}")
-            );
+                .ResponseBody("{\"error\":\"invalid_grant\"}"));
 
-            Assert.Throws<CronofyResponseException>(() => client.GetTokenFromCode(oauthCode, redirectUri));
+            Assert.Throws<CronofyResponseException>(() => this.client.GetTokenFromCode(OauthCode, RedirectUri));
         }
     }
 }

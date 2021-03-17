@@ -1,15 +1,15 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test
+﻿namespace Cronofy.Test
 {
+    using System;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class DateTests
     {
         [Test]
         public void InitializesAtEpoch()
         {
-            var date = new Date();
+            var date = default(Date);
 
             Assert.AreEqual(1970, date.Year);
             Assert.AreEqual(1, date.Month);
@@ -82,7 +82,8 @@ namespace Cronofy.Test
 
             Assert.AreEqual(expectedSuccess, success);
 
-            if (expectedSuccess) {
+            if (expectedSuccess)
+            {
                 Assert.AreEqual(new Date(year, month, day), value);
             }
         }

@@ -1,14 +1,14 @@
-﻿using System;
-using NUnit.Framework;
-using Cronofy.Requests;
-
-namespace Cronofy.Test.CronofyOAuthClientTests
+﻿namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using System;
+    using Cronofy.Requests;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class AddToCalendar
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
 
         private string redirectUrl = "http://example.com/redirectUri";
         private string scope = "test_scope";
@@ -29,16 +29,16 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
 
             this.upsertEventRequest = new UpsertEventRequestBuilder()
-                .EventId(eventId)
-                .Summary(summary)
-                .Start(start)
-                .End(end)
+                .EventId(this.eventId)
+                .Summary(this.summary)
+                .Start(this.start)
+                .End(this.end)
                 .Build();
         }
 
@@ -47,24 +47,23 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             var expectedUrl = "http://test.com";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/add_to_calendar")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
-                    "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\",\"state\":\"{4}\"}},\"event\":{{\"event_id\":\"{5}\",\"summary\":\"{6}\",\"start\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{8}\",\"tzid\":\"Etc/UTC\"}}}}}}",
-                        clientId, clientSecret, redirectUrl, scope, state, eventId, summary, startString, endString)
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\",\"state\":\"{4}\"}},\"event\":{{\"event_id\":\"{5}\",\"summary\":\"{6}\",\"start\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{8}\",\"tzid\":\"Etc/UTC\"}}}}}}",
+                        ClientId, ClientSecret, this.redirectUrl, this.scope, this.state, this.eventId, this.summary, this.startString, this.endString)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
-                        "{{\"url\":\"{0}\"}}", expectedUrl)
-            );
+                        "{{\"url\":\"{0}\"}}", expectedUrl));
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
-                .OAuthDetails(redirectUrl, scope, state)
-                .UpsertEventRequest(upsertEventRequest)
+                .OAuthDetails(this.redirectUrl, this.scope, this.state)
+                .UpsertEventRequest(this.upsertEventRequest)
                 .Build();
 
-            var actualUrl = client.AddToCalendar(addToCalendarRequest);
+            var actualUrl = this.client.AddToCalendar(addToCalendarRequest);
 
             Assert.AreEqual(expectedUrl, actualUrl);
         }
@@ -74,24 +73,23 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             var expectedUrl = "http://test.com";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/add_to_calendar")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
-                    "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\"}},\"event\":{{\"event_id\":\"{4}\",\"summary\":\"{5}\",\"start\":{{\"time\":\"{6}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}}}}}}",
-                        clientId, clientSecret, redirectUrl, scope, eventId, summary, startString, endString)
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\"}},\"event\":{{\"event_id\":\"{4}\",\"summary\":\"{5}\",\"start\":{{\"time\":\"{6}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}}}}}}",
+                        ClientId, ClientSecret, this.redirectUrl, this.scope, this.eventId, this.summary, this.startString, this.endString)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
-                        "{{\"url\":\"{0}\"}}", expectedUrl)
-            );
+                        "{{\"url\":\"{0}\"}}", expectedUrl));
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
-                .OAuthDetails(redirectUrl, scope)
-                .UpsertEventRequest(upsertEventRequest)
+                .OAuthDetails(this.redirectUrl, this.scope)
+                .UpsertEventRequest(this.upsertEventRequest)
                 .Build();
 
-            var actualUrl = client.AddToCalendar(addToCalendarRequest);
+            var actualUrl = this.client.AddToCalendar(addToCalendarRequest);
 
             Assert.AreEqual(expectedUrl, actualUrl);
         }
@@ -102,25 +100,24 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             var expectedUrl = "http://test.com";
             var hourFormat = "h";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/add_to_calendar")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                         "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"oauth\":{{\"redirect_uri\":\"{2}\",\"scope\":\"{3}\"}},\"event\":{{\"event_id\":\"{4}\",\"summary\":\"{5}\",\"start\":{{\"time\":\"{6}\",\"tzid\":\"Etc/UTC\"}},\"end\":{{\"time\":\"{7}\",\"tzid\":\"Etc/UTC\"}}}},\"formatting\":{{\"hour_format\":\"{8}\"}}}}",
-                        clientId, clientSecret, redirectUrl, scope, eventId, summary, startString, endString, hourFormat)
+                        ClientId, ClientSecret, this.redirectUrl, this.scope, this.eventId, this.summary, this.startString, this.endString, hourFormat)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
-                        "{{\"url\":\"{0}\"}}", expectedUrl)
-            );
+                        "{{\"url\":\"{0}\"}}", expectedUrl));
 
             var addToCalendarRequest = new AddToCalendarRequestBuilder()
-                .OAuthDetails(redirectUrl, scope)
-                .UpsertEventRequest(upsertEventRequest)
+                .OAuthDetails(this.redirectUrl, this.scope)
+                .UpsertEventRequest(this.upsertEventRequest)
                 .HourFormat("h")
                 .Build();
 
-            var actualUrl = client.AddToCalendar(addToCalendarRequest);
+            var actualUrl = this.client.AddToCalendar(addToCalendarRequest);
 
             Assert.AreEqual(expectedUrl, actualUrl);
         }

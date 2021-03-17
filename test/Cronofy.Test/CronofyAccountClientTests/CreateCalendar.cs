@@ -1,8 +1,7 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     internal sealed class CreateCalendar : Base
     {
         [Test]
@@ -11,14 +10,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
             const string ProfileId = "pro_n23kjnwrw2";
             const string CalendarName = "New Calendar";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/calendars")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat("{{\"profile_id\":\"{0}\",\"name\":\"{1}\"}}", ProfileId, CalendarName)
                     .ResponseCode(200)
-                .ResponseBodyFormat(@"{{
+                .ResponseBodyFormat(
+                    @"{{
   ""calendar"": {{
     ""provider_name"": ""google"",
     ""profile_id"": ""{0}"",
@@ -28,14 +28,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
     ""calendar_readonly"": false,
     ""calendar_deleted"": false
   }}
-}}", ProfileId, CalendarName)
-        );
+}}", ProfileId, CalendarName));
 
-            var calendar = Client.CreateCalendar(ProfileId, CalendarName);
+            var calendar = this.Client.CreateCalendar(ProfileId, CalendarName);
 
             Assert.AreEqual(
-                new Calendar {
-                    Profile = new Calendar.ProfileSummary {
+                new Calendar
+                {
+                    Profile = new Calendar.ProfileSummary
+                    {
                         ProviderName = "google",
                         ProfileId = ProfileId,
                         Name = "example@cronofy.com",
@@ -55,14 +56,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
             const string CalendarName = "New Calendar";
             const string Color = "#49BED8";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/calendars")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat("{{\"profile_id\":\"{0}\",\"name\":\"{1}\",\"color\":\"{2}\"}}", ProfileId, CalendarName, Color)
                     .ResponseCode(200)
-                .ResponseBodyFormat(@"{{
+                .ResponseBodyFormat(
+                    @"{{
   ""calendar"": {{
     ""provider_name"": ""google"",
     ""profile_id"": ""{0}"",
@@ -72,14 +74,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
     ""calendar_readonly"": false,
     ""calendar_deleted"": false
   }}
-}}", ProfileId, CalendarName)
-        );
+}}", ProfileId, CalendarName));
 
-            var calendar = Client.CreateCalendar(ProfileId, CalendarName, Color);
+            var calendar = this.Client.CreateCalendar(ProfileId, CalendarName, Color);
 
             Assert.AreEqual(
-                new Calendar {
-                    Profile = new Calendar.ProfileSummary {
+                new Calendar
+                {
+                    Profile = new Calendar.ProfileSummary
+                    {
                         ProviderName = "google",
                         ProfileId = ProfileId,
                         Name = "example@cronofy.com",

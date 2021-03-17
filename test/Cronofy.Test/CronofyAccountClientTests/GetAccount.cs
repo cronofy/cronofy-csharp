@@ -1,14 +1,13 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     internal sealed class GetAccount : Base
     {
         [Test]
         public void CanGetAccount()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/account")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -22,10 +21,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
     ""default_tzid"": ""Europe/London"",
     ""scope"": ""read_events create_event delete_event""
   }
-}")
-            );
+}"));
 
-            var actualAccount = Client.GetAccount();
+            var actualAccount = this.Client.GetAccount();
             var expectedAccount = new Account
             {
                 Id = "acc_567236000909002",
@@ -42,9 +40,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
         public void CanGetAccountForSpecifiedDataCentre()
         {
             this.Client = new CronofyAccountClient(AccessToken, "de");
-            Client.HttpClient = Http;
+            this.Client.HttpClient = this.Http;
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                     .Url("https://api-de.cronofy.com/v1/account")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -58,11 +56,11 @@ namespace Cronofy.Test.CronofyAccountClientTests
     ""default_tzid"": ""Europe/London"",
     ""scope"": ""read_events create_event delete_event""
   }
-}")
-            );
+}"));
 
-            var actualAccount = Client.GetAccount();
-            var expectedAccount = new Account {
+            var actualAccount = this.Client.GetAccount();
+            var expectedAccount = new Account
+            {
                 Id = "acc_567236000909002",
                 Email = "janed@company.com",
                 Name = "Jane Doe",
@@ -74,4 +72,3 @@ namespace Cronofy.Test.CronofyAccountClientTests
         }
     }
 }
-

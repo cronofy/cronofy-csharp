@@ -1,8 +1,8 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
+﻿namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
 {
+    using System;
+    using NUnit.Framework;
+
     internal sealed class AuthorizeUser : Base
     {
         [Test]
@@ -12,7 +12,7 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
             const string callbackUrl = "https://cronofy.com/test-callback";
             const string scopes = "read_account list_calendars read_events create_event delete_event read_free_busy";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                 .Url("https://api.cronofy.com/v1/service_account_authorizations")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -25,23 +25,22 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
                     email,
                     callbackUrl,
                     scopes)
-                .ResponseCode(202)
-            );
+                .ResponseCode(202));
 
-            Client.AuthorizeUser(email, callbackUrl, scopes);
+            this.Client.AuthorizeUser(email, callbackUrl, scopes);
         }
 
         [Test]
         public void CanAuthorizeUserForSpecificDataCentre()
         {
             this.Client = new CronofyEnterpriseConnectAccountClient(AccessToken, "de");
-            Client.HttpClient = Http;
+            this.Client.HttpClient = this.Http;
 
             const string email = "test@cronofy.com";
             const string callbackUrl = "https://cronofy.com/test-callback";
             const string scopes = "read_account list_calendars read_events create_event delete_event read_free_busy";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                 .Url("https://api-de.cronofy.com/v1/service_account_authorizations")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -54,10 +53,9 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
                     email,
                     callbackUrl,
                     scopes)
-                .ResponseCode(202)
-            );
+                .ResponseCode(202));
 
-            Client.AuthorizeUser(email, callbackUrl, scopes);
+            this.Client.AuthorizeUser(email, callbackUrl, scopes);
         }
 
         [Test]
@@ -67,7 +65,7 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
             const string callbackUrl = "https://test.com/test-callback";
             string[] scopes = { "read_account", "list_calendars", "read_events", "create_event", "delete_event", "read_free_busy" };
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                 .Url("https://api.cronofy.com/v1/service_account_authorizations")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -79,11 +77,10 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
                     "}}",
                     email,
                     callbackUrl,
-                    String.Join(" ", scopes))
-                .ResponseCode(202)
-            );
+                    string.Join(" ", scopes))
+                .ResponseCode(202));
 
-            Client.AuthorizeUser(email, callbackUrl, scopes);
+            this.Client.AuthorizeUser(email, callbackUrl, scopes);
         }
     }
 }

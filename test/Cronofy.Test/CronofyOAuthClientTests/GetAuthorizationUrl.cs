@@ -1,38 +1,37 @@
-using System;
-using NUnit.Framework;
-using System.Collections.Generic;
-
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class GetAuthorizationUrl
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
-        private const string redirectUri = "http://example.com/redirectUri";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
+        private const string RedirectUri = "http://example.com/redirectUri";
 
         private CronofyOAuthClient client;
 
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
         }
 
         [Test]
         public void SpecifiedDataCentre()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret, "de");
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret, "de");
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri).Build();
             var expectedAuthUrl = string.Format(
                 "https://app-de.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -40,17 +39,17 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void ExplicitDefaultDataCentre()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret, "us");
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret, "us");
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri).Build();
             var expectedAuthUrl = string.Format(
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -64,17 +63,17 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             {
                 Configuration.DefaultDataCentre = DataCentre.German;
 
-                this.client = new CronofyOAuthClient(clientId, clientSecret);
+                this.client = new CronofyOAuthClient(ClientId, ClientSecret);
 
-                var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
+                var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri).Build();
                 var expectedAuthUrl = string.Format(
                     "https://app-de.cronofy.com/oauth/authorize" +
                         "?client_id={0}" +
                         "&response_type=code" +
                         "&redirect_uri={1}" +
                         "&scope=read_account%20read_events%20create_event%20delete_event",
-                    UrlBuilder.EncodeParameter(clientId),
-                    UrlBuilder.EncodeParameter(redirectUri));
+                    UrlBuilder.EncodeParameter(ClientId),
+                    UrlBuilder.EncodeParameter(RedirectUri));
 
                 Assert.AreEqual(expectedAuthUrl, authUrl);
             }
@@ -87,15 +86,15 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void HasDefaultScope()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri).Build();
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri).Build();
             var expectedAuthUrl = string.Format(
                 "https://app.cronofy.com/oauth/authorize" +
                     "?client_id={0}" +
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -103,7 +102,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanOverrideScope()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .Scope("read_account", "read_events")
                 .Build();
 
@@ -113,8 +112,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -122,12 +121,13 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanOverrideScopeWithEnumerable()
         {
-            IEnumerable<string> scope = new List<string> {
+            IEnumerable<string> scope = new List<string>
+            {
                 "read_account",
-                "read_events"
+                "read_events",
             };
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .Scope(scope)
                 .Build();
 
@@ -137,8 +137,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -148,7 +148,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             const string someState = "xyz789";
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .State(someState)
                 .Build();
 
@@ -159,8 +159,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&state={2}",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri),
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri),
                 someState);
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
@@ -169,7 +169,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanSetAvoidLinkingToTrue()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .AvoidLinking(true)
                 .Build();
 
@@ -180,8 +180,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&avoid_linking=true",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -189,7 +189,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanSetAvoidLinkingToFalse()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .AvoidLinking(false)
                 .Build();
 
@@ -200,8 +200,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                      "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&avoid_linking=false",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -209,7 +209,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void ToStringGeneratesUrl()
         {
-            var builder = client.GetAuthorizationUrlBuilder(redirectUri);
+            var builder = this.client.GetAuthorizationUrlBuilder(RedirectUri);
 
             var expectedAuthUrl = string.Format(
                 "https://app.cronofy.com/oauth/authorize" +
@@ -217,8 +217,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                     "&response_type=code" +
                     "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri));
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, builder.ToString());
         }
@@ -226,7 +226,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanSetUrlAsEnterpriseConnect()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                       .EnterpriseConnect()
                       .Build();
 
@@ -237,8 +237,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
               "&redirect_uri={1}" +
               "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
               "&scope=service_account%2Faccounts%2Fmanage%20service_account%2Fresources%2Fmanage",
-              UrlBuilder.EncodeParameter(clientId),
-              UrlBuilder.EncodeParameter(redirectUri));
+              UrlBuilder.EncodeParameter(ClientId),
+              UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -246,7 +246,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanOverrideEnterpriseConnectScope()
         {
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .EnterpriseConnect()
               .EnterpriseConnectScope("service_account/accounts/unrestricted_access", "service_account/resources/unrestricted_access")
               .Build();
@@ -258,8 +258,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
               "&redirect_uri={1}" +
               "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
               "&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
-              UrlBuilder.EncodeParameter(clientId),
-              UrlBuilder.EncodeParameter(redirectUri));
+              UrlBuilder.EncodeParameter(ClientId),
+              UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -267,12 +267,13 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanOverrideEnterpriseConnectScopeWithEnumerable()
         {
-            IEnumerable<string> scope = new List<string> {
+            IEnumerable<string> scope = new List<string>
+            {
                 "service_account/accounts/unrestricted_access",
-                "service_account/resources/unrestricted_access"
+                "service_account/resources/unrestricted_access",
             };
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
               .EnterpriseConnectScope(scope)
               .EnterpriseConnect()
               .Build();
@@ -284,8 +285,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
               "&redirect_uri={1}" +
               "&delegated_scope=read_account%20read_events%20create_event%20delete_event" +
               "&scope=service_account%2Faccounts%2Funrestricted_access%20service_account%2Fresources%2Funrestricted_access",
-              UrlBuilder.EncodeParameter(clientId),
-              UrlBuilder.EncodeParameter(redirectUri));
+              UrlBuilder.EncodeParameter(ClientId),
+              UrlBuilder.EncodeParameter(RedirectUri));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
         }
@@ -295,7 +296,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             const string LinkToken = "LegendOfZelda";
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .LinkToken(LinkToken)
                 .Build();
 
@@ -306,8 +307,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                      "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&link_token={2}",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri),
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri),
                 UrlBuilder.EncodeParameter(LinkToken));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);
@@ -318,7 +319,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             const string ProviderName = "exchange";
 
-            var authUrl = client.GetAuthorizationUrlBuilder(redirectUri)
+            var authUrl = this.client.GetAuthorizationUrlBuilder(RedirectUri)
                 .ProviderName(ProviderName)
                 .Build();
 
@@ -329,8 +330,8 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                      "&redirect_uri={1}" +
                     "&scope=read_account%20read_events%20create_event%20delete_event" +
                     "&provider_name={2}",
-                UrlBuilder.EncodeParameter(clientId),
-                UrlBuilder.EncodeParameter(redirectUri),
+                UrlBuilder.EncodeParameter(ClientId),
+                UrlBuilder.EncodeParameter(RedirectUri),
                 UrlBuilder.EncodeParameter(ProviderName));
 
             Assert.AreEqual(expectedAuthUrl, authUrl);

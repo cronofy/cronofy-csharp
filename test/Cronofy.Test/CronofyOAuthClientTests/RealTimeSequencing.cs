@@ -1,14 +1,13 @@
-﻿using System;
-using NUnit.Framework;
-using Cronofy.Requests;
-
-namespace Cronofy.Test.CronofyOAuthClientTests
+﻿namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using System;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class RealTimeSequencing
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
 
         [Test]
         public void CanGetOAuthUrlWithAvailabilityTargetCalendarsAndHourFormat()
@@ -16,7 +15,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             var start = new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc);
             var end = new DateTime(2014, 8, 5, 16, 30, 0, DateTimeKind.Utc);
 
-            var client = new CronofyOAuthClient(clientId, clientSecret);
+            var client = new CronofyOAuthClient(ClientId, ClientSecret);
             var http = new StubHttpClient();
 
             client.HttpClient = http;
@@ -100,8 +99,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""callback_url"":""http://example.com/callback""
                     }")
                     .ResponseCode(200)
-                    .ResponseBodyFormat("{{\"url\":\"{0}\"}}", expectedUrl)
-            );
+                    .ResponseBodyFormat("{{\"url\":\"{0}\"}}", expectedUrl));
 
             var request = new RealTimeSequencingRequestBuilder()
                 .OAuthDetails("http://example.com/redirectUri", "test_scope")

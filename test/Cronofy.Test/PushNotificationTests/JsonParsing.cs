@@ -1,13 +1,13 @@
-﻿using System;
-using NUnit.Framework;
-using Cronofy.Requests;
-using Newtonsoft.Json;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
-
-namespace Cronofy.Test.PushNotificationTests
+﻿namespace Cronofy.Test.PushNotificationTests
 {
+    using System;
+    using System.IO;
+    using System.Runtime.Serialization.Json;
+    using System.Text;
+    using Cronofy.Requests;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class JsonParsing
     {
@@ -23,6 +23,7 @@ namespace Cronofy.Test.PushNotificationTests
         }
     }
 }";
+
         private static readonly PushNotificationRequest ExpectedVerification
             = new PushNotificationRequest
             {
@@ -38,7 +39,7 @@ namespace Cronofy.Test.PushNotificationTests
                     {
                         CalendarIds = new[] { "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw" },
                     },
-                }
+                },
             };
 
         private const string ChangeRequestBody = @"{
@@ -71,7 +72,7 @@ namespace Cronofy.Test.PushNotificationTests
                     {
                         CalendarIds = new[] { "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw" },
                     },
-                }
+                },
             };
 
         [Test]

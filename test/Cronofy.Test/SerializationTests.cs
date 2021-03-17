@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using NUnit.Framework;
-
-namespace Cronofy.Test
+﻿namespace Cronofy.Test
 {
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     [TestFixture]
-    public sealed class SerializationTest
+    public sealed class SerializationTests
     {
         private sealed class Wrapper
         {
@@ -23,7 +22,7 @@ namespace Cronofy.Test
             {
                 Converters = new List<JsonConverter> { new EventTimeConverter() },
             };
-            
+
             var serialized = JsonConvert.SerializeObject(wrapper, serializerSettings);
 
             var deserialized = JsonConvert.DeserializeObject<Wrapper>(serialized, serializerSettings);
