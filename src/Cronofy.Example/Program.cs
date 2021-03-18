@@ -68,12 +68,16 @@
             var calendarId = Console.ReadLine();
             Console.WriteLine();
 
+            var tomorrow = DateTime.Today.AddDays(1);
+            var start = tomorrow.AddHours(17);
+            var end = start.AddMinutes(30);
+
             var eventBuilder = new UpsertEventRequestBuilder()
                 .EventId(EventId)
                 .Summary("Cronofy Example")
                 .Description("Example from the Cronofy .NET SDK")
-                .Start(2015, 10, 20, 17, 00)
-                .End(2015, 10, 20, 17, 30);
+                .Start(start)
+                .End(end);
 
             client.UpsertEvent(calendarId, eventBuilder);
             Console.WriteLine("Event upserted");
