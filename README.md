@@ -24,10 +24,8 @@ If you're running an older version of .NET Framework, previous versions of the p
 
 In order to use the Cronofy API you will need to [create a developer account](https://app.cronofy.com/sign_up/new).
 
-From there you can [use your Calendar Sandbox](https://app.cronofy.com/oauth/sandbox)
-to access your own calendars, or you can [create an OAuth application](https://app.cronofy.com/oauth/applications/new)
-to obtain an OAuth `client_id` and `client_secret` to be able to use the full
-API.
+From there you can [create an OAuth application](https://app.cronofy.com/oauth/applications/new)
+to obtain an OAuth `client_id` and `client_secret` to be able to use the Cronofy API.
 
 ## Authorization
 
