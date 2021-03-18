@@ -1,15 +1,15 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     internal abstract class Base
     {
         protected const string AccessToken = "zyxvut987654";
 
-        protected CronofyAccountClient Client;
-        protected StubHttpClient Http;
+        protected CronofyAccountClient Client { get; set; }
+
+        protected StubHttpClient Http { get; set; }
 
         [SetUp]
         public void SetUp()
@@ -17,7 +17,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
             this.Client = new CronofyAccountClient(AccessToken);
             this.Http = new StubHttpClient();
 
-            Client.HttpClient = Http;
+            this.Client.HttpClient = this.Http;
         }
     }
 }

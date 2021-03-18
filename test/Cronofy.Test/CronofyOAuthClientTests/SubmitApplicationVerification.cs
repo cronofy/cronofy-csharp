@@ -1,12 +1,12 @@
-using NUnit.Framework;
-
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class SubmitApplicationVerification
     {
-        private const string clientId = "clientid123";
-        private const string clientSecret = "s3cr31v3";
+        private const string ClientId = "clientid123";
+        private const string ClientSecret = "s3cr31v3";
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -14,10 +14,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = this.http;
+            this.client.HttpClient = this.http;
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/application_verification")
-                .RequestHeader("Authorization", $"Bearer {clientSecret}")
+                .RequestHeader("Authorization", $"Bearer {ClientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com"",""display_name"":""Kenneth Calloway""}}")
                 .ResponseCode(202)
@@ -36,12 +36,12 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
                     DisplayName = "Kenneth Calloway",
-                    Email = "kenneth.calloway@pinpoint.com"
+                    Email = "kenneth.calloway@pinpoint.com",
                 },
                 RedirectUris = new[]
                 {
-                    "https://app.pinpoint.com"
-                }
+                    "https://app.pinpoint.com",
+                },
             });
         }
 
@@ -50,7 +50,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/application_verification")
-                .RequestHeader("Authorization", $"Bearer {clientSecret}")
+                .RequestHeader("Authorization", $"Bearer {ClientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com""}}")
                 .ResponseCode(202)
@@ -60,12 +60,12 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             {
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
-                    Email = "kenneth.calloway@pinpoint.com"
+                    Email = "kenneth.calloway@pinpoint.com",
                 },
                 RedirectUris = new[]
                 {
-                    "https://app.pinpoint.com"
-                }
+                    "https://app.pinpoint.com",
+                },
             });
         }
 
@@ -74,7 +74,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         {
             this.http.Stub(HttpPost
                 .Url("https://api.cronofy.com/v1/application_verification")
-                .RequestHeader("Authorization", $"Bearer {clientSecret}")
+                .RequestHeader("Authorization", $"Bearer {ClientSecret}")
                 .RequestHeader("Content-Type", "application/json; charset=utf-8")
                 .RequestBody(@"{""redirect_uris"":[""https://app.pinpoint.com"",""https://app2.pinpoint.com"",""https://app3.pinpoint.com""],""contact"":{""email"":""kenneth.calloway@pinpoint.com"",""display_name"":""Kenneth Calloway""}}")
                 .ResponseCode(202)
@@ -85,14 +85,14 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                 Contact = new ApplicationVerificationRequest.ContactDetails
                 {
                     DisplayName = "Kenneth Calloway",
-                    Email = "kenneth.calloway@pinpoint.com"
+                    Email = "kenneth.calloway@pinpoint.com",
                 },
                 RedirectUris = new[]
                 {
                     "https://app.pinpoint.com",
                     "https://app2.pinpoint.com",
                     "https://app3.pinpoint.com",
-                }
+                },
             });
         }
     }

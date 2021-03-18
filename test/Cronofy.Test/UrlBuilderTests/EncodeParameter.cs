@@ -1,8 +1,7 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.UrlBuilderTests
+﻿namespace Cronofy.Test.UrlBuilderTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class EncodeParameter
     {

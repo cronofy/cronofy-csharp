@@ -35,35 +35,15 @@ namespace Cronofy
         /// The access token for the OAuth authorization for the account, must
         /// not be empty.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
-        public CronofyEnterpriseConnectAccountClient(string accessToken, string dataCentre)
-            : base(accessToken, dataCentre)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyEnterpriseConnectAccountClient"/> class.
-        /// </summary>
-        /// <param name="accessToken">
-        /// The access token for the OAuth authorization for the account, must
-        /// not be empty.
-        /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use, must not be <code>null</code>.
-        /// </param>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
-        /// </exception>
-        public CronofyEnterpriseConnectAccountClient(string accessToken, DataCentre dataCentre)
-            : base(accessToken, dataCentre)
+        public CronofyEnterpriseConnectAccountClient(string accessToken, string dataCenter)
+            : base(accessToken, dataCenter)
         {
         }
 
@@ -94,17 +74,18 @@ namespace Cronofy
             Preconditions.NotEmpty("callbackUrl", callbackUrl);
             Preconditions.NotEmpty("scope", scope);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.UrlProvider.AuthorizeWithServiceAccountUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.UrlProvider.AuthorizeWithServiceAccountUrl,
+            };
             request.AddOAuthAuthorization(this.AccessToken);
 
             var requestBody = new
             {
                 email,
                 callback_url = callbackUrl,
-                scope
+                scope,
             };
             request.SetJsonBody(requestBody);
 

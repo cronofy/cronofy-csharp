@@ -1,119 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A8D2403-F256-45DA-A07D-6FFF9ABC9751}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Cronofy.Test</RootNamespace>
-    <AssemblyName>Cronofy.Test</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <UseMSBuildEngine>False</UseMSBuildEngine>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\Cronofy.Test\bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="../../stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <NoWarn>SA1633, SA0001, SA1117, SA1201, SA1203, SA1204</NoWarn> <!-- no file header or xmldoc requirement, param styling, member ordering -->
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Cronofy.Test\bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
+
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\..\src\Cronofy\Cronofy.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CronofyAccountClientTests\Availability.cs" />
-    <Compile Include="CronofyAccountClientTests\Batch.cs" />
-    <Compile Include="CronofyAccountClientTests\ElevatedPermissions.cs" />
-    <Compile Include="CronofyOAuthClientTests\SmartInvites.cs" />
-    <Compile Include="UrlBuilderTests\EncodeParameter.cs" />
-    <Compile Include="StubHttpClient.cs" />
-    <Compile Include="StubRequestBuilder.cs" />
-    <Compile Include="DateTests.cs" />
-    <Compile Include="EventTimeTests\JsonParsing.cs" />
-    <Compile Include="EventTimeTests\EventTimeHolder.cs" />
-    <Compile Include="EventTimeTests\JsonGeneration.cs" />
-    <Compile Include="CronofyAccountClientTests\GetEvents.cs" />
-    <Compile Include="CronofyAccountClientTests\UpsertEvent.cs" />
-    <Compile Include="CronofyAccountClientTests\DeleteEvent.cs" />
-    <Compile Include="CronofyAccountClientTests\GetCalendars.cs" />
-    <Compile Include="CronofyOAuthClientTests\GetAuthorizationUrl.cs" />
-    <Compile Include="CronofyOAuthClientTests\GetTokenFromCode.cs" />
-    <Compile Include="CronofyOAuthClientTests\GetTokenFromRefreshToken.cs" />
-    <Compile Include="CronofyAccountClientTests\GetFreeBusy.cs" />
-    <Compile Include="CronofyOAuthClientTests\RevokeToken.cs" />
-    <Compile Include="CronofyAccountClientTests\GetAccount.cs" />
-    <Compile Include="CronofyAccountClientTests\GetProfiles.cs" />
-    <Compile Include="CronofyAccountClientTests\CreateChannel.cs" />
-    <Compile Include="CronofyAccountClientTests\Base.cs" />
-    <Compile Include="CronofyAccountClientTests\GetChannels.cs" />
-    <Compile Include="CronofyAccountClientTests\CloseChannel.cs" />
-    <Compile Include="PushNotificationTests\JsonParsing.cs" />
-    <Compile Include="CronofyAccountClientTests\CreateCalendar.cs" />
-    <Compile Include="ExtremeTimesTests\JsonParsing.cs" />
-    <Compile Include="ExtremeTimesTests\TimeHolder.cs" />
-    <Compile Include="CronofyAccountClientTests\ChangeParticipationStatus.cs" />
-    <Compile Include="CronofyAccountClientTests\BulkDelete.cs" />
-    <Compile Include="CronofyAccountClientTests\GetUserInfo.cs" />
-    <Compile Include="CronofyEnterpriseConnectAccountClientTests\GetResources.cs" />
-    <Compile Include="CronofyEnterpriseConnectAccountClientTests\GetUserInfo.cs" />
-    <Compile Include="CronofyEnterpriseConnectAccountClientTests\Base.cs" />
-    <Compile Include="CronofyEnterpriseConnectAccountClientTests\AuthorizeUser.cs" />
-    <Compile Include="CronofyAccountClientTests\CreateLinkToken.cs" />
-    <Compile Include="CronofyOAuthClientTests\AddToCalendar.cs" />
-    <Compile Include="CronofyOAuthClientTests\CreateRealTimeSchedulingLink.cs" />
-    <Compile Include="PushNotificationTests\HmacVerification.cs" />
-    <Compile Include="CronofyAccountClientTests\RevokeProfileAuthorization.cs" />
-    <Compile Include="CronofyOAuthClientTests\ApplicationCalendars.cs" />
-    <Compile Include="SerializationTests.cs" />
-    <Compile Include="CronofyAccountClientTests\SequencedAvailablity.cs" />
-    <Compile Include="CronofyOAuthClientTests\RealTimeSequencing.cs" />
-    <Compile Include="CronofyOAuthClientTests\SubmitApplicationVerification.cs" />
-    <Compile Include="CronofyAdminApiClientTests\ProvisionApplication.cs" />
-    <Compile Include="CronofyOAuthClientTests\DisableRealTimeSchedulingLink.cs" />
-    <Compile Include="CronofyOAuthClientTests\GetRealTimeSchedulingLinkStatus.cs" />
-    <Compile Include="CronofyOAuthClientTests\GetElementToken.cs" />
-    <Compile Include="CronofyOAuthClientTests\RealTimeScheduling.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Cronofy\Cronofy.csproj">
-      <Project>{43F5E20B-AC85-448D-A218-51B9CD248A83}</Project>
-      <Name>Cronofy</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UrlBuilderTests\" />
-    <Folder Include="EventTimeTests\" />
-    <Folder Include="CronofyAccountClientTests\" />
-    <Folder Include="CronofyOAuthClientTests\" />
-    <Folder Include="PushNotificationTests\" />
-    <Folder Include="ExtremeTimesTests\" />
-    <Folder Include="CronofyEnterpriseConnectAccountClientTests\" />
-    <Folder Include="CronofyAdminApiClientTests\" />
-  </ItemGroup>
+
 </Project>

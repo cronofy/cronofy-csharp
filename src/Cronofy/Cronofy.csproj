@@ -1,191 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{43F5E20B-AC85-448D-A218-51B9CD248A83}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Cronofy</RootNamespace>
-    <AssemblyName>Cronofy</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <UseMSBuildEngine>False</UseMSBuildEngine>
-    <StyleCopTreatErrorsAsWarnings>False</StyleCopTreatErrorsAsWarnings>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\Cronofy\bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\..\build\Cronofy\bin\Debug\Cronofy.xml</DocumentationFile>
+
+  <PropertyGroup>
+    <PackageId>Cronofy</PackageId>
+    <Title>Cronofy calendar API SDK</Title>
+    <Authors>Garry Shutler</Authors>
+    <Company>Cronofy</Company>
+    <PackageDescription>Cronofy provide a unified API over all major calendar services, allowing you to focus on developing your application.</PackageDescription>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>http://d1kwv30jm1b7sr.cloudfront.net/2015/05/12085035/cronofy_logo_200.png</PackageIconUrl>
+    <PackageIcon>cronofy-logo.png</PackageIcon>
+    <PackageTags>cronofy;calendar</PackageTags>
+    <RepositoryUrl>https://github.com/cronofy/cronofy-csharp</RepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Cronofy\bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <DocumentationFile>..\..\build\Cronofy\bin\Release\Cronofy.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+  <PropertyGroup>
+    <NoWarn>SA1633</NoWarn> <!-- no file header requirement -->
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Web" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="CronofyAdminApiClient.cs" />
-    <Compile Include="ICronofyAdminApiClient.cs" />
-    <Compile Include="Requests\ApplicationVerificationRequest.cs" />
-    <Compile Include="AvailabilityRequestBuilder.cs" />
-    <Compile Include="AvailablePeriod.cs" />
-    <Compile Include="BatchRequestBuilder.cs" />
-    <Compile Include="ElevatedPermissionsResponse.cs" />
-    <Compile Include="ElevatedPermissionsBuilder.cs" />
-    <Compile Include="EventOptions.cs" />
-    <Compile Include="BatchWithErrorsException.cs" />
-    <Compile Include="ParticipantGroupBuilder.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\AvailabilityRequest.cs" />
-    <Compile Include="Requests\BaseEventRequest.cs" />
-    <Compile Include="Requests\BatchRequest.cs" />
-    <Compile Include="Requests\DeleteEventRequest.cs" />
-    <Compile Include="Requests\DeleteExternalEventRequest.cs" />
-    <Compile Include="Requests\ElevatedPermissionsRequest.cs" />
-    <Compile Include="Requests\ProvisionApplicationRequest.cs" />
-    <Compile Include="Requests\SmartInviteCancelRequest.cs" />
-    <Compile Include="Requests\SmartInviteEventRequest.cs" />
-    <Compile Include="Responses\AvailabilityResponse.cs" />
-    <Compile Include="Responses\BatchResponse.cs" />
-    <Compile Include="Responses\ElevatedPermissionsResponse.cs" />
-    <Compile Include="Responses\ProvisionApplicationResponse.cs" />
-    <Compile Include="Responses\SmartInviteResponse.cs" />
-    <Compile Include="SmartInvite.cs" />
-    <Compile Include="SmartInviteEventRequestBuilder.cs" />
-    <Compile Include="SmartInviteRequestBuilder.cs" />
-    <Compile Include="UrlBuilder.cs" />
-    <Compile Include="Preconditions.cs" />
-    <Compile Include="OAuthToken.cs" />
-    <Compile Include="IHttpClient.cs" />
-    <Compile Include="ConcreteHttpClient.cs" />
-    <Compile Include="HttpRequest.cs" />
-    <Compile Include="HttpResponse.cs" />
-    <Compile Include="Responses\OAuthTokenResponse.cs" />
-    <Compile Include="Requests\OAuthTokenRequest.cs" />
-    <Compile Include="CronofyAccountClient.cs" />
-    <Compile Include="Event.cs" />
-    <Compile Include="Responses\ReadEventsResponse.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="Transparency.cs" />
-    <Compile Include="EventStatus.cs" />
-    <Compile Include="Date.cs" />
-    <Compile Include="EventTime.cs" />
-    <Compile Include="Requests\UpsertEventRequest.cs" />
-    <Compile Include="UpsertEventRequestBuilder.cs" />
-    <Compile Include="Calendar.cs" />
-    <Compile Include="Profile.cs" />
-    <Compile Include="Responses\CalendarsResponse.cs" />
-    <Compile Include="ICronofyAccountClient.cs" />
-    <Compile Include="CronofyOAuthClient.cs" />
-    <Compile Include="Requests\OAuthTokenRefreshRequest.cs" />
-    <Compile Include="ICronofyOAuthClient.cs" />
-    <Compile Include="AttendeeStatus.cs" />
-    <Compile Include="Attendee.cs" />
-    <Compile Include="IHttpClientExtensions.cs" />
-    <Compile Include="IBuilder.cs" />
-    <Compile Include="CronofyException.cs" />
-    <Compile Include="Properties\AssemblyVersion.cs" />
-    <Compile Include="GetEventsRequestBuilder.cs" />
-    <Compile Include="Requests\GetEventsRequest.cs" />
-    <Compile Include="CronofyResponseException.cs" />
-    <Compile Include="FreeBusy.cs" />
-    <Compile Include="FreeBusyStatus.cs" />
-    <Compile Include="Requests\GetFreeBusyRequest.cs" />
-    <Compile Include="GetFreeBusyRequestBuilder.cs" />
-    <Compile Include="Responses\IPagedResultsResponse.cs" />
-    <Compile Include="Responses\PagesResponse.cs" />
-    <Compile Include="Responses\FreeBusyResponse.cs" />
-    <Compile Include="TimeZoneIdentifiers.cs" />
-    <Compile Include="Requests\OAuthTokenRevocationRequest.cs" />
-    <Compile Include="Account.cs" />
-    <Compile Include="Responses\AccountResponse.cs" />
-    <Compile Include="Responses\ProfilesResponse.cs" />
-    <Compile Include="Channel.cs" />
-    <Compile Include="Requests\CreateChannelRequest.cs" />
-    <Compile Include="Responses\ChannelResponse.cs" />
-    <Compile Include="Responses\ChannelsResponse.cs" />
-    <Compile Include="Responses\ChannelDetailResponse.cs" />
-    <Compile Include="CreateChannelBuilder.cs" />
-    <Compile Include="EnumerableUtils.cs" />
-    <Compile Include="Requests\PushNotificationRequest.cs" />
-    <Compile Include="Requests\CreateCalendarRequest.cs" />
-    <Compile Include="Responses\CreateCalendarResponse.cs" />
-    <Compile Include="EventTimeConverter.cs" />
-    <Compile Include="TimestampConverter.cs" />
-    <Compile Include="Organizer.cs" />
-    <Compile Include="ParticipationStatus.cs" />
-    <Compile Include="NullableString.cs" />
-    <Compile Include="NullableStringConverter.cs" />
-    <Compile Include="LinkingProfile.cs" />
-    <Compile Include="Responses\ResourcesResponse.cs" />
-    <Compile Include="Resource.cs" />
-    <Compile Include="Responses\UserInfoResponse.cs" />
-    <Compile Include="UserInfo.cs" />
-    <Compile Include="ICronofyEnterpriseConnectAccountClient.cs" />
-    <Compile Include="CronofyEnterpriseConnectAccountClient.cs" />
-    <Compile Include="ICronofyUserInfoClient.cs" />
-    <Compile Include="CronofyAccessTokenClient.cs" />
-    <Compile Include="AvailabilityMemberBuilder.cs" />
-    <Compile Include="UrlProviderFactory.cs" />
-    <Compile Include="UrlProvider.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="DataCentre.cs" />
-    <Compile Include="Responses\LinkTokenResponse.cs" />
-    <Compile Include="AddToCalendarRequestBuilder.cs" />
-    <Compile Include="Requests\AddToCalendarRequest.cs" />
-    <Compile Include="Responses\AddToCalendarResponse.cs" />
-    <Compile Include="Builder.cs" />
-    <Compile Include="OAuthDetailsBuilder.cs" />
-    <Compile Include="Requests\RealTimeSchedulingRequest.cs" />
-    <Compile Include="RealTimeSchedulingRequestBuilder.cs" />
-    <Compile Include="Requests\SmartInviteRequest.cs" />
-    <Compile Include="Requests\SchedulingFormatting.cs" />
-    <Compile Include="Requests\ApplicationCalendarRequest.cs" />
-    <Compile Include="Requests\RealTimeSequencingRequest.cs" />
-    <Compile Include="Requests\RealTimeSchedulingBaseRequest.cs" />
-    <Compile Include="Requests\SequencedAvailabilityRequest.cs" />
-    <Compile Include="AvailableSequences.cs" />
-    <Compile Include="SequenceRequestBuilder.cs" />
-    <Compile Include="SequencedAvailabilityRequestBuilder.cs" />
-    <Compile Include="Responses\SequencedAvailabilityResponse.cs" />
-    <Compile Include="RealTimeSequencingRequestBuilder.cs" />
-    <Compile Include="Responses\RealTimeSequencingResponse.cs" />
-    <Compile Include="SmartInviteMultiRecipientRequestBuilder.cs" />
-    <Compile Include="Requests\SmartInviteMultiRecipientRequest.cs" />
-    <Compile Include="SmartInviteMultiRecipient.cs" />
-    <Compile Include="Responses\SmartInviteMultiRecipientResponse.cs" />
-    <Compile Include="Requests\DisableRealTimeSchedulingRequest.cs" />
-    <Compile Include="Responses\RealTimeSchedulingStatusResponse.cs" />
-    <Compile Include="RealTimeSchedulingLinkStatus.cs" />
-    <Compile Include="ElementToken.cs" />
-    <Compile Include="Requests\ElementTokenRequest.cs" />
-    <Compile Include="Responses\ElementTokenResponse.cs" />
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+    <_Parameter1>Cronofy.Test</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages/StyleCop.MSBuild.5.0.0\build\StyleCop.MSBuild.targets" />
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <AdditionalFiles Include="../../stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Responses\" />
-    <Folder Include="Requests\" />
+
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <None Include="$(OutputPath)/GITCOMMIT.txt" Pack="true" PackagePath="." />
+    <None Include="../../resources/cronofy-logo.png" Pack="true" PackagePath="." />
+    <None Include="../../CHANGELOG.md" Pack="true" PackagePath="." />
+    <None Include="../../README.md" Pack="true" PackagePath="." />
+    <None Include="../../LICENSE" Pack="true" PackagePath="." />
+    <None Include="../../VERSION" Pack="true" PackagePath="." />
   </ItemGroup>
+
+  <Target Name="GetGitCommit" BeforeTargets="BeforeBuild" Condition="'$(Configuration)'=='Release'">
+    <Exec Command="mkdir -p $(OutputPath); git rev-parse --verify HEAD &gt; $(OutputPath)/GITCOMMIT.txt" />
+  </Target>
+
 </Project>

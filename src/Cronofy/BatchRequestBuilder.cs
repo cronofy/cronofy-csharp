@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Class to build a batch request.

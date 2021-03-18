@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     internal sealed class SequencedAvailability : Base
     {
         [Test]
@@ -109,20 +108,22 @@ namespace Cronofy.Test.CronofyAccountClientTests
               ]
             }";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/sequenced_availability")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .JsonRequest(requestBody)
                     .ResponseCode(200)
-                    .ResponseBody(responseBody)
-            );
+                    .ResponseBody(responseBody));
 
-            var availability = Client.GetSequencedAvailability(builder);
+            var availability = this.Client.GetSequencedAvailability(builder);
 
-            var expected = new AvailableSequences {
-                Sequences = new IEnumerable<AvailableSequences.SequenceItem>[] {
-                    new AvailableSequences.SequenceItem[] {
+            var expected = new AvailableSequences
+            {
+                Sequences = new IEnumerable<AvailableSequences.SequenceItem>[]
+                {
+                    new AvailableSequences.SequenceItem[]
+                    {
                         new AvailableSequences.SequenceItem
                         {
                             SequenceId = "123",
@@ -142,9 +143,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                             {
                                 new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
                             },
-                        }
+                        },
                     },
-                    new[] {
+                    new[]
+                    {
                         new AvailableSequences.SequenceItem
                         {
                             SequenceId = "123",
@@ -164,9 +166,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
                             {
                                 new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
                             },
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             };
 
             Assert.AreEqual(expected.Sequences, availability.Sequences);

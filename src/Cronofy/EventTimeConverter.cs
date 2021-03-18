@@ -16,7 +16,7 @@
         private static readonly string[] DateTimeOffsetFormats =
         {
             "yyyy-MM-ddTHH:mm:ssZ",
-            "yyyy-MM-ddTHH:mm:sszzz"
+            "yyyy-MM-ddTHH:mm:sszzz",
         };
 
         /// <inheritdoc/>

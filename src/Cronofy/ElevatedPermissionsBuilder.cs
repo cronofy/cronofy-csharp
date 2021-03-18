@@ -29,7 +29,7 @@
         /// The level of permission to request for the calendar id, must not be blank.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// If <para>calendarId</para> or <para>permissionLevel</para> are blank.
+        /// If <paramref name="calendarId"/> or <paramref name="permissionLevel"/> are blank.
         /// </exception>
         /// <returns>
         /// A reference to the modified builder.
@@ -42,7 +42,7 @@
             this.calendarPermissions.Add(new CalendarPermission()
             {
                 CalendarId = calendarId,
-                PermissionLevel = permissionLevel
+                PermissionLevel = permissionLevel,
             });
 
             return this;
@@ -56,7 +56,7 @@
         ///  must not be blank.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// If <para>calendarId</para> or <para>permissionLevel</para> are blank.
+        /// If <paramref name="redirectUri"/> is blank.
         /// </exception>
         /// <returns>
         /// A reference to the modified builder.
@@ -84,7 +84,7 @@
                 request.Permissions.Add(new ElevatedPermissionsRequest.CalendarPermission()
                 {
                     CalendarId = calendarPermission.CalendarId,
-                    PermissionLevel = calendarPermission.PermissionLevel
+                    PermissionLevel = calendarPermission.PermissionLevel,
                 });
             }
 

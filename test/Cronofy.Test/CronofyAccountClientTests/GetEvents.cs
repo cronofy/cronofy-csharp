@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-using System.Linq;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
     internal sealed class GetEvents : Base
     {
         [Test]
         public void CanGetEvents()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
+                .ResponseBody(SingleEventResponseBody));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }
@@ -26,7 +25,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventWithoutLocation()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -66,14 +65,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       }
     }
   ]
-}")
-            );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -86,22 +86,24 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
+                            Update = true,
                         },
-                    }
+                    },
                 },
                 events);
         }
@@ -109,7 +111,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventWithGeoLocation()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -154,14 +156,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       }
     }
   ]
-}")
-            );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -174,22 +177,24 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
-                        }
-                    }
+                            Update = true,
+                        },
+                    },
                 },
                 events);
         }
@@ -197,7 +202,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetTransparentEvent()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -237,14 +242,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       }
     }
   ]
-}")
-            );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -257,22 +263,24 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
-                        }
-                    }
+                            Update = true,
+                        },
+                    },
                 },
                 events);
         }
@@ -280,7 +288,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventWithMeetingUrl()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -321,14 +329,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""meeting_url"": ""https://meet.example.com/ABCD1234""
     }
   ]
-}")
-            );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -341,23 +350,25 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
+                            Update = true,
                         },
                         MeetingUrl = "https://meet.example.com/ABCD1234",
-                    }
+                    },
                 },
                 events);
         }
@@ -365,7 +376,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventWithOldAuditTimes()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -400,14 +411,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""updated"": ""0000-12-29T00:00:00Z""
     }
   ]
-}")
-        );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                new Event {
+              new List<Event>
+              {
+                new Event
+                {
                     CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                     EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                     Summary = "Company Retreat",
@@ -419,25 +431,27 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     ParticipationStatus = AttendeeStatus.NeedsAction,
                     Transparency = Transparency.Opaque,
                     EventStatus = EventStatus.Confirmed,
-                    Categories = new string[] {},
+                    Categories = new string[] { },
                     Created = DateTime.MinValue.ToUniversalTime(),
                     Updated = DateTime.MinValue.ToUniversalTime(),
-                    Attendees = new[] {
-                        new Attendee {
+                    Attendees = new[]
+                    {
+                        new Attendee
+                        {
                             Email = "example@cronofy.com",
                             DisplayName = "Example Person",
                             Status = AttendeeStatus.NeedsAction,
-                        }
+                        },
                     },
-                }
-            },
-                events);
+                },
+              },
+              events);
         }
 
         [Test]
         public void CanGetGoogleEventIds()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&google_event_ids=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -478,20 +492,21 @@ namespace Cronofy.Test.CronofyAccountClientTests
       }
     }
   ]
-}")
-            );
+}"));
 
             var builder = new GetEventsRequestBuilder();
 
             builder.GoogleEventIds(true);
 
-            var events = Client.GetEvents(builder);
+            var events = this.Client.GetEvents(builder);
 
             Assert.AreEqual("goog.12345", events.First().GoogleEventId);
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         GoogleEventId = "goog.12345",
@@ -505,22 +520,24 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Transparent,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
-                        }
-                    }
+                            Update = true,
+                        },
+                    },
                 },
                 events);
         }
@@ -528,7 +545,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetPagedEvents()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -564,10 +581,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""updated"": ""2014-09-01T09:24:16Z""
     }
   ]
-}")
-            );
+}"));
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events/pages/08a07b034306679e")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -602,14 +618,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""updated"": ""2014-09-01T10:24:16Z""
     }
   ]
-}")
-            );
+}"));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -621,18 +638,21 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                     },
-                    new Event {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6040",
                         Summary = "Company Retreat",
@@ -644,15 +664,17 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 9, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 10, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example+other@cronofy.com",
                                 DisplayName = "Other Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                     },
                 },
@@ -662,7 +684,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventsWithinDates()
         {
-            AssertParameter(
+            this.AssertParameter(
                 "from=2015-10-20&to=2015-10-30",
                 b => b.From(2015, 10, 20).To(2015, 10, 30));
         }
@@ -672,7 +694,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             var lastModified = DateTime.UtcNow.AddMinutes(-15);
 
-            AssertParameter(
+            this.AssertParameter(
                 "last_modified=" + Encode(lastModified.ToString("u")),
                 b => b.LastModified(lastModified));
         }
@@ -680,31 +702,31 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [Test]
         public void CanGetEventsThatHaveBeenDeleted()
         {
-            AssertParameter("include_deleted=true", b => b.IncludeDeleted(true));
+            this.AssertParameter("include_deleted=true", b => b.IncludeDeleted(true));
         }
 
         [Test]
         public void CanGetEventsThatHaveBeenMoved()
         {
-            AssertParameter("include_moved=true", b => b.IncludeMoved(true));
+            this.AssertParameter("include_moved=true", b => b.IncludeMoved(true));
         }
 
         [Test]
         public void CanGetEventsThatAreManaged()
         {
-            AssertParameter("include_managed=true", b => b.IncludeManaged(true));
+            this.AssertParameter("include_managed=true", b => b.IncludeManaged(true));
         }
 
         [Test]
         public void CanGetOnlyEventsThatAreManaged()
         {
-            AssertParameter("only_managed=true", b => b.OnlyManaged(true));
+            this.AssertParameter("only_managed=true", b => b.OnlyManaged(true));
         }
 
         [Test]
         public void CanGetEventsWithIncludeGeo()
         {
-            AssertParameter("include_geo=true", b => b.IncludeGeo(true));
+            this.AssertParameter("include_geo=true", b => b.IncludeGeo(true));
         }
 
         [Test]
@@ -712,7 +734,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
         {
             const string calendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw";
 
-            AssertParameter(
+            this.AssertParameter(
                 Encode("calendar_ids[]", calendarId),
                 b => b.CalendarId(calendarId));
         }
@@ -730,11 +752,11 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 Encode("calendar_ids[]", calendarIds[0]) + "&" +
                 Encode("calendar_ids[]", calendarIds[1]);
 
-            AssertParameter(
+            this.AssertParameter(
                 expectedKeyValue,
                 b => b.CalendarIds(calendarIds));
 
-            AssertParameter(
+            this.AssertParameter(
                 expectedKeyValue,
                 b => b.CalendarIds(calendarIds.ToArray()));
         }
@@ -743,13 +765,14 @@ namespace Cronofy.Test.CronofyAccountClientTests
         [TestCase(false)]
         public void CanGetPrivateEvents(bool eventPrivate)
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
                 .ResponseBody(
-string.Format(@"{{
+string.Format(
+    @"{{
   ""pages"": {{
     ""current"": 1,
     ""total"": 1
@@ -784,14 +807,15 @@ string.Format(@"{{
       ""event_private"": {0}
     }}
   ]
-}}", eventPrivate.ToString().ToLower()))
-            );
+}}", eventPrivate.ToString().ToLower())));
 
-            var events = Client.GetEvents();
+            var events = this.Client.GetEvents();
 
             CollectionAssert.AreEqual(
-                new List<Event> {
-                    new Event {
+                new List<Event>
+                {
+                    new Event
+                    {
                         CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                         EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                         Summary = "Company Retreat",
@@ -804,47 +828,48 @@ string.Format(@"{{
                         ParticipationStatus = AttendeeStatus.NeedsAction,
                         Transparency = Transparency.Opaque,
                         EventStatus = EventStatus.Confirmed,
-                        Categories = new string[] {},
+                        Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        Attendees = new[] {
-                            new Attendee {
+                        Attendees = new[]
+                        {
+                            new Attendee
+                            {
                                 Email = "example@cronofy.com",
                                 DisplayName = "Example Person",
                                 Status = AttendeeStatus.NeedsAction,
-                            }
+                            },
                         },
                         Options = new EventOptions()
                         {
                             Delete = true,
-                            Update = true
+                            Update = true,
                         },
                         EventPrivate = eventPrivate,
-                    }
+                    },
                 },
                 events);
         }
 
         private void AssertParameter(string keyValue, Action<GetEventsRequestBuilder> builderAction)
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true&" + keyValue)
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
                 .ResponseCode(200)
-                .ResponseBody(SingleEventResponseBody)
-            );
+                .ResponseBody(SingleEventResponseBody));
 
             var builder = new GetEventsRequestBuilder();
 
             builderAction.Invoke(builder);
 
-            var events = Client.GetEvents(builder);
+            var events = this.Client.GetEvents(builder);
 
             CollectionAssert.AreEqual(SingleEventResultCollection, events);
         }
 
-        const string SingleEventResponseBody = @"{
+        private const string SingleEventResponseBody = @"{
   ""pages"": {
     ""current"": 1,
     ""total"": 1
@@ -879,8 +904,10 @@ string.Format(@"{{
   ]
 }";
 
-        private static readonly List<Event> SingleEventResultCollection = new List<Event> {
-            new Event {
+        private static readonly List<Event> SingleEventResultCollection = new List<Event>
+        {
+            new Event
+            {
                 CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
                 EventUid = "evt_external_54008b1a4a41730f8d5c6037",
                 Summary = "Company Retreat",
@@ -892,23 +919,24 @@ string.Format(@"{{
                 ParticipationStatus = AttendeeStatus.NeedsAction,
                 Transparency = Transparency.Opaque,
                 EventStatus = EventStatus.Confirmed,
-                Categories = new string[] {
-
-                },
+                Categories = new string[] { },
                 Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                 Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                Attendees = new[] {
-                    new Attendee {
+                Attendees = new[]
+                {
+                    new Attendee
+                    {
                         Email = "example@cronofy.com",
                         DisplayName = "Example Person",
                         Status = AttendeeStatus.NeedsAction,
-                    }
+                    },
                 },
-                Organizer = new Organizer {
+                Organizer = new Organizer
+                {
                     Email = "example@cronofy.com",
                     DisplayName = "Example Person",
                 },
-            }
+            },
         };
 
         private static string Encode(string value)

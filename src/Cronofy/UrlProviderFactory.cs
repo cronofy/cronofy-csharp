@@ -14,17 +14,17 @@
             new Dictionary<string, UrlProvider>();
 
         /// <summary>
-        /// Gets a <see cref="UrlProvider"/> for the given data centre.
+        /// Gets a <see cref="UrlProvider"/> for the given data center.
         /// </summary>
-        /// <param name="dataCentre">
-        /// An identifier for the data centre.
+        /// <param name="dataCenter">
+        /// An identifier for the data center.
         /// </param>
         /// <returns>
-        /// A <see cref="UrlProvider"/> for the given data centre.
+        /// A <see cref="UrlProvider"/> for the given data center.
         /// </returns>
-        public static UrlProvider GetProvider(string dataCentre)
+        public static UrlProvider GetProvider(string dataCenter)
         {
-            var key = (dataCentre ?? Configuration.DefaultDataCentre.Identifier ?? string.Empty).ToLowerInvariant();
+            var key = (dataCenter ?? Configuration.DefaultDataCenter ?? string.Empty).ToLowerInvariant();
 
             if (key == "us")
             {

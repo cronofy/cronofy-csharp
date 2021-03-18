@@ -1,8 +1,8 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
+    using NUnit.Framework;
+
     internal sealed class Availability : Base
     {
         [Test]
@@ -73,16 +73,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
                   ]
                 }";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/availability")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .JsonRequest(requestBody)
                     .ResponseCode(200)
-                    .ResponseBody(responseBody)
-            );
+                    .ResponseBody(responseBody));
 
-            var availability = Client.GetAvailability(builder);
+            var availability = this.Client.GetAvailability(builder);
 
             var expected = new[]
             {
@@ -145,10 +144,10 @@ namespace Cronofy.Test.CronofyAccountClientTests
                   ""start_interval"":{ ""minutes"": 60 },
                   ""buffer"":{
                     ""before"":{
-                      ""minimum"":{ ""minutes"": 30 } 
+                      ""minimum"":{ ""minutes"": 30 }
                     },
                     ""after"":{
-                      ""minimum"":{ ""minutes"": 60 } 
+                      ""minimum"":{ ""minutes"": 60 }
                     }
                   }
                 }";
@@ -169,16 +168,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
                   ""available_periods"": [ ]
                 }";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/availability")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .JsonRequest(requestBody)
                     .ResponseCode(200)
-                    .ResponseBody(responseBody)
-            );
+                    .ResponseBody(responseBody));
 
-            var availability = Client.GetAvailability(builder);
+            var availability = this.Client.GetAvailability(builder);
 
             Assert.IsEmpty(availability);
         }
@@ -265,16 +263,15 @@ namespace Cronofy.Test.CronofyAccountClientTests
                   ]
                 }";
 
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/availability")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .JsonRequest(requestBody)
                     .ResponseCode(200)
-                    .ResponseBody(responseBody)
-            );
+                    .ResponseBody(responseBody));
 
-            var availability = Client.GetAvailability(builder);
+            var availability = this.Client.GetAvailability(builder);
 
             var expected = new[]
             {

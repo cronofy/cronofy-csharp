@@ -1,8 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace Cronofy.Test.EventTimeTests
+﻿namespace Cronofy.Test.EventTimeTests
 {
+    using Newtonsoft.Json;
+
     internal sealed class EventTimeHolder
     {
         [JsonProperty("event_time")]

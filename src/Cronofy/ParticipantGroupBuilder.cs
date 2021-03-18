@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Class to build <see cref="AvailabilityRequest.ParticipantGroup"/>s.
@@ -42,13 +42,13 @@
         /// Adds a member to the group.
         /// </summary>
         /// <param name="member">
-        /// The member to add, must not be <code>null</code>.
+        /// The member to add, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="ParticipantGroupBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="member"/> is <code>null</code>.
+        /// Thrown if <paramref name="member"/> is <c>null</c>.
         /// </exception>
         public ParticipantGroupBuilder AddMember(AvailabilityRequest.Member member)
         {
@@ -63,13 +63,13 @@
         /// Adds a member to the group.
         /// </summary>
         /// <param name="builder">
-        /// A builder for the member to add, must not be <code>null</code>.
+        /// A builder for the member to add, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="ParticipantGroupBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="builder"/> is <code>null</code>.
+        /// Thrown if <paramref name="builder"/> is <c>null</c>.
         /// </exception>
         public ParticipantGroupBuilder AddMember(IBuilder<AvailabilityRequest.Member> builder)
         {
@@ -82,13 +82,13 @@
         /// Adds members to the group.
         /// </summary>
         /// <param name="subs">
-        /// The subs of the members, must not be <code>null</code>.
+        /// The subs of the members, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// A reference to the <see cref="ParticipantGroupBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="subs"/> is <code>null</code>.
+        /// Thrown if <paramref name="subs"/> is <c>null</c>.
         /// </exception>
         public ParticipantGroupBuilder AddMembers(IEnumerable<string> subs)
         {

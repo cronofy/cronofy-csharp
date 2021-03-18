@@ -1,16 +1,15 @@
-using System;
-using NUnit.Framework;
-using Cronofy.Requests;
-
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using System;
     using System.Linq;
+    using Cronofy.Requests;
+    using NUnit.Framework;
 
     [TestFixture]
     public sealed class SmartInvites
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
 
         private string callbackUrl = "http://example.com/callbackUrl";
 
@@ -27,25 +26,25 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
 
             this.upsertEventRequest = new SmartInviteEventRequestBuilder()
-                .Summary(summary)
-                .Start(start)
-                .End(end)
+                .Summary(this.summary)
+                .Start(this.start)
+                .End(this.end)
                 .Build();
         }
 
         [Test]
         public void CanCreateInvite()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/smart_invites")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
                         @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}},""organizer"":{""name"":""My Cool Application""}}")
@@ -71,19 +70,18 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""attachments"": {
                         ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
-                    }")
-            );
+                    }"));
 
             var smartInviteRequest = new SmartInviteRequestBuilder()
                 .Method("request")
-                .CallbackUrl(callbackUrl)
-                .InviteId(inviteId)
+                .CallbackUrl(this.callbackUrl)
+                .InviteId(this.inviteId)
                 .Recipient("example@example.com")
                 .Organizer("My Cool Application")
-                .Event(upsertEventRequest)
+                .Event(this.upsertEventRequest)
                 .Build();
 
-            var actual = client.CreateInvite(smartInviteRequest);
+            var actual = this.client.CreateInvite(smartInviteRequest);
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -96,10 +94,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanCancelInvite()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/smart_invites")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
                         @"{""method"":""cancel"",""smart_invite_id"":""testEventId"",""recipient"":{""email"":""example@example.com""}}")
@@ -125,10 +123,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""attachments"": {
                         ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
-                    }")
-            );
+                    }"));
 
-            var actual = client.CancelInvite(inviteId, "example@example.com");
+            var actual = this.client.CancelInvite(this.inviteId, "example@example.com");
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -141,10 +138,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanGetEventDetails()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/smart_invites?smart_invite_id=example-event-id&recipient_email=cronofy%40example.com")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .ResponseCode(200)
                     .ResponseBody(@"{
                       ""recipient"": {
@@ -185,10 +182,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                           ""description"": ""Board room""
                         }
                       }
-                    }")
-            );
+                    }"));
 
-            var actual = client.GetSmartInvite("example-event-id", "cronofy@example.com");
+            var actual = this.client.GetSmartInvite("example-event-id", "cronofy@example.com");
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -214,10 +210,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanCreateMultiAttendeeInvite()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/smart_invites")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
                         @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipients"":[{""email"":""cronofy@example.com""},{""email"":""cronofy2@example.com""}],""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}},""organizer"":{""name"":""My Cool Application""}}")
@@ -249,20 +245,19 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""attachments"": {
                         ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
-                    }")
-            );
+                    }"));
 
             var smartInviteRequest = new SmartInviteMultiRecipientRequestBuilder()
                 .Method("request")
-                .CallbackUrl(callbackUrl)
-                .InviteId(inviteId)
+                .CallbackUrl(this.callbackUrl)
+                .InviteId(this.inviteId)
                 .AddRecipient("cronofy@example.com")
                 .AddRecipient("cronofy2@example.com")
                 .Organizer("My Cool Application")
-                .Event(upsertEventRequest)
+                .Event(this.upsertEventRequest)
                 .Build();
 
-            var actual = client.CreateInvite(smartInviteRequest);
+            var actual = this.client.CreateInvite(smartInviteRequest);
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -277,10 +272,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanGetMultiRecipientEventDetails()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/smart_invites?smart_invite_id=example-event-id")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .ResponseCode(200)
                     .ResponseBody(@"{
                       ""recipients"": [
@@ -317,10 +312,9 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                           ""description"": ""Board room""
                         }
                       }
-                    }")
-            );
+                    }"));
 
-            var actual = client.GetSmartInvite("example-event-id");
+            var actual = this.client.GetSmartInvite("example-event-id");
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -345,10 +339,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanCreateMultiAttendeeInviteWithOrganizerEmail()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/smart_invites")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
                     @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipients"":[{""email"":""cronofy@example.com""},{""email"":""cronofy2@example.com""}],""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}},""organizer"":{""name"":""My Cool Application"",""email"":""organizer@example.com""}}")
@@ -380,20 +374,19 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""attachments"": {
                         ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
-                    }")
-            );
+                    }"));
 
             var smartInviteRequest = new SmartInviteMultiRecipientRequestBuilder()
                 .Method("request")
-                .CallbackUrl(callbackUrl)
-                .InviteId(inviteId)
+                .CallbackUrl(this.callbackUrl)
+                .InviteId(this.inviteId)
                 .AddRecipient("cronofy@example.com")
                 .AddRecipient("cronofy2@example.com")
                 .Organizer("My Cool Application", "organizer@example.com")
-                .Event(upsertEventRequest)
+                .Event(this.upsertEventRequest)
                 .Build();
 
-            var actual = client.CreateInvite(smartInviteRequest);
+            var actual = this.client.CreateInvite(smartInviteRequest);
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);
@@ -408,10 +401,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [Test]
         public void CanCreateSingleAttendeeInviteWithOrganizerEmail()
         {
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/smart_invites")
-                    .RequestHeader("Authorization", string.Format("Bearer {0}", clientSecret))
+                    .RequestHeader("Authorization", string.Format("Bearer {0}", ClientSecret))
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBody(
                         @"{""method"":""request"",""smart_invite_id"":""testEventId"",""callback_url"":""http://example.com/callbackUrl"",""recipient"":{""email"":""example@example.com""},""event"":{""summary"":""Test Summary"",""start"":{""time"":""2014-08-05 15:30:00Z"",""tzid"":""Etc/UTC""},""end"":{""time"":""2014-08-05 16:30:00Z"",""tzid"":""Etc/UTC""}},""organizer"":{""name"":""My Cool Application"",""email"":""organizer@example.com""}}")
@@ -437,19 +430,18 @@ namespace Cronofy.Test.CronofyOAuthClientTests
                       ""attachments"": {
                         ""icalendar"": ""BEGIN:VCALENDAR\nVERSION:2.0...""
                       }
-                    }")
-            );
+                    }"));
 
             var smartInviteRequest = new SmartInviteRequestBuilder()
                 .Method("request")
-                .CallbackUrl(callbackUrl)
-                .InviteId(inviteId)
+                .CallbackUrl(this.callbackUrl)
+                .InviteId(this.inviteId)
                 .Recipient("example@example.com")
                 .Organizer("My Cool Application", "organizer@example.com")
-                .Event(upsertEventRequest)
+                .Event(this.upsertEventRequest)
                 .Build();
 
-            var actual = client.CreateInvite(smartInviteRequest);
+            var actual = this.client.CreateInvite(smartInviteRequest);
 
             Assert.AreEqual("your-unique-identifier-for-invite", actual.SmartInviteId);
             Assert.AreEqual("https://example.yourapp.com/cronofy/smart_invite/notifications", actual.CallbackUrl);

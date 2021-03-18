@@ -2,7 +2,7 @@ namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Sequenced availability request builder.
@@ -20,7 +20,7 @@ namespace Cronofy
         /// </summary>
         private readonly IList<SequencedAvailabilityRequest.SequenceRequest> sequences =
             new List<SequencedAvailabilityRequest.SequenceRequest>();
-        
+
         /// <summary>
         /// Adds an available period to the request.
         /// </summary>

@@ -27,7 +27,7 @@
         {
             return new Cronofy.ElevatedPermissionsResponse()
             {
-                Url = this.PermissionsRequest.Url
+                Url = this.PermissionsRequest.Url,
             };
         }
 

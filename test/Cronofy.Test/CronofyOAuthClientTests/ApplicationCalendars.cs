@@ -1,15 +1,13 @@
-using System;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
 namespace Cronofy.Test.CronofyOAuthClientTests
 {
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class ApplicationCalendars
     {
-        private const string clientId = "abcdef123456";
-        private const string clientSecret = "s3cr3t1v3";
-        private const string applicationCalendarId = "example-calendar-id";
+        private const string ClientId = "abcdef123456";
+        private const string ClientSecret = "s3cr3t1v3";
+        private const string ApplicationCalendarId = "example-calendar-id";
 
         private CronofyOAuthClient client;
         private StubHttpClient http;
@@ -17,10 +15,10 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         [SetUp]
         public void SetUp()
         {
-            this.client = new CronofyOAuthClient(clientId, clientSecret);
+            this.client = new CronofyOAuthClient(ClientId, ClientSecret);
             this.http = new StubHttpClient();
 
-            client.HttpClient = http;
+            this.client.HttpClient = this.http;
         }
 
         [Test]
@@ -31,20 +29,19 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             const string refreshToken = "jerwpmsdkjngvdsk";
             const string scope = "read_events create_event delete_event";
 
-            http.Stub(
+            this.http.Stub(
                 HttpPost
                     .Url("https://api.cronofy.com/v1/application_calendars")
                     .RequestHeader("Content-Type", "application/json; charset=utf-8")
                     .RequestBodyFormat(
                     "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"application_calendar_id\":\"{2}\"}}",
-                    clientId, clientSecret, applicationCalendarId)
+                    ClientId, ClientSecret, ApplicationCalendarId)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         "{{\"token_type\":\"bearer\",\"access_token\":\"{0}\",\"expires_in\":{1},\"refresh_token\":\"{2}\",\"scope\":\"{3}\"}}",
-                        accessToken, expiresIn, refreshToken, scope)
-            );
+                        accessToken, expiresIn, refreshToken, scope));
 
-            var actualToken = client.ApplicationCalendar(applicationCalendarId);
+            var actualToken = this.client.ApplicationCalendar(ApplicationCalendarId);
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }));
 
             Assert.AreEqual(expectedToken, actualToken);

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace Cronofy.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     internal sealed class StubHttpClient : IHttpClient
     {
         private readonly IDictionary<string, StubRequest> stubbedRequests;
@@ -43,7 +43,7 @@ namespace Cronofy.Test
 
             var key = GetRequestKey(request.Method, url, request.Headers, request.Body);
 
-            if (stubbedRequests.ContainsKey(key) == false)
+            if (this.stubbedRequests.ContainsKey(key) == false)
             {
                 throw new ArgumentException(
                     "\n\n----------\n\n" +
@@ -53,14 +53,14 @@ namespace Cronofy.Test
                     "\n\n\n" +
                     "Known stubs" +
                     "\n============\n\n" +
-                    string.Join("\n\n-----\n\n", stubbedRequests.Keys.ToArray()) +
-                    "\n\n"
-                );
+                    string.Join("\n\n-----\n\n", this.stubbedRequests.Keys.ToArray()) +
+                    "\n\n");
             }
 
-            var stub = stubbedRequests[key];
+            var stub = this.stubbedRequests[key];
 
-            return new HttpResponse {
+            return new HttpResponse
+            {
                 Code = stub.ResponseCode,
                 Headers = new Dictionary<string, string>(),
                 Body = stub.ResponseBody,

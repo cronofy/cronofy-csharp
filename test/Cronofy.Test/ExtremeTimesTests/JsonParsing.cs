@@ -1,9 +1,9 @@
-﻿using System;
-using NUnit.Framework;
-using Newtonsoft.Json;
-
-namespace Cronofy.Test.ExtremeTimesTests
+﻿namespace Cronofy.Test.ExtremeTimesTests
 {
+    using System;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class JsonParsing
     {
@@ -49,8 +49,7 @@ namespace Cronofy.Test.ExtremeTimesTests
             const string json = @"{ ""time"": ""hello"" }";
 
             Assert.Throws<JsonSerializationException>(() =>
-                JsonConvert.DeserializeObject<TimeHolder>(json, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
-            ));
+                JsonConvert.DeserializeObject<TimeHolder>(json, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }));
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Class to build <see cref="AvailabilityRequest.Member"/>s.

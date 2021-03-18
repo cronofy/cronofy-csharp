@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     internal sealed class GetChannels : Base
     {
         [Test]
         public void CanGetChannels()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                     .Url("https://api.cronofy.com/v1/channels")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -22,10 +21,9 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""filters"": {}
     }
   ]
-}")
-            );
+}"));
 
-            var channels = Client.GetChannels();
+            var channels = this.Client.GetChannels();
 
             Assert.AreEqual(
                 new List<Channel>

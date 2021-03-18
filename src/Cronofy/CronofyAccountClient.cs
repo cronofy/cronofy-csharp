@@ -4,8 +4,8 @@ namespace Cronofy
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Requests;
-    using Responses;
+    using Cronofy.Requests;
+    using Cronofy.Responses;
 
     /// <summary>
     /// Class for a Cronofy client that interacts with an account's calendars
@@ -24,7 +24,8 @@ namespace Cronofy
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is null or empty.
         /// </exception>
-        public CronofyAccountClient(string accessToken) : base(accessToken)
+        public CronofyAccountClient(string accessToken)
+            : base(accessToken)
         {
         }
 
@@ -36,45 +37,26 @@ namespace Cronofy
         /// The access token for the OAuth authorization for the account, must
         /// not be empty.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
+        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
-        public CronofyAccountClient(string accessToken, string dataCentre)
-            : base(accessToken, dataCentre)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyAccountClient"/> class.
-        /// </summary>
-        /// <param name="accessToken">
-        /// The access token for the OAuth authorization for the account, must
-        /// not be empty.
-        /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use, must not be <code>null</code>.
-        /// </param>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <code>null</code> or
-        /// empty, or if <paramref name="dataCentre"/> is <code>null</code>.
-        /// </exception>
-        public CronofyAccountClient(string accessToken, DataCentre dataCentre)
-            : base(accessToken, dataCentre)
+        public CronofyAccountClient(string accessToken, string dataCenter)
+            : base(accessToken, dataCenter)
         {
         }
 
         /// <inheritdoc/>
         public Account GetAccount()
         {
-            var request = new HttpRequest();
-
-            request.Method = "GET";
-            request.Url = this.UrlProvider.AccountUrl;
+            var request = new HttpRequest
+            {
+                Method = "GET",
+                Url = this.UrlProvider.AccountUrl,
+            };
             request.AddOAuthAuthorization(this.AccessToken);
 
             var response = this.HttpClient.GetJsonResponse<AccountResponse>(request);
@@ -715,10 +697,11 @@ namespace Cronofy
             /// </returns>
             private TResponse GetNextPageResponse(IPagedResultsResponse<TResult> currentPage)
             {
-                var request = new HttpRequest();
-
-                request.Method = "GET";
-                request.Url = currentPage.Pages.NextPageUrl;
+                var request = new HttpRequest
+                {
+                    Method = "GET",
+                    Url = currentPage.Pages.NextPageUrl,
+                };
                 request.AddOAuthAuthorization(this.accessToken);
 
                 return this.httpClient.GetJsonResponse<TResponse>(request);

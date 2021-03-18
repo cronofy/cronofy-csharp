@@ -105,14 +105,14 @@ namespace Cronofy
         /// the corresponding request bytes.
         /// </summary>
         /// <param name="sha256Hmac">
-        /// The HMAC taken from the <code>Cronofy-HMAC-SHA256</code> header of
+        /// The HMAC taken from the <c>Cronofy-HMAC-SHA256</c> header of
         /// the request, must not be null or empty.
         /// </param>
         /// <param name="requestBytes">
         /// The contents of the request.
         /// </param>
         /// <returns>
-        /// <code>true</code> if the HMAC matches, otherwise <code>false</code>.
+        /// <c>true</c> if the HMAC matches, otherwise <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="sha256Hmac"/> is null or empty.
@@ -154,7 +154,7 @@ namespace Cronofy
         /// Creates a Smart Invite for the given request.
         /// </summary>
         /// <param name="smartInviteRequest">
-        /// The details of the invite, must not be <code>null</code>.
+        /// The details of the invite, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// A Smart Invite for the given request.
@@ -198,7 +198,7 @@ namespace Cronofy
         /// Creates a Smart Invite for the given request.
         /// </summary>
         /// <param name="smartInviteRequest">
-        /// The details of the invite, must not be <code>null</code>.
+        /// The details of the invite, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// A Smart Invite for the given request.
@@ -226,7 +226,7 @@ namespace Cronofy
         /// Submits your application for verification.
         /// </summary>
         /// <param name="applicationVerificationRequest">
-        /// The details of the verification request, must not be <code>null</code>.
+        /// The details of the verification request, must not be <c>null</c>.
         /// </param>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
@@ -240,7 +240,7 @@ namespace Cronofy
         /// Gets an Element Token for use with UI Elements.
         /// </summary>
         /// <param name="elementTokenRequest">
-        /// The details of the Element Token request, must not be <code>null</code>.
+        /// The details of the Element Token request, must not be <c>null</c>.
         /// </param>
         /// <returns>
         /// Returns an <see cref="ElementToken"/>.
@@ -252,5 +252,59 @@ namespace Cronofy
         /// Thrown if <paramref name="elementTokenRequest"/> is null or invalid.
         /// </exception>
         ElementToken GetElementToken(ElementTokenRequest elementTokenRequest);
+
+        /// <summary>
+        /// Disables a Real-Time Scheduling Link.
+        /// </summary>
+        /// <param name="realTimeSchedulingId">
+        /// The ID of the Real-Time Scheduling Link. Must not be <c>null</c> or blank.
+        /// </param>
+        /// <param name="displayMessage">
+        /// The message to display on the Real-Time Scheduling Page. Must not be <c>null</c> or blank.
+        /// </param>
+        /// <returns>
+        /// Returns the updated <see cref="RealTimeSchedulingLinkStatus"/> of the Link.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="realTimeSchedulingId"/> or <paramref name="realTimeSchedulingId"/> are null or blank.
+        /// </exception>
+        RealTimeSchedulingLinkStatus DisableRealTimeSchedulingLink(string realTimeSchedulingId, string displayMessage);
+
+        /// <summary>
+        /// Gets the current status of a Real-Time Scheduling Link.
+        /// </summary>
+        /// <param name="linkToken">
+        /// The token for the Real-Time Scheduling Link. Must not be <c>null</c> or blank.
+        /// </param>
+        /// <returns>
+        /// Returns the current <see cref="RealTimeSchedulingLinkStatus"/> of the Link.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="linkToken"/> is null or blank.
+        /// </exception>
+        RealTimeSchedulingLinkStatus GetRealTimeSchedulingLinkStatus(string linkToken);
+
+        /// <summary>
+        /// Creates an Add To Calendar link.
+        /// </summary>
+        /// <param name="addToCalendarRequest">
+        /// The details of the Add To Calendar request.
+        /// </param>
+        /// <returns>
+        /// Returns the url of the created link.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="addToCalendarRequest"/> is null.
+        /// </exception>
+        string AddToCalendar(AddToCalendarRequest addToCalendarRequest);
     }
 }

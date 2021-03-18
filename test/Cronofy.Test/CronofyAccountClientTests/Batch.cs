@@ -1,10 +1,10 @@
-﻿using System;
-using Cronofy.Requests;
-using Cronofy.Responses;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
+    using Cronofy.Requests;
+    using Cronofy.Responses;
+    using NUnit.Framework;
+
     internal sealed class Batch : Base
     {
         [Test]
@@ -41,8 +41,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                 { ""status"": 202 }
                             ]
                         }
-                    ")
-            );
+                    "));
 
             var batchBuilder = new BatchRequestBuilder();
 
@@ -99,8 +98,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                 { ""status"": 202 }
                             ]
                         }
-                    ")
-            );
+                    "));
 
             var batchBuilder = new BatchRequestBuilder();
 
@@ -148,8 +146,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                 { ""status"": 202 }
                             ]
                         }
-                    ")
-            );
+                    "));
 
             var batchBuilder = new BatchRequestBuilder();
 
@@ -205,8 +202,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                 { ""status"": 202 }
                             ]
                         }
-                    ")
-            );
+                    "));
 
             var batchBuilder = new BatchRequestBuilder();
 

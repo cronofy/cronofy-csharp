@@ -33,7 +33,7 @@
         /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="hourFormat"/> is empty. 
+        /// Thrown if <paramref name="hourFormat"/> is empty.
         /// </exception>
         public AddToCalendarRequestBuilder HourFormat(string hourFormat)
         {
@@ -57,7 +57,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty. 
+        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope)
         {
@@ -80,7 +80,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.  
+        /// Thrown if <paramref name="redirectUri"/> or <paramref name="scope"/> are empty.
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(string redirectUri, string scope, string state)
         {
@@ -91,7 +91,7 @@
             {
                 RedirectUri = redirectUri,
                 Scope = scope,
-                State = state
+                State = state,
             };
 
             this.oauthBuilder = Builder.Wrap(oauthDetails);
@@ -109,7 +109,7 @@
         /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="oauthBuilder"/> is empty.  
+        /// Thrown if <paramref name="oauthBuilder"/> is empty.
         /// </exception>
         public AddToCalendarRequestBuilder OAuthDetails(IBuilder<AddToCalendarRequest.OAuthDetails> oauthBuilder)
         {
@@ -127,7 +127,7 @@
         /// The event details builder for the request, must not be null.
         /// </param>
         /// <returns>
-        /// A reference to the <see cref="AddToCalendarRequestBuilder"/> 
+        /// A reference to the <see cref="AddToCalendarRequestBuilder"/>.
         /// </returns>
         public AddToCalendarRequestBuilder UpsertEventRequestBuilder(IBuilder<UpsertEventRequest> upsertEventRequestBuilder)
         {

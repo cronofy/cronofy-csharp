@@ -147,7 +147,7 @@
 
             this.recipient = new SmartInviteRequest.InviteRecipient
             {
-                Email = email
+                Email = email,
             };
 
             return this;
@@ -171,7 +171,7 @@
 
             this.organizer = new SmartInviteRequest.InviteOrganizer
             {
-                Name = name
+                Name = name,
             };
             return this;
         }

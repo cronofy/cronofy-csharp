@@ -1,9 +1,9 @@
-﻿using System;
-using NUnit.Framework;
-using Newtonsoft.Json;
-
-namespace Cronofy.Test.EventTimeTests
+﻿namespace Cronofy.Test.EventTimeTests
 {
+    using System;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     [TestFixture]
     public sealed class JsonParsing
     {

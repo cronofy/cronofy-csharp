@@ -1,6 +1,6 @@
 ﻿namespace Cronofy
 {
-    using Responses;
+    using Cronofy.Responses;
 
     /// <summary>
     /// Exception thrown by the Cronofy SDK when a batch request contains

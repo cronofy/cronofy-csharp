@@ -263,9 +263,7 @@
         /// </returns>
         internal static bool TryParse(string input, out Date value)
         {
-            DateTime dateTime;
-
-            var success = DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out dateTime);
+            var success = DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime dateTime);
 
             if (success)
             {
@@ -273,7 +271,7 @@
             }
             else
             {
-                value = new Date();
+                value = default;
             }
 
             return success;

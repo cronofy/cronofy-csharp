@@ -1,16 +1,15 @@
-﻿using System;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
+﻿namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
     internal sealed class GetResources : Base
     {
         [Test]
         public void CanGetResources()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/resources")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -31,22 +30,25 @@ namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
       ""name"": ""Resource Three""
     }
   ]
-}")
-        );
+}"));
 
-            var resources = Client.GetResources();
+            var resources = this.Client.GetResources();
 
             CollectionAssert.AreEqual(
-                new List<Resource> {
-                    new Resource {
+                new List<Resource>
+                {
+                    new Resource
+                    {
                         Email = "resource_one@cronofy.com",
                         Name = "Resource One",
                     },
-                    new Resource {
+                    new Resource
+                    {
                         Email = "resource_two@cronofy.com",
                         Name = "Resource Two",
                     },
-                    new Resource {
+                    new Resource
+                    {
                         Email = "resource_three@cronofy.com",
                         Name = "Resource Three",
                     },

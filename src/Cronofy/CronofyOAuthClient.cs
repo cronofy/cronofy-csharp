@@ -67,21 +67,21 @@ namespace Cronofy
         /// <param name="clientSecret">
         /// Your OAuth client_secret, must not be blank.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="clientId"/> or
         /// <paramref name="clientSecret"/> are blank.
         /// </exception>
-        public CronofyOAuthClient(string clientId, string clientSecret, string dataCentre)
+        public CronofyOAuthClient(string clientId, string clientSecret, string dataCenter)
         {
             Preconditions.NotBlank("clientId", clientId);
             Preconditions.NotBlank("clientSecret", clientSecret);
 
             this.clientId = clientId;
             this.clientSecret = clientSecret;
-            this.urlProvider = UrlProviderFactory.GetProvider(dataCentre);
+            this.urlProvider = UrlProviderFactory.GetProvider(dataCenter);
             this.HttpClient = new ConcreteHttpClient();
         }
 
@@ -157,10 +157,11 @@ namespace Cronofy
             Preconditions.NotEmpty("code", code);
             Preconditions.NotEmpty("redirectUri", redirectUri);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.urlProvider.TokenUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.TokenUrl,
+            };
 
             var requestBody = new OAuthTokenRequest
             {
@@ -183,10 +184,11 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("token", token);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.urlProvider.TokenRevocationUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.TokenRevocationUrl,
+            };
 
             var requestBody = new OAuthTokenRevocationRequest
             {
@@ -210,10 +212,11 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("refreshToken", refreshToken);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.urlProvider.TokenUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.TokenUrl,
+            };
 
             var requestBody = new OAuthTokenRefreshRequest
             {
@@ -244,10 +247,11 @@ namespace Cronofy
             realTimeSchedulingRequest.ClientId = this.clientId;
             realTimeSchedulingRequest.ClientSecret = this.clientSecret;
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.urlProvider.RealTimeSchedulingUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.RealTimeSchedulingUrl,
+            };
             request.SetJsonBody(realTimeSchedulingRequest);
 
             var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingStatusResponse>(request);
@@ -263,7 +267,7 @@ namespace Cronofy
 
             var disableRealTimeSchedulingRequest = new DisableRealTimeSchedulingRequest
             {
-                DisplayMessage = displayMessage
+                DisplayMessage = displayMessage,
             };
 
             var request = new HttpRequest();
@@ -353,7 +357,7 @@ namespace Cronofy
             var request = new HttpRequest
             {
                 Method = "POST",
-                Url = this.urlProvider.SmartInviteUrl
+                Url = this.urlProvider.SmartInviteUrl,
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -372,7 +376,7 @@ namespace Cronofy
             var request = new HttpRequest
             {
                 Method = "POST",
-                Url = this.urlProvider.SmartInviteUrl
+                Url = this.urlProvider.SmartInviteUrl,
             };
 
             var smartInviteRequest = new SmartInviteCancelRequest(smartInviteId, recipientEmail);
@@ -397,8 +401,8 @@ namespace Cronofy
                 QueryString = new HttpRequest.QueryStringCollection
                 {
                     { "smart_invite_id", smartInviteId },
-                    { "recipient_email", emailAddress }
-                }
+                    { "recipient_email", emailAddress },
+                },
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -413,7 +417,7 @@ namespace Cronofy
             var request = new HttpRequest
             {
                 Method = "POST",
-                Url = this.urlProvider.SmartInviteUrl
+                Url = this.urlProvider.SmartInviteUrl,
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -434,8 +438,8 @@ namespace Cronofy
                 Url = this.urlProvider.SmartInviteUrl,
                 QueryString = new HttpRequest.QueryStringCollection
                 {
-                    { "smart_invite_id", smartInviteId }
-                }
+                    { "smart_invite_id", smartInviteId },
+                },
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -449,10 +453,11 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("applicationCalendarId", applicationCalendarId);
 
-            var request = new HttpRequest();
-
-            request.Method = "POST";
-            request.Url = this.urlProvider.ApplicationCalendarsUrl;
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.ApplicationCalendarsUrl,
+            };
 
             var requestBody = new ApplicationCalendarRequest
             {
@@ -478,7 +483,7 @@ namespace Cronofy
             var request = new HttpRequest
             {
                 Method = "POST",
-                Url = this.urlProvider.ApplicationVerificationUrl
+                Url = this.urlProvider.ApplicationVerificationUrl,
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -496,9 +501,9 @@ namespace Cronofy
             Preconditions.NotEmpty(nameof(elementTokenRequest.Origin), elementTokenRequest.Origin);
 
             var request = new HttpRequest
-             {
+            {
                  Method = "POST",
-                 Url = this.urlProvider.ElementTokensUrl
+                 Url = this.urlProvider.ElementTokensUrl,
             };
 
             request.AddOAuthAuthorization(this.clientSecret);
@@ -595,7 +600,7 @@ namespace Cronofy
             /// </param>
             /// <param name="urlProvider">
             /// The URL provider for the current context, must not be
-            /// <code>null</code>.
+            /// <c>null</c>.
             /// </param>
             /// <param name="redirectUri">
             /// The URI to redirect the user's response for the authorization
@@ -603,7 +608,7 @@ namespace Cronofy
             /// </param>
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="clientId"/> is blank,
-            /// <paramref name="urlProvider"/> is <code>null</code>, or if
+            /// <paramref name="urlProvider"/> is <c>null</c>, or if
             /// <paramref name="redirectUri"/> is empty.
             /// </exception>
             internal AuthorizationUrlBuilder(string clientId, UrlProvider urlProvider, string redirectUri)
@@ -838,11 +843,11 @@ namespace Cronofy
             }
 
             /// <summary>
-            /// Returns a <see cref="System.String"/> that represents the
+            /// Returns a <see cref="string"/> that represents the
             /// current <see cref="AuthorizationUrlBuilder"/>.
             /// </summary>
             /// <returns>
-            /// A <see cref="System.String"/> that represents the current
+            /// A <see cref="string"/> that represents the current
             /// <see cref="AuthorizationUrlBuilder"/>.
             /// </returns>
             public override string ToString()

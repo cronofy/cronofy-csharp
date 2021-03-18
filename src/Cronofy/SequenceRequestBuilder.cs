@@ -3,7 +3,7 @@ namespace Cronofy
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Requests;
+    using Cronofy.Requests;
 
     /// <summary>
     /// Builder for Sequence request.
@@ -146,7 +146,7 @@ namespace Cronofy
             {
                 this.beforeBuffer.Minimum = new AvailabilityRequest.Duration
                 {
-                    Minutes = minimum.Value
+                    Minutes = minimum.Value,
                 };
             }
 
@@ -154,7 +154,7 @@ namespace Cronofy
             {
                 this.beforeBuffer.Maximum = new AvailabilityRequest.Duration
                 {
-                    Minutes = maximum.Value
+                    Minutes = maximum.Value,
                 };
             }
 
@@ -197,7 +197,7 @@ namespace Cronofy
             {
                 this.afterBuffer.Minimum = new AvailabilityRequest.Duration
                 {
-                    Minutes = minimum.Value
+                    Minutes = minimum.Value,
                 };
             }
 
@@ -205,7 +205,7 @@ namespace Cronofy
             {
                 this.afterBuffer.Maximum = new AvailabilityRequest.Duration
                 {
-                    Minutes = maximum.Value
+                    Minutes = maximum.Value,
                 };
             }
 
@@ -304,7 +304,7 @@ namespace Cronofy
         /// A reference to the <see cref="SequenceRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="builder"/> is <code>null</code>.
+        /// Thrown if <paramref name="builder"/> is <c>null.</c>.
         /// </exception>
         public SequenceRequestBuilder AddParticipantGroup(IBuilder<AvailabilityRequest.ParticipantGroup> builder)
         {
@@ -325,7 +325,7 @@ namespace Cronofy
         /// A reference to the <see cref="SequenceRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="participantGroup"/> is <code>null</code>.
+        /// Thrown if <paramref name="participantGroup"/> is <c>null</c>.
         /// </exception>
         public SequenceRequestBuilder AddParticipantGroup(AvailabilityRequest.ParticipantGroup participantGroup)
         {
@@ -343,7 +343,7 @@ namespace Cronofy
         /// A reference to the <see cref="SequenceRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="eventRequest"/> is <code>null</code>.
+        /// Thrown if <paramref name="eventRequest"/> is <c>null</c>.
         /// </exception>
         /// <param name="eventRequest">Event request.</param>
         public SequenceRequestBuilder Event(UpsertEventRequest eventRequest)
@@ -410,7 +410,7 @@ namespace Cronofy
             {
                 request.StartInterval = new AvailabilityRequest.Duration
                 {
-                    Minutes = this.startInterval.Value
+                    Minutes = this.startInterval.Value,
                 };
             }
 

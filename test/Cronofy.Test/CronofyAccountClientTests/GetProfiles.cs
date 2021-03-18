@@ -1,17 +1,16 @@
-﻿using System;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
     [TestFixture]
     internal sealed class GetProfiles : Base
     {
         [Test]
         public void CanGetCalendars()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpGet
                 .Url("https://api.cronofy.com/v1/profiles")
                 .RequestHeader("Authorization", "Bearer " + AccessToken)
@@ -33,20 +32,22 @@ namespace Cronofy.Test.CronofyAccountClientTests
       ""profile_relink_url"": ""http://to.cronofy.com/RaNggYu""
     }
   ]
-}")
-        );
+}"));
 
-            var profiles = Client.GetProfiles();
+            var profiles = this.Client.GetProfiles();
 
             CollectionAssert.AreEqual(
-                new List<Profile> {
-                    new Profile {
+                new List<Profile>
+                {
+                    new Profile
+                    {
                         ProviderName = "google",
                         Id = "pro_n23kjnwrw2",
                         Name = "example@cronofy.com",
                         Connected = true,
                     },
-                    new Profile {
+                    new Profile
+                    {
                         ProviderName = "apple",
                         Id = "pro_n23kjnwrw2",
                         Name = "example@cronofy.com",

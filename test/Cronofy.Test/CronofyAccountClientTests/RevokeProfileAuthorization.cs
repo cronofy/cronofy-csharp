@@ -1,23 +1,21 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Cronofy.Test.CronofyAccountClientTests
+﻿namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using NUnit.Framework;
+
     internal sealed class RevokeProfileAuthorization : Base
     {
-        private const string profileId = "pro_123456";
+        private const string ProfileId = "pro_123456";
 
         [Test]
         public void CanRevokeProfileAuthorization()
         {
-            Http.Stub(
+            this.Http.Stub(
                 HttpPost
-                    .Url("https://api.cronofy.com/v1/profiles/" + profileId + "/revoke")
+                    .Url("https://api.cronofy.com/v1/profiles/" + ProfileId + "/revoke")
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
-                    .ResponseCode(202)
-            );
+                    .ResponseCode(202));
 
-            Client.RevokeProfileAuthorization(profileId);
+            this.Client.RevokeProfileAuthorization(ProfileId);
         }
     }
 }
