@@ -68,7 +68,7 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public void AuthorizeUser(string email, string callbackUrl, string scope)
+        public void AuthorizeUser(string email, string callbackUrl, string scope, string state = null)
         {
             Preconditions.NotEmpty("email", email);
             Preconditions.NotEmpty("callbackUrl", callbackUrl);
@@ -86,6 +86,7 @@ namespace Cronofy
                 email,
                 callback_url = callbackUrl,
                 scope,
+                state,
             };
             request.SetJsonBody(requestBody);
 

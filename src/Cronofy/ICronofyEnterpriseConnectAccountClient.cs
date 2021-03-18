@@ -36,7 +36,6 @@
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="email"/>, <paramref name="callbackUrl"/>,
         /// or <paramref name="scope"/> are empty.
-        /// are empty.
         /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
@@ -56,14 +55,17 @@
         /// <param name="scope">
         /// The scope to request authorization for, must not be empty.
         /// </param>
+        /// <param name="state">
+        /// The optional state to pass through the authorization flow, which
+        /// will be returned to the <paramref name="callbackUrl"/> unmodified. Can be null.
+        /// </param>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="email"/>, <paramref name="callbackUrl"/>,
         /// or <paramref name="scope"/> are empty.
-        /// are empty.
         /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        void AuthorizeUser(string email, string callbackUrl, string scope);
+        void AuthorizeUser(string email, string callbackUrl, string scope, string state = null);
     }
 }
