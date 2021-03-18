@@ -1,6 +1,10 @@
 ## [1.0.0]
 
 * Updates the target of the SDK to .NET Standard 2.0, enabling support for .NET Core consumers. [#81]
+* **Breaking changes:**
+   * the `DataCentre` type has been removed.
+     * Update usages of Client constructors to use an _SDK Identifier_ string from [our Data Centers documentation](https://docs.cronofy.com/developers/data-centers/).
+      * Update usages of `Configuration.DefaultDataCentre` to set an SDK Identifier string on the renamed property `Configuration.DefaultDataCenter`
 
 ## [0.29.0]
 

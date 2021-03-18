@@ -163,16 +163,16 @@ namespace Cronofy
         /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
-        /// <param name="dataCentre">
-        /// The data centre the <see cref="UrlProvider"/> is for.
+        /// <param name="dataCenter">
+        /// The data center the <see cref="UrlProvider"/> is for.
         /// </param>
-        internal UrlProvider(string dataCentre)
+        internal UrlProvider(string dataCenter)
         {
             string suffix = string.Empty;
 
-            if (dataCentre != string.Empty)
+            if (dataCenter != string.Empty)
             {
-                suffix = "-" + dataCentre;
+                suffix = "-" + dataCenter;
             }
 
             this.AuthorizationUrl = string.Format(AuthorizationUrlFormat, suffix);

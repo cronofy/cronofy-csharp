@@ -37,7 +37,7 @@
         }
 
         [Test]
-        public void CanGetAccountForSpecifiedDataCentre()
+        public void CanGetAccountForSpecifiedDataCenter()
         {
             this.Client = new CronofyAccountClient(AccessToken, "de");
             this.Client.HttpClient = this.Http;

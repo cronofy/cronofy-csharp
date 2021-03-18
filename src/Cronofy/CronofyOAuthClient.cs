@@ -67,21 +67,21 @@ namespace Cronofy
         /// <param name="clientSecret">
         /// Your OAuth client_secret, must not be blank.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="clientId"/> or
         /// <paramref name="clientSecret"/> are blank.
         /// </exception>
-        public CronofyOAuthClient(string clientId, string clientSecret, string dataCentre)
+        public CronofyOAuthClient(string clientId, string clientSecret, string dataCenter)
         {
             Preconditions.NotBlank("clientId", clientId);
             Preconditions.NotBlank("clientSecret", clientSecret);
 
             this.clientId = clientId;
             this.clientSecret = clientSecret;
-            this.urlProvider = UrlProviderFactory.GetProvider(dataCentre);
+            this.urlProvider = UrlProviderFactory.GetProvider(dataCenter);
             this.HttpClient = new ConcreteHttpClient();
         }
 

@@ -19,7 +19,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
-        public void SpecifiedDataCentre()
+        public void SpecifiedDataCenter()
         {
             this.client = new CronofyOAuthClient(ClientId, ClientSecret, "de");
 
@@ -37,7 +37,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
-        public void ExplicitDefaultDataCentre()
+        public void ExplicitDefaultDataCenter()
         {
             this.client = new CronofyOAuthClient(ClientId, ClientSecret, "us");
 
@@ -55,13 +55,13 @@ namespace Cronofy.Test.CronofyOAuthClientTests
         }
 
         [Test]
-        public void AlteredDefaultDataCentre()
+        public void AlteredDefaultDataCenter()
         {
-            var defaultDataCentre = Configuration.DefaultDataCentre;
+            var defaultDataCenter = Configuration.DefaultDataCenter;
 
             try
             {
-                Configuration.DefaultDataCentre = DataCentre.German;
+                Configuration.DefaultDataCenter = "de";
 
                 this.client = new CronofyOAuthClient(ClientId, ClientSecret);
 
@@ -79,7 +79,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
             }
             finally
             {
-                Configuration.DefaultDataCentre = defaultDataCentre;
+                Configuration.DefaultDataCenter = defaultDataCenter;
             }
         }
 

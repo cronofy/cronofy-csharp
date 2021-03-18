@@ -32,44 +32,19 @@
         /// The access token for the OAuth authorization for the account, must
         /// not be empty.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
-        public CronofyAccessTokenClient(string accessToken, string dataCentre)
+        public CronofyAccessTokenClient(string accessToken, string dataCenter)
         {
             Preconditions.NotEmpty("accessToken", accessToken);
 
             this.AccessToken = accessToken;
-            this.UrlProvider = UrlProviderFactory.GetProvider(dataCentre);
-            this.HttpClient = new ConcreteHttpClient();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyAccessTokenClient"/> class.
-        /// </summary>
-        /// <param name="accessToken">
-        /// The access token for the OAuth authorization for the account, must
-        /// not be empty.
-        /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use, must not be <c>null</c>.
-        /// </param>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
-        /// empty, or if <paramref name="dataCentre"/> is <c>null</c>.
-        /// </exception>
-        public CronofyAccessTokenClient(string accessToken, DataCentre dataCentre)
-        {
-            Preconditions.NotEmpty("accessToken", accessToken);
-            Preconditions.NotNull("dataCentre", dataCentre);
-
-            this.AccessToken = accessToken;
-            this.UrlProvider = UrlProviderFactory.GetProvider(dataCentre.Identifier);
+            this.UrlProvider = UrlProviderFactory.GetProvider(dataCenter);
             this.HttpClient = new ConcreteHttpClient();
         }
 

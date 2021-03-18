@@ -35,35 +35,15 @@ namespace Cronofy
         /// The access token for the OAuth authorization for the account, must
         /// not be empty.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
         /// empty.
         /// </exception>
-        public CronofyEnterpriseConnectAccountClient(string accessToken, string dataCentre)
-            : base(accessToken, dataCentre)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Cronofy.CronofyEnterpriseConnectAccountClient"/> class.
-        /// </summary>
-        /// <param name="accessToken">
-        /// The access token for the OAuth authorization for the account, must
-        /// not be empty.
-        /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use, must not be <c>null</c>.
-        /// </param>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="accessToken"/> is <c>null</c> or
-        /// empty, or if <paramref name="dataCentre"/> is <c>null</c>.
-        /// </exception>
-        public CronofyEnterpriseConnectAccountClient(string accessToken, DataCentre dataCentre)
-            : base(accessToken, dataCentre)
+        public CronofyEnterpriseConnectAccountClient(string accessToken, string dataCenter)
+            : base(accessToken, dataCenter)
         {
         }
 

@@ -31,7 +31,7 @@
         }
 
         [Test]
-        public void CanAuthorizeUserForSpecificDataCentre()
+        public void CanAuthorizeUserForSpecificDataCenter()
         {
             this.Client = new CronofyEnterpriseConnectAccountClient(AccessToken, "de");
             this.Client.HttpClient = this.Http;

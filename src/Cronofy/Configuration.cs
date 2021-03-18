@@ -6,26 +6,27 @@
     public static class Configuration
     {
         /// <summary>
-        /// The default data centre.
+        /// The default data center identifier.
         /// </summary>
-        private static DataCentre defaultDataCentre;
+        private static string defaultDataCenter;
 
         /// <summary>
-        /// Gets or sets the default data centre.
+        /// Gets or sets the default data center identifier.
+        /// See our list of data centers at https://docs.cronofy.com/developers/data-centers/ and use the "SDK identifier".
         /// </summary>
         /// <value>
-        /// The default data centre.
+        /// The default data center identifier.
         /// </value>
-        public static DataCentre DefaultDataCentre
+        public static string DefaultDataCenter
         {
             get
             {
-                return defaultDataCentre ?? DataCentre.Default;
+                return defaultDataCenter ?? "us";
             }
 
             set
             {
-                defaultDataCentre = value;
+                defaultDataCenter = value;
             }
         }
     }

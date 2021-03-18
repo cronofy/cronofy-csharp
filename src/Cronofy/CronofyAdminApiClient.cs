@@ -25,18 +25,18 @@ namespace Cronofy
         /// <param name="adminApiKey">
         /// Your admin API key, must not be blank.
         /// </param>
-        /// <param name="dataCentre">
-        /// The data centre to use.
+        /// <param name="dataCenter">
+        /// The data center to use.
         /// </param>
         /// <exception cref="System.ArgumentException">
         /// Thrown if <paramref name="adminApiKey"/> is blank.
         /// </exception>
-        public CronofyAdminApiClient(string adminApiKey, string dataCentre = null)
+        public CronofyAdminApiClient(string adminApiKey, string dataCenter = null)
         {
             Preconditions.NotBlank(nameof(adminApiKey), adminApiKey);
 
             this.adminApiKey = adminApiKey;
-            this.urlProvider = UrlProviderFactory.GetProvider(dataCentre);
+            this.urlProvider = UrlProviderFactory.GetProvider(dataCenter);
             this.HttpClient = new ConcreteHttpClient();
         }
 
