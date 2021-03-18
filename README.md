@@ -8,7 +8,17 @@ The Cronofy .NET SDK is available as a Nuget package, to install run the followi
 ```
 Install-Package Cronofy
 ```
+
+Or, using the dotnet CLI:
+```
+dotnet add package Cronofy
+```
+
 More info is available on [nuget](https://www.nuget.org/packages/Cronofy/)
+
+This is a .NET Standard 2.0 compatible package, and will therefore work with either .NET Framework applications running .NET Framework 4.7.2 and higher, or .NET Core applications running .NET Core 2.0 and higher.
+
+If you're running an older version of .NET Framework, previous versions of the package (<1.0.0) are compatible with .NET Framework 3.5 and up.
 
 ## Usage
 

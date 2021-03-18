@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* Updates the target of the SDK to .NET Standard 2.0, enabling support for .NET Core consumers. [#81]
+
 ## [0.29.0]
 
  * Exposes full response when creating Real-Time Scheduling link [#85]
@@ -220,6 +224,7 @@
 [0.28.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.1
 [0.28.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.2
 [0.29.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.29.0
+[1.0.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.0.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -267,7 +272,8 @@
 [#76]: https://github.com/cronofy/cronofy-csharp/pull/76
 [#77]: https://github.com/cronofy/cronofy-csharp/pull/77
 [#80]: https://github.com/cronofy/cronofy-csharp/pull/80
-[#82]: https://github.com/cronofy/cronofy-csharp/pull/82
+[#82]: https://github.com/cronofy/cronofy-csharp/pull/81
 [#83]: https://github.com/cronofy/cronofy-csharp/pull/83
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/84
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/85
+[#81]: https://github.com/cronofy/cronofy-csharp/pull/81
