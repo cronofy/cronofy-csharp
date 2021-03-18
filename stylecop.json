@@ -4,8 +4,8 @@
         "documentationRules": {
             "documentPrivateFields": false,
             "documentInternalElements": false,
-            "documentInterfaces": false,
-            "documentExposedElements": false,
+            "documentInterfaces": true,
+            "documentExposedElements": true,
             "documentPrivateElements": false
         }
     }
