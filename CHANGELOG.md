@@ -276,7 +276,7 @@
 [#76]: https://github.com/cronofy/cronofy-csharp/pull/76
 [#77]: https://github.com/cronofy/cronofy-csharp/pull/77
 [#80]: https://github.com/cronofy/cronofy-csharp/pull/80
-[#82]: https://github.com/cronofy/cronofy-csharp/pull/81
+[#82]: https://github.com/cronofy/cronofy-csharp/pull/82
 [#83]: https://github.com/cronofy/cronofy-csharp/pull/83
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/84
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/85
