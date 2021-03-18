@@ -106,6 +106,11 @@ namespace Cronofy
         private const string RealTimeSchedulingUrlFormat = "https://api{0}.cronofy.com/v1/real_time_scheduling";
 
         /// <summary>
+        /// The URL for the real time scheduling endpoint.
+        /// </summary>
+        private const string RealTimeSchedulingByIdUrlFormat = "https://api{0}.cronofy.com/v1/real_time_scheduling/{{0}}";
+
+        /// <summary>
         /// The URL format for the real time scheduling disable endpoint.
         /// </summary>
         private const string DisableRealTimeSchedulingUrlFormatFormat = "https://api{0}.cronofy.com/v1/real_time_scheduling/{{0}}/disable";
@@ -195,6 +200,7 @@ namespace Cronofy
             this.AvailabilityUrl = string.Format(AvailabilityUrlFormat, suffix);
             this.AddToCalendarUrl = string.Format(AddToCalendarUrlFormat, suffix);
             this.RealTimeSchedulingUrl = string.Format(RealTimeSchedulingUrlFormat, suffix);
+            this.RealTimeSchedulingByIdUrl = string.Format(RealTimeSchedulingByIdUrlFormat, suffix);
             this.DisableRealTimeSchedulingUrlFormat = string.Format(DisableRealTimeSchedulingUrlFormatFormat, suffix);
             this.LinkTokensUrl = string.Format(LinkTokensUrlFormat, suffix);
             this.SmartInviteUrl = string.Format(SmartInviteUrlFormat, suffix);
@@ -443,6 +449,18 @@ namespace Cronofy
         /// The real time scheduling URL.
         /// </value>
         public string RealTimeSchedulingUrl
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the real time scheduling by ID URL.
+        /// </summary>
+        /// <value>
+        /// The real time scheduling by ID URL.
+        /// </value>
+        public string RealTimeSchedulingByIdUrl
         {
             get;
             private set;

@@ -291,6 +291,23 @@ namespace Cronofy
         RealTimeSchedulingLinkStatus GetRealTimeSchedulingLinkStatus(string linkToken);
 
         /// <summary>
+        /// Gets the current status of a Real-Time Scheduling Link.
+        /// </summary>
+        /// <param name="realTimeSchedulingId">
+        /// The ID of the Real-Time Scheduling Link. Must not be <c>null</c> or blank.
+        /// </param>
+        /// <returns>
+        /// Returns the current <see cref="RealTimeSchedulingLinkStatus"/> of the Link.
+        /// </returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="realTimeSchedulingId"/> is null or blank.
+        /// </exception>
+        RealTimeSchedulingLinkStatus GetRealTimeSchedulingLinkStatusById(string realTimeSchedulingId);
+
+        /// <summary>
         /// Creates an Add To Calendar link.
         /// </summary>
         /// <param name="addToCalendarRequest">
