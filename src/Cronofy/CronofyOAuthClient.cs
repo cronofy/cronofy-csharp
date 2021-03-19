@@ -300,6 +300,22 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
+        public RealTimeSchedulingLinkStatus GetRealTimeSchedulingLinkStatusById(string realTimeSchedulingId)
+        {
+            Preconditions.NotBlank(nameof(realTimeSchedulingId), realTimeSchedulingId);
+
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = string.Format(this.urlProvider.RealTimeSchedulingByIdUrl, realTimeSchedulingId);
+            request.AddOAuthAuthorization(this.clientSecret);
+
+            var response = this.HttpClient.GetJsonResponse<RealTimeSchedulingStatusResponse>(request);
+
+            return response.ToRealTimeSchedulingLinkStatus();
+        }
+
+        /// <inheritdoc/>
         public string RealTimeSequencing(RealTimeSequencingRequest realTimeSequencingRequest)
         {
             Preconditions.NotNull("realTimeSequencingRequest", realTimeSequencingRequest);
