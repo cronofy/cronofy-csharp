@@ -1,9 +1,13 @@
+## [1.1.0]
+* Adds the optional `state` parameter for [Enterprise Connect delegated access](https://docs.cronofy.com/developers/api/enterprise-connect/delegated-access/) [#87]
+* Adds the ability to fetch Real-Time Scheduling token status by ID [#88]
+
 ## [1.0.0]
 
 * Updates the target of the SDK to .NET Standard 2.0, enabling support for .NET Core consumers. [#81]
 * **Breaking changes:**
    * the `DataCentre` type has been removed.
-     * Update usages of Client constructors to use an _SDK Identifier_ string from [our Data Centers documentation](https://docs.cronofy.com/developers/data-centers/).
+      * Update usages of Client constructors to use an _SDK Identifier_ string from [our Data Centers documentation](https://docs.cronofy.com/developers/data-centers/).
       * Update usages of `Configuration.DefaultDataCentre` to set an SDK Identifier string on the renamed property `Configuration.DefaultDataCenter`
 
 ## [0.29.0]
@@ -229,6 +233,7 @@
 [0.28.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.28.2
 [0.29.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.29.0
 [1.0.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.0.0
+[1.1.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -281,3 +286,5 @@
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/84
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/85
 [#81]: https://github.com/cronofy/cronofy-csharp/pull/81
+[#87]: https://github.com/cronofy/cronofy-csharp/pull/87
+[#88]: https://github.com/cronofy/cronofy-csharp/pull/88
