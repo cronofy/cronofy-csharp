@@ -1,4 +1,9 @@
+## [1.1.1]
+
+* Updates Newtonsoft.Json dependency to [13.0.1](https://www.nuget.org/packages/Newtonsoft.Json/13.0.1) [#91]
+
 ## [1.1.0]
+
 * Adds the optional `state` parameter for [Enterprise Connect delegated access](https://docs.cronofy.com/developers/api/enterprise-connect/delegated-access/) [#87]
 * Adds the ability to fetch Real-Time Scheduling token status by ID [#88]
 
@@ -234,6 +239,7 @@
 [0.29.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-0.29.0
 [1.0.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.0.0
 [1.1.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.0
+[1.1.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -281,10 +287,11 @@
 [#76]: https://github.com/cronofy/cronofy-csharp/pull/76
 [#77]: https://github.com/cronofy/cronofy-csharp/pull/77
 [#80]: https://github.com/cronofy/cronofy-csharp/pull/80
+[#81]: https://github.com/cronofy/cronofy-csharp/pull/81
 [#82]: https://github.com/cronofy/cronofy-csharp/pull/82
 [#83]: https://github.com/cronofy/cronofy-csharp/pull/83
 [#84]: https://github.com/cronofy/cronofy-csharp/pull/84
-[#84]: https://github.com/cronofy/cronofy-csharp/pull/85
-[#81]: https://github.com/cronofy/cronofy-csharp/pull/81
+[#85]: https://github.com/cronofy/cronofy-csharp/pull/85
 [#87]: https://github.com/cronofy/cronofy-csharp/pull/87
 [#88]: https://github.com/cronofy/cronofy-csharp/pull/88
+[#91]: https://github.com/cronofy/cronofy-csharp/pull/91
