@@ -109,6 +109,17 @@ var cronofy = new CronofyAccountClient(accessToken);
 cronofy.DeleteEvent(calendarId, "uniq-id");
 ```
 
+## Choosing a data center
+
+When you're initializing the `CronofyOAuthClient` you can specify the Cronofy data center to use.
+
+```csharp
+var cronofy = new CronofyOAuthClient("clientId", "clientSecret", "de");
+```
+
+A list of the currently supported data centers in the [data center documentation](https://docs.cronofy.com/developers/data-centers/).
+
+
 ## Links
 
  * [API documentation](https://www.cronofy.com/developers/api)
