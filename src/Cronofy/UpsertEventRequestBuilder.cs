@@ -210,7 +210,7 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event using the given offset from UTC.
         /// </summary>
         /// <param name="start">
         /// The start time of the event.
@@ -226,7 +226,7 @@
         }
 
         /// <summary>
-        /// Sets the start time of the event.
+        /// Sets the start time of the event in UTC.
         /// </summary>
         /// <param name="year">
         /// The year of the start time.
@@ -296,7 +296,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event using the given offset from UTC.
         /// </summary>
         /// <param name="end">
         /// The end time of the event.
@@ -312,7 +312,7 @@
         }
 
         /// <summary>
-        /// Sets the end time of the event.
+        /// Sets the end time of the event in UTC.
         /// </summary>
         /// <param name="year">
         /// The year of the end time.
@@ -421,7 +421,8 @@
 
         /// <summary>
         /// Sets the time zone identifier for the start and end times of the
-        /// event.
+        /// event. This is used as a visual hint by calendar clients and does
+        /// not impact the Start and End of the event.
         /// </summary>
         /// <param name="timeZoneId">
         /// Time zone identifier, must not be empty.
