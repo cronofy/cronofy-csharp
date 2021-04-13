@@ -119,6 +119,14 @@ var cronofy = new CronofyOAuthClient("clientId", "clientSecret", "de");
 
 A list of the currently supported data centers in the [data center documentation](https://docs.cronofy.com/developers/data-centers/).
 
+## A feature I want is not in the SDK, how do I get it?
+
+We add features to this SDK as they are requested, to focus on developing the Cronofy API.
+
+If you're comfortable contributing support for an endpoint or attribute, then we love to receive pull requests!
+Please create a PR mentioning the feature/API endpoint you’ve added and we’ll review it as soon as we can.
+
+If you would like to request a feature is added by our team then please let us know by getting in touch via [support@cronofy.com](mailto:support@cronofy.com).
 
 ## Links
 
