@@ -1,3 +1,7 @@
+## [1.1.2]
+
+* Adds support for [Managed Availability](https://docs.cronofy.com/developers/api/scheduling/availability/#param-participants.members.managed_availability) and [Availability Rules](https://docs.cronofy.com/developers/api/scheduling/availability/#param-participants.members.availability_rule_ids) as part of Availability Query requests [#95]
+
 ## [1.1.1]
 
 * Updates Newtonsoft.Json dependency to [13.0.1](https://www.nuget.org/packages/Newtonsoft.Json/13.0.1) [#91]
@@ -240,6 +244,7 @@
 [1.0.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.0.0
 [1.1.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.0
 [1.1.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.1
+[1.1.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.2
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -295,3 +300,4 @@
 [#87]: https://github.com/cronofy/cronofy-csharp/pull/87
 [#88]: https://github.com/cronofy/cronofy-csharp/pull/88
 [#91]: https://github.com/cronofy/cronofy-csharp/pull/91
+[#95]: https://github.com/cronofy/cronofy-csharp/pull/95
