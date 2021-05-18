@@ -188,6 +188,26 @@
             /// </value>
             [JsonProperty("calendar_ids")]
             public IEnumerable<string> CalendarIds { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether Managed Availability is taken into account for this member.
+            /// </summary>
+            /// <value>
+            /// Whether Managed Availability is taken into account for this member.
+            /// </value>
+            [JsonProperty("managed_availability")]
+            public bool? ManagedAvailability { get; set; }
+
+            /// <summary>
+            /// Gets or sets the Availability Rules, stored against the member, which will be considered.
+            /// A <c>null</c> value will mean all Availability Rules will be used, when <see cref="ManagedAvailability" /> is <c>true</c>.
+            /// An empty list will mean that none of the Account's Availability Rules will be used.
+            /// </summary>
+            /// <value>
+            /// The Availability Rules to be considered for the member.
+            /// </value>
+            [JsonProperty("availability_rule_ids")]
+            public IEnumerable<string> AvailabilityRuleIds { get; set; }
         }
     }
 }

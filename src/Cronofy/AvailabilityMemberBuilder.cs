@@ -25,6 +25,16 @@
         private IEnumerable<string> calendarIds;
 
         /// <summary>
+        /// The Availability Rule IDs for the member.
+        /// </summary>
+        private IEnumerable<string> availabilityRuleIds;
+
+        /// <summary>
+        /// Whether to use Managed Availability for the member.
+        /// </summary>
+        private bool? managedAvailability;
+
+        /// <summary>
         /// Sets the sub of the member.
         /// </summary>
         /// <param name="sub">
@@ -113,6 +123,38 @@
             return this.CalendarIds(new[] { calendarId });
         }
 
+        /// <summary>
+        /// Sets whether to use Managed Availability for the member.
+        /// </summary>
+        /// <param name="managedAvailability">
+        /// Whether to use Managed Availability for the member.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public AvailabilityMemberBuilder ManagedAvailability(bool managedAvailability)
+        {
+            this.managedAvailability = managedAvailability;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets which Availability Rules should be considered for the member.
+        /// </summary>
+        /// <param name="availabilityRuleIds">
+        /// Which Availability Rules should be considered for the member. A null value means all of the member's
+        /// Availability Rules will be considered. An empty list means that none of the member's Availability
+        /// Rules will be considered.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public AvailabilityMemberBuilder AvailabilityRuleIds(IEnumerable<string> availabilityRuleIds)
+        {
+            this.availabilityRuleIds = availabilityRuleIds;
+            return this;
+        }
+
         /// <inheritdoc />
         public AvailabilityRequest.Member Build()
         {
@@ -121,6 +163,8 @@
                 Sub = this.sub,
                 AvailablePeriods = this.availablePeriods,
                 CalendarIds = this.calendarIds,
+                AvailabilityRuleIds = this.availabilityRuleIds,
+                ManagedAvailability = this.managedAvailability,
             };
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Test.CronofyAccountClientTests
+namespace Cronofy.Test.CronofyAccountClientTests
 {
     using System;
     using NUnit.Framework;
@@ -284,6 +284,130 @@
                         new AvailablePeriod.Participant { Sub = "acc_567236000909002" },
                         new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
                         new AvailablePeriod.Participant { Sub = "acc_6789010200909001" },
+                    },
+                },
+            };
+
+            Assert.AreEqual(expected, availability);
+        }
+
+        [Test]
+        public void CanPerformAvailabilityQueryWithManagedAvailability()
+        {
+            const string requestBody = @"
+                {
+                  ""participants"": [
+                    {
+                      ""members"": [
+                        { ""sub"": ""acc_567236000909002"", ""managed_availability"": true, ""availability_rule_ids"": [""default""] },
+                        { ""sub"": ""acc_678347111010113"", ""managed_availability"": true, ""availability_rule_ids"": [] }
+                      ],
+                      ""required"": ""all""
+                    }
+                  ],
+                  ""required_duration"": { ""minutes"": 60 },
+                  ""available_periods"": [
+                    {
+                      ""start"": ""2017-01-03 09:00:00Z"",
+                      ""end"": ""2017-01-03 18:00:00Z""
+                    },
+                    {
+                      ""start"": ""2017-01-04 09:00:00Z"",
+                      ""end"": ""2017-01-04 18:00:00Z""
+                    }
+                  ]
+                }";
+
+            var builder = new AvailabilityRequestBuilder()
+                .RequiredDuration(60)
+                .AddAvailablePeriod(
+                    new DateTimeOffset(2017, 1, 3, 9, 0, 0, TimeSpan.Zero),
+                    new DateTimeOffset(2017, 1, 3, 18, 0, 0, TimeSpan.Zero))
+                .AddAvailablePeriod(
+                    new DateTimeOffset(2017, 1, 4, 9, 0, 0, TimeSpan.Zero),
+                    new DateTimeOffset(2017, 1, 4, 18, 0, 0, TimeSpan.Zero))
+                .AddParticipantGroup(
+                    new ParticipantGroupBuilder()
+                        .AllRequired()
+                        .AddMember(new AvailabilityMemberBuilder()
+                            .Sub("acc_567236000909002")
+                            .ManagedAvailability(true)
+                            .AvailabilityRuleIds(new[] { "default" }))
+                        .AddMember(new AvailabilityMemberBuilder()
+                            .Sub("acc_678347111010113")
+                            .ManagedAvailability(true)
+                            .AvailabilityRuleIds(new string[0])));
+
+            const string responseBody = @"
+                {
+                  ""available_periods"": [
+                    {
+                      ""start"": ""2017-01-03T09:00:00Z"",
+                      ""end"": ""2017-01-03T11:00:00Z"",
+                      ""participants"": [
+                        { ""sub"": ""acc_567236000909002"" },
+                        { ""sub"": ""acc_678347111010113"" }
+                      ]
+                    },
+                    {
+                      ""start"": ""2017-01-03T14:00:00Z"",
+                      ""end"": ""2017-01-03T16:00:00Z"",
+                      ""participants"": [
+                        { ""sub"": ""acc_567236000909002"" },
+                        { ""sub"": ""acc_678347111010113"" }
+                      ]
+                    },
+                    {
+                      ""start"": ""2017-01-04T11:00:00Z"",
+                      ""end"": ""2017-01-04T17:00:00Z"",
+                      ""participants"": [
+                        { ""sub"": ""acc_567236000909002"" },
+                        { ""sub"": ""acc_678347111010113"" }
+                      ]
+                    },
+                  ]
+                }";
+
+            this.Http.Stub(
+                HttpPost
+                    .Url("https://api.cronofy.com/v1/availability")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .JsonRequest(requestBody)
+                    .ResponseCode(200)
+                    .ResponseBody(responseBody));
+
+            var availability = this.Client.GetAvailability(builder);
+
+            var expected = new[]
+            {
+                new AvailablePeriod
+                {
+                    Start = new DateTimeOffset(2017, 1, 3, 9, 0, 0, TimeSpan.Zero),
+                    End = new DateTimeOffset(2017, 1, 3, 11, 0, 0, TimeSpan.Zero),
+                    Participants = new[]
+                    {
+                        new AvailablePeriod.Participant { Sub = "acc_567236000909002" },
+                        new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
+                    },
+                },
+                new AvailablePeriod
+                {
+                    Start = new DateTimeOffset(2017, 1, 3, 14, 0, 0, TimeSpan.Zero),
+                    End = new DateTimeOffset(2017, 1, 3, 16, 0, 0, TimeSpan.Zero),
+                    Participants = new[]
+                    {
+                        new AvailablePeriod.Participant { Sub = "acc_567236000909002" },
+                        new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
+                    },
+                },
+                new AvailablePeriod
+                {
+                    Start = new DateTimeOffset(2017, 1, 4, 11, 0, 0, TimeSpan.Zero),
+                    End = new DateTimeOffset(2017, 1, 4, 17, 0, 0, TimeSpan.Zero),
+                    Participants = new[]
+                    {
+                        new AvailablePeriod.Participant { Sub = "acc_567236000909002" },
+                        new AvailablePeriod.Participant { Sub = "acc_678347111010113" },
                     },
                 },
             };
