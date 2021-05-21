@@ -56,6 +56,24 @@
         public bool? EventPrivate { get; set; }
 
         /// <summary>
+        /// Gets or sets the conferencing configuration for the event.
+        /// </summary>
+        /// <value>
+        /// The conferencing configuration for the event.
+        /// </value>
+        [JsonProperty("conferencing")]
+        public RequestConferencing Conferencing { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subscriptions for the event.
+        /// </summary>
+        /// <value>
+        /// The subscriptions for the event.
+        /// </value>
+        [JsonProperty("subscriptions")]
+        public IEnumerable<RequestSubscription> Subscriptions { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>
@@ -103,6 +121,89 @@
             /// </value>
             [JsonProperty("display_name")]
             public string DisplayName { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of event conferencing.
+        /// </summary>
+        public sealed class RequestConferencing
+        {
+            /// <summary>
+            /// Gets or sets the conferencing profile ID.
+            /// </summary>
+            /// <value>
+            /// The conferencing profile ID.
+            /// </value>
+            [JsonProperty("profile_id")]
+            public string ProfileId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the conferencing provider's user-facing name.
+            /// Only valid when using a <see cref="ProfileId"/> equal to <c>"explicit"</c>.
+            /// </summary>
+            /// <value>
+            /// The conferencing provider's user-facing name.
+            /// </value>
+            [JsonProperty("provider_description")]
+            public string ProviderDescription { get; set; }
+
+            /// <summary>
+            /// Gets or sets the conferencing join URL.
+            /// Only valid when using a <see cref="ProfileId"/> equal to <c>"explicit"</c>.
+            /// </summary>
+            /// <value>
+            /// The conferencing join URL.
+            /// </value>
+            [JsonProperty("join_url")]
+            public string JoinUrl { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of event subscriptions.
+        /// </summary>
+        public sealed class RequestSubscription
+        {
+            /// <summary>
+            /// Gets or sets the type of the subscription.
+            /// </summary>
+            /// <value>
+            /// The type of the subscription.
+            /// </value>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Gets or sets the destination URI Cronofy will call when the subscription is triggered.
+            /// </summary>
+            /// <value>
+            /// The destination URI Cronofy will call when the subscription is triggered.
+            /// </value>
+            [JsonProperty("uri")]
+            public string Uri { get; set; }
+
+            /// <summary>
+            /// Gets or sets the interactions subscribed to.
+            /// </summary>
+            /// <value>
+            /// The interactions subscribed to.
+            /// </value>
+            [JsonProperty("interactions")]
+            public IEnumerable<Interaction> Interactions { get; set; }
+
+            /// <summary>
+            /// Class for the serialization of event subscription interactions.
+            /// </summary>
+            public sealed class Interaction
+            {
+                /// <summary>
+                /// Gets or sets the type of the interaction.
+                /// </summary>
+                /// <value>
+                /// The type of the interaction.
+                /// </value>
+                [JsonProperty("type")]
+                public string Type { get; set; }
+            }
         }
     }
 }
