@@ -776,5 +776,89 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             this.Client.UpsertEvent(CalendarId, builder);
         }
+
+        [Test]
+        public void CanUpsertInteractionSubscription()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string description = "Discuss plans for the next quarter";
+            const string startTimeString = "2014-08-05";
+            const string endTimeString = "2014-08-06";
+            const string interactionType = "conferencing_assigned";
+            const string subscriptionUri = "https://consumer.com/webhook?state=foo";
+
+            this.Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"subscriptions\":[{{\"type\":\"webhook\",\"uri\":\"{5}\",\"interactions\":[{{\"type\":\"{6}\"}}]}}]," +
+                    "\"summary\":\"{1}\"," +
+                    "\"description\":\"{2}\"," +
+                    "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}" +
+                    "}}",
+                    eventId,
+                    summary,
+                    description,
+                    startTimeString,
+                    endTimeString,
+                    subscriptionUri,
+                    interactionType)
+                .ResponseCode(202));
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Description(description)
+                .Start(new Date(2014, 8, 5))
+                .End(new Date(2014, 8, 6))
+                .InteractionSubscription(subscriptionUri, interactionType);
+
+            this.Client.UpsertEvent(CalendarId, builder);
+        }
+
+        [Test]
+        public void CanUpsertRemovingSubscriptions()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string description = "Discuss plans for the next quarter";
+            const string startTimeString = "2014-08-05";
+            const string endTimeString = "2014-08-06";
+
+            this.Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"subscriptions\":[]," +
+                    "\"summary\":\"{1}\"," +
+                    "\"description\":\"{2}\"," +
+                    "\"start\":{{\"time\":\"{3}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}" +
+                    "}}",
+                    eventId,
+                    summary,
+                    description,
+                    startTimeString,
+                    endTimeString)
+                .ResponseCode(202));
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Description(description)
+                .Start(new Date(2014, 8, 5))
+                .End(new Date(2014, 8, 6))
+                .Subscriptions(new Requests.UpsertEventRequest.RequestSubscription[0]);
+
+            this.Client.UpsertEvent(CalendarId, builder);
+        }
     }
 }

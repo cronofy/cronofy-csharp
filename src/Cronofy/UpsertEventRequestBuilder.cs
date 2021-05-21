@@ -128,6 +128,11 @@
         private UpsertEventRequest.RequestConferencing conferencing;
 
         /// <summary>
+        /// The subscriptions for the event.
+        /// </summary>
+        private ICollection<UpsertEventRequest.RequestSubscription> subscriptions;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -699,6 +704,57 @@
             return this;
         }
 
+        /// <summary>
+        /// Adds a webhook subscription to an interaction to the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="uri">The destination URI Cronofy will call when the subscription is triggered.</param>
+        /// <param name="type">The type of interaction to subscribe to.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="uri"/> or <paramref name="type"/> are empty.
+        /// </exception>
+        public UpsertEventRequestBuilder InteractionSubscription(string uri, string type)
+        {
+            Preconditions.NotEmpty(nameof(uri), uri);
+            Preconditions.NotEmpty(nameof(type), type);
+
+            if (this.subscriptions == null)
+            {
+                this.subscriptions = new List<UpsertEventRequest.RequestSubscription>();
+            }
+
+            this.subscriptions.Add(new UpsertEventRequest.RequestSubscription
+            {
+                Type = "webhook",
+                Uri = uri,
+                Interactions = new[]
+                {
+                    new UpsertEventRequest.RequestSubscription.Interaction
+                    {
+                        Type = type,
+                    },
+                },
+            });
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the subscriptions for the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="subscriptions">The event subscriptions.</param>
+        public UpsertEventRequestBuilder Subscriptions(ICollection<UpsertEventRequest.RequestSubscription> subscriptions)
+        {
+            this.subscriptions = subscriptions;
+
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -717,6 +773,7 @@
                 RemindersCreateOnly = this.remindersCreateOnly,
                 EventPrivate = this.eventPrivate,
                 Conferencing = this.conferencing,
+                Subscriptions = this.subscriptions,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
