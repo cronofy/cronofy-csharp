@@ -56,6 +56,15 @@
         public bool? EventPrivate { get; set; }
 
         /// <summary>
+        /// Gets or sets the conferencing configuration for the event.
+        /// </summary>
+        /// <value>
+        /// The conferencing configuration for the event.
+        /// </value>
+        [JsonProperty("conferencing")]
+        public RequestConferencing Conferencing { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>
@@ -103,6 +112,41 @@
             /// </value>
             [JsonProperty("display_name")]
             public string DisplayName { get; set; }
+        }
+
+        /// <summary>
+        /// Class for the serialization of event conferencing.
+        /// </summary>
+        public sealed class RequestConferencing
+        {
+            /// <summary>
+            /// Gets or sets the conferencing profile ID.
+            /// </summary>
+            /// <value>
+            /// The conferencing profile ID.
+            /// </value>
+            [JsonProperty("profile_id")]
+            public string ProfileId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the conferencing provider's user-facing name.
+            /// Only valid when using a <see cref="ProfileId"/> equal to <c>"explicit"</c>.
+            /// </summary>
+            /// <value>
+            /// The conferencing provider's user-facing name.
+            /// </value>
+            [JsonProperty("provider_description")]
+            public string ProviderDescription { get; set; }
+
+            /// <summary>
+            /// Gets or sets the conferencing join URL.
+            /// Only valid when using a <see cref="ProfileId"/> equal to <c>"explicit"</c>.
+            /// </summary>
+            /// <value>
+            /// The conferencing join URL.
+            /// </value>
+            [JsonProperty("join_url")]
+            public string JoinUrl { get; set; }
         }
     }
 }

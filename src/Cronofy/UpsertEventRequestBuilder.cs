@@ -123,6 +123,11 @@
         private ICollection<UpsertEventRequest.RequestAttendee> addedAttendees;
 
         /// <summary>
+        /// The conferencing for the event.
+        /// </summary>
+        private UpsertEventRequest.RequestConferencing conferencing;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -648,6 +653,52 @@
             return this;
         }
 
+        /// <summary>
+        /// Adds conferencing to the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="profileId">The profile ID of the required conferencing. Either an explicit ID, or one of our documented built-in values.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="profileId"/> is empty.
+        /// </exception>
+        public UpsertEventRequestBuilder Conferencing(string profileId)
+        {
+            Preconditions.NotEmpty(nameof(profileId), profileId);
+
+            this.conferencing = new UpsertEventRequest.RequestConferencing
+            {
+                ProfileId = profileId,
+            };
+            return this;
+        }
+
+        /// <summary>
+        /// Adds explicit (not provisioned by Cronofy) conferencing to the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="providerDescription">The user-facing provider name of the conferencing.</param>
+        /// <param name="joinUrl">The URL to join the conferencing meeting.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="providerDescription"/> or <paramref name="joinUrl"/> are empty.
+        /// </exception>
+        public UpsertEventRequestBuilder ExplicitConferencing(string providerDescription, string joinUrl)
+        {
+            Preconditions.NotEmpty(nameof(providerDescription), providerDescription);
+            Preconditions.NotEmpty(nameof(joinUrl), joinUrl);
+
+            this.conferencing = new UpsertEventRequest.RequestConferencing
+            {
+                ProfileId = "explicit",
+                ProviderDescription = providerDescription,
+                JoinUrl = joinUrl,
+            };
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -665,6 +716,7 @@
                 Color = this.color,
                 RemindersCreateOnly = this.remindersCreateOnly,
                 EventPrivate = this.eventPrivate,
+                Conferencing = this.conferencing,
             };
 
             if (string.IsNullOrEmpty(this.locationDescription) == false
