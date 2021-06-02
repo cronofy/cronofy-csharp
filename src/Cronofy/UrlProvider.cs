@@ -166,6 +166,11 @@ namespace Cronofy
         private const string ElementTokensUrlFormat = "https://api{0}.cronofy.com/v1/element_tokens";
 
         /// <summary>
+        /// The URL of the Conferencing Services Authorization endpoint.
+        /// </summary>
+        private const string ConferencingServiceAuthorizationUrlFormat = "https://api{0}.cronofy.com/v1/conferencing_service_authorizations";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCenter">
@@ -212,6 +217,7 @@ namespace Cronofy
             this.ApplicationVerificationUrl = string.Format(ApplicationVerificationUrlFormat, suffix);
             this.ProvisionApplicationUrl = string.Format(ProvisionApplicationUrlFormat, suffix);
             this.ElementTokensUrl = string.Format(ElementTokensUrlFormat, suffix);
+            this.ConferencingServiceAuthorizationUrl = string.Format(ConferencingServiceAuthorizationUrlFormat, suffix);
         }
 
         /// <summary>
@@ -555,5 +561,11 @@ namespace Cronofy
         /// </summary>
         /// <value>The element tokens URL.</value>
         public string ElementTokensUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the conferencing service authorization URL.
+        /// </summary>
+        /// <value>The conferencing service authorization URL.</value>
+        public string ConferencingServiceAuthorizationUrl { get; private set; }
     }
 }
