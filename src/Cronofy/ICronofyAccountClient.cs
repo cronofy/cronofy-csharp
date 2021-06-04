@@ -575,5 +575,20 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         void RevokeProfileAuthorization(string profileId);
+
+        /// <summary>
+        /// Creates a URL which the end-user can use to link a conferencing service to their Cronofy Account.
+        /// </summary>
+        /// <param name="conferencingServiceAuthorizationRequest">
+        /// The details of the authorization request.
+        /// </param>
+        /// <returns>The URL which the end-user should visit.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="conferencingServiceAuthorizationRequest"/> if null, or it doesn't contain a Redirect URI.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        string GetConferencingServiceAuthorizationUrl(ConferencingServiceAuthorizationRequest conferencingServiceAuthorizationRequest);
     }
 }

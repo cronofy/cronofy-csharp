@@ -558,6 +558,26 @@ namespace Cronofy
             this.HttpClient.GetValidResponse(request);
         }
 
+        /// <inheritdoc/>
+        public string GetConferencingServiceAuthorizationUrl(ConferencingServiceAuthorizationRequest conferencingServiceAuthorizationRequest)
+        {
+            Preconditions.NotNull(nameof(conferencingServiceAuthorizationRequest), conferencingServiceAuthorizationRequest);
+            Preconditions.NotBlank(nameof(conferencingServiceAuthorizationRequest.RedirectUri), conferencingServiceAuthorizationRequest.RedirectUri);
+
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.UrlProvider.ConferencingServiceAuthorizationUrl,
+            };
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            request.SetJsonBody(conferencingServiceAuthorizationRequest);
+
+            var response = this.HttpClient.GetJsonResponse<ConferencingServiceAuthorizationResponse>(request);
+
+            return response.AuthorizationRequest.Url;
+        }
+
         /// <summary>
         /// Creates a calendar.
         /// </summary>
