@@ -58,6 +58,17 @@
         /// </value>
         public bool Primary { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this
+        /// <see cref="Cronofy.Calendar"/> supports "integrated" conferencing
+        /// mode.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the calendar supports integrated conferencing; otherwise,
+        /// <c>false</c>.
+        /// </value>
+        public bool IntegratedConferencingAvailable { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -98,6 +109,7 @@
                 && this.ReadOnly == other.ReadOnly
                 && this.Deleted == other.Deleted
                 && this.Primary == other.Primary
+                && this.IntegratedConferencingAvailable == other.IntegratedConferencingAvailable
                 && object.Equals(this.Profile, other.Profile);
         }
 
@@ -105,14 +117,15 @@
         public override string ToString()
         {
             return string.Format(
-                "<{0} Profile={1}, CalendarId={2}, Name={3}, ReadOnly={4}, Deleted={5}, Primary={6}>",
+                "<{0} Profile={1}, CalendarId={2}, Name={3}, ReadOnly={4}, Deleted={5}, Primary={6}, IntegratedConferencing={7}>",
                 this.GetType(),
                 this.Profile,
                 this.CalendarId,
                 this.Name,
                 this.ReadOnly,
                 this.Deleted,
-                this.Primary);
+                this.Primary,
+                this.IntegratedConferencingAvailable);
         }
 
         /// <summary>
