@@ -25,7 +25,8 @@
       ""calendar_name"": ""Home"",
       ""calendar_readonly"": false,
       ""calendar_deleted"": false,
-      ""calendar_primary"": true
+      ""calendar_primary"": true,
+      ""calendar_integrated_conferencing_available"": true
     },
     {
       ""provider_name"": ""google"",
@@ -35,7 +36,8 @@
       ""calendar_name"": ""Work"",
       ""calendar_readonly"": true,
       ""calendar_deleted"": true,
-      ""calendar_primary"": false
+      ""calendar_primary"": false,
+      ""calendar_integrated_conferencing_available"": false
     },
     {
       ""provider_name"": ""apple"",
@@ -45,7 +47,8 @@
       ""calendar_name"": ""Bank Holidays"",
       ""calendar_readonly"": true,
       ""calendar_deleted"": false,
-      ""calendar_primary"": false
+      ""calendar_primary"": false,
+      ""calendar_integrated_conferencing_available"": false
     }
   ]
 }"));
@@ -68,6 +71,7 @@
                         ReadOnly = false,
                         Deleted = false,
                         Primary = true,
+                        IntegratedConferencingAvailable = true,
                     },
                     new Calendar
                     {
@@ -82,6 +86,7 @@
                         ReadOnly = true,
                         Deleted = true,
                         Primary = false,
+                        IntegratedConferencingAvailable = false,
                     },
                     new Calendar
                     {
@@ -96,6 +101,7 @@
                         ReadOnly = true,
                         Deleted = false,
                         Primary = false,
+                        IntegratedConferencingAvailable = false,
                     },
                 },
                 calendars.ToList());

@@ -99,6 +99,17 @@
             public bool CalendarPrimary { get; set; }
 
             /// <summary>
+            /// Gets or sets a value indicating whether this calendar supports
+            /// "integrated" conferencing.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the calendar supports integrated conferencing;
+            /// otherwise, <c>false</c>.
+            /// </value>
+            [JsonProperty("calendar_integrated_conferencing_available")]
+            public bool CalendarIntegratedConferencingAvailable { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Calendar"/>.
             /// </summary>
             /// <returns>
@@ -121,6 +132,7 @@
                     ReadOnly = this.CalendarReadonly,
                     Deleted = this.CalendarDeleted,
                     Primary = this.CalendarPrimary,
+                    IntegratedConferencingAvailable = this.CalendarIntegratedConferencingAvailable,
                 };
             }
         }
