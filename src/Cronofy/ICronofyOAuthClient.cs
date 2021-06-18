@@ -101,11 +101,11 @@ namespace Cronofy
         void RevokeToken(string token);
 
         /// <summary>
-        /// Validates whether the provided HMAC matches the one generated for
+        /// Validates whether the provided HMAC header matches the one generated for
         /// the corresponding request bytes.
         /// </summary>
-        /// <param name="sha256Hmac">
-        /// The HMAC taken from the <c>Cronofy-HMAC-SHA256</c> header of
+        /// <param name="cronofyHmacSha256HeaderValue">
+        /// The value of the <c>Cronofy-HMAC-SHA256</c> header of
         /// the request, must not be null or empty.
         /// </param>
         /// <param name="requestBytes">
@@ -115,9 +115,9 @@ namespace Cronofy
         /// <c>true</c> if the HMAC matches, otherwise <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="sha256Hmac"/> is null or empty.
+        /// Thrown if <paramref name="cronofyHmacSha256HeaderValue"/> is null or empty.
         /// </exception>
-        bool HmacMatches(string sha256Hmac, byte[] requestBytes);
+        bool HmacMatches(string cronofyHmacSha256HeaderValue, byte[] requestBytes);
 
         /// <summary>
         /// Generates a link for real time scheduling based on the request provided.
