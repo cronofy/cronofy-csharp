@@ -354,17 +354,25 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public bool HmacMatches(string sha256Hmac, byte[] requestBytes)
+        public bool HmacMatches(string cronofyHmacSha256HeaderValue, byte[] requestBytes)
         {
-            Preconditions.NotEmpty("sha256Hmac", sha256Hmac);
+            Preconditions.NotEmpty(nameof(cronofyHmacSha256HeaderValue), cronofyHmacSha256HeaderValue);
+
+            var headerHmacs = cronofyHmacSha256HeaderValue.Split(',').Select(s => s.Trim()).ToList();
+            if (!headerHmacs.Any())
+            {
+                return false;
+            }
 
             var keyBytes = Encoding.UTF8.GetBytes(this.clientSecret);
-
+            string sha256Hmac;
             using (var hmacsha256 = new HMACSHA256(keyBytes))
             {
                 var requestHash = hmacsha256.ComputeHash(requestBytes);
-                return sha256Hmac == Convert.ToBase64String(requestHash);
+                sha256Hmac = Convert.ToBase64String(requestHash);
             }
+
+            return headerHmacs.Contains(sha256Hmac);
         }
 
         /// <inheritdoc/>
