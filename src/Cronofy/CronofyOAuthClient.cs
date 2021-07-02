@@ -184,27 +184,25 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("token", token);
 
-            var request = new HttpRequest
-            {
-                Method = "POST",
-                Url = this.urlProvider.TokenRevocationUrl,
-            };
-
-            var requestBody = new OAuthTokenRevocationRequest
+            this.RevokeRequest(new OAuthTokenRevocationRequest
             {
                 ClientId = this.clientId,
                 ClientSecret = this.clientSecret,
                 Token = token,
-            };
+            });
+        }
 
-            request.SetJsonBody(requestBody);
+        /// <inheritdoc/>
+        public void RevokeSub(string sub)
+        {
+            Preconditions.NotEmpty("sub", sub);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 200)
+            this.RevokeRequest(new OAuthTokenRevocationRequest
             {
-                throw new CronofyResponseException("Request failed", response);
-            }
+                ClientId = this.clientId,
+                ClientSecret = this.clientSecret,
+                Sub = sub,
+            });
         }
 
         /// <inheritdoc/>
@@ -536,6 +534,24 @@ namespace Cronofy
             var elementTokenResponse = this.HttpClient.GetJsonResponse<ElementTokenResponse>(request);
 
             return elementTokenResponse.ToElementToken();
+        }
+
+        private void RevokeRequest(OAuthTokenRevocationRequest requestBody)
+        {
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.TokenRevocationUrl,
+            };
+
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 200)
+            {
+                throw new CronofyResponseException("Request failed", response);
+            }
         }
 
         /// <summary>
