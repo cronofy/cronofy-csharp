@@ -43,5 +43,15 @@
         /// </value>
         [JsonProperty("sub")]
         public string Sub { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether PII erasure will be requested alongside the
+        /// revocation.
+        /// </summary>
+        /// <value>
+        /// Whether PII erasure will be requested alongside the revocation.
+        /// </value>
+        [JsonProperty("request_pii_erasure")]
+        public bool? RequestPiiErasure { get; set; }
     }
 }

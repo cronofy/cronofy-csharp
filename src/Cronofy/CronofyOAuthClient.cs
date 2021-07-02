@@ -184,12 +184,7 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("token", token);
 
-            this.RevokeRequest(new OAuthTokenRevocationRequest
-            {
-                ClientId = this.clientId,
-                ClientSecret = this.clientSecret,
-                Token = token,
-            });
+            this.RevokeAuthorization(new RevokeAuthorizationOptions { Token = token });
         }
 
         /// <inheritdoc/>
@@ -197,12 +192,37 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("sub", sub);
 
-            this.RevokeRequest(new OAuthTokenRevocationRequest
+            this.RevokeAuthorization(new RevokeAuthorizationOptions { Sub = sub });
+        }
+
+        /// <inheritdoc/>
+        public void RevokeAuthorization(RevokeAuthorizationOptions options)
+        {
+            Preconditions.NotNull("options", options);
+
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.TokenRevocationUrl,
+            };
+
+            var requestBody = new OAuthTokenRevocationRequest
             {
                 ClientId = this.clientId,
                 ClientSecret = this.clientSecret,
-                Sub = sub,
-            });
+                Sub = options.Sub,
+                Token = options.Token,
+                RequestPiiErasure = options.RequestPiiErasure,
+            };
+
+            request.SetJsonBody(requestBody);
+
+            var response = this.HttpClient.GetResponse(request);
+
+            if (response.Code != 200)
+            {
+                throw new CronofyResponseException("Request failed", response);
+            }
         }
 
         /// <inheritdoc/>
@@ -534,24 +554,6 @@ namespace Cronofy
             var elementTokenResponse = this.HttpClient.GetJsonResponse<ElementTokenResponse>(request);
 
             return elementTokenResponse.ToElementToken();
-        }
-
-        private void RevokeRequest(OAuthTokenRevocationRequest requestBody)
-        {
-            var request = new HttpRequest
-            {
-                Method = "POST",
-                Url = this.urlProvider.TokenRevocationUrl,
-            };
-
-            request.SetJsonBody(requestBody);
-
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 200)
-            {
-                throw new CronofyResponseException("Request failed", response);
-            }
         }
 
         /// <summary>
