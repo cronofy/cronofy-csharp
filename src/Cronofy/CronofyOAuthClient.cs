@@ -184,6 +184,22 @@ namespace Cronofy
         {
             Preconditions.NotEmpty("token", token);
 
+            this.RevokeAuthorization(new RevokeAuthorizationOptions { Token = token });
+        }
+
+        /// <inheritdoc/>
+        public void RevokeSub(string sub)
+        {
+            Preconditions.NotEmpty("sub", sub);
+
+            this.RevokeAuthorization(new RevokeAuthorizationOptions { Sub = sub });
+        }
+
+        /// <inheritdoc/>
+        public void RevokeAuthorization(RevokeAuthorizationOptions options)
+        {
+            Preconditions.NotNull("options", options);
+
             var request = new HttpRequest
             {
                 Method = "POST",
@@ -194,7 +210,9 @@ namespace Cronofy
             {
                 ClientId = this.clientId,
                 ClientSecret = this.clientSecret,
-                Token = token,
+                Sub = options.Sub,
+                Token = options.Token,
+                RequestPiiErasure = options.RequestPiiErasure,
             };
 
             request.SetJsonBody(requestBody);

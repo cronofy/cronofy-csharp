@@ -101,6 +101,35 @@ namespace Cronofy
         void RevokeToken(string token);
 
         /// <summary>
+        /// Revokes any authorizations for the given sub.
+        /// </summary>
+        /// <param name="sub">
+        /// The sub of the account to revoke the OAuth authorizations for, must
+        /// not be null or empty.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="sub"/> is null or empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void RevokeSub(string sub);
+
+        /// <summary>
+        /// Revokes any matching authorizations.
+        /// </summary>
+        /// <param name="options">
+        /// The options for the revocation request, must not be null.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="options"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void RevokeAuthorization(RevokeAuthorizationOptions options);
+
+        /// <summary>
         /// Validates whether the provided HMAC header matches the one generated for
         /// the corresponding request bytes.
         /// </summary>

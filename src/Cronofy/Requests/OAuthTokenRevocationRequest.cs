@@ -34,5 +34,24 @@
         /// </value>
         [JsonProperty("token")]
         public string Token { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sub of the OAuth authorization to be revoked.
+        /// </summary>
+        /// <value>
+        /// The sub of the OAuth authorization to be revoked.
+        /// </value>
+        [JsonProperty("sub")]
+        public string Sub { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether PII erasure will be requested alongside the
+        /// revocation.
+        /// </summary>
+        /// <value>
+        /// Whether PII erasure will be requested alongside the revocation.
+        /// </value>
+        [JsonProperty("request_pii_erasure")]
+        public bool? RequestPiiErasure { get; set; }
     }
 }

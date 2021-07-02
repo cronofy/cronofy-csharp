@@ -1,4 +1,9 @@
+## [1.1.4]
+
+* Adds support for additional parameters when revoking an authorization [#102]
+
 ## [1.1.3]
+
 * Adds support for [requesting conferencing provisioning](https://docs.cronofy.com/developers/api/conferencing-services/create/) and related [push notifications](https://docs.cronofy.com/developers/api/conferencing-services/subscriptions/) when creating an event [#97]
 * Adds support for [conferencing authorization URL generation](https://docs.cronofy.com/developers/api/conferencing-services/authorization/) [#98]
 
@@ -250,6 +255,7 @@
 [1.1.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.1
 [1.1.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.2
 [1.1.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.3
+[1.1.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.4
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -308,3 +314,4 @@
 [#95]: https://github.com/cronofy/cronofy-csharp/pull/95
 [#97]: https://github.com/cronofy/cronofy-csharp/pull/97
 [#98]: https://github.com/cronofy/cronofy-csharp/pull/98
+[#102]: https://github.com/cronofy/cronofy-csharp/pull/102

@@ -38,5 +38,43 @@
 
             this.client.RevokeToken(refreshToken);
         }
+
+        [Test]
+        public void CanRevokeSub()
+        {
+            const string sub = "acc_1234567890";
+
+            this.http.Stub(
+                HttpPost
+                    .Url("https://app.cronofy.com/oauth/token/revoke")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"sub\":\"{2}\"}}",
+                        ClientId, ClientSecret, sub)
+                    .ResponseCode(200));
+
+            this.client.RevokeSub(sub);
+        }
+
+        [Test]
+        public void CanRevokeWithRemovePiiRequest()
+        {
+            const string sub = "acc_1234567890";
+
+            this.http.Stub(
+                HttpPost
+                    .Url("https://app.cronofy.com/oauth/token/revoke")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"sub\":\"{2}\",\"request_pii_erasure\":{3}}}",
+                        ClientId, ClientSecret, sub, "true") // Need to provide bool as string to avoid incorrect serialization
+                    .ResponseCode(200));
+
+            this.client.RevokeAuthorization(new RevokeAuthorizationOptions
+            {
+                Sub = sub,
+                RequestPiiErasure = true,
+            });
+        }
     }
 }
