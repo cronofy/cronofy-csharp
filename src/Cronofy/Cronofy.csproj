@@ -24,6 +24,11 @@
     <NoWarn>SA1633</NoWarn> <!-- no file header requirement -->
   </PropertyGroup>
 
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../strongname-keypair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -34,7 +39,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-    <_Parameter1>Cronofy.Test</_Parameter1>
+    <_Parameter1>Cronofy.Test, PublicKey=0024000004800000940000000602000000240000525341310004000001000100ed5066433880090ad89a5c22530f48b932eab7425653e450a9d292a2a54dbd43e75eead4f0185a07e81c83ade8cf04875a9898ecfc36d064c480622dad51f1f0a0460233b169b18d0fc82e64d3c62d25edf409db62db04438c2f4a079b831bad53c7009c7ff81fd644b4a4f541a5eec0ff8ba781c10725e72fddbbe8b5d30e84</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 
