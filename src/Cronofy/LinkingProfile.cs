@@ -19,7 +19,7 @@
         /// <value>
         /// The service name of the provider for the profile.
         /// </value>
-        public string ProviderService{ get; set; }
+        public string ProviderService { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the profile.
