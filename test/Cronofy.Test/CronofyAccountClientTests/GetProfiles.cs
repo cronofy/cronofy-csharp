@@ -27,6 +27,7 @@
     },
     {
       ""provider_name"": ""apple"",
+      ""provider_service"": ""icloud"",
       ""profile_id"": ""pro_n23kjnwrw2"",
       ""profile_name"": ""example@cronofy.com"",
       ""profile_connected"": false,
@@ -58,6 +59,7 @@
                     new Profile
                     {
                         ProviderName = "apple",
+                        ProviderService = "icloud",
                         Id = "pro_n23kjnwrw2",
                         Name = "example@cronofy.com",
                         Connected = false,
