@@ -32,6 +32,15 @@
             public string ProviderName { get; set; }
 
             /// <summary>
+            /// Gets or sets the service name of the provider.
+            /// </summary>
+            /// <value>
+            /// The service name of the provider.
+            /// </value>
+            [JsonProperty("provider_service")]
+            public string ProviderService { get; set; }
+
+            /// <summary>
             /// Gets or sets the ID of the profile.
             /// </summary>
             /// <value>
@@ -80,6 +89,7 @@
                 return new Profile
                 {
                     ProviderName = this.ProviderName,
+                    ProviderService = this.ProviderService,
                     Id = this.ProfileId,
                     Name = this.ProfileName,
                     Connected = this.ProfileConnected,

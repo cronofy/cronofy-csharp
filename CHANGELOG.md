@@ -1,3 +1,7 @@
+## [1.3.0]
+
+* Adds `ProviderService` to profile information returned by `GetProfiles()` and `GetTokenFromCode()`. [#104]
+
 ## [1.2.0]
 
 * Enables [strong name signing](https://docs.microsoft.com/en-us/dotnet/standard/assembly/strong-named), which allows applications that also use strong names to reference this package. [#103]
@@ -261,6 +265,7 @@
 [1.1.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.3
 [1.1.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.4
 [1.2.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.2.0
+[1.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.3.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -321,3 +326,4 @@
 [#98]: https://github.com/cronofy/cronofy-csharp/pull/98
 [#102]: https://github.com/cronofy/cronofy-csharp/pull/102
 [#103]: https://github.com/cronofy/cronofy-csharp/pull/103
+[#104]: https://github.com/cronofy/cronofy-csharp/pull/104
