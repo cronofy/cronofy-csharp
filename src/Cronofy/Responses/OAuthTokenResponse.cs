@@ -130,6 +130,15 @@
             public string ProviderName { get; set; }
 
             /// <summary>
+            /// Gets or sets the service provider name.
+            /// </summary>
+            /// <value>
+            /// The service provider name.
+            /// </value>
+            [JsonProperty("provider_service")]
+            public string ProviderService { get; set; }
+
+            /// <summary>
             /// Gets or sets the profile ID.
             /// </summary>
             /// <value>
@@ -158,6 +167,7 @@
                 return new LinkingProfile
                 {
                     ProviderName = this.ProviderName,
+                    ProviderService = this.ProviderService,
                     Id = this.ProfileId,
                     Name = this.ProfileName,
                 };

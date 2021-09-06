@@ -57,6 +57,7 @@
             const string scope = "read_events create_event delete_event";
             const string accountId = "acc_567236000909002";
             const string providerName = "google";
+            const string providerService = "gsuite";
             const string profileId = "pro_n23kjnwrw2";
             const string profileName = "example@cronofy.com";
 
@@ -80,12 +81,13 @@
                         "\"linking_profile\":" +
                             "{{" +
                             "\"provider_name\":\"{5}\"," +
-                            "\"profile_id\":\"{6}\"," +
-                            "\"profile_name\":\"{7}\"" +
+                            "\"provider_service\":\"{6}\"," +
+                            "\"profile_id\":\"{7}\"," +
+                            "\"profile_name\":\"{8}\"" +
                             "}}" +
                         "}}",
                         accessToken, expiresIn, refreshToken, scope,
-                        accountId, providerName, profileId, profileName));
+                        accountId, providerName, providerService, profileId, profileName));
 
             var actualToken = this.client.GetTokenFromCode(OauthCode, RedirectUri);
             var expectedToken = new OAuthToken(accessToken, refreshToken, expiresIn, scope.Split(new[] { ' ' }))
@@ -95,6 +97,7 @@
                 LinkingProfile = new LinkingProfile()
                 {
                     ProviderName = providerName,
+                    ProviderService = providerService,
                     Id = profileId,
                     Name = profileName,
                 },

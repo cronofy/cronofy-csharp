@@ -20,6 +20,7 @@
   ""profiles"": [
     {
       ""provider_name"": ""google"",
+      ""provider_service"": ""gsuite"",
       ""profile_id"": ""pro_n23kjnwrw2"",
       ""profile_name"": ""example@cronofy.com"",
       ""profile_connected"": true
@@ -30,6 +31,13 @@
       ""profile_name"": ""example@cronofy.com"",
       ""profile_connected"": false,
       ""profile_relink_url"": ""http://to.cronofy.com/RaNggYu""
+    },
+    {
+      ""provider_name"": ""exchange"",
+      ""provider_service"": ""office365"",
+      ""profile_id"": ""pro_n23kjnwrw2"",
+      ""profile_name"": ""example@cronofy.com"",
+      ""profile_connected"": true,
     }
   ]
 }"));
@@ -42,6 +50,7 @@
                     new Profile
                     {
                         ProviderName = "google",
+                        ProviderService = "gsuite",
                         Id = "pro_n23kjnwrw2",
                         Name = "example@cronofy.com",
                         Connected = true,
@@ -53,6 +62,14 @@
                         Name = "example@cronofy.com",
                         Connected = false,
                         RelinkUrl = "http://to.cronofy.com/RaNggYu",
+                    },
+                    new Profile
+                    {
+                        ProviderName = "exchange",
+                        ProviderService = "office365",
+                        Id = "pro_n23kjnwrw2",
+                        Name = "example@cronofy.com",
+                        Connected = true,
                     },
                 },
                 profiles.ToList());

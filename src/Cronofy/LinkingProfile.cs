@@ -14,6 +14,14 @@
         public string ProviderName { get; set; }
 
         /// <summary>
+        /// Gets or sets the service name of the provider of the profile.
+        /// </summary>
+        /// <value>
+        /// The service name of the provider for the profile.
+        /// </value>
+        public string ProviderService{ get; set; }
+
+        /// <summary>
         /// Gets or sets the ID of the profile.
         /// </summary>
         /// <value>
@@ -65,6 +73,7 @@
         {
             return other != null
                 && this.ProviderName == other.ProviderName
+                && this.ProviderService == other.ProviderService
                 && this.Id == other.Id
                 && this.Name == other.Name;
         }
@@ -73,9 +82,10 @@
         public override string ToString()
         {
             return string.Format(
-                "<{0} ProviderName={1}, Id={2}, Name={3}>",
+                "<{0} ProviderName={1}, ProviderService={2}, Id={3}, Name={4}>",
                 this.GetType(),
                 this.ProviderName,
+                this.ProviderService,
                 this.Id,
                 this.Name);
         }
