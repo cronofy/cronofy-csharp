@@ -67,5 +67,19 @@
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         void AuthorizeUser(string email, string callbackUrl, string scope, string state = null);
+
+        /// <summary>
+        /// Authorizes the collection of users for this service account.
+        /// </summary>
+        /// <param name="options">
+        /// The collection of users to be authorized, must not be null.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="options"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void AuthorizeUsers(IEnumerable<EnterpriseConnectAuthorizeUserOptions> options);
     }
 }
