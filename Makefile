@@ -4,6 +4,10 @@ VERSION:=$(shell cat VERSION)
 .PHONY: all
 all: test
 
+.PHONY: dev-init
+dev-init:
+	script/init
+
 .PHONY: clean
 clean:
 	rm -rf build/ artifacts/

@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+set -o errexit
+
+asdf plugin update --all
+
+while read -r line; do
+  line_array=($line)
+  asdf_package=${line_array[0]}
+  (asdf plugin add $asdf_package) || true
+done < ".tool-versions"
+
+asdf install
