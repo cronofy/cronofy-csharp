@@ -92,5 +92,22 @@ namespace Cronofy
 
             this.HttpClient.GetValidResponse(request);
         }
+
+        /// <inheritdoc/>
+        public void AuthorizeUsers(IEnumerable<EnterpriseConnectAuthorizeUserOptions> options)
+        {
+            Preconditions.NotNull("options", options);
+
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.UrlProvider.AuthorizeWithServiceAccountUrl,
+            };
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            request.SetJsonBody(new { service_account_authorizations = options });
+
+            this.HttpClient.GetValidResponse(request);
+        }
     }
 }

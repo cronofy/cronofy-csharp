@@ -1,6 +1,7 @@
 ﻿namespace Cronofy.Test.CronofyEnterpriseConnectAccountClientTests
 {
     using System;
+    using System.Collections.Generic;
     using NUnit.Framework;
 
     internal sealed class AuthorizeUser : Base
@@ -28,6 +29,47 @@
                 .ResponseCode(202));
 
             this.Client.AuthorizeUser(email, callbackUrl, scopes);
+        }
+
+        [Test]
+        public void CanAuthorizeMultipleUsers()
+        {
+            const string email = "test@cronofy.com";
+            const string callbackUrl = "https://cronofy.com/test-callback";
+            const string scope = "read_account list_calendars read_events create_event delete_event read_free_busy";
+            const string state = "nggyu";
+
+            this.Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/service_account_authorizations")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"service_account_authorizations\":[" +
+                    "{{\"email\":\"{0}\"," +
+                    "\"callback_url\":\"{1}\"," +
+                    "\"scope\":\"{2}\"," +
+                    "\"state\":\"{3}\"" +
+                    "}}" +
+                    "]}}",
+                    email,
+                    callbackUrl,
+                    scope,
+                    state)
+                .ResponseCode(202));
+
+            var options = new List<EnterpriseConnectAuthorizeUserOptions>
+            {
+                new EnterpriseConnectAuthorizeUserOptions
+                {
+                    Email = email,
+                    CallbackUrl = callbackUrl,
+                    Scope = scope,
+                    State = state,
+                },
+            };
+
+            this.Client.AuthorizeUsers(options);
         }
 
         [Test]
