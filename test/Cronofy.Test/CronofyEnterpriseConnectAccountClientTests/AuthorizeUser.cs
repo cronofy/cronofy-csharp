@@ -72,7 +72,6 @@
             this.Client.AuthorizeUsers(options);
         }
 
-
         [Test]
         public void CanAuthorizeUserWithState()
         {
