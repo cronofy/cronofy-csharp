@@ -1,3 +1,7 @@
+## [1.4.0]
+
+* Adds for providing multiple users when requesting [Enterprise Connect delegated access](https://docs.cronofy.com/developers/api/enterprise-connect/delegated-access/) [#105]
+
 ## [1.3.0]
 
 * Adds `ProviderService` to profile information returned by `GetProfiles()` and `GetTokenFromCode()`. [#104]
@@ -266,6 +270,7 @@
 [1.1.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.1.4
 [1.2.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.2.0
 [1.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.3.0
+[1.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.4.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -327,3 +332,4 @@
 [#102]: https://github.com/cronofy/cronofy-csharp/pull/102
 [#103]: https://github.com/cronofy/cronofy-csharp/pull/103
 [#104]: https://github.com/cronofy/cronofy-csharp/pull/104
+[#105]: https://github.com/cronofy/cronofy-csharp/pull/105
