@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     /// <summary>
     /// Class representing a free-busy period.
@@ -39,6 +39,24 @@
         /// See <see cref="Cronofy.FreeBusyStatus"/> for potential values.
         /// </remarks>
         public string FreeBusyStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OAuth application's ID for the event, if it is
+        /// an event the OAuth application is managing.
+        /// </summary>
+        /// <value>
+        /// The OAuth application's ID for the event, <c>null</c> if the
+        /// OAuth application is not managing this event.
+        /// </value>
+        public string EventId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UID of the event.
+        /// </summary>
+        /// <value>
+        /// The UID of the event.
+        /// </value>
+        public string EventUid { get; set; }
 
         /// <inheritdoc/>
         public override int GetHashCode()

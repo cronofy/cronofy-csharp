@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +28,26 @@
         /// The request's include managed flag.
         /// </summary>
         private bool? includeManaged;
+
+        /// <summary>
+        /// The request's include IDs flag.
+        /// </summary>
+        private bool? includeIds;
+
+        /// <summary>
+        /// The request's include free events flag.
+        /// </summary>
+        private bool? includeFree;
+
+        /// <summary>
+        /// The request's include deleted events flag.
+        /// </summary>
+        private bool? includeDeleted;
+
+        /// <summary>
+        /// The request's last modified time.
+        /// </summary>
+        private DateTime? lastModified;
 
         /// <summary>
         /// The request's calendar IDs.
@@ -200,6 +220,82 @@
             return this.CalendarIds(new[] { calendarId });
         }
 
+        /// <summary>
+        /// Sets the include IDs flag for the request.
+        /// </summary>
+        /// <param name="includeIds">
+        /// A flag specifying whether event IDs should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder IncludeIds(bool includeIds)
+        {
+            this.includeIds = includeIds;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the include free flag for the request.
+        /// </summary>
+        /// <param name="includeFree">
+        /// A flag specifying whether free events should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder IncludeFree(bool includeFree)
+        {
+            this.includeFree = includeFree;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the include deleted flag for the request.
+        /// </summary>
+        /// <param name="includeDeleted">
+        /// A flag specifying whether fdeletedree events should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder IncludeDeleted(bool includeDeleted)
+        {
+            this.includeDeleted = includeDeleted;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the include deleted flag for the request.
+        /// </summary>
+        /// <param name="includeDeleted">
+        /// A flag specifying whether fdeletedree events should be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder LastModified(bool includeDeleted)
+        {
+            this.includeDeleted = includeDeleted;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the last modified time for the request.
+        /// </summary>
+        /// <param name="lastModified">
+        /// The time the an event must have been modified on or after in order
+        /// to be returned.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        public GetFreeBusyRequestBuilder LastModified(DateTime lastModified)
+        {
+            this.lastModified = lastModified;
+            return this;
+        }
+
         /// <inheritdoc/>
         public GetFreeBusyRequest Build()
         {
@@ -210,6 +306,10 @@
                 To = this.to,
                 IncludeManaged = this.includeManaged,
                 CalendarIds = this.calendarIds,
+                IncludeIds = this.includeIds,
+                IncludeFree = this.includeFree,
+                IncludeDeleted = this.includeDeleted,
+                LastModified = this.lastModified,
             };
         }
     }
