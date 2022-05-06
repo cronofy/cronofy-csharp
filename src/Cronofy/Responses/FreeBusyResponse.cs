@@ -123,6 +123,8 @@ namespace Cronofy.Responses
                     Start = this.Start,
                     End = this.End,
                     FreeBusyStatus = this.FreeBusyStatus,
+                    EventId = this.EventId,
+                    EventUid = this.EventUid,
                 };
             }
         }
