@@ -211,6 +211,8 @@ namespace Cronofy
             httpRequest.QueryString.Add("to", request.To);
             httpRequest.QueryString.Add("include_ids", request.IncludeIds);
             httpRequest.QueryString.Add("include_free", request.IncludeFree);
+            httpRequest.QueryString.Add("include_deleted", request.IncludeDeleted);
+            httpRequest.QueryString.Add("last_modified", request.LastModified);
 
             return new PagedResultsIterator<FreeBusyResponse, FreeBusy>(
                 this.HttpClient,
