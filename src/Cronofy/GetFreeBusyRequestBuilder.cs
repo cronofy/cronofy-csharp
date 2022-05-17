@@ -281,22 +281,6 @@ namespace Cronofy
             return this;
         }
 
-        /// <summary>
-        /// Sets the last modified time for the request.
-        /// </summary>
-        /// <param name="lastModified">
-        /// The time the an event must have been modified on or after in order
-        /// to be returned.
-        /// </param>
-        /// <returns>
-        /// A reference to the modified builder.
-        /// </returns>
-        public GetFreeBusyRequestBuilder LastModified(DateTime lastModified)
-        {
-            this.lastModified = lastModified;
-            return this;
-        }
-
         /// <inheritdoc/>
         public GetFreeBusyRequest Build()
         {
