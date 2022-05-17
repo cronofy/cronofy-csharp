@@ -254,7 +254,7 @@ namespace Cronofy
         /// Sets the include deleted flag for the request.
         /// </summary>
         /// <param name="includeDeleted">
-        /// A flag specifying whether fdeletedree events should be returned.
+        /// A flag specifying whether deleted events should be returned.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.
@@ -266,17 +266,18 @@ namespace Cronofy
         }
 
         /// <summary>
-        /// Sets the include deleted flag for the request.
+        /// Sets the last modified time for the request.
         /// </summary>
-        /// <param name="includeDeleted">
-        /// A flag specifying whether fdeletedree events should be returned.
+        /// <param name="lastModified">
+        /// The time the an event must have been modified on or after in order
+        /// to be returned.
         /// </param>
         /// <returns>
         /// A reference to the modified builder.
         /// </returns>
-        public GetFreeBusyRequestBuilder LastModified(bool includeDeleted)
+        public GetFreeBusyRequestBuilder LastModified(DateTime lastModified)
         {
-            this.includeDeleted = includeDeleted;
+            this.lastModified = lastModified;
             return this;
         }
 
