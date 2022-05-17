@@ -58,6 +58,16 @@ namespace Cronofy
         /// </value>
         public string EventUid { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this event has been
+        /// deleted.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the event has been deleted; otherwise,
+        /// <c>false</c>.
+        /// </value>
+        public bool Deleted { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -96,7 +106,10 @@ namespace Cronofy
                 && this.CalendarId == other.CalendarId
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
-                && object.Equals(this.FreeBusyStatus, other.FreeBusyStatus);
+                && object.Equals(this.FreeBusyStatus, other.FreeBusyStatus)
+                && object.Equals(this.EventId, other.EventId)
+                && object.Equals(this.EventUid, other.EventUid)
+                && object.Equals(this.Deleted, other.Deleted);
         }
 
         /// <inheritdoc/>

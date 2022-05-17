@@ -125,6 +125,7 @@ namespace Cronofy.Responses
                     FreeBusyStatus = this.FreeBusyStatus,
                     EventId = this.EventId,
                     EventUid = this.EventUid,
+                    Deleted = this.Deleted,
                 };
             }
         }
