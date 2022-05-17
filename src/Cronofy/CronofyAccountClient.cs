@@ -209,8 +209,8 @@ namespace Cronofy
             httpRequest.QueryString.Add("calendar_ids[]", request.CalendarIds);
             httpRequest.QueryString.Add("from", request.From);
             httpRequest.QueryString.Add("to", request.To);
-            httpRequest.QueryString.Add("include_managed", request.IncludeManaged);
             httpRequest.QueryString.Add("include_ids", request.IncludeIds);
+            httpRequest.QueryString.Add("include_free", request.IncludeFree);
 
             return new PagedResultsIterator<FreeBusyResponse, FreeBusy>(
                 this.HttpClient,
