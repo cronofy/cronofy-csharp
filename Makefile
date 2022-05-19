@@ -45,3 +45,8 @@ guard-env-%:
 		echo "$* must be set"; \
 		exit 1; \
 	fi
+
+.PHONY: init
+init:
+	asdf plugin-add dotnet-core || true
+	asdf install
