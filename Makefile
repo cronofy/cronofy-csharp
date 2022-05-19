@@ -48,4 +48,5 @@ guard-env-%:
 
 .PHONY: init
 init:
+	asdf plugin-add dotnet-core || true
 	asdf install
