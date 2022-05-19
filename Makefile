@@ -45,3 +45,7 @@ guard-env-%:
 		echo "$* must be set"; \
 		exit 1; \
 	fi
+
+.PHONY: init
+init:
+	asdf install
