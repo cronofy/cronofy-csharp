@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Test.CronofyAccountClientTests
+namespace Cronofy.Test.CronofyAccountClientTests
 {
     using System;
     using System.Collections.Generic;
@@ -125,9 +125,37 @@
         }
 
         [Test]
-        public void CanGetFreeBusyIncludingManagedEvents()
+        public void CanGetEventsThatAreManaged()
         {
             this.AssertParameter("include_managed=true", b => b.IncludeManaged(true));
+        }
+
+        [Test]
+        public void CanGetFreeBusyIncludingIds()
+        {
+            this.AssertParameter("include_ids=true", b => b.IncludeIds(true));
+        }
+
+        [Test]
+        public void CanGetEventsThatHaveBeenDeleted()
+        {
+            this.AssertParameter("include_deleted=true", b => b.IncludeDeleted(true));
+        }
+
+        [Test]
+        public void CanGetFreeBusyIncludingFree()
+        {
+            this.AssertParameter("include_free=true", b => b.IncludeFree(true));
+        }
+
+        [Test]
+        public void CanGetEventsSinceLastModified()
+        {
+            var lastModified = DateTime.UtcNow.AddMinutes(-15);
+
+            this.AssertParameter(
+                "last_modified=" + Encode(lastModified.ToString("u")),
+                b => b.LastModified(lastModified));
         }
 
         [Test]

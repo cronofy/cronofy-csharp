@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     /// <summary>
     /// Class representing a free-busy period.
@@ -40,6 +40,34 @@
         /// </remarks>
         public string FreeBusyStatus { get; set; }
 
+        /// <summary>
+        /// Gets or sets the OAuth application's ID for the event, if it is
+        /// an event the OAuth application is managing.
+        /// </summary>
+        /// <value>
+        /// The OAuth application's ID for the event, <c>null</c> if the
+        /// OAuth application is not managing this event.
+        /// </value>
+        public string EventId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UID of the event.
+        /// </summary>
+        /// <value>
+        /// The UID of the event.
+        /// </value>
+        public string EventUid { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this event has been
+        /// deleted.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the event has been deleted; otherwise,
+        /// <c>false</c>.
+        /// </value>
+        public bool Deleted { get; set; }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
@@ -78,7 +106,10 @@
                 && this.CalendarId == other.CalendarId
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
-                && object.Equals(this.FreeBusyStatus, other.FreeBusyStatus);
+                && object.Equals(this.FreeBusyStatus, other.FreeBusyStatus)
+                && object.Equals(this.EventId, other.EventId)
+                && object.Equals(this.EventUid, other.EventUid)
+                && object.Equals(this.Deleted, other.Deleted);
         }
 
         /// <inheritdoc/>
