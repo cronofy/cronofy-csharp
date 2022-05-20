@@ -1,5 +1,6 @@
-﻿namespace Cronofy.Requests
+namespace Cronofy.Requests
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -46,5 +47,37 @@
         /// The calendar IDs for the request.
         /// </value>
         public IEnumerable<string> CalendarIds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include IDs flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include IDs flag for the request.
+        /// </value>
+        public bool? IncludeIds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include free events flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include free events flag for the request.
+        /// </value>
+        public bool? IncludeFree { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include deleted flag for the request.
+        /// </summary>
+        /// <value>
+        /// The include deleted flag for the request.
+        /// </value>
+        public bool? IncludeDeleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified time for the request.
+        /// </summary>
+        /// <value>
+        /// The last modified time for the request.
+        /// </value>
+        public DateTime? LastModified { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Responses
+namespace Cronofy.Responses
 {
     using System;
     using System.Collections.Generic;
@@ -79,6 +79,37 @@
             public string FreeBusyStatus { get; set; }
 
             /// <summary>
+            /// Gets or sets the OAuth application's ID for the event, if it is
+            /// an event the OAuth application is managing.
+            /// </summary>
+            /// <value>
+            /// The OAuth application's ID for the event, <c>null</c> if the
+            /// OAuth application is not managing this event.
+            /// </value>
+            [JsonProperty("event_id")]
+            public string EventId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the UID of the event.
+            /// </summary>
+            /// <value>
+            /// The UID of the event.
+            /// </value>
+            [JsonProperty("event_uid")]
+            public string EventUid { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether this event has been
+            /// deleted.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the event has been deleted; otherwise,
+            /// <c>false</c>.
+            /// </value>
+            [JsonProperty("deleted")]
+            public bool Deleted { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.FreeBusy"/>.
             /// </summary>
             /// <returns>
@@ -92,6 +123,9 @@
                     Start = this.Start,
                     End = this.End,
                     FreeBusyStatus = this.FreeBusyStatus,
+                    EventId = this.EventId,
+                    EventUid = this.EventUid,
+                    Deleted = this.Deleted,
                 };
             }
         }
