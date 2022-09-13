@@ -343,6 +343,15 @@ namespace Cronofy
             }
         }
 
+        // new method for 
+        // public void UpsertAvailabilityRule(AvailabilityRule request) {...}
+
+        // list availability rules
+        // public ListAvailabilityRulesResponse ListAvailabilityRules() { ... }
+
+        // var response = this.HttpClient.GetJsonResponse<ListAvailabilityRulesResponse>(request);
+        //
+
         /// <inheritdoc/>
         public void DeleteExternalEvent(string calendarId, string eventUid)
         {
@@ -436,6 +445,7 @@ namespace Cronofy
             return this.CreateChannel(request);
         }
 
+// good example for creating availability rule
         /// <inheritdoc/>
         public Channel CreateChannel(CreateChannelRequest channelRequest)
         {
@@ -453,6 +463,7 @@ namespace Cronofy
             return response.ToChannel();
         }
 
+// good example for listing availability rules
         /// <inheritdoc/>
         public IEnumerable<Channel> GetChannels()
         {
@@ -467,6 +478,7 @@ namespace Cronofy
             return response.Channels.Select(c => c.ToChannel());
         }
 
+// good example for deleting availability rule
         /// <inheritdoc/>
         public void CloseChannel(string channelId)
         {
@@ -603,6 +615,8 @@ namespace Cronofy
 
             return response.ToCalendar();
         }
+
+
 
         /// <summary>
         /// Iterator for a paged events response.

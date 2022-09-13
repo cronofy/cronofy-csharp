@@ -5,6 +5,9 @@ namespace Cronofy
     /// </summary>
     public sealed class UrlProvider
     {
+
+        // new url here for /v1/availability_rules
+
         /// <summary>
         /// The URL format of the OAuth authorization endpoint.
         /// </summary>
@@ -218,7 +221,10 @@ namespace Cronofy
             this.ProvisionApplicationUrl = string.Format(ProvisionApplicationUrlFormat, suffix);
             this.ElementTokensUrl = string.Format(ElementTokensUrlFormat, suffix);
             this.ConferencingServiceAuthorizationUrl = string.Format(ConferencingServiceAuthorizationUrlFormat, suffix);
+            // transform url
         }
+
+        // new public url getter
 
         /// <summary>
         /// Gets the authorization URL.
