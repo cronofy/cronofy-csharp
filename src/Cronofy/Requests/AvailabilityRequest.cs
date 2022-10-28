@@ -46,6 +46,15 @@
         public Duration StartInterval { get; set; }
 
         /// <summary>
+        /// Gets or sets the max results for the request.
+        /// </summary>
+        /// <value>
+        /// The maximum number of available periods or slots for the request.
+        /// </value>
+        [JsonProperty("max_results")]
+        public int? MaxResults { get; set; }
+
+        /// <summary>
         /// Gets or sets the buffer.
         /// </summary>
         /// <value>The buffer.</value>

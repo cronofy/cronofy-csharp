@@ -54,6 +54,35 @@
         private int? startInterval;
 
         /// <summary>
+        /// The maximum number of available periods or slots of the request.
+        /// </summary>
+        private int? maxResults;
+
+        /// <summary>
+        /// Sets the maximum number of available periods or slots of the request.
+        /// </summary>
+        /// <param name="maxResults">
+        /// The maximum number of available periods or slots, must be greater than zero and less than or equal to 512.
+        /// </param>
+        /// <returns>
+        /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="maxResults"/> is not greater than zero.
+        /// Thrown if <paramref name="maxResults"/> is not less than or equal to 512.
+        /// </exception>
+        public AvailabilityRequestBuilder MaxResults(int maxResults)
+        {
+            Preconditions.True(maxResults > 0, "maxResults must be greater than zero");
+            Preconditions.True(maxResults <= 512, "maxResults must be less than or equal to 512");
+
+            this.maxResults = maxResults;
+
+            return this;
+        }
+
+
+        /// <summary>
         /// Sets the required duration of the request.
         /// </summary>
         /// <param name="minutes">
@@ -105,7 +134,7 @@
         /// A reference to the <see cref="AvailabilityRequestBuilder"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="beforeBuffer"/> is not null or is negative.
+        /// Thrown if <paramref name="beforeBuffer"/> is not null and is negative.
         /// </exception>
         public AvailabilityRequestBuilder BeforeBuffer(int? beforeBuffer)
         {
@@ -294,6 +323,11 @@
                         },
                     };
                 }
+            }
+
+            if (this.maxResults.HasValue)
+            {
+                request.MaxResults = this.maxResults.Value;
             }
 
             request.Participants = participantGroups;
