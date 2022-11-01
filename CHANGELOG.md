@@ -1,3 +1,7 @@
+## [1.6.0]
+
+* Add `max_results` to AvailabilityBuilder. [More info can be found here](https://docs.cronofy.com/developers/api/scheduling/availability/#param-max_results) [#110]
+
 ## [1.5.0]
 
 * Add additional FreeBusy API parameters [#107]
@@ -276,6 +280,7 @@
 [1.3.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.3.0
 [1.4.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.4.0
 [1.5.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.5.0
+[1.6.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.6.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -339,3 +344,4 @@
 [#104]: https://github.com/cronofy/cronofy-csharp/pull/104
 [#105]: https://github.com/cronofy/cronofy-csharp/pull/105
 [#107]: https://github.com/cronofy/cronofy-csharp/pull/107
+[#110]: https://github.com/cronofy/cronofy-csharp/pull/110
