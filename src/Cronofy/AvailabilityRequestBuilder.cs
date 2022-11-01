@@ -81,7 +81,6 @@
             return this;
         }
 
-
         /// <summary>
         /// Sets the required duration of the request.
         /// </summary>
