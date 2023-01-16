@@ -152,6 +152,15 @@
             /// <value>
             /// The account's participation status.
             /// </value>
+            [JsonProperty("series_identifier")]
+            public string SeriesIdentifier { get; set; }
+
+            /// <summary>
+            /// Gets or sets the series identifier that the event is part of.
+            /// </summary>
+            /// <value>
+            /// The event's recurring series identifier.
+            /// </value>
             [JsonProperty("participation_status")]
             public string ParticipationStatus { get; set; }
 
@@ -273,6 +282,7 @@
                     Created = this.Created,
                     Updated = this.Updated,
                     Recurring = this.Recurring,
+                    SeriesIdentifier = this.SeriesIdentifier,
                     EventPrivate = this.EventPrivate,
                     MeetingUrl = this.MeetingUrl,
                 };

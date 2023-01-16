@@ -177,6 +177,14 @@ namespace Cronofy
         public bool Recurring { get; set; }
 
         /// <summary>
+        /// Gets or sets the series identifier that the event is part of.
+        /// </summary>
+        /// <value>
+        /// The event's recurring series identifier.
+        /// </value>
+        public string SeriesIdentifier { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this event is private.
         /// </summary>
         /// <value>
