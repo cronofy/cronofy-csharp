@@ -39,5 +39,44 @@
             [JsonProperty("completed_url")]
             public string CompletedUrl { get; set; }
         }
+
+        /// <summary>
+        /// Gets or sets the callback URLs for the request.
+        /// </summary>
+        /// <value>
+        /// The callback URLs for the request.
+        /// </value>
+        [JsonProperty("callback_urls", NullValueHandling=NullValueHandling.Ignore)]
+        public CallbackUrlsInfo CallbackUrls { get; set; }
+
+        public class CallbackUrlsInfo
+        {
+            /// <summary>
+            /// Gets or sets the Completed URL for the request.
+            /// </summary>
+            /// <value>
+            /// The Completed URL for the request.
+            /// </value>
+            [JsonProperty("completed_url", NullValueHandling=NullValueHandling.Ignore)]
+            public string CallbackCompletedUrl { get; set; }
+
+            /// <summary>
+            /// Gets or sets the No Times Suitable URL for the request.
+            /// </summary>
+            /// <value>
+            /// The No Times Suitable URL for the request.
+            /// </value>
+            [JsonProperty("no_times_suitable_url", NullValueHandling=NullValueHandling.Ignore)]
+            public string NoTimesSuitableUrl { get; set; }
+
+            /// <summary>
+            /// Gets or sets the No Times Displayed URL for the request.
+            /// </summary>
+            /// <value>
+            /// The No Times Suitable URL for the request.
+            /// </value>
+            [JsonProperty("no_times_displayed_url", NullValueHandling=NullValueHandling.Ignore)]
+            public string NoTimesDisplayedUrl { get; set; }
+        }
     }
 }

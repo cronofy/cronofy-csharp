@@ -76,7 +76,7 @@ namespace Cronofy.Requests
         /// Gets or sets the callback URL for the request.
         /// </summary>
         /// <value>The callback URL for the request.</value>
-        [JsonProperty("callback_url")]
+        [JsonProperty("callback_url", NullValueHandling=NullValueHandling.Ignore)]
         public string CallbackUrl { get; set; }
 
         /// <summary>

@@ -50,6 +50,21 @@
         private string completedUrl;
 
         /// <summary>
+        /// The callback URL for the request.
+        /// </summary>
+        private string callbackCompletedUrl;
+
+        /// <summary>
+        /// The URL for the request when no suitable times are found.
+        /// </summary>
+        private string noTimesSuitableUrl;
+
+        /// <summary>
+        /// The URL for the request when no suitable times are displayed on-screen.
+        /// </summary>
+        private string noTimesDisplayedUrl;
+
+        /// <summary>
         /// Sets the OAuth details of the request.
         /// </summary>
         /// <param name="redirectUri">
@@ -307,6 +322,27 @@
         }
 
         /// <summary>
+        /// Sets the callback URLs for the request.
+        /// </summary>
+        /// <param name="callbackCompletedUrl">
+        /// The completed URL to use for the request callback.
+        /// </param>
+        /// <param name="noTimesSuitableUrl">
+        /// The URL to use for the request when no suitable times are found.
+        /// </param>
+        /// <param name="noTimesDisplayedUrl">
+        /// The URL to use for the request when no times are displayed on-screen.
+        /// </param>
+        public RealTimeSchedulingRequestBuilder CallbackUrls(string callbackCompletedUrl = null, string noTimesSuitableUrl = null, string noTimesDisplayedUrl = null)
+        {
+            this.callbackCompletedUrl = callbackCompletedUrl;
+            this.noTimesSuitableUrl = noTimesSuitableUrl;
+            this.noTimesDisplayedUrl = noTimesDisplayedUrl;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the redirect URLs for the request.
         /// </summary>
         /// <param name="completedUrl">
@@ -336,7 +372,7 @@
                 Event = this.upsertEventRequestBuilder.Build(),
                 TargetCalendars = this.targetCalendars,
                 Tzid = this.tzid,
-                CallbackUrl = this.callbackUrl,
+                CallbackUrl = this.callbackUrl
             };
 
             if (this.completedUrl != null)
@@ -344,6 +380,16 @@
                 request.RedirectUrls = new RealTimeSchedulingRequest.RedirectUrlsInfo
                 {
                     CompletedUrl = this.completedUrl,
+                };
+            }
+
+            if (this.noTimesSuitableUrl != null || this.noTimesDisplayedUrl != null || this.callbackCompletedUrl != null)
+            {
+                request.CallbackUrls = new RealTimeSchedulingRequest.CallbackUrlsInfo
+                {
+                    NoTimesSuitableUrl = this.noTimesSuitableUrl,
+                    NoTimesDisplayedUrl = this.noTimesDisplayedUrl,
+                    CallbackCompletedUrl = this.callbackCompletedUrl
                 };
             }
 
