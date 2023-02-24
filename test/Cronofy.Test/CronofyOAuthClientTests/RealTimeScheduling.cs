@@ -169,8 +169,7 @@
                             "\"formatting\":{{" +
                                 "\"hour_format\":\"{11}\"" +
                             "}}," +
-                            "\"tzid\":\"Etc/UTC\"," +
-                            "\"callback_url\":\"{12}\"" +
+                            "\"tzid\":\"Etc/UTC\"" +
                         "}}",
                         ClientId, ClientSecret, this.redirectUrl, this.scope, this.eventId, this.summary, this.sub, this.startString, this.endString, this.sub, this.calendarId, hourFormat, callbackUrl, completedUrl, noTimesSuitableUrl, noTimesDisplayedUrl, callbackCompletedUrl)
                     .ResponseCode(200)
@@ -184,7 +183,6 @@
                 .AvailabilityRequest(this.availabilityRequest)
                 .AddTargetCalendar(this.sub, this.calendarId)
                 .HourFormat("H")
-                .CallbackUrl(callbackUrl)
                 .CallbackUrls(callbackUrl, noTimesSuitableUrl, noTimesDisplayedUrl)
                 .RedirectUrls(completedUrl)
                 .Build();

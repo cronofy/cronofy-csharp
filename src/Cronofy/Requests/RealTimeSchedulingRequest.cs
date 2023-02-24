@@ -49,8 +49,20 @@
         [JsonProperty("callback_urls", NullValueHandling=NullValueHandling.Ignore)]
         public CallbackUrlsInfo CallbackUrls { get; set; }
 
+        /// <summary>
+        /// Class for the callback URLs parameters.
+        /// </summary>
         public class CallbackUrlsInfo
         {
+            /// <summary>
+            /// Gets or sets the callback URLs for the request.
+            /// </summary>
+            /// <value>
+            /// The callback URLs for the request.
+            /// </value>
+            [JsonProperty("callback_urls", NullValueHandling=NullValueHandling.Ignore)]
+            public CallbackUrlsInfo CallbackUrls { get; set; }
+              
             /// <summary>
             /// Gets or sets the Completed URL for the request.
             /// </summary>

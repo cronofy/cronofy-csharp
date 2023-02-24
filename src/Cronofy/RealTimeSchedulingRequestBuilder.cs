@@ -333,6 +333,9 @@
         /// <param name="noTimesDisplayedUrl">
         /// The URL to use for the request when no times are displayed on-screen.
         /// </param>
+        /// <returns>
+        /// A reference to the <see cref="RealTimeSchedulingRequestBuilder"/>.
+        /// </returns>
         public RealTimeSchedulingRequestBuilder CallbackUrls(string callbackCompletedUrl = null, string noTimesSuitableUrl = null, string noTimesDisplayedUrl = null)
         {
             this.callbackCompletedUrl = callbackCompletedUrl;
@@ -372,8 +375,18 @@
                 Event = this.upsertEventRequestBuilder.Build(),
                 TargetCalendars = this.targetCalendars,
                 Tzid = this.tzid,
-                CallbackUrl = this.callbackUrl
+                CallbackUrl = this.callbackUrl,
             };
+
+            if (this.callbackUrl != null)
+            {
+                request.CallbackUrls = new RealTimeSchedulingRequest.CallbackUrlsInfo
+                {
+                    NoTimesSuitableUrl = this.noTimesSuitableUrl,
+                    NoTimesDisplayedUrl = this.noTimesDisplayedUrl,
+                    CallbackCompletedUrl = this.callbackUrl,
+                };
+            }
 
             if (this.completedUrl != null)
             {
@@ -389,7 +402,7 @@
                 {
                     NoTimesSuitableUrl = this.noTimesSuitableUrl,
                     NoTimesDisplayedUrl = this.noTimesDisplayedUrl,
-                    CallbackCompletedUrl = this.callbackCompletedUrl
+                    CallbackCompletedUrl = this.callbackCompletedUrl,
                 };
             }
 
