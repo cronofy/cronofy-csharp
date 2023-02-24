@@ -320,7 +320,7 @@
         /// Sets the callback URLs for the request.
         /// </summary>
         /// <param name="callbackCompletedUrl">
-        /// The completed URL to use for the request callback.
+        /// The URL to use for the request when it is completed (a time is chosen)
         /// </param>
         /// <param name="noTimesSuitableUrl">
         /// The URL to use for the request when no suitable times are found.
