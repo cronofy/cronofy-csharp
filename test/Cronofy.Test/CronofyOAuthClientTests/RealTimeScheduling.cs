@@ -118,8 +118,10 @@
         {
             var expectedUrl = "http://test.com";
             var hourFormat = "H";
-            var callbackUrl = "https://test.com/callback_url";
             var completedUrl = "https://test.com/completed_url";
+            var callbackCompletedUrl = "https://test.com/callback_url";
+            var noTimesSuitableUrl = "https://test.com/no_times_suitable_url";
+            var noTimesDisplayedUrl = "http://test.com/no_times_displayed_url";
 
             this.http.Stub(
                 HttpPost
@@ -142,7 +144,12 @@
                                 "}}]" +
                             "}}," +
                             "\"redirect_urls\":{{" +
-                                "\"completed_url\":\"{13}\"" +
+                                "\"completed_url\":\"{12}\"" +
+                            "}}," +
+                            "\"callback_urls\":{{" +
+                                "\"completed_url\":\"{15}\"," +
+                                "\"no_times_suitable_url\":\"{13}\"," +
+                                "\"no_times_displayed_url\":\"{14}\"" +
                             "}}," +
                             "\"client_id\":\"{0}\"," +
                             "\"client_secret\":\"{1}\"," +
@@ -161,10 +168,9 @@
                             "\"formatting\":{{" +
                                 "\"hour_format\":\"{11}\"" +
                             "}}," +
-                            "\"tzid\":\"Etc/UTC\"," +
-                            "\"callback_url\":\"{12}\"" +
+                            "\"tzid\":\"Etc/UTC\"" +
                         "}}",
-                        ClientId, ClientSecret, this.redirectUrl, this.scope, this.eventId, this.summary, this.sub, this.startString, this.endString, this.sub, this.calendarId, hourFormat, callbackUrl, completedUrl)
+                        ClientId, ClientSecret, this.redirectUrl, this.scope, this.eventId, this.summary, this.sub, this.startString, this.endString, this.sub, this.calendarId, hourFormat, completedUrl, noTimesSuitableUrl, noTimesDisplayedUrl, callbackCompletedUrl)
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         @"{{""url"": ""{0}"", ""real_time_scheduling"":{{""real_time_scheduling_id"":""sch_123"",""url"":""{0}"",""status"":""open"",""event"":{{""summary"":""{1}"",""event_id"":""{2}"",""event_private"":false}}}}}}", expectedUrl, this.summary, this.eventId));
@@ -176,7 +182,7 @@
                 .AvailabilityRequest(this.availabilityRequest)
                 .AddTargetCalendar(this.sub, this.calendarId)
                 .HourFormat("H")
-                .CallbackUrl(callbackUrl)
+                .CallbackUrls(callbackCompletedUrl, noTimesSuitableUrl, noTimesDisplayedUrl)
                 .RedirectUrls(completedUrl)
                 .Build();
 
