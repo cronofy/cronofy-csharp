@@ -40,11 +40,6 @@
         private string hourFormat;
 
         /// <summary>
-        /// The callback URL for the request.
-        /// </summary>
-        private string callbackUrl;
-
-        /// <summary>
         /// The completed URL for the request.
         /// </summary>
         private string completedUrl;
@@ -316,7 +311,7 @@
         {
             Preconditions.NotBlank(nameof(callbackUrl), callbackUrl);
 
-            this.callbackUrl = callbackUrl;
+            this.callbackCompletedUrl = callbackUrl;
 
             return this;
         }
@@ -375,18 +370,7 @@
                 Event = this.upsertEventRequestBuilder.Build(),
                 TargetCalendars = this.targetCalendars,
                 Tzid = this.tzid,
-                CallbackUrl = this.callbackUrl,
             };
-
-            if (this.callbackUrl != null)
-            {
-                request.CallbackUrls = new RealTimeSchedulingRequest.CallbackUrlsInfo
-                {
-                    NoTimesSuitableUrl = this.noTimesSuitableUrl,
-                    NoTimesDisplayedUrl = this.noTimesDisplayedUrl,
-                    CallbackCompletedUrl = this.callbackUrl,
-                };
-            }
 
             if (this.completedUrl != null)
             {
