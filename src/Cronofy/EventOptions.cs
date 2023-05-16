@@ -22,6 +22,14 @@
         /// </value>
         public bool Update { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether permission exists to change the user’s participation status with regard to this event.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if permission to update participation status exists; otherwise, <c>false</c>.
+        /// </value>
+        public bool ChangeParticipationStatus { get; set; }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
