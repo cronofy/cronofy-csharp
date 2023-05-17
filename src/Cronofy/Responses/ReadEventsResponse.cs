@@ -384,6 +384,17 @@
                 public bool Update { get; set; }
 
                 /// <summary>
+                /// Gets or sets a value indicating whether permission exists to change the
+                /// user’s participation status with regard to this event.
+                /// </summary>
+                /// <value>
+                /// <c>true</c> if permission to update participation status exists; otherwise,
+                /// <c>false</c>.
+                /// </value>
+                [JsonProperty("change_participation_status")]
+                public bool ChangeParticipationStatus { get; set; }
+
+                /// <summary>
                 /// Converts the response into a
                 /// <see cref="Cronofy.EventOptions"/>.
                 /// </summary>
@@ -397,6 +408,7 @@
                     {
                         Delete = this.Delete,
                         Update = this.Update,
+                        ChangeParticipationStatus = this.ChangeParticipationStatus,
                     };
                 }
             }

@@ -62,7 +62,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }
     }
   ]
@@ -104,6 +105,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                     },
                 },
@@ -155,7 +157,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }
     }
   ]
@@ -197,6 +200,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                     },
                 },
@@ -247,7 +251,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }
     }
   ]
@@ -288,6 +293,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                     },
                 },
@@ -334,7 +340,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }
     }
   ]
@@ -376,6 +383,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                     },
                 },
@@ -422,7 +430,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       },
       ""meeting_url"": ""https://meet.example.com/ABCD1234""
     }
@@ -465,6 +474,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                         MeetingUrl = "https://meet.example.com/ABCD1234",
                     },
@@ -588,7 +598,8 @@
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }
     }
   ]
@@ -637,6 +648,7 @@
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                     },
                 },
@@ -904,7 +916,8 @@ string.Format(
       ""updated"": ""2014-09-01T09:24:16Z"",
       ""options"": {{
         ""delete"": true,
-        ""update"": true
+        ""update"": true,
+        ""change_participation_status"": true
       }},
       ""event_private"": {0}
     }}
@@ -947,6 +960,7 @@ string.Format(
                         {
                             Delete = true,
                             Update = true,
+                            ChangeParticipationStatus = true,
                         },
                         EventPrivate = eventPrivate,
                     },
