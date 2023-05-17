@@ -1,6 +1,6 @@
 ## [1.9.0]
 
-* Add `change_participation_status` to Read Events.
+* Add `change_participation_status` to Read Events. [#118]
 
 ## [1.8.0]
 
