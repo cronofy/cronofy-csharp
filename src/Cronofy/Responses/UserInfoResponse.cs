@@ -21,6 +21,18 @@
         public string CronofyType { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether integrated conferencing is available for an account.
+        /// </summary>
+        [JsonProperty("cronofy.data.profiles.profile_calendars.calendar_integrated_conferencing_available")]
+        public bool CalendarIntegratedConferencingAvailable { get; set; }
+
+        /// <summary>
+        /// Gets or sets the calendar provider name.
+        /// </summary>
+        [JsonProperty("cronofy.data.profiles.provider_name")]
+        public string ProviderName { get; set; }
+
+        /// <summary>
         /// Converts the response into a <see cref="Cronofy.UserInfo"/>.
         /// </summary>
         /// <returns>
@@ -32,6 +44,8 @@
             {
                 Sub = this.Sub,
                 CronofyType = this.CronofyType,
+                CalendarIntegratedConferencingAvailable = this.CalendarIntegratedConferencingAvailable,
+                ProviderName = this.ProviderName,
             };
         }
     }
