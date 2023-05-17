@@ -1,3 +1,7 @@
+## [1.9.0]
+
+* Add `change_participation_status` to Read Events. [#118]
+
 ## [1.8.0]
 
 * Adds support for more Real-Time Scheduling callback URL types: No Time Suitable, No Times Displayed. [More info can be found here](https://docs.cronofy.com/developers/api/scheduling/real-time-scheduling/#param-callback_urls.completed_url) [#116]
@@ -291,6 +295,7 @@
 [1.6.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.6.0
 [1.7.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.7.0
 [1.8.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.8.0
+[1.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.9.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -357,3 +362,4 @@
 [#110]: https://github.com/cronofy/cronofy-csharp/pull/110
 [#114]: https://github.com/cronofy/cronofy-csharp/pull/114
 [#116]: https://github.com/cronofy/cronofy-csharp/pull/116
+[#118]: https://github.com/cronofy/cronofy-csharp/pull/118
