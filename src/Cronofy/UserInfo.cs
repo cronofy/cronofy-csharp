@@ -1,5 +1,7 @@
 ﻿namespace Cronofy
 {
+    using System.Linq;
+
     /// <summary>
     /// Class representing a user's information.
     /// </summary>
@@ -28,38 +30,124 @@
         public Profile[] Profiles { get; set; }
 
         /// <summary>
-        /// Gets or sets the calendar provider name.
+        /// Class representing a profile for an account.
         /// </summary>
-        public string ProviderName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the profile calendars.
-        /// </summary>
-        /// <value>The profile calendars.</value>
-        public ProfileCalendar[] ProfileCalendars { get; set; }
-
-        public sealed class Profile {
-
-        /// <summary>
-        /// Gets or sets the calendar provider name.
-        /// </summary>
-        public string ProviderName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the profile calendars.
-        /// </summary>
-        /// <value>The profile calendars.</value>
-        public ProfileCalendar[] ProfileCalendars { get; set; }
-
-        }
-
-         public sealed class ProfileCalendar 
+        public sealed class Profile
         {
+            /// <summary>
+            /// Gets or sets the name of the provider of the profile.
+            /// </summary>
+            /// <value>
+            /// The name of the provider for the profile.
+            /// </value>
+            public string ProviderName { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether integrated conferencing is available for a calendar.
-        /// </summary>
-        public bool CalendarIntegratedConferencingAvailable { get; set; }
+            /// <summary>
+            /// Gets or sets the service name of the provider of the profile.
+            /// </summary>
+            /// <value>
+            /// The service name of the provider for the profile.
+            /// </value>
+            public string ProviderService { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ID of the profile.
+            /// </summary>
+            /// <value>
+            /// The ID of the profile.
+            /// </value>
+            public string Id { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the profile.
+            /// </summary>
+            /// <value>
+            /// The name of the profile.
+            /// </value>
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether this profile is connected.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if this profile is connected; otherwise, <c>false</c>.
+            /// </value>
+            public bool Connected { get; set; }
+
+            /// <summary>
+            /// Gets or sets the relink URL for the profile.
+            /// </summary>
+            /// <value>
+            /// The relink URL for the profile.
+            /// </value>
+            /// <remarks>
+            /// <c>null</c> unless <see cref="Connected"/> is false.
+            /// </remarks>
+            public string RelinkUrl { get; set; }
+
+            /// <summary>
+            /// Gets or sets the profile's calendars.
+            /// </summary>
+            /// <value>The profile's calendars.</value>
+            public Calendar[] Calendars { get; set; }
+
+            /// <inheritdoc/>
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
+
+            /// <inheritdoc/>
+            public override bool Equals(object obj)
+            {
+                var other = obj as Profile;
+
+                if (other == null)
+                {
+                    return false;
+                }
+
+                return this.Equals(other);
+            }
+
+            /// <summary>
+            /// Determines whether the specified <see cref="Cronofy.UserInfo.Profile"/> is
+            /// equal to the current <see cref="Cronofy.UserInfo.Profile"/>.
+            /// </summary>
+            /// <param name="other">
+            /// The <see cref="Cronofy.UserInfo.Profile"/> to compare with the current
+            /// <see cref="Cronofy.UserInfo.Profile"/>.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the specified <see cref="Cronofy.UserInfo.Profile"/> is equal
+            /// to the current <see cref="Cronofy.UserInfo.Profile"/>; otherwise,
+            /// <c>false</c>.
+            /// </returns>
+            public bool Equals(Profile other)
+            {
+                return other != null
+                    && this.Id == other.Id
+                    && this.Name == other.Name
+                    && this.ProviderName == other.ProviderName
+                    && this.ProviderService == other.ProviderService
+                    && this.Connected == other.Connected
+                    && this.RelinkUrl == other.RelinkUrl
+                    && EnumerableUtils.NullTolerantSequenceEqual(this.Calendars, other.Calendars);
+            }
+
+            /// <inheritdoc/>
+            public override string ToString()
+            {
+                return string.Format(
+                    "<{0} ProviderName={1}, ProviderService={2}, Id={3}, Name={4}, Connected={5}, RelinkUrl={6}>",
+                    this.GetType(),
+                    this.ProviderName,
+                    this.ProviderService,
+                    this.Id,
+                    this.Name,
+                    this.Connected,
+                    this.RelinkUrl);
+            }
         }
 
         /// <inheritdoc/>
@@ -98,21 +186,18 @@
         {
             return other != null
                 && this.Sub == other.Sub
-                       && this.CronofyType == other.CronofyType
-                            && this.CalendarIntegratedConferencingAvailable == other.CalendarIntegratedConferencingAvailable
-                                && this.ProviderName == other.ProviderName;
+                && this.CronofyType == other.CronofyType
+                && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles);
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format(
-                "<{0} Sub={1}, CronofyType={2}>, CalendarIntegratedConferencingAvailable={3}>, ProviderName={4}>",
+                "<{0} Sub={1}, CronofyType={2}>",
                 this.GetType(),
                 this.Sub,
-                this.CronofyType,
-                this.CalendarIntegratedConferencingAvailable,
-                this.ProviderName);
+                this.CronofyType);
         }
     }
 }

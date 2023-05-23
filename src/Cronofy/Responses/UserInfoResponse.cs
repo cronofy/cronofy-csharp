@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+    using System.Linq;
 
     /// <summary>
     /// Class for the deserialization of a user info response.
@@ -20,6 +21,9 @@
         [JsonProperty("cronofy.type")]
         public string CronofyType { get; set; }
 
+        [JsonProperty("cronofy.data")]
+        public CronofyData Data { get; set; }
+
         /// <summary>
         /// Converts the response into a <see cref="Cronofy.UserInfo"/>.
         /// </summary>
@@ -28,69 +32,120 @@
         /// </returns>
         public UserInfo ToUserInfo()
         {
-
             return new UserInfo
             {
                 Sub = this.Sub,
                 CronofyType = this.CronofyType,
-                //CalendarIntegratedConferencingAvailable = this.CalendarIntegratedConferencingAvailable,
-                Profiles = this.Profiles,
+                Profiles = this.Data.Profiles.Select((p) => p.ToProfile()).ToArray(),
             };
-
-            UserInfo.ProviderName = this.ProviderName.ToProfileCalendar();
         }
-        public sealed class CronofyData {
 
+        public sealed class CronofyData {
             /// <summary>
             /// Gets or sets the profiles.
             /// </summary>
             /// <value>The profiles.</value>
             [JsonProperty("profiles")]
-            public Profile[] Profiles { get; set; }
-
-
+            public ProfileResponse[] Profiles { get; set; }
         }
 
-        public sealed class Profile {
-
+        /// <summary>
+        /// Class for the deserialization of a profile response.
+        /// </summary>
+        internal sealed class ProfileResponse
+        {
             /// <summary>
-            /// Gets or sets the calendar provider name.
+            /// Gets or sets the name of the provider.
             /// </summary>
+            /// <value>
+            /// The name of the provider.
+            /// </value>
             [JsonProperty("provider_name")]
             public string ProviderName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the service name of the provider.
+            /// </summary>
+            /// <value>
+            /// The service name of the provider.
+            /// </value>
+            [JsonProperty("provider_service")]
+            public string ProviderService { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ID of the profile.
+            /// </summary>
+            /// <value>
+            /// The ID of the profile.
+            /// </value>
+            [JsonProperty("profile_id")]
+            public string ProfileId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the profile.
+            /// </summary>
+            /// <value>
+            /// The name of the profile.
+            /// </value>
+            [JsonProperty("profile_name")]
+            public string ProfileName { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether this profile is
+            /// connected.
+            /// </summary>
+            /// <value>
+            /// <c>true</c> if the profile is connected; otherwise,
+            /// <c>false</c>.
+            /// </value>
+            [JsonProperty("profile_connected")]
+            public bool ProfileConnected { get; set; }
+
+            /// <summary>
+            /// Gets or sets the relink URL for the profile.
+            /// </summary>
+            /// <value>
+            /// The relink URL for the profile.
+            /// </value>
+            [JsonProperty("profile_relink_url")]
+            public string ProfileRelinkUrl { get; set; }
 
             /// <summary>
             /// Gets or sets the profile calendars.
             /// </summary>
             /// <value>The profile calendars.</value>
             [JsonProperty("profile_calendars")]
-            public ProfileCalendar[] ProfileCalendars { get; set; }
-
-        }
-
-        public sealed class ProfileCalendar {
+            public CalendarsResponse.CalendarResponse[] ProfileCalendars { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether integrated conferencing is available for a calendar.
-            /// </summary>
-            [JsonProperty("calendar_integrated_conferencing_available")]
-            public bool CalendarIntegratedConferencingAvailable { get; set; }
-
-
-            /// <summary>
-            /// Converts this response to a profile calendar object.
+            /// Converts the response into a <see cref="Cronofy.Profile"/>.
             /// </summary>
             /// <returns>
-            /// A Profile Calendar object.
+            /// A <see cref="Cronofy.Profile"/> based upon the response.
             /// </returns>
-            public UserInfo.ProfileCalendar ToProfileCalendar()
+            public UserInfo.Profile ToProfile()
             {
-                return new UserInfo.ProfileCalendars
+                var profileSummary = new Calendar.ProfileSummary {
+                    ProviderName = this.ProviderName,
+                    ProfileId = this.ProfileId,
+                    Name = this.ProfileName,
+                };
+
+                return new UserInfo.Profile
                 {
                     ProviderName = this.ProviderName,
+                    ProviderService = this.ProviderService,
+                    Id = this.ProfileId,
+                    Name = this.ProfileName,
+                    Connected = this.ProfileConnected,
+                    RelinkUrl = this.ProfileRelinkUrl,
+                    Calendars = this.ProfileCalendars.Select((pc) => {
+                        var calendar = pc.ToCalendar();
+                        calendar.Profile = profileSummary;
+                        return calendar;
+                    }).ToArray(),
                 };
             }
-
         }
     }
 }
