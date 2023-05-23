@@ -16,8 +16,26 @@
                     @"{
   ""sub"": ""acc_567236000909002"",
   ""cronofy.type"": ""janed@company.com"",
-  ""cronofy.data.profiles.profile_calendars.calendar_integrated_conferencing_available"": ""true"",
-  ""cronofy.data.profiles.provider_name"": ""google"",
+  ""cronofy.data"": {
+    ""profiles"": [
+            {
+                ""provider_name"": ""google"",
+                ""profile_calendars"": [
+                    {
+                        ""calendar_integrated_conferencing_available"": ""true"",
+                    }
+                ]
+            },
+            {
+                ""provider_name"": ""apple"",
+                ""profile_calendars"": [
+                    {
+                        ""calendar_integrated_conferencing_available"": ""false"",
+                    }
+                ]
+            }
+        ]
+    }
 }"));
 
             var actualUserInfo = this.Client.GetUserInfo();
