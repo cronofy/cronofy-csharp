@@ -22,20 +22,45 @@
         public string CronofyType { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether integrated conferencing is available for an account.
+        /// Gets or sets the profiles.
         /// </summary>
-        /// <value>
-        /// True if conferencing available, otherwise false.
-        /// </value>
-        public bool CalendarIntegratedConferencingAvailable { get; set; }
+        /// <value>The profiles.</value>
+        public Profile[] Profiles { get; set; }
 
         /// <summary>
         /// Gets or sets the calendar provider name.
         /// </summary>
-        /// <value>
-        /// The name of a calendar provider of a calendar profile.
-        /// </value>
         public string ProviderName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile calendars.
+        /// </summary>
+        /// <value>The profile calendars.</value>
+        public ProfileCalendar[] ProfileCalendars { get; set; }
+
+        public sealed class Profile {
+
+        /// <summary>
+        /// Gets or sets the calendar provider name.
+        /// </summary>
+        public string ProviderName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile calendars.
+        /// </summary>
+        /// <value>The profile calendars.</value>
+        public ProfileCalendar[] ProfileCalendars { get; set; }
+
+        }
+
+         public sealed class ProfileCalendar 
+        {
+
+        /// <summary>
+        /// Gets or sets a value indicating whether integrated conferencing is available for a calendar.
+        /// </summary>
+        public bool CalendarIntegratedConferencingAvailable { get; set; }
+        }
 
         /// <inheritdoc/>
         public override int GetHashCode()
