@@ -1,8 +1,8 @@
 ﻿namespace Cronofy.Responses
 {
     using System;
-    using Newtonsoft.Json;
     using System.Linq;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Class for the deserialization of a user info response.
@@ -40,7 +40,8 @@
             };
         }
 
-        public sealed class CronofyData {
+        public sealed class CronofyData 
+        {
             /// <summary>
             /// Gets or sets the profiles.
             /// </summary>
@@ -139,7 +140,8 @@
                     Name = this.ProfileName,
                     Connected = this.ProfileConnected,
                     RelinkUrl = this.ProfileRelinkUrl,
-                    Calendars = this.ProfileCalendars.Select((pc) => {
+                    Calendars = this.ProfileCalendars.Select((pc) => 
+                    {
                         var calendar = pc.ToCalendar();
                         calendar.Profile = profileSummary;
                         return calendar;
