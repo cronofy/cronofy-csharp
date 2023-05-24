@@ -85,16 +85,21 @@
             {
                 Sub = "acc_5700a00eb0ccd07000000000",
                 CronofyType = "account",
-                Profiles = new UserInfo.Profile[] {
-                    new UserInfo.Profile {
+                Profiles = new UserInfo.Profile[]
+                {
+                    new UserInfo.Profile
+                    {
                         ProviderName = "google",
                         ProviderService = "gsuite",
                         Id = "pro_n23kjnwrw2",
                         Name = "example1@cronofy.com",
                         Connected = true,
-                        Calendars = new Calendar[] {
-                            new Calendar {
-                                Profile = new Calendar.ProfileSummary {
+                        Calendars = new Calendar[]
+                        {
+                            new Calendar
+                            {
+                                Profile = new Calendar.ProfileSummary
+                                {
                                     ProviderName = "google",
                                     ProfileId = "pro_n23kjnwrw2",
                                     Name = "example1@cronofy.com",
@@ -106,8 +111,10 @@
                                 Primary = true,
                                 IntegratedConferencingAvailable = true,
                             },
-                            new Calendar {
-                                Profile = new Calendar.ProfileSummary {
+                            new Calendar
+                            {
+                                Profile = new Calendar.ProfileSummary
+                                {
                                     ProviderName = "google",
                                     ProfileId = "pro_n23kjnwrw2",
                                     Name = "example1@cronofy.com",
@@ -119,18 +126,22 @@
                                 Primary = false,
                                 IntegratedConferencingAvailable = true,
                             },
-                        }
+                        },
                     },
-                    new UserInfo.Profile {
+                    new UserInfo.Profile
+                    {
                         ProviderName = "apple",
                         ProviderService = "icloud",
                         Id = "pro_fe145c37de",
                         Name = "example2@cronofy.com",
                         Connected = false,
                         RelinkUrl = "https://app.cronofy.com/relink/apple?email=example@cronofy.com",
-                        Calendars = new Calendar[] {
-                            new Calendar {
-                                Profile = new Calendar.ProfileSummary {
+                        Calendars = new Calendar[]
+                        {
+                            new Calendar
+                            {
+                                Profile = new Calendar.ProfileSummary
+                                {
                                     ProviderName = "apple",
                                     ProfileId = "pro_fe145c37de",
                                     Name = "example2@cronofy.com",
@@ -144,7 +155,7 @@
                             },
                         },
                     },
-                }
+                },
             };
 
             Assert.AreEqual(expectedUserInfo, actualUserInfo);
