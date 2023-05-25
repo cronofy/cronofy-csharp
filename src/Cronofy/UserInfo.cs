@@ -29,7 +29,57 @@
         /// <value>The profiles.</value>
         public Profile[] Profiles { get; set; }
 
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            return this.Sub.GetHashCode() ^ this.CronofyType.GetHashCode();
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
+        {
+            var other = obj as UserInfo;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            return this.Equals(other);
+        }
+
         /// <summary>
+        /// Determines whether the specified <see cref="Cronofy.UserInfo"/> is
+        /// equal to the current <see cref="Cronofy.UserInfo"/>.
+        /// </summary>
+        /// <param name="other">
+        /// The <see cref="Cronofy.UserInfo"/> to compare with the current
+        /// <see cref="Cronofy.UserInfo"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="Cronofy.UserInfo"/> is equal
+        /// to the current <see cref="Cronofy.UserInfo"/>; otherwise,
+        /// <c>false</c>.
+        /// </returns>
+        public bool Equals(UserInfo other)
+        {
+            return other != null
+                && this.Sub == other.Sub
+                && this.CronofyType == other.CronofyType
+                && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles);
+        }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return string.Format(
+                "<{0} Sub={1}, CronofyType={2}>",
+                this.GetType(),
+                this.Sub,
+                this.CronofyType);
+        }
+
+                /// <summary>
         /// Class representing a profile for an account.
         /// </summary>
         public sealed class Profile
@@ -148,56 +198,6 @@
                     this.Connected,
                     this.RelinkUrl);
             }
-        }
-
-        /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return this.Sub.GetHashCode() ^ this.CronofyType.GetHashCode();
-        }
-
-        /// <inheritdoc/>
-        public override bool Equals(object obj)
-        {
-            var other = obj as UserInfo;
-
-            if (other == null)
-            {
-                return false;
-            }
-
-            return this.Equals(other);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Cronofy.UserInfo"/> is
-        /// equal to the current <see cref="Cronofy.UserInfo"/>.
-        /// </summary>
-        /// <param name="other">
-        /// The <see cref="Cronofy.UserInfo"/> to compare with the current
-        /// <see cref="Cronofy.UserInfo"/>.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="Cronofy.UserInfo"/> is equal
-        /// to the current <see cref="Cronofy.UserInfo"/>; otherwise,
-        /// <c>false</c>.
-        /// </returns>
-        public bool Equals(UserInfo other)
-        {
-            return other != null
-                && this.Sub == other.Sub
-                && this.CronofyType == other.CronofyType
-                && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles);
-        }
-
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format(
-                "<{0} Sub={1}, CronofyType={2}>",
-                this.GetType(),
-                this.Sub,
-                this.CronofyType);
         }
     }
 }

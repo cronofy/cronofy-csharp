@@ -40,7 +40,7 @@
             };
         }
 
-        public sealed class CronofyData 
+        public sealed class CronofyData
         {
             /// <summary>
             /// Gets or sets the profiles.
@@ -126,7 +126,8 @@
             /// </returns>
             public UserInfo.Profile ToProfile()
             {
-                var profileSummary = new Calendar.ProfileSummary {
+                var profileSummary = new Calendar.ProfileSummary
+                {
                     ProviderName = this.ProviderName,
                     ProfileId = this.ProfileId,
                     Name = this.ProfileName,
@@ -140,7 +141,7 @@
                     Name = this.ProfileName,
                     Connected = this.ProfileConnected,
                     RelinkUrl = this.ProfileRelinkUrl,
-                    Calendars = this.ProfileCalendars.Select((pc) => 
+                    Calendars = this.ProfileCalendars.Select((pc) =>
                     {
                         var calendar = pc.ToCalendar();
                         calendar.Profile = profileSummary;
