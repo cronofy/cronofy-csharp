@@ -5,7 +5,7 @@
     internal sealed class GetUserInfo : Base
     {
         [Test]
-        public void CanGetUserInfo()
+        public void CanGetUserInfoForSericeAccount()
         {
             this.Http.Stub(
                 HttpGet
@@ -14,15 +14,26 @@
                     .ResponseCode(200)
                     .ResponseBody(
                     @"{
-  ""sub"": ""acc_567236000909002"",
-  ""cronofy.type"": ""janed@company.com"",
+    ""sub"": ""ser_61a8b807a341fc00bee53042"",
+    ""cronofy.type"": ""service_account"",
+    ""cronofy.data"": {
+        ""service_account"": {
+            ""provider_name"": ""exchange""
+        },
+        ""authorization"": {
+            ""scope"": ""service_account/accounts/manage service_account/resources/manage"",
+            ""status"": ""active"",
+            ""delegated_scope"": ""read_write""
+        }
+    },
+    ""email"": ""exchange-service-account@example.org""
 }"));
 
             var actualUserInfo = this.Client.GetUserInfo();
             var expectedUserInfo = new UserInfo
             {
-                Sub = "acc_567236000909002",
-                CronofyType = "janed@company.com",
+                Sub = "ser_61a8b807a341fc00bee53042",
+                CronofyType = "service_account",
             };
 
             Assert.AreEqual(expectedUserInfo, actualUserInfo);

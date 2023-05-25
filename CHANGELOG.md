@@ -1,3 +1,7 @@
+## [1.10.0]
+
+* Increases the coverage of `GetUserInfo()`, returning information about connected profiles and calendars. [#120]
+
 ## [1.9.0]
 
 * Add `change_participation_status` to Read Events. [#118]
@@ -296,6 +300,7 @@
 [1.7.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.7.0
 [1.8.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.8.0
 [1.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.9.0
+[1.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.10.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -363,3 +368,4 @@
 [#114]: https://github.com/cronofy/cronofy-csharp/pull/114
 [#116]: https://github.com/cronofy/cronofy-csharp/pull/116
 [#118]: https://github.com/cronofy/cronofy-csharp/pull/118
+[#120]: https://github.com/cronofy/cronofy-csharp/pull/120
