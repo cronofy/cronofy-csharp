@@ -5,7 +5,7 @@
     internal sealed class GetUserInfo : Base
     {
         [Test]
-        public void CanGetUserInfo()
+        public void CanGetUserInfoForAccount()
         {
             this.Http.Stub(
                 HttpGet
@@ -151,6 +151,91 @@
                                 ReadOnly = true,
                                 Deleted = false,
                                 Primary = false,
+                                IntegratedConferencingAvailable = false,
+                            },
+                        },
+                    },
+                },
+            };
+
+            Assert.AreEqual(expectedUserInfo, actualUserInfo);
+        }
+
+        [Test]
+        public void CanGetUserInfoForApplicationCalendar()
+        {
+            this.Http.Stub(
+                HttpGet
+                    .Url("https://api.cronofy.com/v1/userinfo")
+                    .RequestHeader("Authorization", "Bearer " + AccessToken)
+                    .ResponseCode(200)
+                    .ResponseBody(
+                    @"{
+    ""sub"": ""apc_618a6dc923347b00a4ac6438"",
+    ""cronofy.type"": ""application_calendar"",
+    ""cronofy.data"": {
+        ""application_calendar"": {
+            ""application_calendar_id"": ""app01""
+        },
+        ""authorization"": {
+            ""scope"": ""read_write"",
+            ""status"": ""active""
+        },
+        ""profiles"": [
+            {
+                ""provider_name"": ""cronofy"",
+                ""provider_service"": ""cronofy"",
+                ""profile_id"": ""pro_YYptyBKGewCkrTTz"",
+                ""profile_name"": ""app01"",
+                ""profile_connected"": true,
+                ""profile_initial_sync_required"": false,
+                ""profile_calendars"": [
+                    {
+                        ""calendar_id"": ""cal_YYptyBKGewCkrTTz_0000000000"",
+                        ""calendar_name"": ""app01"",
+                        ""calendar_readonly"": false,
+                        ""calendar_deleted"": false,
+                        ""calendar_primary"": true,
+                        ""calendar_integrated_conferencing_available"": false,
+                        ""calendar_attachments_available"": false,
+                        ""permission_level"": ""unrestricted""
+                    }
+                ]
+            }
+        ]
+    },
+    ""application_calendar_id"": ""app01""
+}"));
+
+            var actualUserInfo = this.Client.GetUserInfo();
+            var expectedUserInfo = new UserInfo
+            {
+                Sub = "apc_618a6dc923347b00a4ac6438",
+                CronofyType = "application_calendar",
+                Profiles = new UserInfo.Profile[]
+                {
+                    new UserInfo.Profile
+                    {
+                        ProviderName = "cronofy",
+                        ProviderService = "cronofy",
+                        Id = "pro_YYptyBKGewCkrTTz",
+                        Name = "app01",
+                        Connected = true,
+                        Calendars = new Calendar[]
+                        {
+                            new Calendar
+                            {
+                                Profile = new Calendar.ProfileSummary
+                                {
+                                    ProviderName = "cronofy",
+                                    ProfileId = "pro_YYptyBKGewCkrTTz",
+                                    Name = "app01",
+                                },
+                                CalendarId = "cal_YYptyBKGewCkrTTz_0000000000",
+                                Name = "app01",
+                                ReadOnly = false,
+                                Deleted = false,
+                                Primary = true,
                                 IntegratedConferencingAvailable = false,
                             },
                         },

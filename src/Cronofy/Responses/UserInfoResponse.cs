@@ -36,7 +36,7 @@
             {
                 Sub = this.Sub,
                 CronofyType = this.CronofyType,
-                Profiles = this.Data.Profiles.Select((p) => p.ToProfile()).ToArray(),
+                Profiles = this.Data?.Profiles?.Select((p) => p.ToProfile()).ToArray(),
             };
         }
 
@@ -141,7 +141,7 @@
                     Name = this.ProfileName,
                     Connected = this.ProfileConnected,
                     RelinkUrl = this.ProfileRelinkUrl,
-                    Calendars = this.ProfileCalendars.Select((pc) =>
+                    Calendars = this.ProfileCalendars?.Select((pc) =>
                     {
                         var calendar = pc.ToCalendar();
                         calendar.Profile = profileSummary;
