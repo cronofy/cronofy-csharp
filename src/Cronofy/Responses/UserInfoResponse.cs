@@ -21,6 +21,9 @@
         [JsonProperty("cronofy.type")]
         public string CronofyType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Cronofy account data of the response.
+        /// </summary>
         [JsonProperty("cronofy.data")]
         public CronofyData Data { get; set; }
 
@@ -40,14 +43,130 @@
             };
         }
 
-        public sealed class CronofyData
+        /// <summary>
+        /// Class for the deserialization of CronofyData.
+        /// </summary>
+        internal sealed class CronofyData
         {
+            /// <summary>
+            /// Gets or sets the authorization.
+            /// </summary>
+            /// <value>The authorization.</value>
+            [JsonProperty("service_account")]
+            public CronofyServiceAccount ServiceAccount { get; set; }
+
+            /// <summary>
+            /// Gets or sets the authorization.
+            /// </summary>
+            /// <value>The authorization.</value>
+            [JsonProperty("authorization")]
+            public CronofyAuthorization Authorization { get; set; }
+
+            /// <summary>
+            /// Gets or sets the account's email.
+            /// </summary>
+            /// <value>
+            /// The email of the account.
+            /// </value>
+            [JsonProperty("email")]
+            public string Email { get; set; }
+
             /// <summary>
             /// Gets or sets the profiles.
             /// </summary>
             /// <value>The profiles.</value>
             [JsonProperty("profiles")]
             public ProfileResponse[] Profiles { get; set; }
+        }
+
+                /// <summary>
+        /// Class for the deserialization of an authorization response.
+        /// </summary>
+        internal sealed class CronofyServiceAccount
+        {
+            /// <summary>
+            /// Gets or sets the provider name of the Service Account.
+            /// </summary>
+            /// <value>
+            /// The provider name of the Service Account.
+            /// </value>
+            [JsonProperty("provider_name")]
+            public string ProviderName { get; set; }
+
+            /// <summary>
+            /// Converts the response into a <see cref="Cronofy.Account"/>.
+            /// </summary>
+            /// <returns>
+            /// A <see cref="Cronofy.Account"/> based upon the response.
+            /// </returns>
+            public UserInfo.ServiceAccount ToServiceAccount()
+            {
+                var serviceAccount = new UserInfo.ServiceAccount
+                {
+                    ProviderName = this.ProviderName,
+                };
+
+                return new UserInfo.ServiceAccount
+                {
+                    ProviderName = this.ProviderName,
+                };
+            }
+        }
+
+        /// <summary>
+        /// Class for the deserialization of an authorization response.
+        /// </summary>
+        internal sealed class CronofyAuthorization
+        {
+            /// <summary>
+            /// Gets or sets the scope.
+            /// </summary>
+            /// <value>
+            /// The scope of the authorization.
+            /// </value>
+            [JsonProperty("scope")]
+            public string Scope { get; set; }
+
+            /// <summary>
+            /// Gets or sets the status of the authorization.
+            /// </summary>
+            /// <value>
+            /// The status of the authorization.
+            /// </value>
+            [JsonProperty("status")]
+            public string Status { get; set; }
+
+            /// <summary>
+            /// Gets or sets the delegated scope of the authorization.
+            /// </summary>
+            /// <value>
+            /// The delegated scope of the authorization.
+            /// </value>
+            [JsonProperty("delegated_scope")]
+            public string DelegatedScope { get; set; }
+
+            /// <summary>
+            /// Converts the response into a <see cref="Cronofy.Account"/>.
+            /// </summary>
+            /// <returns>
+            /// A <see cref="Cronofy.Account"/> based upon the response.
+            /// </returns>
+            public UserInfo.Authorization ToAuthorization()
+            {
+                var authorization = new UserInfo.Authorization
+                {
+                    Scope = this.Scope,
+                    Status = this.Status,
+                    DelegatedScope = this.DelegatedScope,
+                };
+
+                return new UserInfo.Authorization
+                {
+                    Scope = this.Scope,
+                    Status = this.Status,
+                    DelegatedScope = this.DelegatedScope,
+                };
+            }
         }
 
         /// <summary>

@@ -85,6 +85,14 @@
             {
                 Sub = "acc_5700a00eb0ccd07000000000",
                 CronofyType = "account",
+                CronofyData = new UserInfo.Data
+                {
+                    Authorization = new UserInfo.Authorization
+                    {
+                        Scope = "read_write",
+                        Status = "active",
+                    },
+                },
                 Profiles = new UserInfo.Profile[]
                 {
                     new UserInfo.Profile
