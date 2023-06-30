@@ -153,13 +153,6 @@
             /// </returns>
             public UserInfo.Authorization ToAuthorization()
             {
-                var authorization = new UserInfo.Authorization
-                {
-                    Scope = this.Scope,
-                    Status = this.Status,
-                    DelegatedScope = this.DelegatedScope,
-                };
-
                 return new UserInfo.Authorization
                 {
                     Scope = this.Scope,
