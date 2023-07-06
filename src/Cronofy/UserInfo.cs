@@ -82,17 +82,21 @@
             return other != null
                 && this.Sub == other.Sub
                 && this.CronofyType == other.CronofyType
-                && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles);
+                && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles)
+                && object.Equals(this.CronofyData, other.CronofyData)
+                && this.Email == other.Email;
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format(
-                "<{0} Sub={1}, CronofyType={2}>",
+                "<{0} Sub={1}, CronofyType={2}>, CronofyData={3}, Email={4}",
                 this.GetType(),
                 this.Sub,
-                this.CronofyType);
+                this.CronofyType,
+                this.CronofyData,
+                this.Email);
         }
 
         /// <summary>
@@ -115,6 +119,49 @@
             /// The Service Account data.
             /// </value>
             public ServiceAccount ServiceAccount { get; set; }
+
+            /// <inheritdoc/>
+            public override bool Equals(object obj)
+            {
+                var other = obj as Data;
+
+                if (other == null)
+                {
+                    return false;
+                }
+
+                return this.Equals(other);
+            }
+
+            /// <summary>
+            /// Determines whether the specified <see cref="Cronofy.UserInfo.Data"/> is
+            /// equal to the current <see cref="Cronofy.UserInfo.Data"/>.
+            /// </summary>
+            /// <param name="other">
+            /// The <see cref="Cronofy.UserInfo.Data"/> to compare with the current
+            /// <see cref="Cronofy.UserInfo.Data"/>.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the specified <see cref="Cronofy.UserInfo.Data"/> is equal
+            /// to the current <see cref="Cronofy.UserInfo.Data"/>; otherwise,
+            /// <c>false</c>.
+            /// </returns>
+            public bool Equals(Data other)
+            {
+                return other != null
+                    && object.Equals(this.Authorization, other.Authorization)
+                    && object.Equals(this.ServiceAccount, other.ServiceAccount);
+            }
+
+            /// <inheritdoc/>
+            public override string ToString()
+            {
+                return string.Format(
+                    "<{0}, Authorization={1}, ServiceAccount={2}",
+                    this.GetType(),
+                    this.Authorization,
+                    this.ServiceAccount);
+            }
         }
 
         /// <summary>
