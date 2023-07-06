@@ -164,6 +164,7 @@
                         },
                     },
                 },
+                Email = "janed@company.com",
             };
 
             Assert.AreEqual(expectedUserInfo, actualUserInfo);
