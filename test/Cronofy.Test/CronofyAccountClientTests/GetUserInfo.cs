@@ -85,13 +85,10 @@
             {
                 Sub = "acc_5700a00eb0ccd07000000000",
                 CronofyType = "account",
-                CronofyData = new UserInfo.Data
+                Authorization = new UserInfo.Authorization
                 {
-                    Authorization = new UserInfo.Authorization
-                    {
-                        Scope = "read_write",
-                        Status = "active",
-                    },
+                    Scope = "read_write",
+                    Status = "active",
                 },
                 Profiles = new UserInfo.Profile[]
                 {
@@ -221,13 +218,10 @@
             {
                 Sub = "apc_618a6dc923347b00a4ac6438",
                 CronofyType = "application_calendar",
-                CronofyData = new UserInfo.Data
+                Authorization = new UserInfo.Authorization
                 {
-                    Authorization = new UserInfo.Authorization
-                    {
-                        Scope = "read_write",
-                        Status = "active",
-                    },
+                    Scope = "read_write",
+                    Status = "active",
                 },
                 Profiles = new UserInfo.Profile[]
                 {
