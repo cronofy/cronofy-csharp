@@ -28,6 +28,12 @@ namespace Cronofy.Responses
         public CronofyData Data { get; set; }
 
         /// <summary>
+        /// Gets or sets the account's email.
+        /// </summary>
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        /// <summary>
         /// Converts the response into a <see cref="Cronofy.UserInfo"/>.
         /// </summary>
         /// <returns>
@@ -66,15 +72,6 @@ namespace Cronofy.Responses
             /// <value>The authorization.</value>
             [JsonProperty("authorization")]
             public CronofyAuthorization Authorization { get; set; }
-
-            /// <summary>
-            /// Gets or sets the account's email.
-            /// </summary>
-            /// <value>
-            /// The email of the account.
-            /// </value>
-            [JsonProperty("email")]
-            public string Email { get; set; }
 
             /// <summary>
             /// Gets or sets the profiles.
