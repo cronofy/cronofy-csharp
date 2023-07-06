@@ -46,8 +46,8 @@
                 Sub = this.Sub,
                 CronofyType = this.CronofyType,
                 Profiles = this.Data?.Profiles?.Select((p) => p.ToProfile()).ToArray(),
-                ServiceAccount = this.Data?.ServiceAccount?.ToServiceAccount(),
-                Authorization = this.Data?.Authorization?.ToAuthorization(),
+                ServiceAccountInfo = this.Data?.ServiceAccount?.ToServiceAccount(),
+                AuthorizationInfo = this.Data?.Authorization?.ToAuthorization(),
                 Email = this.Email,
             };
         }

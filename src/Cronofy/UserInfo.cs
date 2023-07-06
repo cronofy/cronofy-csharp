@@ -33,13 +33,14 @@
         /// Gets or sets the authorization of the account.
         /// </summary>
         /// <value> The authorization for the account.</value>
-        public Authorization Authorization { get; set; }
+
+        public Authorization AuthorizationInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the Service Account data.
         /// </summary>
         /// <value> /// The Service Account data.</value>
-        public ServiceAccount ServiceAccount { get; set; }
+        public ServiceAccount ServiceAccountInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the account's email.
@@ -85,8 +86,8 @@
                 && this.Sub == other.Sub
                 && this.CronofyType == other.CronofyType
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles)
-                && object.Equals(this.Authorization, other.Authorization)
-                && object.Equals(this.ServiceAccount, other.ServiceAccount)
+                && object.Equals(this.AuthorizationInfo, other.AuthorizationInfo)
+                && object.Equals(this.ServiceAccountInfo, other.ServiceAccountInfo)
                 && this.Email == other.Email;
         }
 
@@ -94,12 +95,13 @@
         public override string ToString()
         {
             return string.Format(
-                "<{0} Sub={1}, CronofyType={2}>, Authorization={3}, ServiceAccount={4} Email={5}",
+
+                "<{0} Sub={1}, CronofyType={2}>, AuthorizationInfo={3}, ServiceAccountInfo={4} Email={5}",
                 this.GetType(),
                 this.Sub,
                 this.CronofyType,
-                this.Authorization,
-                this.ServiceAccount,
+                this.AuthorizationInfo,
+                this.ServiceAccountInfo,
                 this.Email);
         }
 

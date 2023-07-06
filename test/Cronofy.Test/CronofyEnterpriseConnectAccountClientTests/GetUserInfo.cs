@@ -34,11 +34,12 @@
             {
                 Sub = "ser_61a8b807a341fc00bee53042",
                 CronofyType = "service_account",
-                ServiceAccount = new UserInfo.ServiceAccount
+
+                ServiceAccountInfo = new UserInfo.ServiceAccount
                 {
                     ProviderName = "exchange",
                 },
-                Authorization = new UserInfo.Authorization
+                AuthorizationInfo = new UserInfo.Authorization
                 {
                     Scope = "service_account/accounts/manage service_account/resources/manage",
                     Status = "active",

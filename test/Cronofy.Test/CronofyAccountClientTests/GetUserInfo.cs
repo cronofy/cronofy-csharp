@@ -85,7 +85,7 @@
             {
                 Sub = "acc_5700a00eb0ccd07000000000",
                 CronofyType = "account",
-                Authorization = new UserInfo.Authorization
+                AuthorizationInfo = new UserInfo.Authorization
                 {
                     Scope = "read_write",
                     Status = "active",
@@ -218,7 +218,7 @@
             {
                 Sub = "apc_618a6dc923347b00a4ac6438",
                 CronofyType = "application_calendar",
-                Authorization = new UserInfo.Authorization
+                AuthorizationInfo = new UserInfo.Authorization
                 {
                     Scope = "read_write",
                     Status = "active",
