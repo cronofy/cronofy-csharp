@@ -1,4 +1,4 @@
-namespace Cronofy.Responses
+﻿namespace Cronofy.Responses
 {
     using System;
     using System.Linq;
@@ -103,11 +103,6 @@ namespace Cronofy.Responses
             /// </returns>
             public UserInfo.ServiceAccount ToServiceAccount()
             {
-                var serviceAccount = new UserInfo.ServiceAccount
-                {
-                    ProviderName = this.ProviderName,
-                };
-
                 return new UserInfo.ServiceAccount
                 {
                     ProviderName = this.ProviderName,
