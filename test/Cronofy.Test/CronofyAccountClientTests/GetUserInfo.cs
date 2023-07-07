@@ -85,6 +85,11 @@
             {
                 Sub = "acc_5700a00eb0ccd07000000000",
                 CronofyType = "account",
+                AuthorizationInfo = new UserInfo.Authorization
+                {
+                    Scope = "read_write",
+                    Status = "active",
+                },
                 Profiles = new UserInfo.Profile[]
                 {
                     new UserInfo.Profile
@@ -156,6 +161,7 @@
                         },
                     },
                 },
+                Email = "janed@company.com",
             };
 
             Assert.AreEqual(expectedUserInfo, actualUserInfo);
@@ -212,6 +218,11 @@
             {
                 Sub = "apc_618a6dc923347b00a4ac6438",
                 CronofyType = "application_calendar",
+                AuthorizationInfo = new UserInfo.Authorization
+                {
+                    Scope = "read_write",
+                    Status = "active",
+                },
                 Profiles = new UserInfo.Profile[]
                 {
                     new UserInfo.Profile

@@ -34,6 +34,18 @@
             {
                 Sub = "ser_61a8b807a341fc00bee53042",
                 CronofyType = "service_account",
+
+                ServiceAccountInfo = new UserInfo.ServiceAccount
+                {
+                    ProviderName = "exchange",
+                },
+                AuthorizationInfo = new UserInfo.Authorization
+                {
+                    Scope = "service_account/accounts/manage service_account/resources/manage",
+                    Status = "active",
+                    DelegatedScope = "read_write",
+                },
+                Email = "exchange-service-account@example.org",
             };
 
             Assert.AreEqual(expectedUserInfo, actualUserInfo);
