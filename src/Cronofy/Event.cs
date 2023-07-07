@@ -201,6 +201,14 @@ namespace Cronofy
         public EventOptions Options { get; set; }
 
         /// <summary>
+        /// Gets or sets the conferencing details for this event.
+        /// </summary>
+        /// <value>
+        /// The event's conferencing details.
+        /// </value>
+        public Conferencing ConferencingInfo { get; set; }
+
+        /// <summary>
         /// Gets or sets a value for the event's meeting URL.
         /// </summary>
         /// <value>
@@ -260,6 +268,7 @@ namespace Cronofy
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
+                && object.Equals(this.ConferencingInfo, other.ConferencingInfo)
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Attendees, other.Attendees)
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Categories, other.Categories);
         }
@@ -268,7 +277,7 @@ namespace Cronofy
         public override string ToString()
         {
             return string.Format(
-                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}, Organizer={10}>",
+                "<{0} CalendarId={1}, EventId={2}, EventUid={3}, Summary={4}, Start={5}, End={6}, Deleted={7}, Recurring={8}, Attendees={9}, Organizer={10}, ConferencingInfo={11}>",
                 this.GetType(),
                 this.CalendarId,
                 this.EventId,
@@ -279,7 +288,8 @@ namespace Cronofy
                 this.Deleted,
                 this.Recurring,
                 this.Attendees,
-                this.Organizer);
+                this.Organizer,
+                this.ConferencingInfo);
         }
     }
 }
