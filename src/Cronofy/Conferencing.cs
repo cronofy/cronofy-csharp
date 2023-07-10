@@ -60,7 +60,7 @@ namespace Cronofy
         /// equal to the current <see cref="Cronofy.Conferencing"/>; otherwise,
         /// <c>false</c>.
         /// </returns>
-        private bool Equals(Conferencing other)
+        public bool Equals(Conferencing other)
         {
             return this.ProviderName == other.ProviderName && this.JoinUrl == other.JoinUrl;
         }

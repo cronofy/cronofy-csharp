@@ -517,7 +517,6 @@
                 }
             }
 
-
             /// <summary>
             /// Class for the deserialization of the conferencing for a read event
             /// response.
