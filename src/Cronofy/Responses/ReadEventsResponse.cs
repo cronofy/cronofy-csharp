@@ -263,7 +263,7 @@
             /// The event's conferencing details.
             /// </value>
             [JsonProperty("conferencing")]
-            public Conferencing ConferencingInfo { get; set; }
+            public ConferencingResponse Conferencing { get; set; }
 
             /// <summary>
             /// Converts the response into a <see cref="Cronofy.Event"/>.
@@ -316,9 +316,9 @@
                     evt.Organizer = this.Organizer.ToOrganizer();
                 }
 
-                if (this.ConferencingInfo != null)
+                if (this.Conferencing != null)
                 {
-                    evt.ConferencingInfo = this.ConferencingInfo.ToConferencing();
+                    evt.Conferencing = this.Conferencing.ToConferencing();
                 }
 
                 return evt;
@@ -521,7 +521,7 @@
             /// Class for the deserialization of the conferencing for a read event
             /// response.
             /// </summary>
-            internal sealed class Conferencing
+            internal sealed class ConferencingResponse
             {
                 /// <summary>
                 /// Gets or sets the conferencing provider name.

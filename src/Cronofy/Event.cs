@@ -206,7 +206,7 @@ namespace Cronofy
         /// <value>
         /// The event's conferencing details.
         /// </value>
-        public Conferencing ConferencingInfo { get; set; }
+        public Conferencing Conferencing { get; set; }
 
         /// <summary>
         /// Gets or sets a value for the event's meeting URL.
@@ -268,7 +268,7 @@ namespace Cronofy
                 && object.Equals(this.Location, other.Location)
                 && object.Equals(this.Start, other.Start)
                 && object.Equals(this.End, other.End)
-                && object.Equals(this.ConferencingInfo, other.ConferencingInfo)
+                && object.Equals(this.Conferencing, other.Conferencing)
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Attendees, other.Attendees)
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Categories, other.Categories);
         }
@@ -289,7 +289,7 @@ namespace Cronofy
                 this.Recurring,
                 this.Attendees,
                 this.Organizer,
-                this.ConferencingInfo);
+                this.Conferencing);
         }
     }
 }

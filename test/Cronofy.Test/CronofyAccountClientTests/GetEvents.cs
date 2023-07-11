@@ -84,7 +84,7 @@
                         Categories = new string[] { },
                         Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
                         Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
-                        ConferencingInfo = new Conferencing
+                        Conferencing = new Conferencing
                         {
                           ProviderName = "zoom",
                           JoinUrl = "https://example.com/joinurl",
