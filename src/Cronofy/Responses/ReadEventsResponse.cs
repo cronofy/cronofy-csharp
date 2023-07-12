@@ -257,6 +257,15 @@
             public string MeetingUrl { get; set; }
 
             /// <summary>
+            /// Gets or sets the event's conferencing details.
+            /// </summary>
+            /// <value>
+            /// The event's conferencing details.
+            /// </value>
+            [JsonProperty("conferencing")]
+            public ConferencingResponse Conferencing { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Event"/>.
             /// </summary>
             /// <returns>
@@ -305,6 +314,11 @@
                 if (this.Organizer != null)
                 {
                     evt.Organizer = this.Organizer.ToOrganizer();
+                }
+
+                if (this.Conferencing != null)
+                {
+                    evt.Conferencing = this.Conferencing.ToConferencing();
                 }
 
                 return evt;
@@ -499,6 +513,48 @@
                     {
                         Email = this.Email,
                         DisplayName = this.DisplayName,
+                    };
+                }
+            }
+
+            /// <summary>
+            /// Class for the deserialization of the conferencing for a read event
+            /// response.
+            /// </summary>
+            internal sealed class ConferencingResponse
+            {
+                /// <summary>
+                /// Gets or sets the conferencing provider name.
+                /// </summary>
+                /// <value>
+                /// The conferencing provider name.
+                /// </value>
+                [JsonProperty("provider_name")]
+                public string ProviderName { get; set; }
+
+                /// <summary>
+                /// Gets or sets the conferencing URL of the event.
+                /// </summary>
+                /// <value>
+                /// The conferencing URL of the event.
+                /// </value>
+                [JsonProperty("join_url")]
+                public string JoinUrl { get; set; }
+
+                /// <summary>
+                /// Converts the response into a
+                /// <see cref="Cronofy.Conferencing"/>.
+                /// </summary>
+                /// <returns>
+                /// A <see cref="Cronofy.Conferencing"/> based upon the
+                /// response.
+                /// </returns>
+                public Cronofy.Conferencing ToConferencing()
+                {
+                    return new Cronofy.Conferencing
+                    {
+                        ProviderName = this.ProviderName,
+                        JoinUrl = this.JoinUrl,
                     };
                 }
             }

@@ -23,6 +23,78 @@
         }
 
         [Test]
+        public void CanGetEventWithConferencing()
+        {
+            this.Http.Stub(
+                HttpGet
+                .Url("https://api.cronofy.com/v1/events?tzid=Etc%2FUTC&localized_times=true")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .ResponseCode(200)
+                .ResponseBody(
+                    @"{
+  ""pages"": {
+    ""current"": 1,
+    ""total"": 1
+  },
+  ""events"": [
+    {
+      ""calendar_id"": ""cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw"",
+      ""event_uid"": ""evt_external_54008b1a4a41730f8d5c6037"",
+      ""summary"": ""Company Retreat"",
+      ""description"": ""Escape to the country"",
+      ""start"": ""2014-09-06"",
+      ""end"": ""2014-09-08"",
+      ""deleted"": false,
+      ""recurring"": true,
+      ""conferencing"": {
+        ""provider_name"": ""zoom"",
+        ""join_url"": ""https://example.com/joinurl""
+      },
+      ""series_identifier"": ""identifier"",
+      ""participation_status"": ""needs_action"",
+      ""transparency"": ""opaque"",
+      ""status"": ""confirmed"",
+      ""categories"": [],
+      ""created"": ""2014-09-01T08:00:01Z"",
+      ""updated"": ""2014-09-01T09:24:16Z""
+    }
+  ]
+}"));
+
+            var events = this.Client.GetEvents();
+
+            CollectionAssert.AreEqual(
+                new List<Event>
+                {
+                    new Event
+                    {
+                        CalendarId = "cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw",
+                        EventUid = "evt_external_54008b1a4a41730f8d5c6037",
+                        Summary = "Company Retreat",
+                        Description = "Escape to the country",
+                        Start = new EventTime(new Date(2014, 9, 6), "Etc/UTC"),
+                        End = new EventTime(new Date(2014, 9, 8), "Etc/UTC"),
+                        Location = null,
+                        Deleted = false,
+                        Recurring = true,
+                        SeriesIdentifier = "identifier",
+                        ParticipationStatus = AttendeeStatus.NeedsAction,
+                        Transparency = Transparency.Opaque,
+                        EventStatus = EventStatus.Confirmed,
+                        Categories = new string[] { },
+                        Created = new DateTime(2014, 9, 1, 8, 0, 1, DateTimeKind.Utc),
+                        Updated = new DateTime(2014, 9, 1, 9, 24, 16, DateTimeKind.Utc),
+                        Conferencing = new Conferencing
+                        {
+                          ProviderName = "zoom",
+                          JoinUrl = "https://example.com/joinurl",
+                        },
+                    },
+                },
+                events);
+        }
+
+        [Test]
         public void CanGetEventWithoutLocation()
         {
             this.Http.Stub(
