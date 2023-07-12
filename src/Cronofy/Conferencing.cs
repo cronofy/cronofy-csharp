@@ -12,6 +12,9 @@ namespace Cronofy
         /// <value>
         /// The conferencing provider name.
         /// </value>
+        /// <remarks>
+        /// See <see cref="ConferencingProviders"/> for potential values.
+        /// </remarks>
         public string ProviderName { get; set; }
 
         /// <summary>
