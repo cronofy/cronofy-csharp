@@ -1,3 +1,7 @@
+## [1.12.0]
+
+* Adds `Conferencing` property to the `CronofyAccountClient.GetEvents()` return value. [#125]
+
 ## [1.11.0]
 
 * Adds authorization parameters for the Enterprise Connect and Individual Connect UserInfo responses, and `provider_name` parameter for Enterprise Connect UserInfo response. [#123]
@@ -306,6 +310,7 @@
 [1.9.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.9.0
 [1.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.10.0
 [1.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.11.0
+[1.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.0
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -375,3 +380,4 @@
 [#118]: https://github.com/cronofy/cronofy-csharp/pull/118
 [#120]: https://github.com/cronofy/cronofy-csharp/pull/120
 [#123]: https://github.com/cronofy/cronofy-csharp/pull/123
+[#125]: https://github.com/cronofy/cronofy-csharp/pull/125
