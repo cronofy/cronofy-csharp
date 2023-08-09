@@ -1,5 +1,6 @@
 ﻿namespace Cronofy
 {
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     /// <summary>
@@ -10,8 +11,8 @@
         /// <summary>
         /// The cache for generated <see cref="UrlProvider"/>s.
         /// </summary>
-        private static readonly IDictionary<string, UrlProvider> ProviderCache =
-            new Dictionary<string, UrlProvider>();
+        private static readonly ConcurrentDictionary<string, UrlProvider> ProviderCache =
+            new ConcurrentDictionary<string, UrlProvider>();
 
         /// <summary>
         /// Gets a <see cref="UrlProvider"/> for the given data center.
@@ -31,13 +32,15 @@
                 key = string.Empty;
             }
 
-            if (!ProviderCache.ContainsKey(key))
-            {
-                var urlProvider = new UrlProvider(key);
-                ProviderCache.Add(key, urlProvider);
-            }
+            return ProviderCache.GetOrAdd(key, (k) => new UrlProvider(k));
+        }
 
-            return ProviderCache[key];
+        /// <summary>
+        /// Resets the internal UrlProvider cache. Used for tests.
+        /// </summary>
+        internal static void Reset()
+        {
+            ProviderCache.Clear();
         }
     }
 }
