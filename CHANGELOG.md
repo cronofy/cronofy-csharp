@@ -1,3 +1,7 @@
+## [1.12.1]
+
+* Internal changes to support constructing multiple client classes concurrently. [#127]
+
 ## [1.12.0]
 
 * Adds `Conferencing` property to the `CronofyAccountClient.GetEvents()` return value. [#125]
@@ -311,6 +315,7 @@
 [1.10.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.10.0
 [1.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.11.0
 [1.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.0
+[1.12.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.1
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -381,3 +386,4 @@
 [#120]: https://github.com/cronofy/cronofy-csharp/pull/120
 [#123]: https://github.com/cronofy/cronofy-csharp/pull/123
 [#125]: https://github.com/cronofy/cronofy-csharp/pull/125
+[#127]: https://github.com/cronofy/cronofy-csharp/pull/127
