@@ -1,3 +1,7 @@
+## [1.12.2]
+
+* Adding `GetAuthorizationUrlBuilder` and `GetEnterpriseConnectAuthorizationUrlBuilder` to the `ICronofyOAuthClient` interface. [#128]
+
 ## [1.12.1]
 
 * Internal changes to support constructing multiple client classes concurrently. [#127]
