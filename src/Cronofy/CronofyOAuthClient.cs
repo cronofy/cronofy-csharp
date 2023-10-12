@@ -96,54 +96,16 @@ namespace Cronofy
         /// </remarks>
         internal IHttpClient HttpClient { get; set; }
 
-        /// <summary>
-        /// Creates a new <see cref="AuthorizationUrlBuilder"/> seeded with your
-        /// client configuration.
-        /// </summary>
-        /// <param name="redirectUri">
-        /// The URI to redirect the user's response for the authorization
-        /// request to, must not be empty.
-        /// </param>
-        /// <returns>
-        /// Returns a new <see cref="AuthorizationUrlBuilder"/>.
-        /// </returns>
-        /// <remarks>
-        /// The read_account, read_events, create_event, and delete_event scopes
-        /// are requested by default.
-        /// </remarks>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> is null or empty.
-        /// </exception>
-        public AuthorizationUrlBuilder GetAuthorizationUrlBuilder(string redirectUri)
+        /// <inheritdoc />
+        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder(string redirectUri)
         {
             Preconditions.NotEmpty("redirectUri", redirectUri);
 
             return new AuthorizationUrlBuilder(this.clientId, this.urlProvider, redirectUri);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="AuthorizationUrlBuilder"/>, set as an Enterprise
-        /// Connect authorization URL, and seeded with your client configuration.
-        /// </summary>
-        /// <param name="redirectUri">
-        /// The URI to redirect the user's response for the authorization
-        /// request to, must not be empty.
-        /// </param>
-        /// <returns>
-        /// Returns a new <see cref="AuthorizationUrlBuilder"/>.
-        /// </returns>
-        /// <remarks>
-        /// The delegated scopes read_account, read_events, create_event, and delete_event
-        /// are requested by default.
-        /// <para>
-        /// The Enterprise Connect service_account/accounts/manage and
-        /// service_account/resources/manage are requested by default.
-        /// </para>
-        /// </remarks>
-        /// <exception cref="System.ArgumentException">
-        /// Thrown if <paramref name="redirectUri"/> is null or empty.
-        /// </exception>
-        public AuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri)
+        /// <inheritdoc />
+        public IAuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri)
         {
             Preconditions.NotEmpty("redirectUri", redirectUri);
 
@@ -559,7 +521,7 @@ namespace Cronofy
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>
-        public sealed class AuthorizationUrlBuilder
+        public sealed class AuthorizationUrlBuilder : IAuthorizationUrlBuilder
         {
             /// <summary>
             /// The default scopes for a new OAuth authorization request.
@@ -678,7 +640,7 @@ namespace Cronofy
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
-            public AuthorizationUrlBuilder Scope(params string[] scope)
+            public IAuthorizationUrlBuilder Scope(params string[] scope)
             {
                 Preconditions.NotEmpty("scope", scope);
 
@@ -699,7 +661,7 @@ namespace Cronofy
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
-            public AuthorizationUrlBuilder Scope(IEnumerable<string> scope)
+            public IAuthorizationUrlBuilder Scope(IEnumerable<string> scope)
             {
                 return this.Scope(scope.ToArray());
             }
@@ -717,7 +679,7 @@ namespace Cronofy
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="state"/> is null or empty.
             /// </exception>
-            public AuthorizationUrlBuilder State(string state)
+            public IAuthorizationUrlBuilder State(string state)
             {
                 Preconditions.NotEmpty("state", state);
 
@@ -737,7 +699,7 @@ namespace Cronofy
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            public AuthorizationUrlBuilder AvoidLinking(bool avoidLinking)
+            public IAuthorizationUrlBuilder AvoidLinking(bool avoidLinking)
             {
                 this.avoidLinking = avoidLinking;
 
@@ -751,7 +713,7 @@ namespace Cronofy
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            public AuthorizationUrlBuilder EnterpriseConnect()
+            public IAuthorizationUrlBuilder EnterpriseConnect()
             {
                 this.enterpriseConnect = true;
 
@@ -771,7 +733,7 @@ namespace Cronofy
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
-            public AuthorizationUrlBuilder EnterpriseConnectScope(params string[] scope)
+            public IAuthorizationUrlBuilder EnterpriseConnectScope(params string[] scope)
             {
                 Preconditions.NotEmpty("scope", scope);
 
@@ -793,7 +755,7 @@ namespace Cronofy
             /// <exception cref="System.ArgumentException">
             /// Thrown if <paramref name="scope"/> is empty.
             /// </exception>
-            public AuthorizationUrlBuilder EnterpriseConnectScope(IEnumerable<string> scope)
+            public IAuthorizationUrlBuilder EnterpriseConnectScope(IEnumerable<string> scope)
             {
                 this.enterpriseConnectScope = scope.ToArray();
 
@@ -810,7 +772,7 @@ namespace Cronofy
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            public AuthorizationUrlBuilder LinkToken(string linkToken)
+            public IAuthorizationUrlBuilder LinkToken(string linkToken)
             {
                 this.linkToken = linkToken;
 
@@ -827,7 +789,7 @@ namespace Cronofy
             /// <returns>
             /// A reference to the builder.
             /// </returns>
-            public AuthorizationUrlBuilder ProviderName(string providerName)
+            public IAuthorizationUrlBuilder ProviderName(string providerName)
             {
                 this.providerName = providerName;
 

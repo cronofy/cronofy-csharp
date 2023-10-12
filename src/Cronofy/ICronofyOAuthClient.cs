@@ -352,5 +352,49 @@ namespace Cronofy
         /// Thrown if <paramref name="addToCalendarRequest"/> is null.
         /// </exception>
         string AddToCalendar(AddToCalendarRequest addToCalendarRequest);
+
+        /// <summary>
+        /// Creates a new <see cref="CronofyOAuthClient.AuthorizationUrlBuilder"/> seeded with your
+        /// client configuration.
+        /// </summary>
+        /// <param name="redirectUri">
+        /// The URI to redirect the user's response for the authorization
+        /// request to, must not be empty.
+        /// </param>
+        /// <returns>
+        /// Returns a new <see cref="CronofyOAuthClient.AuthorizationUrlBuilder"/>.
+        /// </returns>
+        /// <remarks>
+        /// The read_account, read_events, create_event, and delete_event scopes
+        /// are requested by default.
+        /// </remarks>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="redirectUri"/> is null or empty.
+        /// </exception>
+        IAuthorizationUrlBuilder GetAuthorizationUrlBuilder(string redirectUri);
+
+        /// <summary>
+        /// Creates a new <see cref="CronofyOAuthClient.AuthorizationUrlBuilder"/>, set as an Enterprise
+        /// Connect authorization URL, and seeded with your client configuration.
+        /// </summary>
+        /// <param name="redirectUri">
+        /// The URI to redirect the user's response for the authorization
+        /// request to, must not be empty.
+        /// </param>
+        /// <returns>
+        /// Returns a new <see cref="CronofyOAuthClient.AuthorizationUrlBuilder"/>.
+        /// </returns>
+        /// <remarks>
+        /// The delegated scopes read_account, read_events, create_event, and delete_event
+        /// are requested by default.
+        /// <para>
+        /// The Enterprise Connect service_account/accounts/manage and
+        /// service_account/resources/manage are requested by default.
+        /// </para>
+        /// </remarks>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="redirectUri"/> is null or empty.
+        /// </exception>
+        IAuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri);
     }
 }
