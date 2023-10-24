@@ -1,5 +1,8 @@
 # Cronofy
 
+[![CSharp Tests](https://github.com/cronofy/cronofy-csharp/actions/workflows/test.yaml/badge.svg)](https://github.com/cronofy/cronofy-csharp/actions/workflows/test.yaml)
+[![NuGet version](https://badge.fury.io/nu/Cronofy.svg)](https://badge.fury.io/nu/Cronofy)
+
 [Cronofy](https://www.cronofy.com) - one API for all the calendars (Google, iCloud, Exchange, Office 365, Outlook.com)
 
 ## Installation
