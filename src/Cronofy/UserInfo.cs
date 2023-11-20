@@ -33,11 +33,10 @@
         /// Gets or sets the authorization of the account.
         /// </summary>
         /// <value> The authorization for the account.</value>
-
         public Authorization AuthorizationInfo { get; set; }
 
         /// <summary>
-        /// Gets or sets the Service Account data.
+        /// Gets or sets the Service Account data. Only populated when CronofyType == "service_account".
         /// </summary>
         /// <value> /// The Service Account data.</value>
         public ServiceAccount ServiceAccountInfo { get; set; }
@@ -95,7 +94,6 @@
         public override string ToString()
         {
             return string.Format(
-
                 "<{0} Sub={1}, CronofyType={2}>, AuthorizationInfo={3}, ServiceAccountInfo={4} Email={5}",
                 this.GetType(),
                 this.Sub,
@@ -308,10 +306,16 @@
         }
 
         /// <summary>
-        /// Class representing an authorization for an account.
+        /// Class representing additional information from the service account authorization.
         /// </summary>
         public sealed class ServiceAccount
         {
+            /// <summary>
+            /// Gets the domain that the service account relates to.
+            /// We may not be able to determine this, and this property is not guaranteed to be populated.
+            /// </summary>
+            public string Domain { get; internal set; }
+
             /// <summary>
             /// Gets or sets the provider name of the Service Account.
             /// </summary>
@@ -323,7 +327,7 @@
             /// <inheritdoc/>
             public override int GetHashCode()
             {
-                return this.ProviderName.GetHashCode();
+                return this.ProviderName.GetHashCode() ^ this.Domain.GetHashCode();
             }
 
             /// <inheritdoc/>
@@ -355,16 +359,18 @@
             public bool Equals(ServiceAccount other)
             {
                 return other != null
-                    && this.ProviderName == other.ProviderName;
+                    && this.ProviderName == other.ProviderName
+                    && this.Domain == other.Domain;
             }
 
             /// <inheritdoc/>
             public override string ToString()
             {
                 return string.Format(
-                    "<{0} ProviderName={1}>",
+                    "<{0} ProviderName={1}, Domain={2}>",
                     this.GetType(),
-                    this.ProviderName);
+                    this.ProviderName,
+                    this.Domain);
             }
         }
     }
