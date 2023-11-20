@@ -1,4 +1,4 @@
-## [1.13.3]
+## [1.12.3]
 * Adds the `domain` property to the service account details when a `service_account` is returned in GetUserInfo.
 
 ## [1.12.2]
