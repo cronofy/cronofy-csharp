@@ -1,3 +1,6 @@
+## [1.13.3]
+* Adds the `domain` property to the service account details when a `service_account` is returned in GetUserInfo.
+
 ## [1.12.2]
 
 * Adding `GetAuthorizationUrlBuilder` and `GetEnterpriseConnectAuthorizationUrlBuilder` to the `ICronofyOAuthClient` interface. [#128]
