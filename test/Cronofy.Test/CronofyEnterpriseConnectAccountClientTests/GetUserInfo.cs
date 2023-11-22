@@ -5,7 +5,7 @@
     internal sealed class GetUserInfo : Base
     {
         [Test]
-        public void CanGetUserInfoForSericeAccount()
+        public void CanGetUserInfoForServiceAccount()
         {
             this.Http.Stub(
                 HttpGet
@@ -13,12 +13,14 @@
                     .RequestHeader("Authorization", "Bearer " + AccessToken)
                     .ResponseCode(200)
                     .ResponseBody(
-                    @"{
+                    @"
+{
     ""sub"": ""ser_61a8b807a341fc00bee53042"",
     ""cronofy.type"": ""service_account"",
     ""cronofy.data"": {
         ""service_account"": {
-            ""provider_name"": ""exchange""
+            ""provider_name"": ""exchange"",
+            ""domain"": ""example.org""
         },
         ""authorization"": {
             ""scope"": ""service_account/accounts/manage service_account/resources/manage"",
@@ -27,7 +29,8 @@
         }
     },
     ""email"": ""exchange-service-account@example.org""
-}"));
+}
+"));
 
             var actualUserInfo = this.Client.GetUserInfo();
             var expectedUserInfo = new UserInfo
@@ -38,6 +41,7 @@
                 ServiceAccountInfo = new UserInfo.ServiceAccount
                 {
                     ProviderName = "exchange",
+                    Domain = "example.org",
                 },
                 AuthorizationInfo = new UserInfo.Authorization
                 {

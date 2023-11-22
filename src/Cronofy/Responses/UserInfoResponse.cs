@@ -79,8 +79,8 @@
             public ProfileResponse[] Profiles { get; set; }
         }
 
-                /// <summary>
-        /// Class for the deserialization of an authorization response.
+        /// <summary>
+        /// Class for the deserialization of a service account within a UserProfile.
         /// </summary>
         internal sealed class CronofyServiceAccount
         {
@@ -94,6 +94,12 @@
             public string ProviderName { get; set; }
 
             /// <summary>
+            /// Gets or sets the domain name of the Service Account.
+            /// </summary>
+            [JsonProperty("domain")]
+            public string Domain { get; set; }
+
+            /// <summary>
             /// Converts the response into a <see cref="Cronofy.Account"/>.
             /// </summary>
             /// <returns>
@@ -104,6 +110,7 @@
                 return new UserInfo.ServiceAccount
                 {
                     ProviderName = this.ProviderName,
+                    Domain = this.Domain,
                 };
             }
         }
