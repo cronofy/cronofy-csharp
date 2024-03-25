@@ -326,10 +326,10 @@ namespace Cronofy.Responses
           public string ProfileRelinkUrl { get; set; }
 
           /// <summary>
-          /// Converts the response into a <see cref="Cronofy.ConferencingProfile"/>.
+          /// Converts the response into a <see cref="Cronofy.UserInfo.ConferencingProfile"/>.
           /// </summary>
           /// <returns>
-          /// A <see cref="Cronofy.ConferencingProfile"/> based upon the response.
+          /// A <see cref="Cronofy.UserInfo.ConferencingProfile"/> based upon the response.
           /// </returns>
           public UserInfo.ConferencingProfile ToConferencingProfile()
           {
@@ -339,7 +339,7 @@ namespace Cronofy.Responses
               Id = this.ProfileId,
               Name = this.ProfileName,
               Connected = this.ProfileConnected,
-              RelinkUrl = this.ProfileRelinkUrl
+              RelinkUrl = this.ProfileRelinkUrl,
             };
           }
         }

@@ -311,7 +311,7 @@ namespace Cronofy
           /// to the current <see cref="Cronofy.UserInfo.ConferencingProfile"/>; otherwise,
           /// <c>false</c>.
           /// </returns>
-          public bool Equals(Profile other)
+          public bool Equals(ConferencingProfile other)
           {
             return other != null
                 && this.Id == other.Id

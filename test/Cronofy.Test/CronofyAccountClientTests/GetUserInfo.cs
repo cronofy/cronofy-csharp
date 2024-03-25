@@ -178,18 +178,20 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 },
                 ConferencingProfiles = new UserInfo.ConferencingProfile[]
                 {
-                  new UserInfo.ConferencingProfile {
+                  new UserInfo.ConferencingProfile
+                  {
                     Connected = true,
                     Id = "pro_jknsdfk234",
                     Name = "example@cronofy.com",
                     ProviderName = "zoom",
                   },
-                  new UserInfo.ConferencingProfile {
+                  new UserInfo.ConferencingProfile
+                  {
                     Connected = false,
                     Id = "pro_gfmdsg51qa",
                     Name = "example@cronofy.com",
                     RelinkUrl = "https://app.cronofy.com/v2/relink/go_to?email=example%40cronofy.com",
-                    ProviderName = "go_to1",
+                    ProviderName = "go_to",
                   },
                 },
                 Email = "janed@company.com",
