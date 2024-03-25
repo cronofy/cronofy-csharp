@@ -1,4 +1,4 @@
-﻿namespace Cronofy
+namespace Cronofy
 {
     using System.Linq;
 
@@ -28,6 +28,12 @@
         /// </summary>
         /// <value>The profiles.</value>
         public Profile[] Profiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profiles.
+        /// </summary>
+        /// <value>The conferencing profiles.</value>
+        public ConferencingProfile[] ConferencingProfiles { get; set; }
 
         /// <summary>
         /// Gets or sets the authorization of the account.
@@ -85,6 +91,7 @@
                 && this.Sub == other.Sub
                 && this.CronofyType == other.CronofyType
                 && EnumerableUtils.NullTolerantSequenceEqual(this.Profiles, other.Profiles)
+                && EnumerableUtils.NullTolerantSequenceEqual(this.ConferencingProfiles, other.ConferencingProfiles)
                 && object.Equals(this.AuthorizationInfo, other.AuthorizationInfo)
                 && object.Equals(this.ServiceAccountInfo, other.ServiceAccountInfo)
                 && this.Email == other.Email;
@@ -225,85 +232,189 @@
         }
 
         /// <summary>
+        /// Class representing a conferencing profile for an account.
+        /// </summary>
+        public sealed class ConferencingProfile
+        {
+          /// <summary>
+          /// Gets or sets the name of the provider of the profile.
+          /// </summary>
+          /// <value>
+          /// The name of the provider for the profile.
+          /// </value>
+          public string ProviderName { get; set; }
+
+          /// <summary>
+          /// Gets or sets the ID of the profile.
+          /// </summary>
+          /// <value>
+          /// The ID of the profile.
+          /// </value>
+          public string Id { get; set; }
+
+          /// <summary>
+          /// Gets or sets the name of the profile.
+          /// </summary>
+          /// <value>
+          /// The name of the profile.
+          /// </value>
+          public string Name { get; set; }
+
+          /// <summary>
+          /// Gets or sets a value indicating whether this profile is connected.
+          /// </summary>
+          /// <value>
+          /// <c>true</c> if this profile is connected; otherwise, <c>false</c>.
+          /// </value>
+          public bool Connected { get; set; }
+
+          /// <summary>
+          /// Gets or sets the relink URL for the profile.
+          /// </summary>
+          /// <value>
+          /// The relink URL for the profile.
+          /// </value>
+          /// <remarks>
+          /// <c>null</c> unless <see cref="Connected"/> is false.
+          /// </remarks>
+          public string RelinkUrl { get; set; }
+
+          /// <inheritdoc/>
+          public override int GetHashCode()
+          {
+            return this.Id.GetHashCode();
+          }
+
+          /// <inheritdoc/>
+          public override bool Equals(object obj)
+          {
+            var other = obj as ConferencingProfile;
+
+            if (other == null)
+            {
+              return false;
+            }
+
+            return this.Equals(other);
+          }
+
+          /// <summary>
+          /// Determines whether the specified <see cref="Cronofy.UserInfo.ConferencingProfile"/> is
+          /// equal to the current <see cref="Cronofy.UserInfo.ConferencingProfile"/>.
+          /// </summary>
+          /// <param name="other">
+          /// The <see cref="Cronofy.UserInfo.ConferencingProfile"/> to compare with the current
+          /// <see cref="Cronofy.UserInfo.ConferencingProfile"/>.
+          /// </param>
+          /// <returns>
+          /// <c>true</c> if the specified <see cref="Cronofy.UserInfo.ConferencingProfile"/> is equal
+          /// to the current <see cref="Cronofy.UserInfo.ConferencingProfile"/>; otherwise,
+          /// <c>false</c>.
+          /// </returns>
+          public bool Equals(Profile other)
+          {
+            return other != null
+                && this.Id == other.Id
+                && this.Name == other.Name
+                && this.ProviderName == other.ProviderName
+                && this.Connected == other.Connected
+                && this.RelinkUrl == other.RelinkUrl;
+          }
+
+          /// <inheritdoc/>
+          public override string ToString()
+          {
+            return string.Format(
+                "<{0} ProviderName={1}, Id={2}, Name={3}, Connected={4}, RelinkUrl={5}>",
+                this.GetType(),
+                this.ProviderName,
+                this.Id,
+                this.Name,
+                this.Connected,
+                this.RelinkUrl);
+          }
+        }
+
+        /// <summary>
         /// Class representing an authorization for an account.
         /// </summary>
         public sealed class Authorization
-        {
-            /// <summary>
-            /// Gets or sets the scope of the authorization of the account.
-            /// </summary>
-            /// <value>
-            /// The scope of the authorization for the account.
-            /// </value>
-            public string Scope { get; set; }
-
-            /// <summary>
-            /// Gets or sets the status of the authorization of the account.
-            /// </summary>
-            /// <value>
-            /// The status of the authorization for the account.
-            /// </value>
-            public string Status { get; set; }
-
-            /// <summary>
-            /// Gets or sets the delegated scope of the account.
-            /// </summary>
-            /// <value>
-            /// The delegated scope of the account.
-            /// </value>
-            public string DelegatedScope { get; set; }
-
-            /// <inheritdoc/>
-            public override int GetHashCode()
             {
-                return this.Scope.GetHashCode();
-            }
+                /// <summary>
+                /// Gets or sets the scope of the authorization of the account.
+                /// </summary>
+                /// <value>
+                /// The scope of the authorization for the account.
+                /// </value>
+                public string Scope { get; set; }
 
-            /// <inheritdoc/>
-            public override bool Equals(object obj)
-            {
-                var other = obj as Authorization;
+                /// <summary>
+                /// Gets or sets the status of the authorization of the account.
+                /// </summary>
+                /// <value>
+                /// The status of the authorization for the account.
+                /// </value>
+                public string Status { get; set; }
 
-                if (other == null)
+                /// <summary>
+                /// Gets or sets the delegated scope of the account.
+                /// </summary>
+                /// <value>
+                /// The delegated scope of the account.
+                /// </value>
+                public string DelegatedScope { get; set; }
+
+                /// <inheritdoc/>
+                public override int GetHashCode()
                 {
-                    return false;
+                    return this.Scope.GetHashCode();
                 }
 
-                return this.Equals(other);
-            }
+                /// <inheritdoc/>
+                public override bool Equals(object obj)
+                {
+                    var other = obj as Authorization;
 
-            /// <summary>
-            /// Determines whether the specified <see cref="Cronofy.UserInfo.Authorization"/> is
-            /// equal to the current <see cref="Cronofy.UserInfo.Authorization"/>.
-            /// </summary>
-            /// <param name="other">
-            /// The <see cref="Cronofy.UserInfo.Authorization"/> to compare with the current
-            /// <see cref="Cronofy.UserInfo.Authorization"/>.
-            /// </param>
-            /// <returns>
-            /// <c>true</c> if the specified <see cref="Cronofy.UserInfo.Authorization"/> is equal
-            /// to the current <see cref="Cronofy.UserInfo.Authorization"/>; otherwise,
-            /// <c>false</c>.
-            /// </returns>
-            public bool Equals(Authorization other)
-            {
-                return other != null
-                    && this.Scope == other.Scope
-                    && this.Status == other.Status
-                    && this.DelegatedScope == other.DelegatedScope;
-            }
+                    if (other == null)
+                    {
+                        return false;
+                    }
 
-            /// <inheritdoc/>
-            public override string ToString()
-            {
-                return string.Format(
-                    "<{0} Scope={1}, Status={2}, DelegatedScope={3}>",
-                    this.GetType(),
-                    this.Scope,
-                    this.Status,
-                    this.DelegatedScope);
+                    return this.Equals(other);
+                }
+
+                /// <summary>
+                /// Determines whether the specified <see cref="Cronofy.UserInfo.Authorization"/> is
+                /// equal to the current <see cref="Cronofy.UserInfo.Authorization"/>.
+                /// </summary>
+                /// <param name="other">
+                /// The <see cref="Cronofy.UserInfo.Authorization"/> to compare with the current
+                /// <see cref="Cronofy.UserInfo.Authorization"/>.
+                /// </param>
+                /// <returns>
+                /// <c>true</c> if the specified <see cref="Cronofy.UserInfo.Authorization"/> is equal
+                /// to the current <see cref="Cronofy.UserInfo.Authorization"/>; otherwise,
+                /// <c>false</c>.
+                /// </returns>
+                public bool Equals(Authorization other)
+                {
+                    return other != null
+                        && this.Scope == other.Scope
+                        && this.Status == other.Status
+                        && this.DelegatedScope == other.DelegatedScope;
+                }
+
+                /// <inheritdoc/>
+                public override string ToString()
+                {
+                    return string.Format(
+                        "<{0} Scope={1}, Status={2}, DelegatedScope={3}>",
+                        this.GetType(),
+                        this.Scope,
+                        this.Status,
+                        this.DelegatedScope);
+                }
             }
-        }
 
         /// <summary>
         /// Class representing additional information from the service account authorization.

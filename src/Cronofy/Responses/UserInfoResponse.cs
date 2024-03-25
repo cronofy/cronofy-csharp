@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Responses
+namespace Cronofy.Responses
 {
     using System;
     using System.Linq;
@@ -46,6 +46,7 @@
                 Sub = this.Sub,
                 CronofyType = this.CronofyType,
                 Profiles = this.Data?.Profiles?.Select((p) => p.ToProfile()).ToArray(),
+                ConferencingProfiles = this.Data?.ConferencingProfiles?.Select((cp) => cp.ToConferencingProfile()).ToArray(),
                 ServiceAccountInfo = this.Data?.ServiceAccount?.ToServiceAccount(),
                 AuthorizationInfo = this.Data?.Authorization?.ToAuthorization(),
                 Email = this.Email,
@@ -77,7 +78,14 @@
             /// <value>The profiles.</value>
             [JsonProperty("profiles")]
             public ProfileResponse[] Profiles { get; set; }
-        }
+
+            /// <summary>
+            /// Gets or sets the profiles.
+            /// </summary>
+            /// <value>The conferencing profiles.</value>
+            [JsonProperty("conferencing_profiles")]
+            public ConferencingProfileResponse[] ConferencingProfiles { get; set; }
+    }
 
         /// <summary>
         /// Class for the deserialization of a service account within a UserProfile.
@@ -264,5 +272,76 @@
                 };
             }
         }
-    }
+
+        /// <summary>
+        /// Class for the deserialization of a conferencing profile response.
+        /// </summary>
+        internal sealed class ConferencingProfileResponse
+        {
+          /// <summary>
+          /// Gets or sets the name of the provider.
+          /// </summary>
+          /// <value>
+          /// The name of the provider.
+          /// </value>
+          [JsonProperty("provider_name")]
+          public string ProviderName { get; set; }
+
+          /// <summary>
+          /// Gets or sets the ID of the profile.
+          /// </summary>
+          /// <value>
+          /// The ID of the profile.
+          /// </value>
+          [JsonProperty("profile_id")]
+          public string ProfileId { get; set; }
+
+          /// <summary>
+          /// Gets or sets the name of the profile.
+          /// </summary>
+          /// <value>
+          /// The name of the profile.
+          /// </value>
+          [JsonProperty("profile_name")]
+          public string ProfileName { get; set; }
+
+          /// <summary>
+          /// Gets or sets a value indicating whether this profile is
+          /// connected.
+          /// </summary>
+          /// <value>
+          /// <c>true</c> if the profile is connected; otherwise,
+          /// <c>false</c>.
+          /// </value>
+          [JsonProperty("profile_connected")]
+          public bool ProfileConnected { get; set; }
+
+          /// <summary>
+          /// Gets or sets the relink URL for the profile.
+          /// </summary>
+          /// <value>
+          /// The relink URL for the profile.
+          /// </value>
+          [JsonProperty("profile_relink_url")]
+          public string ProfileRelinkUrl { get; set; }
+
+          /// <summary>
+          /// Converts the response into a <see cref="Cronofy.ConferencingProfile"/>.
+          /// </summary>
+          /// <returns>
+          /// A <see cref="Cronofy.ConferencingProfile"/> based upon the response.
+          /// </returns>
+          public UserInfo.ConferencingProfile ToConferencingProfile()
+          {
+            return new UserInfo.ConferencingProfile
+            {
+              ProviderName = this.ProviderName,
+              Id = this.ProfileId,
+              Name = this.ProfileName,
+              Connected = this.ProfileConnected,
+              RelinkUrl = this.ProfileRelinkUrl
+            };
+          }
+        }
+  }
 }
