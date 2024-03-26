@@ -1,3 +1,6 @@
+## [1.12.4]
+* Adds support for the `conferencing_profiles` field to the response object from GetUserInfo. [#132]
+
 ## [1.12.3]
 * Adds the `domain` property to the service account details when a `service_account` is returned in GetUserInfo.
 
@@ -323,6 +326,9 @@
 [1.11.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.11.0
 [1.12.0]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.0
 [1.12.1]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.1
+[1.12.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.2
+[1.12.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.3
+[1.12.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.4
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -394,3 +400,4 @@
 [#123]: https://github.com/cronofy/cronofy-csharp/pull/123
 [#125]: https://github.com/cronofy/cronofy-csharp/pull/125
 [#127]: https://github.com/cronofy/cronofy-csharp/pull/127
+[#132]: https://github.com/cronofy/cronofy-csharp/pull/132
