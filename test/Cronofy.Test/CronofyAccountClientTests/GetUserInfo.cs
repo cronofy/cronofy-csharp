@@ -1,4 +1,4 @@
-﻿namespace Cronofy.Test.CronofyAccountClientTests
+namespace Cronofy.Test.CronofyAccountClientTests
 {
     using NUnit.Framework;
 
@@ -74,7 +74,22 @@
             ""calendar_attachments_available"": true,
             ""permission_level"": ""sandbox""
           }
-        ]
+        ],
+      }
+    ],
+    ""conferencing_profiles"": [
+      {
+        ""provider_name"": ""zoom"",
+        ""profile_id"": ""pro_jknsdfk234"",
+        ""profile_name"": ""example@cronofy.com"",
+        ""profile_connected"": true
+      },
+      {
+        ""provider_name"": ""go_to"",
+        ""profile_id"": ""pro_gfmdsg51qa"",
+        ""profile_name"": ""example@cronofy.com"",
+        ""profile_connected"": false,
+        ""profile_relink_url"": ""https://app.cronofy.com/v2/relink/go_to?email=example%40cronofy.com""
       }
     ]
   }
@@ -160,6 +175,24 @@
                             },
                         },
                     },
+                },
+                ConferencingProfiles = new UserInfo.ConferencingProfile[]
+                {
+                  new UserInfo.ConferencingProfile
+                  {
+                    Connected = true,
+                    Id = "pro_jknsdfk234",
+                    Name = "example@cronofy.com",
+                    ProviderName = "zoom",
+                  },
+                  new UserInfo.ConferencingProfile
+                  {
+                    Connected = false,
+                    Id = "pro_gfmdsg51qa",
+                    Name = "example@cronofy.com",
+                    RelinkUrl = "https://app.cronofy.com/v2/relink/go_to?email=example%40cronofy.com",
+                    ProviderName = "go_to",
+                  },
                 },
                 Email = "janed@company.com",
             };
