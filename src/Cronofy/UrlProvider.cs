@@ -171,6 +171,11 @@ namespace Cronofy
         private const string ConferencingServiceAuthorizationUrlFormat = "https://api{0}.cronofy.com/v1/conferencing_service_authorizations";
 
         /// <summary>
+        /// The URL of the Attachments endpoint.
+        /// </summary>
+        private const string AttachmentsUrlFormat = "https://api{0}.cronofy.com/v1/attachments";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCenter">
@@ -218,6 +223,7 @@ namespace Cronofy
             this.ProvisionApplicationUrl = string.Format(ProvisionApplicationUrlFormat, suffix);
             this.ElementTokensUrl = string.Format(ElementTokensUrlFormat, suffix);
             this.ConferencingServiceAuthorizationUrl = string.Format(ConferencingServiceAuthorizationUrlFormat, suffix);
+            this.AttachmentsUrl = string.Format(AttachmentsUrlFormat, suffix);
         }
 
         /// <summary>
@@ -567,5 +573,11 @@ namespace Cronofy
         /// </summary>
         /// <value>The conferencing service authorization URL.</value>
         public string ConferencingServiceAuthorizationUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the attachments URL.
+        /// </summary>
+        /// <value>The attachments URL.</value>
+        public string AttachmentsUrl { get; private set; }
     }
 }

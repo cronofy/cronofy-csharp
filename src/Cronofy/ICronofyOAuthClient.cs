@@ -396,5 +396,7 @@ namespace Cronofy
         /// Thrown if <paramref name="redirectUri"/> is null or empty.
         /// </exception>
         IAuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri);
+
+        Attachment CreateAttachment(CreateAttachmentRequest createAttachmentRequest);
     }
 }
