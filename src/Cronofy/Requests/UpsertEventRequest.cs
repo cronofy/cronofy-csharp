@@ -74,6 +74,15 @@
         public IEnumerable<RequestSubscription> Subscriptions { get; set; }
 
         /// <summary>
+        /// Gets or sets the attachments for the event.
+        /// </summary>
+        /// <value>
+        /// The attachments for the event.
+        /// </value>
+        [JsonProperty("attachments")]
+        public IEnumerable<Attachment> Attachments { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>
@@ -204,6 +213,21 @@
                 [JsonProperty("type")]
                 public string Type { get; set; }
             }
+        }
+
+        /// <summary>
+        /// Class for the serialization of an events individual attachment.
+        /// </summary>
+        public sealed class Attachment
+        {
+            /// <summary>
+            /// Gets or sets the id of the attachment.
+            /// </summary>
+            /// <value>
+            /// The id of the attachment.
+            /// </value>
+            [JsonProperty("attachment_id")]
+            public string AttachmentId { get; set; }
         }
     }
 }
