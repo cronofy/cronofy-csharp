@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using System.Text;
 
     /// <summary>
     /// Example program for interacting with the Cronofy API.
@@ -28,6 +29,11 @@
                 AddToCalendarExample();
                 return;
             }
+            else if (args.Any(t => t == "attachments"))
+            {
+                AttachmentsExample();
+                return;
+            }
 
             Console.Write("Enter access token: ");
             var accessToken = Console.ReadLine();
@@ -35,29 +41,7 @@
             Console.WriteLine();
             var client = new CronofyAccountClient(accessToken);
 
-            Console.WriteLine("Fetching calendars...");
-            var calendars = client.GetCalendars();
-
-            Console.WriteLine();
-
-            foreach (var calendar in calendars)
-            {
-                Console.WriteLine("{0} - {1} - {2} ({3})", calendar.CalendarId, calendar.Name, calendar.Profile.Name, calendar.Profile.ProviderName);
-            }
-
-            Console.WriteLine();
-
-            Console.WriteLine("Fetching events...");
-            var events = client.GetEvents();
-
-            Console.WriteLine();
-
-            foreach (var evt in events)
-            {
-                Console.WriteLine("{0} - {1}", evt.Start, evt.Summary);
-            }
-
-            Console.WriteLine();
+            FetchAndPrintCalendars(client);
 
             const string EventId = "CronofyExample";
 
@@ -179,6 +163,109 @@
             Console.WriteLine(actualUrl);
 
             Process.Start(actualUrl);
+        }
+
+        /// <summary>
+        /// Attachments usage example.
+        /// </summary>
+        private static void AttachmentsExample()
+        {
+            Console.Write("Enter Client id: ");
+            var clientId = Console.ReadLine();
+            Console.Write("Enter Secret: ");
+            var clientSecret = Console.ReadLine();
+
+            Console.WriteLine();
+            var oaClient = new CronofyOAuthClient(clientId, clientSecret);
+
+            Console.Write("Enter access token: ");
+            var accessToken = Console.ReadLine();
+
+            Console.WriteLine();
+            var client = new CronofyAccountClient(accessToken);
+
+            Console.WriteLine("Creating an example attachment");
+            Console.WriteLine();
+
+            var attachmentContent = Encoding.ASCII.GetBytes("Example file content");
+
+            var attachment = oaClient.CreateAttachment(new Requests.CreateAttachmentRequest
+            {
+                FileName = "example.txt",
+                ContentType = "text/plain",
+                Base64Content = Convert.ToBase64String(attachmentContent),
+            });
+
+            Console.WriteLine("Attachment created");
+            Console.WriteLine();
+
+            FetchAndPrintCalendars(client);
+
+            const string EventId = "CronofyAttachmentExample";
+
+            Console.WriteLine("Creating event with ID {0}", EventId);
+            Console.WriteLine();
+
+            Console.Write("Enter calendar ID: ");
+            var calendarId = Console.ReadLine();
+            Console.WriteLine();
+
+            var tomorrow = DateTime.Today.AddDays(1);
+            var start = tomorrow.AddHours(17);
+            var end = start.AddMinutes(30);
+
+            var eventBuilder = new UpsertEventRequestBuilder()
+                .EventId(EventId)
+                .Summary("Cronofy Attachment Example")
+                .Description("Attachment example from the Cronofy .NET SDK")
+                .AddAttachment(attachment.AttachmentId)
+                .Start(start)
+                .End(end);
+
+            client.UpsertEvent(calendarId, eventBuilder);
+            Console.WriteLine("Event upserted");
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to delete...");
+            Console.ReadLine();
+
+            client.DeleteEvent(calendarId, EventId);
+            Console.WriteLine("Event deleted");
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Fetches a list of all of the users calendars and prints a summary to the console.
+        /// </summary>
+        /// <param name="client">Account client to use to read the list of calendars.</param>
+        private static void FetchAndPrintCalendars(CronofyAccountClient client)
+        {
+            Console.WriteLine("Fetching calendars...");
+            var calendars = client.GetCalendars();
+
+            Console.WriteLine();
+
+            foreach (var calendar in calendars)
+            {
+                Console.WriteLine("{0} - {1} - {2} ({3})", calendar.CalendarId, calendar.Name, calendar.Profile.Name, calendar.Profile.ProviderName);
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("Fetching events...");
+            var events = client.GetEvents();
+
+            Console.WriteLine();
+
+            foreach (var evt in events)
+            {
+                Console.WriteLine("{0} - {1}", evt.Start, evt.Summary);
+            }
+
+            Console.WriteLine();
         }
     }
 }
