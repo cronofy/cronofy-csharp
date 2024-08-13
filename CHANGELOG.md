@@ -1,3 +1,7 @@
+
+## [1.12.5]
+* Adds support for creating and attaching files to events using the attachments API. [#135]
+
 ## [1.12.4]
 * Adds support for the `conferencing_profiles` field to the response object from GetUserInfo. [#132]
 
@@ -329,6 +333,7 @@
 [1.12.2]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.2
 [1.12.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.3
 [1.12.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.4
+[1.12.5]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.5
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -401,3 +406,4 @@
 [#125]: https://github.com/cronofy/cronofy-csharp/pull/125
 [#127]: https://github.com/cronofy/cronofy-csharp/pull/127
 [#132]: https://github.com/cronofy/cronofy-csharp/pull/132
+[#135]: https://github.com/cronofy/cronofy-csharp/pull/135
