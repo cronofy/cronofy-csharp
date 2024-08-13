@@ -19,21 +19,10 @@ namespace Cronofy.Responses
         [JsonProperty("attachment")]
         public AttachmentSummary Attachment { get; set; }
 
-        internal sealed class AttachmentSummary
-        {
-            [JsonProperty("attachment_id")]
-            public string AttachmentId { get; set; }
-
-            [JsonProperty("file_name")]
-            public string FileName { get; set; }
-
-            [JsonProperty("content_type")]
-            public string ContentType { get; set; }
-
-            [JsonProperty("md5")]
-            public string MD5 { get; set; }
-        }
-
+        /// <summary>
+        /// Converts the response into an attachment.
+        /// </summary>
+        /// <returns>The response as an attachment.</returns>
         public Attachment ToAttachment()
         {
             return new Attachment
@@ -43,6 +32,48 @@ namespace Cronofy.Responses
                 ContentType = this.Attachment.ContentType,
                 MD5 = this.Attachment.MD5,
             };
+        }
+
+        /// <summary>
+        /// Class for the serialization of attachment summary.
+        /// </summary>
+        internal sealed class AttachmentSummary
+        {
+            /// <summary>
+            /// Gets or sets the id of the attachment.
+            /// </summary>
+            /// <value>
+            /// The id of the attachment.
+            /// </value>
+            [JsonProperty("attachment_id")]
+            public string AttachmentId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the attachment file.
+            /// </summary>
+            /// <value>
+            /// The name of the attachment file.
+            /// </value>
+            [JsonProperty("file_name")]
+            public string FileName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the MIME content type of the attachment.
+            /// </summary>
+            /// <value>
+            /// The MIME content type of the attachment.
+            /// </value>
+            [JsonProperty("content_type")]
+            public string ContentType { get; set; }
+
+            /// <summary>
+            /// Gets or sets the MD5 hash of the attachment file content.
+            /// </summary>
+            /// <value>
+            /// The MD5 hash of the attachment file content.
+            /// </value>
+            [JsonProperty("md5")]
+            public string MD5 { get; set; }
         }
     }
 }

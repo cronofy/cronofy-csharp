@@ -1,7 +1,7 @@
 namespace Cronofy.Requests
 {
-    using Newtonsoft.Json;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Class for the serialization of a create attachment request.

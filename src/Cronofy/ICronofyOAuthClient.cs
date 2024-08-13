@@ -397,6 +397,18 @@ namespace Cronofy
         /// </exception>
         IAuthorizationUrlBuilder GetEnterpriseConnectAuthorizationUrlBuilder(string redirectUri);
 
+        /// <summary>
+        /// Creates a new attachment that can be added to an event as part of an upsert operation.
+        /// </summary>
+        /// <param name="createAttachmentRequest">
+        /// The details of the attachment to be created.
+        /// </param>
+        /// <returns>
+        /// The created attachment.
+        /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if <paramref name="createAttachmentRequest"/> is null or empty.
+        /// </exception>
         Attachment CreateAttachment(CreateAttachmentRequest createAttachmentRequest);
     }
 }
