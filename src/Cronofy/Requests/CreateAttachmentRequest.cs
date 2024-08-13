@@ -9,31 +9,55 @@ namespace Cronofy.Requests
     public sealed class CreateAttachmentRequest
     {
         /// <summary>
-        /// Gets or sets the file name for the attachment.
+        /// Gets or sets the summary of the attachment to be created.
         /// </summary>
         /// <value>
-        /// The file name for the attachment.
+        /// The summary of the attachment to be created.
         /// </value>
-        [JsonProperty("file_name")]
-        public string FileName { get; set; }
+        [JsonProperty("attachment")]
+        public AttachmentSummary Attachment { get; set; }
 
         /// <summary>
-        /// Gets or sets the MIME content type for the attachment.
+        /// Gets or sets the list of subscriptions to be added to the attachment.
         /// </summary>
         /// <value>
-        /// The MIME content type for the attachment.
+        /// The list of subscriptions to be added to the attachment.
         /// </value>
-        [JsonProperty("content_type")]
-        public string ContentType { get; set; }
+        [JsonProperty("subscriptions")]
+        public IEnumerable<RequestSubscription> Subscriptions { get; set; }
 
         /// <summary>
-        /// Gets or sets the Base64-encoded content of the attachment.
+        /// Class for the serialization of attachment summary.
         /// </summary>
-        /// <value>
-        /// The Base64-encoded content of the attachment.
-        /// </value>
-        [JsonProperty("base64_content")]
-        public string Base64Content { get; set; }
+        public sealed class AttachmentSummary
+        {
+            /// <summary>
+            /// Gets or sets the file name for the attachment.
+            /// </summary>
+            /// <value>
+            /// The file name for the attachment.
+            /// </value>
+            [JsonProperty("file_name")]
+            public string FileName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the MIME content type for the attachment.
+            /// </summary>
+            /// <value>
+            /// The MIME content type for the attachment.
+            /// </value>
+            [JsonProperty("content_type")]
+            public string ContentType { get; set; }
+
+            /// <summary>
+            /// Gets or sets the Base64-encoded content of the attachment.
+            /// </summary>
+            /// <value>
+            /// The Base64-encoded content of the attachment.
+            /// </value>
+            [JsonProperty("base64_content")]
+            public string Base64Content { get; set; }
+        }
 
         /// <summary>
         /// Class for the serialization of attachment subscriptions.

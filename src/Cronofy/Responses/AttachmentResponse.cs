@@ -11,10 +11,10 @@ namespace Cronofy.Responses
     internal sealed class AttachmentResponse
     {
         /// <summary>
-        /// Gets or sets the available periods of the response.
+        /// Gets or sets the created attachment.
         /// </summary>
         /// <value>
-        /// The available periods of the response.
+        /// The created attachment.
         /// </value>
         [JsonProperty("attachment")]
         public AttachmentSummary Attachment { get; set; }

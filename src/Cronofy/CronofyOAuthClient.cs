@@ -522,9 +522,10 @@ namespace Cronofy
         public Attachment CreateAttachment(CreateAttachmentRequest createAttachmentRequest)
         {
             Preconditions.NotNull(nameof(createAttachmentRequest), createAttachmentRequest);
-            Preconditions.NotEmpty(nameof(createAttachmentRequest.FileName), createAttachmentRequest.FileName);
-            Preconditions.NotEmpty(nameof(createAttachmentRequest.ContentType), createAttachmentRequest.ContentType);
-            Preconditions.NotEmpty(nameof(createAttachmentRequest.Base64Content), createAttachmentRequest.Base64Content);
+            Preconditions.NotNull(nameof(createAttachmentRequest.Attachment), createAttachmentRequest.Attachment);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.FileName), createAttachmentRequest.Attachment.FileName);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.ContentType), createAttachmentRequest.Attachment.ContentType);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.Base64Content), createAttachmentRequest.Attachment.Base64Content);
 
             var request = new HttpRequest
             {

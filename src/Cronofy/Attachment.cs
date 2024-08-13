@@ -14,7 +14,6 @@ namespace Cronofy
         /// <value>
         /// The ID of the attachment.
         /// </value>
-        [JsonProperty("attachment_id")]
         public string AttachmentId { get; set; }
 
         /// <summary>
@@ -23,7 +22,6 @@ namespace Cronofy
         /// <value>
         /// The file name for the attachment.
         /// </value>
-        [JsonProperty("file_name")]
         public string FileName { get; set; }
 
         /// <summary>
@@ -32,7 +30,6 @@ namespace Cronofy
         /// <value>
         /// The MIME content type for the attachment.
         /// </value>
-        [JsonProperty("content_type")]
         public string ContentType { get; set; }
 
         /// <summary>
@@ -41,7 +38,6 @@ namespace Cronofy
         /// <value>
         /// The MD5 hash of the attachment content.
         /// </value>
-        [JsonProperty("md5")]
         public string MD5 { get; set; }
 
         /// <inheritdoc/>
