@@ -518,6 +518,29 @@ namespace Cronofy
             return elementTokenResponse.ToElementToken();
         }
 
+        /// <inheritdoc/>
+        public Attachment CreateAttachment(CreateAttachmentRequest createAttachmentRequest)
+        {
+            Preconditions.NotNull(nameof(createAttachmentRequest), createAttachmentRequest);
+            Preconditions.NotNull(nameof(createAttachmentRequest.Attachment), createAttachmentRequest.Attachment);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.FileName), createAttachmentRequest.Attachment.FileName);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.ContentType), createAttachmentRequest.Attachment.ContentType);
+            Preconditions.NotEmpty(nameof(createAttachmentRequest.Attachment.Base64Content), createAttachmentRequest.Attachment.Base64Content);
+
+            var request = new HttpRequest
+            {
+                Method = "POST",
+                Url = this.urlProvider.AttachmentsUrl,
+            };
+
+            request.AddOAuthAuthorization(this.clientSecret);
+            request.SetJsonBody(createAttachmentRequest);
+
+            var attachmentResponse = this.HttpClient.GetJsonResponse<AttachmentResponse>(request);
+
+            return attachmentResponse.ToAttachment();
+        }
+
         /// <summary>
         /// Builder class for authorization URLs.
         /// </summary>

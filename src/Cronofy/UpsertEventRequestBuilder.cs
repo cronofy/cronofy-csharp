@@ -133,6 +133,11 @@
         private ICollection<UpsertEventRequest.RequestSubscription> subscriptions;
 
         /// <summary>
+        /// The attachments for the event.
+        /// </summary>
+        private ICollection<UpsertEventRequest.Attachment> attachments;
+
+        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="Cronofy.UpsertEventRequestBuilder"/> class.
         /// </summary>
@@ -142,6 +147,7 @@
             this.endTimeZoneId = TimeZoneIdentifiers.Default;
             this.addedAttendees = new List<UpsertEventRequest.RequestAttendee>();
             this.removedAttendees = new List<UpsertEventRequest.RequestAttendee>();
+            this.attachments = new List<UpsertEventRequest.Attachment>();
         }
 
         /// <summary>
@@ -755,6 +761,25 @@
             return this;
         }
 
+        /// <summary>
+        /// Adds an attachment to the event.
+        /// </summary>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <param name="attachmentId">The identifier of the attachment to be added.</param>
+        public UpsertEventRequestBuilder AddAttachment(string attachmentId)
+        {
+            Preconditions.NotEmpty("attachmentId", attachmentId);
+
+            this.attachments.Add(new UpsertEventRequest.Attachment
+            {
+                AttachmentId = attachmentId,
+            });
+
+            return this;
+        }
+
         /// <inheritdoc/>
         public UpsertEventRequest Build()
         {
@@ -806,6 +831,11 @@
             if (this.removedAttendees.Any())
             {
                 request.Attendees.Remove = this.removedAttendees;
+            }
+
+            if (this.attachments.Any())
+            {
+                request.Attachments = this.attachments;
             }
 
             return request;
