@@ -5,7 +5,7 @@ namespace Cronofy.Test.CronofyOAuthClientTests
     [TestFixture]
     public sealed class Attachments
     {
-      private const string ClientId = "abcdef123456";
+        private const string ClientId = "abcdef123456";
         private const string ClientSecret = "s3cr3t1v3";
 
         private CronofyOAuthClient client;
