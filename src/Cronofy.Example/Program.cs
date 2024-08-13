@@ -42,6 +42,7 @@
             var client = new CronofyAccountClient(accessToken);
 
             FetchAndPrintCalendars(client);
+            FetchAndPrintEvents(client);
 
             const string EventId = "CronofyExample";
 
@@ -191,9 +192,12 @@
 
             var attachment = oaClient.CreateAttachment(new Requests.CreateAttachmentRequest
             {
-                FileName = "example.txt",
-                ContentType = "text/plain",
-                Base64Content = Convert.ToBase64String(attachmentContent),
+                Attachment = new Requests.CreateAttachmentRequest.AttachmentSummary
+                {
+                    FileName = "example.txt",
+                    ContentType = "text/plain",
+                    Base64Content = Convert.ToBase64String(attachmentContent),
+                },
             });
 
             Console.WriteLine("Attachment created");
@@ -254,7 +258,14 @@
             }
 
             Console.WriteLine();
+        }
 
+        /// <summary>
+        /// Fetches a list of all of the users events and prints a summary to the console.
+        /// </summary>
+        /// <param name="client">Account client to use to read the list of events.</param>
+        private static void FetchAndPrintEvents(CronofyAccountClient client)
+        {
             Console.WriteLine("Fetching events...");
             var events = client.GetEvents();
 
