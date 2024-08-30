@@ -179,12 +179,7 @@ namespace Cronofy
 
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 200)
-            {
-                throw new CronofyResponseException("Request failed", response);
-            }
+            this.HttpClient.GetValidResponse(request);
         }
 
         /// <inheritdoc/>

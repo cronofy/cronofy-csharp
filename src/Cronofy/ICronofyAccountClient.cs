@@ -241,9 +241,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void UpsertEvent(string calendarId, IBuilder<UpsertEventRequest> eventBuilder);
 
         /// <summary>
@@ -263,9 +260,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void UpsertEvent(string calendarId, UpsertEventRequest eventRequest);
 
         /// <summary>
@@ -285,9 +279,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void DeleteEvent(string calendarId, string eventId);
 
         /// <summary>
@@ -296,9 +287,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void DeleteAllEvents();
 
         /// <summary>
@@ -313,9 +301,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void DeleteAllEventsForCalendars(params string[] calendarIds);
 
         /// <summary>
@@ -335,9 +320,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void DeleteExternalEvent(string calendarId, string eventUid);
 
         /// <summary>
@@ -360,9 +342,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         void ChangeParticipationStatus(string calendarId, string eventUid, ParticipationStatus status);
 
         /// <summary>
@@ -380,9 +359,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         Channel CreateChannel(string callbackUrl);
 
         /// <summary>
@@ -401,9 +377,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         Channel CreateChannel(IBuilder<CreateChannelRequest> channelBuilder);
 
         /// <summary>
@@ -421,9 +394,6 @@
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         Channel CreateChannel(CreateChannelRequest channelRequest);
 
         /// <summary>
