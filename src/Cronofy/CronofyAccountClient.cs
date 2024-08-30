@@ -311,13 +311,7 @@ namespace Cronofy
             var requestBody = new { delete_all = true };
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 202)
-            {
-                // TODO More useful exceptions for validation errors
-                throw new CronofyException("Request failed");
-            }
+            this.HttpClient.GetValidResponse(request);
         }
 
         /// <inheritdoc/>
@@ -334,13 +328,7 @@ namespace Cronofy
             var requestBody = new { calendar_ids = calendarIds };
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 202)
-            {
-                // TODO More useful exceptions for validation errors
-                throw new CronofyException("Request failed");
-            }
+            this.HttpClient.GetValidResponse(request);
         }
 
         /// <inheritdoc/>
@@ -358,12 +346,7 @@ namespace Cronofy
             var requestBody = new DeleteExternalEventRequest { EventUid = eventUid };
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 202)
-            {
-                throw new CronofyException("Request failed");
-            }
+            this.HttpClient.GetValidResponse(request);
         }
 
         /// <inheritdoc/>
@@ -381,12 +364,7 @@ namespace Cronofy
             var requestBody = new { status = status.ToString().ToLower() };
             request.SetJsonBody(requestBody);
 
-            var response = this.HttpClient.GetResponse(request);
-
-            if (response.Code != 202)
-            {
-                throw new CronofyException("Request failed");
-            }
+            this.HttpClient.GetValidResponse(request);
         }
 
         /// <inheritdoc/>

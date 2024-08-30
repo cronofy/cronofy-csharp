@@ -31,9 +31,6 @@ namespace Cronofy
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         OAuthToken GetTokenFromCode(string code, string redirectUri);
 
         /// <summary>
@@ -53,9 +50,6 @@ namespace Cronofy
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         OAuthToken GetTokenFromRefreshToken(string refreshToken);
 
         /// <summary>
@@ -74,9 +68,6 @@ namespace Cronofy
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        /// <remarks>
-        /// TODO Validation exceptions.
-        /// </remarks>
         OAuthToken ApplicationCalendar(string applicationCalendarId);
 
         /// <summary>

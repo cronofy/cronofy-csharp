@@ -76,5 +76,32 @@
                 RequestPiiErasure = true,
             });
         }
+
+        [Test]
+        public void RevokeAuthorizationThrowsCronofyResponseExceptionOnFailure()
+        {
+            const string sub = "acc_1234567890";
+
+            this.http.Stub(
+                HttpPost
+                    .Url("https://app.cronofy.com/oauth/token/revoke")
+                    .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                    .RequestBodyFormat(
+                        "{{\"client_id\":\"{0}\",\"client_secret\":\"{1}\",\"sub\":\"{2}\",\"request_pii_erasure\":{3}}}",
+                        ClientId, ClientSecret, sub, "true") // Need to provide bool as string to avoid incorrect serialization
+                    .ResponseCode(400)
+                    .ResponseBody("{\"error\":\"invalid_client\"}"));
+
+            var exception = Assert.Throws<CronofyResponseException>(() =>
+                this.client.RevokeAuthorization(new RevokeAuthorizationOptions
+                {
+                    Sub = sub,
+                    RequestPiiErasure = true,
+                }));
+
+            Assert.AreEqual(exception.Message, "Request failed - code=400");
+            Assert.AreEqual(exception.Response.Code, 400);
+            Assert.AreEqual(exception.Response.Body, "{\"error\":\"invalid_client\"}");
+        }
     }
 }
