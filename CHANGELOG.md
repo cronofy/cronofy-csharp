@@ -1,3 +1,5 @@
+## [1.12.6]
+* Include the validation errors from the response within the raised CronofyResponseException for the DeleteAllEvents, DeleteAllEventsForCalendars, DeleteExternalEvent, ChangeParticipationStatus, and RevokeAuthorization APIs. [#137]
 
 ## [1.12.5]
 * Adds support for creating and attaching files to events using the attachments API. [#135]
@@ -334,6 +336,7 @@
 [1.12.3]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.3
 [1.12.4]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.4
 [1.12.5]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.5
+[1.12.6]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.6
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -407,3 +410,4 @@
 [#127]: https://github.com/cronofy/cronofy-csharp/pull/127
 [#132]: https://github.com/cronofy/cronofy-csharp/pull/132
 [#135]: https://github.com/cronofy/cronofy-csharp/pull/135
+[#137]: https://github.com/cronofy/cronofy-csharp/pull/137
