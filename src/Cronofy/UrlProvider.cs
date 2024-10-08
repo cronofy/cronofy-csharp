@@ -176,6 +176,16 @@ namespace Cronofy
         private const string AttachmentsUrlFormat = "https://api{0}.cronofy.com/v1/attachments";
 
         /// <summary>
+        /// The URL of the Availability Rule endpoint.
+        /// </summary>
+        private const string AvailabilityRulesUrlFormat = "https://api{0}.cronofy.com/v1/availability_rules";
+
+        /// <summary>
+        /// The URL of the Availability Rule endpoint for a specific rule.
+        /// </summary>
+        private const string AvailabilityRuleUrlFormat = "https://api{0}.cronofy.com/v1/availability_rules/{{0}}";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UrlProvider"/> class.
         /// </summary>
         /// <param name="dataCenter">
@@ -224,6 +234,8 @@ namespace Cronofy
             this.ElementTokensUrl = string.Format(ElementTokensUrlFormat, suffix);
             this.ConferencingServiceAuthorizationUrl = string.Format(ConferencingServiceAuthorizationUrlFormat, suffix);
             this.AttachmentsUrl = string.Format(AttachmentsUrlFormat, suffix);
+            this.AvailabilityRulesUrl = string.Format(AvailabilityRulesUrlFormat, suffix);
+            this.AvailabilityRuleUrl = string.Format(AvailabilityRuleUrlFormat, suffix);
         }
 
         /// <summary>
@@ -232,11 +244,7 @@ namespace Cronofy
         /// <value>
         /// The authorization URL.
         /// </value>
-        public string AuthorizationUrl
-        {
-            get;
-            private set;
-        }
+        public string AuthorizationUrl { get; private set; }
 
         /// <summary>
         /// Gets the Enterprise Connect authorization URL.
@@ -244,11 +252,7 @@ namespace Cronofy
         /// <value>
         /// The Enterprise Connect authorization URL.
         /// </value>
-        public string EnterpriseConnectAuthorizationUrl
-        {
-            get;
-            private set;
-        }
+        public string EnterpriseConnectAuthorizationUrl { get; private set; }
 
         /// <summary>
         /// Gets the OAuth token URL.
@@ -256,11 +260,7 @@ namespace Cronofy
         /// <value>
         /// The OAuth token URL.
         /// </value>
-        public string TokenUrl
-        {
-            get;
-            private set;
-        }
+        public string TokenUrl { get; private set; }
 
         /// <summary>
         /// Gets the OAuth token revocation URL.
@@ -268,11 +268,7 @@ namespace Cronofy
         /// <value>
         /// The OAuth token revocation URL.
         /// </value>
-        public string TokenRevocationUrl
-        {
-            get;
-            private set;
-        }
+        public string TokenRevocationUrl { get; private set; }
 
         /// <summary>
         /// Gets the userinfo URL.
@@ -280,11 +276,7 @@ namespace Cronofy
         /// <value>
         /// The userinfo URL.
         /// </value>
-        public string UserInfoUrl
-        {
-            get;
-            private set;
-        }
+        public string UserInfoUrl { get; private set; }
 
         /// <summary>
         /// Gets the resources URL.
@@ -292,11 +284,7 @@ namespace Cronofy
         /// <value>
         /// The resources URL.
         /// </value>
-        public string ResourcesUrl
-        {
-            get;
-            private set;
-        }
+        public string ResourcesUrl { get; private set; }
 
         /// <summary>
         /// Gets the authorize with service account URL.
@@ -304,11 +292,7 @@ namespace Cronofy
         /// <value>
         /// The authorize with service account URL.
         /// </value>
-        public string AuthorizeWithServiceAccountUrl
-        {
-            get;
-            private set;
-        }
+        public string AuthorizeWithServiceAccountUrl { get; private set; }
 
         /// <summary>
         /// Gets the account URL.
@@ -316,11 +300,7 @@ namespace Cronofy
         /// <value>
         /// The account URL.
         /// </value>
-        public string AccountUrl
-        {
-            get;
-            private set;
-        }
+        public string AccountUrl { get; private set; }
 
         /// <summary>
         /// Gets the profiles URL.
@@ -328,11 +308,7 @@ namespace Cronofy
         /// <value>
         /// The profiles URL.
         /// </value>
-        public string ProfilesUrl
-        {
-            get;
-            private set;
-        }
+        public string ProfilesUrl { get; private set; }
 
         /// <summary>
         /// Gets the calendars URL.
@@ -340,11 +316,7 @@ namespace Cronofy
         /// <value>
         /// The calendars URL.
         /// </value>
-        public string CalendarsUrl
-        {
-            get;
-            private set;
-        }
+        public string CalendarsUrl { get; private set; }
 
         /// <summary>
         /// Gets the free busy URL.
@@ -352,11 +324,7 @@ namespace Cronofy
         /// <value>
         /// The free busy URL.
         /// </value>
-        public string FreeBusyUrl
-        {
-            get;
-            private set;
-        }
+        public string FreeBusyUrl { get; private set; }
 
         /// <summary>
         /// Gets the events URL.
@@ -364,11 +332,7 @@ namespace Cronofy
         /// <value>
         /// The events URL.
         /// </value>
-        public string EventsUrl
-        {
-            get;
-            private set;
-        }
+        public string EventsUrl { get; private set; }
 
         /// <summary>
         /// Gets the managed event URL format.
@@ -376,11 +340,7 @@ namespace Cronofy
         /// <value>
         /// The managed event URL format.
         /// </value>
-        public string ManagedEventUrlFormat
-        {
-            get;
-            private set;
-        }
+        public string ManagedEventUrlFormat { get; private set; }
 
         /// <summary>
         /// Gets the participation status URL format.
@@ -388,11 +348,7 @@ namespace Cronofy
         /// <value>
         /// The participation status URL format.
         /// </value>
-        public string ParticipationStatusUrlFormat
-        {
-            get;
-            private set;
-        }
+        public string ParticipationStatusUrlFormat { get; private set; }
 
         /// <summary>
         /// Gets the channels URL.
@@ -400,11 +356,7 @@ namespace Cronofy
         /// <value>
         /// The channels URL.
         /// </value>
-        public string ChannelsUrl
-        {
-            get;
-            private set;
-        }
+        public string ChannelsUrl { get; private set; }
 
         /// <summary>
         /// Gets the channel URL format.
@@ -412,11 +364,7 @@ namespace Cronofy
         /// <value>
         /// The channel URL format.
         /// </value>
-        public string ChannelUrlFormat
-        {
-            get;
-            private set;
-        }
+        public string ChannelUrlFormat { get; private set; }
 
         /// <summary>
         /// Gets the permissions URL.
@@ -424,11 +372,7 @@ namespace Cronofy
         /// <value>
         /// The permissions URL.
         /// </value>
-        public string PermissionsUrl
-        {
-            get;
-            private set;
-        }
+        public string PermissionsUrl { get; private set; }
 
         /// <summary>
         /// Gets the availability URL.
@@ -436,11 +380,7 @@ namespace Cronofy
         /// <value>
         /// The availability URL.
         /// </value>
-        public string AvailabilityUrl
-        {
-            get;
-            private set;
-        }
+        public string AvailabilityUrl { get; private set; }
 
         /// <summary>
         /// Gets the add to calendar URL.
@@ -448,11 +388,7 @@ namespace Cronofy
         /// <value>
         /// The add to calendar URL.
         /// </value>
-        public string AddToCalendarUrl
-        {
-            get;
-            private set;
-        }
+        public string AddToCalendarUrl { get; private set; }
 
         /// <summary>
         /// Gets the real time scheduling URL.
@@ -460,11 +396,7 @@ namespace Cronofy
         /// <value>
         /// The real time scheduling URL.
         /// </value>
-        public string RealTimeSchedulingUrl
-        {
-            get;
-            private set;
-        }
+        public string RealTimeSchedulingUrl { get; private set; }
 
         /// <summary>
         /// Gets the real time scheduling by ID URL.
@@ -472,11 +404,7 @@ namespace Cronofy
         /// <value>
         /// The real time scheduling by ID URL.
         /// </value>
-        public string RealTimeSchedulingByIdUrl
-        {
-            get;
-            private set;
-        }
+        public string RealTimeSchedulingByIdUrl { get; private set; }
 
         /// <summary>
         /// Gets the real time scheduling disable URL format.
@@ -484,11 +412,7 @@ namespace Cronofy
         /// <value>
         /// The real time scheduling disable URL format.
         /// </value>
-        public string DisableRealTimeSchedulingUrlFormat
-        {
-            get;
-            private set;
-        }
+        public string DisableRealTimeSchedulingUrlFormat { get; private set; }
 
         /// <summary>
         /// Gets the link tokens URL.
@@ -496,11 +420,7 @@ namespace Cronofy
         /// <value>
         /// The link tokens URL.
         /// </value>
-        public string LinkTokensUrl
-        {
-            get;
-            private set;
-        }
+        public string LinkTokensUrl { get; private set; }
 
         /// <summary>
         /// Gets the revoke profile authorization URL format.
@@ -508,11 +428,7 @@ namespace Cronofy
         /// <value>
         /// The revoke profile authorization URL format.
         /// </value>
-        public string RevokeProfileAuthorizationUrlFormat
-        {
-            get;
-            private set;
-        }
+        public string RevokeProfileAuthorizationUrlFormat { get; private set; }
 
         /// <summary>
         /// Gets the Smart Invite URL.
@@ -526,11 +442,7 @@ namespace Cronofy
         /// <value>
         /// The batch request URL.
         /// </value>
-        public string BatchUrl
-        {
-            get;
-            private set;
-        }
+        public string BatchUrl { get; private set; }
 
         /// <summary>
         /// Gets the application calendars URL.
@@ -579,5 +491,17 @@ namespace Cronofy
         /// </summary>
         /// <value>The attachments URL.</value>
         public string AttachmentsUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the Availability Rule URL.
+        /// </summary>
+        /// <value>The Availability Rule URL.</value>
+        public string AvailabilityRulesUrl { get; private set; }
+
+        /// <summary>
+        /// Gets the Availability Rule URL for a specific rule.
+        /// </summary>
+        /// <value>The Availability Rule URL for a specific rule.</value>
+        public string AvailabilityRuleUrl { get; private set; }
     }
 }

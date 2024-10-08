@@ -560,6 +560,67 @@ namespace Cronofy
             return response.AuthorizationRequest.Url;
         }
 
+        /// <inheritdoc/>
+        public AvailabilityRule GetAvailabilityRule(string availabilityRuleId)
+        {
+            Preconditions.NotEmpty("availabilityRuleId", availabilityRuleId);
+
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = string.Format(this.UrlProvider.AvailabilityRuleUrl, availabilityRuleId);
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            var response = this.HttpClient.GetJsonResponse<AvailabilityRuleResponse>(request);
+
+            return response.ToAvailabilityRule();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<AvailabilityRule> GetAvailabilityRules()
+        {
+            var request = new HttpRequest();
+
+            request.Method = "GET";
+            request.Url = this.UrlProvider.AvailabilityRulesUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            var response = this.HttpClient.GetJsonResponse<ListAvailabilityRulesResponse>(request);
+
+            return response.AvailabilityRules.Select(ap => ap.ToAvailabilityRule());
+        }
+
+        /// <inheritdoc/>
+        public AvailabilityRule UpsertAvailabilityRule(UpsertAvailabilityRuleRequest upsertAvailabilityRuleRequest)
+        {
+            Preconditions.NotNull("upsertAvailabilityRuleRequest", upsertAvailabilityRuleRequest);
+
+            var request = new HttpRequest();
+
+            request.Method = "POST";
+            request.Url = this.UrlProvider.AvailabilityRulesUrl;
+            request.AddOAuthAuthorization(this.AccessToken);
+            request.SetJsonBody(upsertAvailabilityRuleRequest);
+
+            var response = this.HttpClient.GetJsonResponse<AvailabilityRuleResponse>(request);
+
+            return response.ToAvailabilityRule();
+        }
+
+        /// <inheritdoc/>
+        public void DeleteAvailabilityRule(string availabilityRuleId)
+        {
+            Preconditions.NotEmpty("availabilityRuleId", availabilityRuleId);
+
+            var request = new HttpRequest();
+
+            request.Method = "DELETE";
+            request.Url = string.Format(this.UrlProvider.AvailabilityRuleUrl, availabilityRuleId);
+            request.AddOAuthAuthorization(this.AccessToken);
+
+            this.HttpClient.GetValidResponse(request);
+        }
+
         /// <summary>
         /// Creates a calendar.
         /// </summary>
