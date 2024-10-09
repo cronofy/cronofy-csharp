@@ -554,11 +554,64 @@
         /// </param>
         /// <returns>The URL which the end-user should visit.</returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="conferencingServiceAuthorizationRequest"/> if null, or it doesn't contain a Redirect URI.
+        /// Thrown if <paramref name="conferencingServiceAuthorizationRequest"/> is null, or it doesn't contain a Redirect URI.
         /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
         string GetConferencingServiceAuthorizationUrl(ConferencingServiceAuthorizationRequest conferencingServiceAuthorizationRequest);
+
+        /// <summary>
+        /// Reads a single availability rule.
+        /// </summary>
+        /// <param name="availabilityRuleId">
+        /// The unique identifier of the availability rule.
+        /// </param>
+        /// <returns>The availability rule.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="availabilityRuleId"/> is null, or empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        AvailabilityRule GetAvailabilityRule(string availabilityRuleId);
+
+        /// <summary>
+        /// Retrieves all availability rules saved against an account.
+        /// </summary>
+        /// <returns>The list of all availability rules.</returns>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        IEnumerable<AvailabilityRule> GetAvailabilityRules();
+
+        /// <summary>
+        /// Creates or updates an availability rule.
+        /// </summary>
+        /// <param name="availabilityRule">
+        /// The availability rule to upsert, must not be null.
+        /// </param>
+        /// <returns>The created or updated availability rule.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="availabilityRule"/> is null.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        AvailabilityRule UpsertAvailabilityRule(AvailabilityRule availabilityRule);
+
+        /// <summary>
+        /// Deletes an availability rule for the authenticated account.
+        /// </summary>
+        /// <param name="availabilityRuleId">
+        /// The unique identifier of the availability rule.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="availabilityRuleId"/> is null, or empty.
+        /// </exception>
+        /// <exception cref="CronofyException">
+        /// Thrown if an error is encountered whilst making the request.
+        /// </exception>
+        void DeleteAvailabilityRule(string availabilityRuleId);
     }
 }
