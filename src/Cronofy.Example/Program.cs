@@ -34,6 +34,11 @@
                 AttachmentsExample();
                 return;
             }
+            else if (args.Any(t => t == "availability-rules"))
+            {
+                AvailabilityRulesExample();
+                return;
+            }
 
             Console.Write("Enter access token: ");
             var accessToken = Console.ReadLine();
@@ -235,6 +240,90 @@
 
             client.DeleteEvent(calendarId, EventId);
             Console.WriteLine("Event deleted");
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Availability rules usage example.
+        /// </summary>
+        private static void AvailabilityRulesExample()
+        {
+            Console.Write("Enter access token: ");
+            var accessToken = Console.ReadLine();
+
+            Console.WriteLine();
+            var client = new CronofyAccountClient(accessToken);
+
+            FetchAndPrintCalendars(client);
+
+            Console.Write("Enter calendar ID: ");
+            var calendarId = Console.ReadLine();
+            Console.WriteLine();
+
+            Console.WriteLine("Creating an example availability rule");
+            Console.WriteLine();
+
+            const string AvailabilityRuleId = "CSharpExampleAvailabilityRule";
+
+            client.UpsertAvailabilityRule(new Requests.UpsertAvailabilityRuleRequest
+            {
+                AvailabilityRuleId = AvailabilityRuleId,
+                TimeZoneId = "America/Chicago",
+                CalendarIds = new[] { calendarId },
+                WeeklyPeriods = new[]
+                {
+                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    {
+                        Day = "monday",
+                        StartTime = "09:30",
+                        EndTime = "12:30",
+                    },
+                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    {
+                        Day = "monday",
+                        StartTime = "14:00",
+                        EndTime = "17:00",
+                    },
+                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    {
+                        Day = "wednesday",
+                        StartTime = "09:30",
+                        EndTime = "12:30",
+                    },
+                },
+            });
+
+            Console.WriteLine("Availability rule created");
+            Console.WriteLine();
+
+            Console.WriteLine("Fetching created availability rule...");
+            var availabilityRule = client.GetAvailabilityRule(AvailabilityRuleId);
+
+            Console.WriteLine();
+            Console.WriteLine(availabilityRule.ToString());
+            Console.WriteLine();
+
+
+            Console.WriteLine("Fetching all availability rules...");
+            var availabilityRules = client.GetAvailabilityRules();
+
+            Console.WriteLine();
+
+            foreach (var rule in availabilityRules)
+            {
+                Console.WriteLine(rule.ToString());
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to delete the example rule...");
+            Console.ReadLine();
+
+            client.DeleteAvailabilityRule(AvailabilityRuleId);
+            Console.WriteLine("Availability rule deleted");
             Console.WriteLine();
 
             Console.WriteLine("Press enter to continue...");
