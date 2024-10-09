@@ -7,7 +7,7 @@ namespace Cronofy.Responses
     /// <summary>
     /// Class for the deserialization of an upsert availability rules response.
     /// </summary>
-    internal sealed class UpsertAvailabilityRulesResponse
+    internal sealed class UpsertAvailabilityRuleResponse
     {
         /// <summary>
         /// Gets or sets the created or updated availability rule.

@@ -7,7 +7,7 @@ namespace Cronofy.Responses
     /// <summary>
     /// Class for the deserialization of a get availability rule response.
     /// </summary>
-    internal sealed class GetAvailabilityRulesResponse
+    internal sealed class GetAvailabilityRuleResponse
     {
         /// <summary>
         /// Gets or sets the availability rule.
