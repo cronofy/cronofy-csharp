@@ -87,11 +87,11 @@ namespace Cronofy
         public override string ToString()
         {
             return string.Format(
-                "<{0} AvailabilityRuleId={1}, TimeZoneId={2}, CalendarIds={3}, WeeklyPeriods={4}>",
+                "<{0} AvailabilityRuleId={1}, TimeZoneId={2}, CalendarIds={3}, WeeklyPeriods=[{4}]>",
                 this.GetType(),
                 this.AvailabilityRuleId,
                 this.TimeZoneId,
-                this.CalendarIds,
+                this.CalendarIds == null ? "null" : string.Format("[{0}]", string.Join(", ", this.CalendarIds)),
                 string.Join(", ", this.WeeklyPeriods.Select(weeklyPeriod => weeklyPeriod.ToString())));
         }
 
