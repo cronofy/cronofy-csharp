@@ -1,5 +1,6 @@
 namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
     using NUnit.Framework;
 
     internal sealed class GetAvailabilityRule : Base
@@ -55,19 +56,19 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 {
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "14:00",
                         EndTime = "17:00",
                     },
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "wednesday",
+                        Day = DayOfWeek.Wednesday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },

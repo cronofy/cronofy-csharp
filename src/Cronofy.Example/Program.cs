@@ -268,28 +268,28 @@
 
             const string AvailabilityRuleId = "CSharpExampleAvailabilityRule";
 
-            client.UpsertAvailabilityRule(new Requests.UpsertAvailabilityRuleRequest
+            client.UpsertAvailabilityRule(new AvailabilityRule
             {
                 AvailabilityRuleId = AvailabilityRuleId,
                 TimeZoneId = "America/Chicago",
                 CalendarIds = new[] { calendarId },
                 WeeklyPeriods = new[]
                 {
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "14:00",
                         EndTime = "17:00",
                     },
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
+                    new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "wednesday",
+                        Day = DayOfWeek.Wednesday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },
@@ -305,7 +305,6 @@
             Console.WriteLine();
             Console.WriteLine(availabilityRule.ToString());
             Console.WriteLine();
-
 
             Console.WriteLine("Fetching all availability rules...");
             var availabilityRules = client.GetAvailabilityRules();

@@ -1,5 +1,6 @@
 namespace Cronofy.Test.CronofyAccountClientTests
 {
+    using System;
     using NUnit.Framework;
 
     internal sealed class UpsertAvailabilityRule : Base
@@ -67,35 +68,7 @@ namespace Cronofy.Test.CronofyAccountClientTests
                         }
                     "));
 
-            var actualResponse = this.Client.UpsertAvailabilityRule(new Requests.UpsertAvailabilityRuleRequest
-            {
-                AvailabilityRuleId = "default",
-                TimeZoneId = "America/Chicago",
-                CalendarIds = new[] { "cal_n23kjnwrw2_jsdfjksn234" },
-                WeeklyPeriods = new[]
-                {
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
-                    {
-                        Day = "monday",
-                        StartTime = "09:30",
-                        EndTime = "12:30",
-                    },
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
-                    {
-                        Day = "monday",
-                        StartTime = "14:00",
-                        EndTime = "17:00",
-                    },
-                    new Requests.UpsertAvailabilityRuleRequest.WeeklyPeriod
-                    {
-                        Day = "wednesday",
-                        StartTime = "09:30",
-                        EndTime = "12:30",
-                    },
-                },
-            });
-
-            var expectedResponse = new AvailabilityRule
+            var updatedAvailabilityRuleState = new AvailabilityRule
             {
                 AvailabilityRuleId = "default",
                 TimeZoneId = "America/Chicago",
@@ -104,26 +77,28 @@ namespace Cronofy.Test.CronofyAccountClientTests
                 {
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "monday",
+                        Day = DayOfWeek.Monday,
                         StartTime = "14:00",
                         EndTime = "17:00",
                     },
                     new AvailabilityRule.WeeklyPeriod
                     {
-                        Day = "wednesday",
+                        Day = DayOfWeek.Wednesday,
                         StartTime = "09:30",
                         EndTime = "12:30",
                     },
                 },
             };
 
-            Assert.AreEqual(expectedResponse, actualResponse);
+            var actualResponse = this.Client.UpsertAvailabilityRule(updatedAvailabilityRuleState);
+
+            Assert.AreEqual(updatedAvailabilityRuleState, actualResponse);
         }
     }
 }

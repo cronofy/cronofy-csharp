@@ -588,17 +588,17 @@
         /// <summary>
         /// Creates or updates an availability rule.
         /// </summary>
-        /// <param name="upsertAvailabilityRuleRequest">
-        /// The parameters for the request, must not be null.
+        /// <param name="availabilityRule">
+        /// The availability rule to upsert, must not be null.
         /// </param>
         /// <returns>The created or updated availability rule.</returns>
         /// <exception cref="ArgumentException">
-        /// Thrown if <paramref name="upsertAvailabilityRuleRequest"/> is null.
+        /// Thrown if <paramref name="availabilityRule"/> is null.
         /// </exception>
         /// <exception cref="CronofyException">
         /// Thrown if an error is encountered whilst making the request.
         /// </exception>
-        AvailabilityRule UpsertAvailabilityRule(UpsertAvailabilityRuleRequest upsertAvailabilityRuleRequest);
+        AvailabilityRule UpsertAvailabilityRule(AvailabilityRule availabilityRule);
 
         /// <summary>
         /// Deletes an availability rule for the authenticated account.

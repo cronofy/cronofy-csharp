@@ -563,7 +563,7 @@ namespace Cronofy
         /// <inheritdoc/>
         public AvailabilityRule GetAvailabilityRule(string availabilityRuleId)
         {
-            Preconditions.NotEmpty("availabilityRuleId", availabilityRuleId);
+            Preconditions.NotEmpty(nameof(availabilityRuleId), availabilityRuleId);
 
             var request = new HttpRequest();
 
@@ -591,15 +591,17 @@ namespace Cronofy
         }
 
         /// <inheritdoc/>
-        public AvailabilityRule UpsertAvailabilityRule(UpsertAvailabilityRuleRequest upsertAvailabilityRuleRequest)
+        public AvailabilityRule UpsertAvailabilityRule(AvailabilityRule availabilityRule)
         {
-            Preconditions.NotNull("upsertAvailabilityRuleRequest", upsertAvailabilityRuleRequest);
+            Preconditions.NotNull(nameof(availabilityRule), availabilityRule);
 
             var request = new HttpRequest();
 
             request.Method = "POST";
             request.Url = this.UrlProvider.AvailabilityRulesUrl;
             request.AddOAuthAuthorization(this.AccessToken);
+
+            var upsertAvailabilityRuleRequest = UpsertAvailabilityRuleRequest.FromAvailabilityRule(availabilityRule);
             request.SetJsonBody(upsertAvailabilityRuleRequest);
 
             var response = this.HttpClient.GetJsonResponse<UpsertAvailabilityRuleResponse>(request);
@@ -610,7 +612,7 @@ namespace Cronofy
         /// <inheritdoc/>
         public void DeleteAvailabilityRule(string availabilityRuleId)
         {
-            Preconditions.NotEmpty("availabilityRuleId", availabilityRuleId);
+            Preconditions.NotEmpty(nameof(availabilityRuleId), availabilityRuleId);
 
             var request = new HttpRequest();
 

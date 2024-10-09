@@ -106,7 +106,7 @@ namespace Cronofy
             /// <value>
             /// The week day the period applies to.
             /// </value>
-            public string Day { get; set; }
+            public DayOfWeek Day { get; set; }
 
             /// <summary>
             /// Gets or sets the time of day the period should start.

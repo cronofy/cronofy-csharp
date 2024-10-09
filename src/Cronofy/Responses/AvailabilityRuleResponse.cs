@@ -105,10 +105,38 @@ namespace Cronofy.Responses
             {
                 return new AvailabilityRule.WeeklyPeriod
                 {
-                    Day = this.Day,
+                    Day = ToDayOfWeek(this.Day),
                     StartTime = this.StartTime,
                     EndTime = this.EndTime,
                 };
+            }
+
+            /// <summary>
+            /// Converts a day string to a day of the week representation.
+            /// </summary>
+            /// <param name="day">The string representation of the day of the week.</param>
+            /// <returns>The day of the week represented by the string.</returns>
+            private static DayOfWeek ToDayOfWeek(string day)
+            {
+                switch (day)
+                {
+                    case "monday":
+                        return DayOfWeek.Monday;
+                    case "tuesday":
+                        return DayOfWeek.Tuesday;
+                    case "wednesday":
+                        return DayOfWeek.Wednesday;
+                    case "thursday":
+                        return DayOfWeek.Thursday;
+                    case "friday":
+                        return DayOfWeek.Friday;
+                    case "saturday":
+                        return DayOfWeek.Saturday;
+                    case "sunday":
+                        return DayOfWeek.Sunday;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(day), "Unexpected day");
+                }
             }
         }
     }

@@ -47,6 +47,22 @@ namespace Cronofy.Requests
         public IEnumerable<WeeklyPeriod> WeeklyPeriods { get; set; }
 
         /// <summary>
+        /// Creates an upsert request from an existing availability rule.
+        /// </summary>
+        /// <param name="availabilityRule">Availability rule to create this upsert request from.</param>
+        /// <returns>An upsert request for the given rule.</returns>
+        public static UpsertAvailabilityRuleRequest FromAvailabilityRule(AvailabilityRule availabilityRule)
+        {
+            return new UpsertAvailabilityRuleRequest
+            {
+                AvailabilityRuleId = availabilityRule.AvailabilityRuleId,
+                TimeZoneId = availabilityRule.TimeZoneId,
+                CalendarIds = availabilityRule.CalendarIds.ToArray(),
+                WeeklyPeriods = availabilityRule.WeeklyPeriods.Select(WeeklyPeriod.FromWeeklyPeriod).ToArray(),
+            };
+        }
+
+        /// <summary>
         /// Class for the serialization of a weekly period within an availability rule.
         /// </summary>
         public sealed class WeeklyPeriod
@@ -77,6 +93,49 @@ namespace Cronofy.Requests
             /// </value>
             [JsonProperty("end_time")]
             public string EndTime { get; set; }
+
+            /// <summary>
+            /// Creates an upset weekly period request from a given weekly period.
+            /// </summary>
+            /// <param name="weeklyPeriod">The weekly period to copy from.</param>
+            /// <returns>The weekly period upsert request.</returns>
+            public static WeeklyPeriod FromWeeklyPeriod(AvailabilityRule.WeeklyPeriod weeklyPeriod)
+            {
+                return new WeeklyPeriod
+                {
+                    Day = ToDayString(weeklyPeriod.Day),
+                    StartTime = weeklyPeriod.StartTime,
+                    EndTime = weeklyPeriod.EndTime,
+                };
+            }
+
+            /// <summary>
+            /// Converts a day of the week to its string representation.
+            /// </summary>
+            /// <param name="day">The day of the week.</param>
+            /// <returns>The string representation of the day of the week.</returns>
+            private static string ToDayString(DayOfWeek day)
+            {
+                switch (day)
+                {
+                    case DayOfWeek.Monday:
+                        return "monday";
+                    case DayOfWeek.Tuesday:
+                        return "tuesday";
+                    case DayOfWeek.Wednesday:
+                        return "wednesday";
+                    case DayOfWeek.Thursday:
+                        return "thursday";
+                    case DayOfWeek.Friday:
+                        return "friday";
+                    case DayOfWeek.Saturday:
+                        return "saturday";
+                    case DayOfWeek.Sunday:
+                        return "sunday";
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(day), "Unexpected day");
+                }
+            }
         }
     }
 }
