@@ -59,6 +59,17 @@ namespace Cronofy.Test.CronofyAccountClientTests
                                             ""end_time"": ""17:40""
                                         }
                                     ]
+                                },
+                                {
+                                    ""availability_rule_id"": ""null_calendar_ids"",
+                                    ""tzid"": ""Europe/London"",
+                                    ""weekly_periods"": [
+                                        {
+                                            ""day"": ""thursday"",
+                                            ""start_time"": ""09:00"",
+                                            ""end_time"": ""17:30""
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -117,6 +128,21 @@ namespace Cronofy.Test.CronofyAccountClientTests
                             Day = DayOfWeek.Sunday,
                             StartTime = "11:00",
                             EndTime = "17:40",
+                        },
+                    },
+                },
+                new AvailabilityRule
+                {
+                    AvailabilityRuleId = "null_calendar_ids",
+                    TimeZoneId = "Europe/London",
+                    CalendarIds = null,
+                    WeeklyPeriods = new[]
+                    {
+                        new AvailabilityRule.WeeklyPeriod
+                        {
+                            Day = DayOfWeek.Thursday,
+                            StartTime = "09:00",
+                            EndTime = "17:30",
                         },
                     },
                 },

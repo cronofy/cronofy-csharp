@@ -58,7 +58,7 @@ namespace Cronofy.Responses
             {
                 AvailabilityRuleId = this.AvailabilityRuleId,
                 TimeZoneId = this.TimeZoneId,
-                CalendarIds = this.CalendarIds.ToArray(),
+                CalendarIds = this.CalendarIds?.ToArray(),
                 WeeklyPeriods = this.WeeklyPeriods.Select(weeklyPeriod => weeklyPeriod.ToWeeklyPeriod()).ToArray(),
             };
         }

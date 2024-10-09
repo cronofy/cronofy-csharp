@@ -57,7 +57,7 @@ namespace Cronofy.Requests
             {
                 AvailabilityRuleId = availabilityRule.AvailabilityRuleId,
                 TimeZoneId = availabilityRule.TimeZoneId,
-                CalendarIds = availabilityRule.CalendarIds.ToArray(),
+                CalendarIds = availabilityRule.CalendarIds?.ToArray(),
                 WeeklyPeriods = availabilityRule.WeeklyPeriods.Select(WeeklyPeriod.FromWeeklyPeriod).ToArray(),
             };
         }

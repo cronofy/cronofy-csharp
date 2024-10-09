@@ -79,7 +79,7 @@ namespace Cronofy
         {
             return this.AvailabilityRuleId == other.AvailabilityRuleId &&
                 this.TimeZoneId == other.TimeZoneId &&
-                this.CalendarIds.SequenceEqual(other.CalendarIds) &&
+                ((this.CalendarIds == null && other.CalendarIds == null) || (this.CalendarIds != null && other.CalendarIds != null && this.CalendarIds.SequenceEqual(other.CalendarIds))) &&
                 this.WeeklyPeriods.SequenceEqual(other.WeeklyPeriods);
         }
 
