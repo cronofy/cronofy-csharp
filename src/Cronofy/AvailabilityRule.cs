@@ -92,7 +92,7 @@ namespace Cronofy
                 this.AvailabilityRuleId,
                 this.TimeZoneId,
                 this.CalendarIds,
-                this.WeeklyPeriods);
+                string.Join(", ", this.WeeklyPeriods.Select(weeklyPeriod => weeklyPeriod.ToString())));
         }
 
         /// <summary>

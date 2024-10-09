@@ -10,10 +10,10 @@ namespace Cronofy.Responses
     internal sealed class ListAvailabilityRulesResponse
     {
         /// <summary>
-        /// Gets or sets the weekly recurring periods for the availability rule.
+        /// Gets or sets the list of discovered availability rules.
         /// </summary>
         /// <value>
-        /// The weekly recurring periods for the availability rule.
+        /// The list of discovered availability rules.
         /// </value>
         [JsonProperty("availability_rules")]
         public IEnumerable<AvailabilityRuleResponse> AvailabilityRules { get; set; }

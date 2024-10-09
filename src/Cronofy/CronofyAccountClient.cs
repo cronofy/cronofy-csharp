@@ -571,9 +571,9 @@ namespace Cronofy
             request.Url = string.Format(this.UrlProvider.AvailabilityRuleUrl, availabilityRuleId);
             request.AddOAuthAuthorization(this.AccessToken);
 
-            var response = this.HttpClient.GetJsonResponse<AvailabilityRuleResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<GetAvailabilityRulesResponse>(request);
 
-            return response.ToAvailabilityRule();
+            return response.AvailabilityRule.ToAvailabilityRule();
         }
 
         /// <inheritdoc/>
@@ -602,9 +602,9 @@ namespace Cronofy
             request.AddOAuthAuthorization(this.AccessToken);
             request.SetJsonBody(upsertAvailabilityRuleRequest);
 
-            var response = this.HttpClient.GetJsonResponse<AvailabilityRuleResponse>(request);
+            var response = this.HttpClient.GetJsonResponse<UpsertAvailabilityRulesResponse>(request);
 
-            return response.ToAvailabilityRule();
+            return response.AvailabilityRule.ToAvailabilityRule();
         }
 
         /// <inheritdoc/>

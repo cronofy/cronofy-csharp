@@ -16,30 +16,32 @@ namespace Cronofy.Test.CronofyAccountClientTests
                     .ResponseCode(200)
                     .ResponseBodyFormat(
                         @"
-                          {{
-                              ""availability_rule_id"": ""{0}"",
-                              ""tzid"": ""America/Chicago"",
-                              ""calendar_ids"": [
-                                  ""cal_n23kjnwrw2_jsdfjksn234""
-                              ],
-                              ""weekly_periods"": [
-                                  {{
-                                      ""day"": ""monday"",
-                                      ""start_time"": ""09:30"",
-                                      ""end_time"": ""12:30""
-                                  }},
-                                  {{
-                                      ""day"": ""monday"",
-                                      ""start_time"": ""14:00"",
-                                      ""end_time"": ""17:00""
-                                  }},
-                                  {{
-                                      ""day"": ""wednesday"",
-                                      ""start_time"": ""09:30"",
-                                      ""end_time"": ""12:30""
-                                  }}
-                              ]
-                          }}
+                            {{
+                                ""availability_rule"": {{
+                                    ""availability_rule_id"": ""{0}"",
+                                    ""tzid"": ""America/Chicago"",
+                                    ""calendar_ids"": [
+                                        ""cal_n23kjnwrw2_jsdfjksn234""
+                                    ],
+                                    ""weekly_periods"": [
+                                        {{
+                                            ""day"": ""monday"",
+                                            ""start_time"": ""09:30"",
+                                            ""end_time"": ""12:30""
+                                        }},
+                                        {{
+                                            ""day"": ""monday"",
+                                            ""start_time"": ""14:00"",
+                                            ""end_time"": ""17:00""
+                                        }},
+                                        {{
+                                            ""day"": ""wednesday"",
+                                            ""start_time"": ""09:30"",
+                                            ""end_time"": ""12:30""
+                                        }}
+                                    ]
+                                }}
+                            }}
                         ", AvailabilityRuleId));
 
             var actualResponse = this.Client.GetAvailabilityRule(AvailabilityRuleId);
