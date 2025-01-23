@@ -174,6 +174,15 @@
             public string Transparency { get; set; }
 
             /// <summary>
+            /// Gets or sets the extended transparency of the event.
+            /// </summary>
+            /// <value>
+            /// The extended transparency of the event.
+            /// </value>
+            [JsonProperty("extended_transparency")]
+            public string ExtendedTransparency { get; set; }
+
+            /// <summary>
             /// Gets or sets the status of the event.
             /// </summary>
             /// <value>
@@ -286,6 +295,7 @@
                     Deleted = this.Deleted,
                     ParticipationStatus = this.ParticipationStatus,
                     Transparency = this.Transparency,
+                    ExtendedTransparency = this.ExtendedTransparency,
                     EventStatus = this.EventStatus,
                     Categories = this.Categories,
                     Created = this.Created,

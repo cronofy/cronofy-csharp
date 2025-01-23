@@ -1,3 +1,6 @@
+## [1.12.8]
+* Add support for extended_transparency for events. [#142]
+
 ## [1.12.7]
 * Add support for Availability Rules endpoints. [#139]
 
@@ -341,6 +344,7 @@
 [1.12.5]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.5
 [1.12.6]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.6
 [1.12.7]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.7
+[1.12.8]: https://github.com/cronofy/cronofy-csharp/releases/tag/rel-1.12.8
 
 [#3]: https://github.com/cronofy/cronofy-csharp/pull/3
 [#10]: https://github.com/cronofy/cronofy-csharp/pull/10
@@ -416,3 +420,4 @@
 [#135]: https://github.com/cronofy/cronofy-csharp/pull/135
 [#137]: https://github.com/cronofy/cronofy-csharp/pull/137
 [#139]: https://github.com/cronofy/cronofy-csharp/pull/139
+[#142]: https://github.com/cronofy/cronofy-csharp/pull/142

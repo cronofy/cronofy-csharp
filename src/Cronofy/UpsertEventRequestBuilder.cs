@@ -108,6 +108,11 @@
         private string transparency;
 
         /// <summary>
+        /// The extended_transparency of the event.
+        /// </summary>
+        private string extendedTransparency;
+
+        /// <summary>
         /// The color of the event.
         /// </summary>
         private string color;
@@ -602,6 +607,30 @@
         }
 
         /// <summary>
+        /// Sets the extended transparency of the event.
+        /// </summary>
+        /// <param name="extendedTransparency">
+        /// ExtendedTransparency, must not be empty.
+        /// </param>
+        /// <returns>
+        /// A reference to the modified builder.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown if <paramref name="extendedTransparency"/> is not
+        /// transparent, opaque, working_elsewhere, tentative, or out_of_office.
+        /// </exception>
+        public UpsertEventRequestBuilder ExtendedTransparency(string extendedTransparency)
+        {
+            Preconditions.True(
+                new[] { "transparent", "opaque", "working_elsewhere", "tentative", "out_of_office" }.Contains(extendedTransparency),
+                "ExtendedTransparency must be `transparent`, `opaque`, `working_elsewhere`, `tentative`, or `out_of_office`.");
+
+            this.extendedTransparency = extendedTransparency;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the color of the event.
         /// </summary>
         /// <param name="color">
@@ -793,6 +822,7 @@
                 End = GetEventTime("End", this.endTime, this.endDate, this.endTimeZoneId),
                 Url = this.url,
                 Transparency = this.transparency,
+                ExtendedTransparency = this.extendedTransparency,
                 TimeZoneId = this.timeZoneId,
                 Color = this.color,
                 RemindersCreateOnly = this.remindersCreateOnly,

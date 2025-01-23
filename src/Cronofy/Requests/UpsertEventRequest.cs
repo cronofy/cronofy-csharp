@@ -83,6 +83,15 @@
         public IEnumerable<Attachment> Attachments { get; set; }
 
         /// <summary>
+        /// Gets or sets the extended_transparency of the event.
+        /// </summary>
+        /// <value>
+        /// The extended_transparency of the event.
+        /// </value>
+        [JsonProperty("extended_transparency")]
+        public string ExtendedTransparency { get; set; }
+
+        /// <summary>
         /// Class for the serialization of the attendees for an upsert event
         /// request.
         /// </summary>

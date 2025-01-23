@@ -860,5 +860,51 @@ namespace Cronofy.Test.CronofyAccountClientTests
 
             this.Client.UpsertEvent(CalendarId, builder);
         }
+
+        [Test]
+        public void CanUpsertEventWithExtendedTransparency()
+        {
+            const string eventId = "qTtZdczOccgaPncGJaCiLg";
+            const string summary = "Board meeting";
+            const string description = "Discuss plans for the next quarter";
+            const string startTimeString = "2014-08-05 15:30:00Z";
+            const string endTimeString = "2014-08-05 17:00:00Z";
+            const string locationDescription = "Board room";
+            const string extendedTransparency = ExtendedTransparency.OutOfOffice;
+
+            this.Http.Stub(
+                HttpPost
+                .Url("https://api.cronofy.com/v1/calendars/" + CalendarId + "/events")
+                .RequestHeader("Authorization", "Bearer " + AccessToken)
+                .RequestHeader("Content-Type", "application/json; charset=utf-8")
+                .RequestBodyFormat(
+                    "{{\"event_id\":\"{0}\"," +
+                    "\"extended_transparency\":\"{1}\"," +
+                    "\"summary\":\"{2}\"," +
+                    "\"description\":\"{3}\"," +
+                    "\"start\":{{\"time\":\"{4}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"end\":{{\"time\":\"{5}\",\"tzid\":\"Etc/UTC\"}}," +
+                    "\"location\":{{\"description\":\"{6}\"}}" +
+                    "}}",
+                    eventId,
+                    extendedTransparency,
+                    summary,
+                    description,
+                    startTimeString,
+                    endTimeString,
+                    locationDescription)
+                .ResponseCode(202));
+
+            var builder = new UpsertEventRequestBuilder()
+                .EventId(eventId)
+                .Summary(summary)
+                .Description(description)
+                .Start(new DateTime(2014, 8, 5, 15, 30, 0, DateTimeKind.Utc))
+                .End(new DateTime(2014, 8, 5, 17, 0, 0, DateTimeKind.Utc))
+                .Location(locationDescription)
+                .ExtendedTransparency(extendedTransparency);
+
+            this.Client.UpsertEvent(CalendarId, builder);
+        }
     }
 }
