@@ -116,6 +116,17 @@ namespace Cronofy
         public string Transparency { get; set; }
 
         /// <summary>
+        /// Gets or sets the extended transparency of the event.
+        /// </summary>
+        /// <value>
+        /// The extended transparency of the event.
+        /// </value>
+        /// <remarks>
+        /// See <see cref="Cronofy.ExtendedTransparency"/> for potential values.
+        /// </remarks>
+        public string ExtendedTransparency { get; set; }
+
+        /// <summary>
         /// Gets or sets the status of the event.
         /// </summary>
         /// <value>
@@ -261,6 +272,7 @@ namespace Cronofy
                 && this.Description == other.Description
                 && this.ParticipationStatus == other.ParticipationStatus
                 && this.Transparency == other.Transparency
+                && this.ExtendedTransparency == other.ExtendedTransparency
                 && this.EventStatus == other.EventStatus
                 && this.Recurring == other.Recurring
                 && this.MeetingUrl == other.MeetingUrl
